@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Opendoor Technologies (OPEN)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --color-primary: #1a1a2e;
+            --color-secondary: #16213e;
+            --color-accent: #e94560;
+            --color-warning: #f39c12;
+            --color-success: #27ae60;
+            --color-danger: #c0392b;
+            --color-text: #2c3e50;
+            --color-light: #ecf0f1;
+            --color-gold: #f1c40f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: #fafafa;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 60px rgba(0,0,0,0.1);
+        }
+
+        /* Cover Page */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.1) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-logo {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: 30px;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--color-warning);
+            color: var(--color-primary);
+            border-radius: 50px;
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .verdict-badge.precaucion {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .score-display {
+            font-size: 6rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .score-display span {
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        .cover-date {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 40px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 50px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--color-accent);
+            display: inline-block;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--color-accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Simple Explanation */
+        .simple-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .simple-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .analogy {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Score Dashboard */
+        .score-dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .pillar-score {
+            background: var(--color-light);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pillar-score:hover {
+            transform: translateY(-5px);
+        }
+
+        .pillar-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .pillar-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin-bottom: 10px;
+        }
+
+        .pillar-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .pillar-value.low { color: var(--color-danger); }
+        .pillar-value.medium { color: var(--color-warning); }
+        .pillar-value.high { color: var(--color-success); }
+
+        .total-score-box {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .total-score-value {
+            font-size: 5rem;
+            font-weight: 700;
+        }
+
+        .total-score-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: var(--color-light);
+            font-weight: 600;
+            color: var(--color-secondary);
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid var(--color-light);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .metric-value.negative { color: var(--color-danger); }
+        .metric-value.positive { color: var(--color-success); }
+        .metric-value.warning { color: var(--color-warning); }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--color-light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        .progress-fill.danger { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .progress-fill.warning { background: linear-gradient(90deg, #f39c12, #e67e22); }
+        .progress-fill.success { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+
+        /* Comparison Chart */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            background: var(--color-light);
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .company-card.highlight {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+        }
+
+        .company-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--color-accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--color-accent);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h4 {
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        /* Moat Analysis */
+        .moat-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .moat-castle {
+            text-align: center;
+        }
+
+        .moat-castle .icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+        }
+
+        .moat-rating {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .moat-star {
+            font-size: 2rem;
+        }
+
+        .moat-star.filled { color: var(--color-gold); }
+        .moat-star.empty { color: #ddd; }
+
+        /* Red Flags */
+        .red-flags {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #fff5f5;
+            border-left: 4px solid var(--color-danger);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .flag-item.warning {
+            background: #fff9e6;
+            border-left-color: var(--color-warning);
+        }
+
+        .flag-item.ok {
+            background: #f0fff4;
+            border-left-color: var(--color-success);
+        }
+
+        .flag-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Valuation Scenarios */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .scenario-card {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .scenario-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .scenario-return {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .scenario-prob {
+            font-size: 0.9rem;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+
+        /* Conclusion */
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .conclusion-verdict {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .conclusion-summary {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-btn.primary {
+            background: var(--color-warning);
+            color: var(--color-primary);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* Alerts Box */
+        .alerts-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .alerts-box h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .alerts-box ul {
+            list-style: none;
+        }
+
+        .alerts-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .alerts-box li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .report-footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--color-light);
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* Print Styles */
+        @media print {
+            .page { box-shadow: none; }
+            .section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Page 1: Cover -->
+        <section class="cover">
+            <div class="cover-content">
+                <div class="company-logo">🏠</div>
+                <h1 class="company-name">Opendoor Technologies</h1>
+                <div class="company-ticker">NASDAQ: OPEN</div>
+
+                <div class="verdict-badge precaucion">PRECAUCIÓN</div>
+
+                <div class="score-display">42<span>/100</span></div>
+
+                <p style="font-size: 1.3rem; opacity: 0.9; max-width: 600px;">
+                    Modelo de negocio en transición • Pérdidas persistentes • Alto riesgo de ejecución
+                </p>
+
+                <div class="cover-date">
+                    Análisis realizado el 27 de Enero de 2026<br>
+                    Framework: Value-Growth Investing
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Simple Explanation -->
+        <section class="section">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Explicación Simple</h2>
+
+            <div class="simple-box">
+                <h3>¿Qué hace Opendoor?</h3>
+                <p>
+                    Opendoor es un "iBuyer" - compra casas directamente a propietarios con ofertas instantáneas
+                    en efectivo, las renueva ligeramente, y las revende. El objetivo es eliminar las molestias
+                    de vender una casa (visitas, incertidumbre, meses de espera).
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>El problema:</strong> Comprar y vender casas requiere MUCHO capital, y con márgenes
+                    de solo 8%, cualquier error en precios o una caída del mercado inmobiliario destruye valor.
+                    Zillow perdió $550M intentando esto y abandonó en 2021.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>El pivot:</strong> En 2025, Opendoor está girando hacia ser una "plataforma AI"
+                    que ayuda a otros a vender casas, en lugar de comprarlas ellos mismos. Menos capital,
+                    más software. Pero la transición es incierta.
+                </p>
+
+                <div class="analogy">
+                    💡 <strong>Analogía:</strong> Es como si un concesionario de coches usados intentara
+                    convertirse en Carfax - pasar de comprar/vender a solo proveer información. El cambio
+                    es lógico, pero ejecutarlo mientras pierdes dinero es muy difícil.
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Score Dashboard -->
+        <section class="section">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+
+            <div class="score-dashboard">
+                <div class="pillar-score">
+                    <div class="pillar-icon">🏢</div>
+                    <div class="pillar-name">Calidad Negocio</div>
+                    <div class="pillar-value low">8/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">💰</div>
+                    <div class="pillar-name">Fortaleza Financiera</div>
+                    <div class="pillar-value low">6/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">🏰</div>
+                    <div class="pillar-name">Ventaja Competitiva</div>
+                    <div class="pillar-value low">8/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">👔</div>
+                    <div class="pillar-name">Gestión</div>
+                    <div class="pillar-value medium">12/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">📊</div>
+                    <div class="pillar-name">Valoración</div>
+                    <div class="pillar-value low">8/20</div>
+                </div>
+            </div>
+
+            <div class="total-score-box">
+                <div class="total-score-value">42/100</div>
+                <div class="total-score-label">Puntuación Total • PRECAUCIÓN</div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">Desglose por Pilar</h3>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Calidad del Negocio</span>
+                        <span>8/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 40%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Fortaleza Financiera</span>
+                        <span>6/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 30%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Ventaja Competitiva (Moat)</span>
+                        <span>8/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 40%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Gestión</span>
+                        <span>12/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill warning" style="width: 60%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Valoración</span>
+                        <span>8/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Business Analysis -->
+        <section class="section">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Análisis del Negocio</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Cuota Mercado iBuying</div>
+                    <div class="metric-value">~67%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">iBuying % Total Mercado</div>
+                    <div class="metric-value warning">&lt;0.5%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Margen Bruto</div>
+                    <div class="metric-value negative">8%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Casas en Inventario</div>
+                    <div class="metric-value">3,139</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ciudades Activas</div>
+                    <div class="metric-value">50+</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Descuento vs Mercado</div>
+                    <div class="metric-value warning">-9%</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">Modelo de Negocio Actual</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Segmento</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                </tr>
+                <tr>
+                    <td><strong>iBuying Tradicional</strong></td>
+                    <td>Compra directa de casas, renovación, reventa</td>
+                    <td>⚠️ En declive</td>
+                </tr>
+                <tr>
+                    <td><strong>Opendoor 2.0 (Platform)</strong></td>
+                    <td>Marketplace AI para conectar vendedores con compradores/agentes</td>
+                    <td>🔄 En transición</td>
+                </tr>
+                <tr>
+                    <td><strong>Servicios Auxiliares</strong></td>
+                    <td>Hipotecas, títulos, seguros de hogar</td>
+                    <td>📊 Creciendo</td>
+                </tr>
+            </table>
+
+            <h3 style="margin: 30px 0 20px;">El Problema del iBuying</h3>
+            <div style="background: #fff3cd; padding: 25px; border-radius: 15px; border-left: 5px solid #f39c12;">
+                <p><strong>¿Por qué Zillow y Redfin abandonaron?</strong></p>
+                <ul style="margin-top: 15px; margin-left: 20px;">
+                    <li>Predecir precios de casas es extremadamente difícil</li>
+                    <li>Cada casa es única - no es como comprar inventario estándar</li>
+                    <li>Márgenes muy bajos (5-10%) no absorben errores</li>
+                    <li>Capital-intensivo: necesitas MUCHO dinero atado en inventario</li>
+                    <li>Muy cíclico: cuando bajan los precios, pierdes en cada casa</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Zillow perdió $550M en un trimestre</strong> y cerró su programa de iBuying en 2021.
+                    Redfin siguió en 2022. Solo quedan Opendoor y Offerpad, ambos con problemas.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 5: Financial Evolution -->
+        <section class="section">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Evolución Financiera (5 Años)</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ingresos ($B)</strong></td>
+                        <td>$8.0B</td>
+                        <td>$15.6B</td>
+                        <td>$6.9B</td>
+                        <td>$5.2B</td>
+                        <td>$4.1B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Margen Bruto</strong></td>
+                        <td>7.5%</td>
+                        <td>4.5%</td>
+                        <td>5.2%</td>
+                        <td>7.1%</td>
+                        <td>8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>-$662M</td>
+                        <td>-$1,350M</td>
+                        <td>-$275M</td>
+                        <td>-$201M</td>
+                        <td>-$234M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Casas Vendidas</strong></td>
+                        <td>21,725</td>
+                        <td>39,183</td>
+                        <td>19,500</td>
+                        <td>14,200</td>
+                        <td>~11,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precio Acción (fin año)</strong></td>
+                        <td>$15.70</td>
+                        <td>$1.15</td>
+                        <td>$3.30</td>
+                        <td>$1.80</td>
+                        <td>$1.50</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="metrics-grid" style="margin-top: 30px;">
+                <div class="metric-card">
+                    <div class="metric-label">Cash Q3 2025</div>
+                    <div class="metric-value">$962M</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Deuda Total</div>
+                    <div class="metric-value negative">$1.8B</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Debt/Equity</div>
+                    <div class="metric-value negative">219%</div>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h4 style="margin-bottom: 15px;">📊 Interpretación</h4>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Caída dramática:</strong> De $15.6B en 2022 a ~$4B en 2025 (-74%)</li>
+                    <li><strong>Nunca rentable:</strong> Pérdidas cada año, total acumulado ~$2.7B</li>
+                    <li><strong>Acción colapsada:</strong> De $15 a ~$1.50 (-90% desde máximos)</li>
+                    <li><strong>Cash burn moderado:</strong> ~$200M/año, con $962M en caja</li>
+                    <li><strong>Runway:</strong> 3-4 años al ritmo actual de quema</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 6: Competitive Analysis -->
+        <section class="section">
+            <span class="section-number">05</span>
+            <h2 class="section-title">Análisis Competitivo</h2>
+
+            <div class="comparison-grid">
+                <div class="company-card highlight">
+                    <h4>🏠 Opendoor (OPEN)</h4>
+                    <table class="data-table" style="color: white;">
+                        <tr><td>Market Cap</td><td>~$1.1B</td></tr>
+                        <tr><td>Cuota iBuying</td><td>67%</td></tr>
+                        <tr><td>Revenue 2025E</td><td>$4.1B</td></tr>
+                        <tr><td>Net Income</td><td>-$234M</td></tr>
+                        <tr><td>Margen Bruto</td><td>8%</td></tr>
+                    </table>
+                </div>
+                <div class="company-card">
+                    <h4>🏘️ Offerpad (OPAD)</h4>
+                    <table class="data-table">
+                        <tr><td>Market Cap</td><td>~$100M</td></tr>
+                        <tr><td>Cuota iBuying</td><td>~25%</td></tr>
+                        <tr><td>Revenue 2025E</td><td>$0.9B</td></tr>
+                        <tr><td>Net Income</td><td>-$80M</td></tr>
+                        <tr><td>Margen Bruto</td><td>6%</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px;">Competidores Indirectos (Plataformas)</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Empresa</th>
+                    <th>Modelo</th>
+                    <th>Fortaleza</th>
+                    <th>Amenaza para OPEN</th>
+                </tr>
+                <tr>
+                    <td><strong>Zillow (Z)</strong></td>
+                    <td>Marketplace + Leads</td>
+                    <td>234M visitantes/mes, marca dominante</td>
+                    <td>⚠️ ALTA - Si Opendoor pivota a plataforma</td>
+                </tr>
+                <tr>
+                    <td><strong>Redfin (RDFN)</strong></td>
+                    <td>Brokerage + Tech</td>
+                    <td>Agentes propios, comisiones bajas</td>
+                    <td>🔶 MEDIA</td>
+                </tr>
+                <tr>
+                    <td><strong>Realtor.com</strong></td>
+                    <td>Marketplace (News Corp)</td>
+                    <td>Datos MLS oficiales</td>
+                    <td>🔶 MEDIA</td>
+                </tr>
+            </table>
+
+            <div style="background: #ffe6e6; padding: 25px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #e74c3c;">
+                <h4 style="color: #c0392b; margin-bottom: 15px;">⚠️ El Dilema Competitivo</h4>
+                <p>
+                    Opendoor está atrapado entre dos mundos:
+                </p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Como iBuyer:</strong> Líder del mercado, pero el mercado es diminuto (&lt;0.5%) y no rentable</li>
+                    <li><strong>Como plataforma:</strong> Competiría con Zillow (50x más grande) sin sus ventajas de tráfico</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    Es como ser el mejor vendedor de disquetes en la era del USB - dominas un mercado que está desapareciendo.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 7: Timeline -->
+        <section class="section">
+            <span class="section-number">06</span>
+            <h2 class="section-title">Timeline de Eventos Críticos</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2014</div>
+                    <div class="timeline-content">
+                        <h4>Fundación de Opendoor</h4>
+                        <p>Eric Wu funda Opendoor en San Francisco con la misión de simplificar la venta de casas.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Diciembre 2020</div>
+                    <div class="timeline-content">
+                        <h4>Salida a bolsa vía SPAC</h4>
+                        <p>Se fusiona con Social Capital Hedosophia II (Chamath). Valoración: $4.8B. Acción abre a $31.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-content">
+                        <h4>Máxima expansión</h4>
+                        <p>Compra récord de casas durante el boom inmobiliario. Acción llega a $35. Zillow aún competía.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Noviembre 2021</div>
+                    <div class="timeline-content">
+                        <h4>Zillow abandona iBuying</h4>
+                        <p>Zillow cierra Zillow Offers tras perder $550M. La industria entra en crisis de confianza.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-content">
+                        <h4>Crisis de tasas de interés</h4>
+                        <p>La Fed sube tasas agresivamente. Mercado inmobiliario se congela. Opendoor pierde $1.35B. Acción cae a $1.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Noviembre 2022</div>
+                    <div class="timeline-content">
+                        <h4>Redfin cierra RedfinNow</h4>
+                        <p>Otro competidor abandona. Solo quedan Opendoor y Offerpad en el sector iBuying.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Agosto 2024</div>
+                    <div class="timeline-content">
+                        <h4>Eric Wu deja el puesto de CEO</h4>
+                        <p>El fundador pasa a ser Chairman. Carrie Wheeler (CFO) asume como CEO.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Octubre 2025</div>
+                    <div class="timeline-content">
+                        <h4>Lanzamiento Opendoor 2.0</h4>
+                        <p>Pivot estratégico hacia plataforma AI. Objetivo: breakeven ajustado para fin de 2026.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 8: Moat Analysis -->
+        <section class="section">
+            <span class="section-number">07</span>
+            <h2 class="section-title">Análisis del Moat</h2>
+
+            <div class="moat-visual">
+                <div class="moat-castle">
+                    <div class="icon">🏚️</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Moat Estrecho (Casi Inexistente)</h3>
+                    <p style="color: #7f8c8d;">Ventajas competitivas muy limitadas en un modelo de negocio commodity</p>
+                    <div class="moat-rating">
+                        <span class="moat-star filled">★</span>
+                        <span class="moat-star empty">★</span>
+                        <span class="moat-star empty">★</span>
+                        <span class="moat-star empty">★</span>
+                        <span class="moat-star empty">★</span>
+                    </div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Moat</th>
+                        <th>Evaluación</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Efectos de Red</strong></td>
+                        <td>❌ No existe</td>
+                        <td>No hay efecto red en comprar casas individualmente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costos de Cambio</strong></td>
+                        <td>❌ No existe</td>
+                        <td>Vendedores comparan ofertas de múltiples fuentes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Economías de Escala</strong></td>
+                        <td>⚠️ Débil</td>
+                        <td>Algo de eficiencia en operaciones, pero no decisiva</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activos Intangibles</strong></td>
+                        <td>⚠️ Débil</td>
+                        <td>Marca conocida pero no premium. Algoritmos de pricing no únicos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ventaja de Costos</strong></td>
+                        <td>❌ No existe</td>
+                        <td>Mismos costos de financiamiento y renovación que competidores</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: #fff3cd; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h4 style="margin-bottom: 15px;">🤔 ¿Por qué el modelo iBuying no tiene moat?</h4>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Commodity puro:</strong> Una casa es una casa. No hay diferenciación</li>
+                    <li><strong>Capital disponible:</strong> Cualquiera con dinero puede comprar casas</li>
+                    <li><strong>Algoritmos replicables:</strong> Los modelos de pricing son similares</li>
+                    <li><strong>Sin lock-in:</strong> Los vendedores no tienen lealtad, van al mejor precio</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Ironía:</strong> Zillow/Redfin abandonaron no porque Opendoor fuera superior,
+                    sino porque concluyeron que el modelo entero no funciona. Opendoor "ganó" un mercado
+                    que nadie quiere.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 9: Management -->
+        <section class="section">
+            <span class="section-number">08</span>
+            <h2 class="section-title">Evaluación de la Gestión</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">CEO</div>
+                    <div class="metric-value" style="font-size: 1.2rem;">Carrie Wheeler</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Desde Ago 2024 (ex-CFO)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Fundador/Chairman</div>
+                    <div class="metric-value" style="font-size: 1.2rem;">Eric Wu</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Dejó rol ejecutivo en 2024</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Skin in the Game</div>
+                    <div class="metric-value warning">Moderado</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Insiders ~15%</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">Track Record</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Métrica</th>
+                    <th>Resultado</th>
+                    <th>Evaluación</th>
+                </tr>
+                <tr>
+                    <td>ROIC histórico</td>
+                    <td>Negativo (siempre)</td>
+                    <td>❌ Destrucción de valor</td>
+                </tr>
+                <tr>
+                    <td>Asignación de capital</td>
+                    <td>Expansión agresiva en 2021-22</td>
+                    <td>❌ Timing terrible</td>
+                </tr>
+                <tr>
+                    <td>Comunicación</td>
+                    <td>Transparente sobre desafíos</td>
+                    <td>✅ Honesta</td>
+                </tr>
+                <tr>
+                    <td>Pivote estratégico</td>
+                    <td>Opendoor 2.0 lanzado Oct 2025</td>
+                    <td>⚠️ Por demostrar</td>
+                </tr>
+                <tr>
+                    <td>Gestión de costos</td>
+                    <td>Reducción de plantilla 2022-24</td>
+                    <td>✅ Adaptación</td>
+                </tr>
+            </table>
+
+            <h3 style="margin: 30px 0 20px;">Compensación Ejecutiva</h3>
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px;">
+                <ul style="margin-left: 20px;">
+                    <li>Compensación moderada para el sector tech</li>
+                    <li>Incentivos ligados a métricas operativas (no solo precio de acción)</li>
+                    <li>Eric Wu mantuvo participación significativa tras dejar CEO</li>
+                    <li>Levantamiento de capital ATM en Sep 2025 a $9.26 (dilutivo pero necesario)</li>
+                </ul>
+            </div>
+
+            <div class="alerts-box" style="margin-top: 30px; background: #e8f4fd; border-color: #3498db;">
+                <h4 style="color: #2980b9;">💡 Puntos Positivos de la Gestión</h4>
+                <ul>
+                    <li>Reconocieron problemas del modelo y están pivotando</li>
+                    <li>Redujeron quema de caja significativamente</li>
+                    <li>Comunicación honesta con inversores</li>
+                    <li>Objetivo claro: breakeven 2026</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 10: Red Flags -->
+        <section class="section">
+            <span class="section-number">09</span>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+
+            <div class="red-flags">
+                <div class="flag-item">
+                    <div class="flag-icon">🚨</div>
+                    <div>
+                        <strong>Nunca rentable</strong>
+                        <p style="font-size: 0.9rem; color: #666;">10+ años de pérdidas acumuladas (~$2.7B)</p>
+                    </div>
+                </div>
+
+                <div class="flag-item">
+                    <div class="flag-icon">🚨</div>
+                    <div>
+                        <strong>Modelo de negocio cuestionado</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Zillow y Redfin abandonaron el iBuying</p>
+                    </div>
+                </div>
+
+                <div class="flag-item">
+                    <div class="flag-icon">🚨</div>
+                    <div>
+                        <strong>Alta deuda</strong>
+                        <p style="font-size: 0.9rem; color: #666;">D/E de 219%, deuda respaldada por casas</p>
+                    </div>
+                </div>
+
+                <div class="flag-item">
+                    <div class="flag-icon">🚨</div>
+                    <div>
+                        <strong>Márgenes mínimos</strong>
+                        <p style="font-size: 0.9rem; color: #666;">8% margen bruto - sin margen de error</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Mercado cíclico</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Dependiente de tasas de interés y housing</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Pivot no probado</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Opendoor 2.0 recién lanzado, sin resultados</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Competencia en pivot</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Zillow domina el espacio de plataforma</p>
+                    </div>
+                </div>
+
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div>
+                        <strong>Liquidez suficiente</strong>
+                        <p style="font-size: 0.9rem; color: #666;">$962M cash, 3+ años runway</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #ffe6e6; padding: 25px; border-radius: 15px; margin-top: 30px; border: 2px solid #e74c3c;">
+                <h4 style="color: #c0392b; margin-bottom: 15px;">🚨 Red Flag Principal</h4>
+                <p style="font-size: 1.1rem;">
+                    <strong>El modelo de negocio fundamental puede no funcionar.</strong> Opendoor no es una empresa
+                    en problemas temporales - es una empresa que opera en un sector donde los dos principales
+                    competidores (Zillow, Redfin) concluyeron que no es posible ganar dinero y cerraron.
+                    Dominar un mercado imposible no es una ventaja.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 11: Valuation -->
+        <section class="section">
+            <span class="section-number">10</span>
+            <h2 class="section-title">Valoración y Escenarios</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Precio Actual</div>
+                    <div class="metric-value">$1.50</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Market Cap</div>
+                    <div class="metric-value">$1.1B</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Price/Sales</div>
+                    <div class="metric-value">0.27x</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Price/Book</div>
+                    <div class="metric-value">1.4x</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">EV/Revenue</div>
+                    <div class="metric-value">0.7x</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">PT Analistas</div>
+                    <div class="metric-value warning">$1.67</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px;">Escenarios a 5 Años (2030)</h3>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull">
+                    <div class="scenario-name">🚀 Optimista</div>
+                    <div class="scenario-price">$8.00</div>
+                    <div class="scenario-return">+433%</div>
+                    <div class="scenario-prob">Probabilidad: 15%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        Opendoor 2.0 funciona, tasas bajan, mercado inmobiliario se recupera, alcanza rentabilidad sostenida
+                    </p>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-name">📊 Base</div>
+                    <div class="scenario-price">$2.50</div>
+                    <div class="scenario-return">+67%</div>
+                    <div class="scenario-prob">Probabilidad: 35%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        Pivot parcialmente exitoso, breakeven en 2027, crecimiento moderado, mercado estable
+                    </p>
+                </div>
+                <div class="scenario-card bear">
+                    <div class="scenario-name">🐻 Pesimista</div>
+                    <div class="scenario-price">$0.30</div>
+                    <div class="scenario-return">-80%</div>
+                    <div class="scenario-prob">Probabilidad: 50%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        Pivot falla, continúan pérdidas, dilución masiva o quiebra, housing débil prolongado
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h4 style="margin-bottom: 15px;">📐 Precio Ponderado por Probabilidad</h4>
+                <table class="data-table">
+                    <tr>
+                        <td>Bull (15%)</td>
+                        <td>$8.00 × 0.15</td>
+                        <td>= $1.20</td>
+                    </tr>
+                    <tr>
+                        <td>Base (35%)</td>
+                        <td>$2.50 × 0.35</td>
+                        <td>= $0.88</td>
+                    </tr>
+                    <tr>
+                        <td>Bear (50%)</td>
+                        <td>$0.30 × 0.50</td>
+                        <td>= $0.15</td>
+                    </tr>
+                    <tr style="font-weight: bold; background: #e8f4fd;">
+                        <td colspan="2">Valor Esperado</td>
+                        <td>$2.23</td>
+                    </tr>
+                </table>
+                <p style="margin-top: 15px;">
+                    <strong>Interpretación:</strong> El valor esperado ($2.23) está por encima del precio actual ($1.50),
+                    lo que sugiere potencial... pero la distribución es extremadamente asimétrica.
+                    <strong>Hay 50% de probabilidad de perder 80%+ de la inversión.</strong>
+                </p>
+            </div>
+
+            <div class="alerts-box" style="margin-top: 20px;">
+                <h4>⚠️ Por Qué No Valoramos por Múltiplos Tradicionales</h4>
+                <ul>
+                    <li>Sin beneficios = P/E no aplicable</li>
+                    <li>Revenue inflado (cada casa vendida es revenue, no margen)</li>
+                    <li>P/Sales engañoso con 8% margen bruto</li>
+                    <li>Esta es una apuesta binaria, no una inversión value tradicional</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 12: Investment Thesis -->
+        <section class="section">
+            <span class="section-number">11</span>
+            <h2 class="section-title">Tesis de Inversión</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div style="background: #e8f5e9; padding: 30px; border-radius: 15px;">
+                    <h3 style="color: #27ae60; margin-bottom: 20px;">✅ Argumentos a Favor</h3>
+                    <ul style="list-style: none;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Valoración deprimida:</strong> P/S 0.27x, cerca de mínimos históricos
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Única superviviente:</strong> Líder indiscutido del iBuying
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Pivot inteligente:</strong> Mover a plataforma reduce riesgo de capital
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Liquidez:</strong> $962M da tiempo para ejecutar
+                        </li>
+                        <li style="padding: 10px 0;">
+                            <strong>Catalizador:</strong> Bajada de tasas beneficiaría mucho
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: #ffebee; padding: 30px; border-radius: 15px;">
+                    <h3 style="color: #c0392b; margin-bottom: 20px;">❌ Argumentos en Contra</h3>
+                    <ul style="list-style: none;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Modelo no probado:</strong> Nadie ha hecho dinero en iBuying
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Competencia en pivot:</strong> Zillow domina plataformas de RE
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Sin moat:</strong> Negocio commodity sin ventajas sostenibles
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Dependencia macro:</strong> Si tasas suben más, colapso
+                        </li>
+                        <li style="padding: 10px 0;">
+                            <strong>Dilución:</strong> Continuas emisiones de acciones
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h3 style="margin-bottom: 15px;">⚖️ Balance Final</h3>
+                <p style="font-size: 1.2rem;">
+                    Los argumentos en contra son más fundamentales (modelo de negocio) mientras que los
+                    argumentos a favor son más tácticos (valoración, liquidez). En inversiones, los problemas
+                    estructurales suelen pesar más que las oportunidades tácticas.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 13: Conclusion -->
+        <section class="section" style="border-bottom: none;">
+            <span class="section-number">12</span>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">PRECAUCIÓN</div>
+                <p class="conclusion-summary">
+                    Opendoor es una apuesta especulativa de alto riesgo, no una inversión value.
+                    Aunque la valoración es atractiva y hay potencial si el pivot funciona, el modelo
+                    de negocio fundamental nunca ha sido probado rentable y competidores más grandes
+                    lo abandonaron. Solo para inversores que puedan perder el 100%.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">POSICIÓN: 0-2% MÁX</span>
+                    <span class="action-btn secondary">HORIZONTE: ESPECULATIVO</span>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px;">Acciones Recomendadas</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Acción</th>
+                    <th>Detalle</th>
+                </tr>
+                <tr>
+                    <td>✋ <strong>NO comprar ahora</strong></td>
+                    <td>Esperar evidencia del pivot Opendoor 2.0 (Q1-Q2 2026)</td>
+                </tr>
+                <tr>
+                    <td>👀 <strong>Monitorear</strong></td>
+                    <td>Resultados Q4 2025 y guía 2026 (febrero 2026)</td>
+                </tr>
+                <tr>
+                    <td>📊 <strong>Métricas clave</strong></td>
+                    <td>Conversión platform, EBITDA ajustado, volumen de transacciones</td>
+                </tr>
+                <tr>
+                    <td>💰 <strong>Si se compra</strong></td>
+                    <td>Máximo 1-2% del portfolio, asumir pérdida total posible</td>
+                </tr>
+            </table>
+
+            <div class="alerts-box" style="margin-top: 30px;">
+                <h4>🔔 Alertas de Seguimiento</h4>
+                <ul>
+                    <li><strong>Resultados Q4 2025:</strong> ¿Progreso en Opendoor 2.0? (Feb 2026)</li>
+                    <li><strong>Guía breakeven:</strong> ¿Mantienen objetivo fin 2026?</li>
+                    <li><strong>Tasas de interés:</strong> Si Fed recorta agresivamente, revisar tesis</li>
+                    <li><strong>Competencia:</strong> Si Zillow entra agresivamente en su espacio</li>
+                    <li><strong>Cash burn:</strong> Si quema acelera o hace más emisiones de acciones</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h4 style="margin-bottom: 15px;">🎰 Perfil del Inversor Adecuado</h4>
+                <p>
+                    <strong>SÍ para:</strong> Especuladores con alta tolerancia al riesgo, que buscan
+                    opcionalidad a turnarounds inmobiliarios, y pueden monitorear activamente.<br><br>
+                    <strong>NO para:</strong> Inversores value tradicionales, buscadores de dividendos,
+                    o cualquiera que no pueda asumir pérdida total.
+                </p>
+            </div>
+        </section>
+
+        <footer class="report-footer">
+            <p>
+                <strong>Análisis generado por FMA - Agente /analista</strong><br>
+                Framework: Value-Growth Investing | Fecha: 27 Enero 2026<br>
+                Este informe es solo para fines educativos. No constituye asesoramiento financiero.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

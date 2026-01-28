@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: The Trade Desk (TTD)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --color-primary: #1a1a2e;
+            --color-secondary: #16213e;
+            --color-accent: #00b894;
+            --color-warning: #f39c12;
+            --color-success: #27ae60;
+            --color-danger: #c0392b;
+            --color-text: #2c3e50;
+            --color-light: #ecf0f1;
+            --color-gold: #f1c40f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: #fafafa;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 60px rgba(0,0,0,0.1);
+        }
+
+        /* Cover Page */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 50%, #0984e3 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-logo {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .verdict-badge.buena {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .score-display {
+            font-size: 6rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .score-display span {
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        .cover-date {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 40px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 50px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--color-accent);
+            display: inline-block;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--color-accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Simple Explanation */
+        .simple-box {
+            background: linear-gradient(135deg, #00b894 0%, #0984e3 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .simple-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .analogy {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Score Dashboard */
+        .score-dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .pillar-score {
+            background: var(--color-light);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pillar-score:hover {
+            transform: translateY(-5px);
+        }
+
+        .pillar-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .pillar-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin-bottom: 10px;
+        }
+
+        .pillar-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .pillar-value.low { color: var(--color-danger); }
+        .pillar-value.medium { color: var(--color-warning); }
+        .pillar-value.high { color: var(--color-success); }
+
+        .total-score-box {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .total-score-value {
+            font-size: 5rem;
+            font-weight: 700;
+        }
+
+        .total-score-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: var(--color-light);
+            font-weight: 600;
+            color: var(--color-secondary);
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid var(--color-light);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .metric-value.negative { color: var(--color-danger); }
+        .metric-value.positive { color: var(--color-success); }
+        .metric-value.warning { color: var(--color-warning); }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--color-light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        .progress-fill.danger { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .progress-fill.warning { background: linear-gradient(90deg, #f39c12, #e67e22); }
+        .progress-fill.success { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+
+        /* Red Flags */
+        .red-flags {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #fff5f5;
+            border-left: 4px solid var(--color-danger);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .flag-item.warning {
+            background: #fff9e6;
+            border-left-color: var(--color-warning);
+        }
+
+        .flag-item.ok {
+            background: #f0fff4;
+            border-left-color: var(--color-success);
+        }
+
+        .flag-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Moat Rating */
+        .moat-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .moat-castle {
+            text-align: center;
+        }
+
+        .moat-castle .icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+        }
+
+        .moat-rating {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .moat-star {
+            font-size: 2rem;
+        }
+
+        .moat-star.filled { color: var(--color-gold); }
+        .moat-star.empty { color: #ddd; }
+
+        /* Valuation Scenarios */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .scenario-card {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .scenario-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .scenario-return {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .scenario-prob {
+            font-size: 0.9rem;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+
+        /* Conclusion */
+        .conclusion-box {
+            background: linear-gradient(135deg, #00b894 0%, #0984e3 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .conclusion-verdict {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .conclusion-summary {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-btn.primary {
+            background: white;
+            color: #00b894;
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* Alerts Box */
+        .alerts-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .alerts-box h4 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .alerts-box ul {
+            list-style: none;
+        }
+
+        .alerts-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .alerts-box li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .report-footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--color-light);
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* Print Styles */
+        @media print {
+            .page { box-shadow: none; }
+            .section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Page 1: Cover -->
+        <section class="cover">
+            <div class="cover-content">
+                <div class="company-logo">📺</div>
+                <h1 class="company-name">The Trade Desk</h1>
+                <div class="company-ticker">NASDAQ: TTD</div>
+
+                <div class="verdict-badge buena">BUENA</div>
+
+                <div class="score-display">79<span>/100</span></div>
+
+                <p style="font-size: 1.3rem; opacity: 0.9; max-width: 600px;">
+                    Líder en AdTech Independiente • Caída de 70% = Oportunidad • Catalizador DOJ vs Google
+                </p>
+
+                <div class="cover-date">
+                    Análisis realizado el 27 de Enero de 2026<br>
+                    Framework: Value-Growth Investing
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Simple Explanation -->
+        <section class="section">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Explicación Simple</h2>
+
+            <div class="simple-box">
+                <h3>¿Qué hace The Trade Desk?</h3>
+                <p>
+                    The Trade Desk es una plataforma que ayuda a las empresas a comprar publicidad digital
+                    de forma automatizada (programmatic advertising). Cuando ves un anuncio en una app,
+                    en un Smart TV, o en una web - hay una buena probabilidad de que TTD lo haya colocado ahí.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>¿Por qué importa?</strong> A diferencia de Google, Meta o Amazon (los "walled gardens"),
+                    TTD es <strong>independiente</strong>. No vende su propio inventario de anuncios, así que
+                    no hay conflicto de interés. Esto los hace el socio preferido para empresas que no quieren
+                    depender de los gigantes tech.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>La oportunidad:</strong> La acción cayó 70% en 2025 (de $141 a $38) por temores
+                    de desaceleración. Pero con el caso DOJ vs Google y el crecimiento de CTV (Connected TV),
+                    TTD está muy bien posicionado para 2026.
+                </p>
+
+                <div class="analogy">
+                    💡 <strong>Analogía:</strong> Imagina que Google es un supermercado que vende SUS productos
+                    y te obliga a usar SU carrito. TTD es un comparador de precios independiente que te
+                    ayuda a encontrar el mejor producto en CUALQUIER tienda. Los anunciantes prefieren
+                    la neutralidad.
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Score Dashboard -->
+        <section class="section">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+
+            <div class="score-dashboard">
+                <div class="pillar-score">
+                    <div class="pillar-icon">🏢</div>
+                    <div class="pillar-name">Calidad Negocio</div>
+                    <div class="pillar-value high">17/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">💰</div>
+                    <div class="pillar-name">Fortaleza Financiera</div>
+                    <div class="pillar-value high">17/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">🏰</div>
+                    <div class="pillar-name">Ventaja Competitiva</div>
+                    <div class="pillar-value medium">14/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">👔</div>
+                    <div class="pillar-name">Gestión</div>
+                    <div class="pillar-value high">16/20</div>
+                </div>
+                <div class="pillar-score">
+                    <div class="pillar-icon">📊</div>
+                    <div class="pillar-name">Valoración</div>
+                    <div class="pillar-value medium">15/20</div>
+                </div>
+            </div>
+
+            <div class="total-score-box">
+                <div class="total-score-value">79/100</div>
+                <div class="total-score-label">Puntuación Total • BUENA INVERSIÓN</div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">Desglose por Pilar</h3>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Calidad del Negocio</span>
+                        <span>17/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill success" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Fortaleza Financiera</span>
+                        <span>17/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill success" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Ventaja Competitiva (Moat)</span>
+                        <span>14/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill warning" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Gestión</span>
+                        <span>16/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill success" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Valoración</span>
+                        <span>15/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill warning" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Business Analysis -->
+        <section class="section">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Análisis del Negocio</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Revenue Q3 2025</div>
+                    <div class="metric-value">$739M</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Crecimiento YoY</div>
+                    <div class="metric-value positive">+18%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">EBITDA Margin</div>
+                    <div class="metric-value positive">43%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Gross Margin</div>
+                    <div class="metric-value positive">~80%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">CTV % Revenue</div>
+                    <div class="metric-value">50%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">DSP Market Share</div>
+                    <div class="metric-value">25.8%</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">Canales de Ingresos</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Canal</th>
+                    <th>% Revenue</th>
+                    <th>Crecimiento</th>
+                    <th>Tendencia</th>
+                </tr>
+                <tr>
+                    <td><strong>Connected TV (CTV)</strong></td>
+                    <td>50%</td>
+                    <td>+25%+</td>
+                    <td>📈 Más rápido que la empresa</td>
+                </tr>
+                <tr>
+                    <td><strong>Mobile</strong></td>
+                    <td>25%</td>
+                    <td>+15%</td>
+                    <td>📊 Estable</td>
+                </tr>
+                <tr>
+                    <td><strong>Desktop/Display</strong></td>
+                    <td>15%</td>
+                    <td>+5%</td>
+                    <td>📉 Legacy, declining</td>
+                </tr>
+                <tr>
+                    <td><strong>Audio</strong></td>
+                    <td>5%</td>
+                    <td>+20%</td>
+                    <td>📈 Creciendo</td>
+                </tr>
+                <tr>
+                    <td><strong>Retail Media</strong></td>
+                    <td>5%</td>
+                    <td>+30%</td>
+                    <td>📈 Nueva área de crecimiento</td>
+                </tr>
+            </table>
+
+            <h3 style="margin: 30px 0 20px;">¿Por Qué CTV Es Tan Importante?</h3>
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 25px; border-radius: 15px;">
+                <p>
+                    <strong>Linear TV está muriendo.</strong> Los millennials y Gen Z no ven TV tradicional.
+                    Los dólares de publicidad están migrando masivamente a Streaming/CTV.
+                </p>
+                <ul style="margin-top: 15px; margin-left: 20px;">
+                    <li><strong>Netflix, Disney+, Max:</strong> Todos tienen tiers con anuncios</li>
+                    <li><strong>CTV = 40%</strong> de todo el gasto digital ad para 2026</li>
+                    <li><strong>TTD es el líder</strong> en compra programática de CTV</li>
+                    <li><strong>Márgenes altos:</strong> CTV ads son más caros que display</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 5: Financial Evolution -->
+        <section class="section">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Evolución Financiera (5 Años)</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue ($B)</strong></td>
+                        <td>$1.2</td>
+                        <td>$1.6</td>
+                        <td>$1.95</td>
+                        <td>$2.4</td>
+                        <td>~$2.85</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crecimiento</strong></td>
+                        <td>+43%</td>
+                        <td>+32%</td>
+                        <td>+23%</td>
+                        <td>+23%</td>
+                        <td>+18%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBITDA Margin</strong></td>
+                        <td>38%</td>
+                        <td>40%</td>
+                        <td>41%</td>
+                        <td>42%</td>
+                        <td>43%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income Margin</strong></td>
+                        <td>22%</td>
+                        <td>20%</td>
+                        <td>23%</td>
+                        <td>25%</td>
+                        <td>~26%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="metrics-grid" style="margin-top: 30px;">
+                <div class="metric-card">
+                    <div class="metric-label">Cash Position</div>
+                    <div class="metric-value positive">$1.4B</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Deuda</div>
+                    <div class="metric-value positive">$0</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Take Rate</div>
+                    <div class="metric-value">20%</div>
+                </div>
+            </div>
+
+            <div style="background: #e8f5e9; padding: 25px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #27ae60;">
+                <h4 style="color: #27ae60; margin-bottom: 15px;">✅ Balance Sheet Impecable</h4>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Zero debt:</strong> Ninguna deuda financiera</li>
+                    <li><strong>$1.4B cash:</strong> Flexibilidad para M&A o recompras</li>
+                    <li><strong>FCF positive:</strong> Genera caja consistentemente</li>
+                    <li><strong>Márgenes crecientes:</strong> Economías de escala funcionando</li>
+                </ul>
+            </div>
+
+            <div style="background: #fff3cd; padding: 25px; border-radius: 15px; margin-top: 20px; border-left: 5px solid #f39c12;">
+                <h4 style="color: #856404; margin-bottom: 15px;">⚠️ Desaceleración del Crecimiento</h4>
+                <p>
+                    El crecimiento bajó de +43% (2021) a +18% (2025). Esto explica la caída de 70%
+                    de la acción. Sin embargo, +18% sigue siendo superior al mercado de ads digital (~12%)
+                    y los márgenes siguen expandiéndose.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 6: Competitive Analysis -->
+        <section class="section">
+            <span class="section-number">05</span>
+            <h2 class="section-title">Análisis Competitivo</h2>
+
+            <h3 style="margin-bottom: 20px;">El Campo de Batalla: DSPs vs Walled Gardens</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Competidor</th>
+                    <th>Tipo</th>
+                    <th>Fortaleza</th>
+                    <th>Debilidad</th>
+                </tr>
+                <tr>
+                    <td><strong>Google DV360</strong></td>
+                    <td>Walled Garden</td>
+                    <td>Escala, YouTube, datos</td>
+                    <td>Conflicto interés (DOJ caso)</td>
+                </tr>
+                <tr>
+                    <td><strong>Amazon DSP</strong></td>
+                    <td>Walled Garden</td>
+                    <td>Datos retail, Prime Video</td>
+                    <td>Prioriza su inventario</td>
+                </tr>
+                <tr>
+                    <td><strong>Meta</strong></td>
+                    <td>Walled Garden</td>
+                    <td>Instagram, FB, datos</td>
+                    <td>Solo su inventario</td>
+                </tr>
+                <tr>
+                    <td><strong>The Trade Desk</strong></td>
+                    <td>Independiente</td>
+                    <td>Neutral, CTV líder</td>
+                    <td>Sin inventario propio</td>
+                </tr>
+                <tr>
+                    <td><strong>Magnite</strong></td>
+                    <td>SSP/Indie</td>
+                    <td>Supply side fuerte</td>
+                    <td>Menos escala buy-side</td>
+                </tr>
+            </table>
+
+            <div style="background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 30px;">
+                <h3 style="color: #00b894; margin-bottom: 20px;">🎯 El Catalizador: DOJ vs Google</h3>
+                <p>
+                    En el caso antimonopolio DOJ vs Google, el juez determinó que Google tiene
+                    monopolio ilegal en búsqueda y ads. Los remedios se implementarán en <strong>mid-2026</strong>.
+                </p>
+                <ul style="margin-top: 15px; margin-left: 20px;">
+                    <li><strong>Escenario probable:</strong> Google forzado a vender AdX o Ad Manager</li>
+                    <li><strong>Impacto para TTD:</strong> Anunciantes migrarían a plataformas neutrales</li>
+                    <li><strong>"Generational opportunity"</strong> según analistas</li>
+                </ul>
+                <p style="margin-top: 15px; font-style: italic;">
+                    Si Google pierde control de su stack de ads, TTD es el beneficiario más claro.
+                </p>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">Amenaza Amazon</h3>
+            <div style="background: #fff3cd; padding: 25px; border-radius: 15px;">
+                <p>
+                    <strong>Amazon DSP está creciendo agresivamente:</strong>
+                </p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>Deals con Roku y Disney+ amplían alcance a ~80M hogares CTV</li>
+                    <li>Prime Video ads tier lanzado en 2024</li>
+                    <li>Datos de retail superiores a cualquier competidor</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>Pero:</strong> 95% de ingresos de Amazon Ads viene de Sponsored Listings
+                    (búsqueda en Amazon), no del open web donde TTD domina.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 7: Moat Analysis -->
+        <section class="section">
+            <span class="section-number">06</span>
+            <h2 class="section-title">Análisis del Moat</h2>
+
+            <div class="moat-visual">
+                <div class="moat-castle">
+                    <div class="icon">🛡️</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Moat Moderado-Alto</h3>
+                    <p style="color: #7f8c8d;">Único independiente a escala, pero compite con gigantes tech</p>
+                    <div class="moat-rating">
+                        <span class="moat-star filled">★</span>
+                        <span class="moat-star filled">★</span>
+                        <span class="moat-star filled">★</span>
+                        <span class="moat-star filled">★</span>
+                        <span class="moat-star empty">★</span>
+                    </div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Moat</th>
+                        <th>Evaluación</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Independencia/Neutralidad</strong></td>
+                        <td>✅ Único</td>
+                        <td>Única DSP independiente a escala global. No hay conflicto de interés.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Switching Costs</strong></td>
+                        <td>✅ Alto</td>
+                        <td>Integración profunda con workflows de agencias. UID 2.0 lock-in.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Datos/AI</strong></td>
+                        <td>✅ Fuerte</td>
+                        <td>Trillones de eventos procesados. Koa AI mejora targeting continuamente.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Marca</strong></td>
+                        <td>✅ Fuerte</td>
+                        <td>Preferido por agencias independientes. Jeff Green respetado.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Red de Inventory</strong></td>
+                        <td>⚠️ Moderado</td>
+                        <td>Access al open web pero walled gardens tienen mejor inventario propio.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin: 30px 0 20px;">UID 2.0 - La Apuesta Estratégica</h3>
+            <div style="background: #e8f4fd; padding: 25px; border-radius: 15px;">
+                <p>
+                    Con el fin de las cookies de terceros, TTD creó <strong>UID 2.0</strong>: un
+                    estándar de identidad open-source que permite tracking cross-platform SIN cookies.
+                </p>
+                <ul style="margin-top: 15px; margin-left: 20px;">
+                    <li><strong>Adoptado por:</strong> Disney, Walmart, Kroger, y miles más</li>
+                    <li><strong>Ventaja:</strong> Si UID 2.0 se convierte en estándar, TTD gana</li>
+                    <li><strong>Riesgo:</strong> Google y Apple pueden bloquear o competir</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 8: Management -->
+        <section class="section">
+            <span class="section-number">07</span>
+            <h2 class="section-title">Evaluación de la Gestión</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">CEO y Fundador</div>
+                    <div class="metric-value" style="font-size: 1.2rem;">Jeff Green</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Desde 2009</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Insider Ownership</div>
+                    <div class="metric-value positive">~10%</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Jeff Green ~7%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tenencia CEO</div>
+                    <div class="metric-value positive">17 años</div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">Fundador desde día 1</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px;">Jeff Green - Track Record</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Evaluación</th>
+                </tr>
+                <tr>
+                    <td>Visión estratégica</td>
+                    <td>✅ Pionero en CTV y programmatic. Anticipó muerte de cookies.</td>
+                </tr>
+                <tr>
+                    <td>Ejecución</td>
+                    <td>✅ De startup a $3B revenue, siempre profitable.</td>
+                </tr>
+                <tr>
+                    <td>Comunicación</td>
+                    <td>✅ Earnings calls detalladas, visión clara articulada.</td>
+                </tr>
+                <tr>
+                    <td>Capital allocation</td>
+                    <td>✅ Zero debt, $1.4B cash, M&A selectivo.</td>
+                </tr>
+                <tr>
+                    <td>Skin in the game</td>
+                    <td>✅ ~7% ownership = ~$700M+ a precios actuales</td>
+                </tr>
+            </table>
+
+            <div style="background: #e8f5e9; padding: 25px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #27ae60;">
+                <h4 style="color: #27ae60; margin-bottom: 15px;">💬 Cita de Jeff Green (Q3 2025)</h4>
+                <blockquote style="font-style: italic; margin: 10px 0;">
+                    "I'm more excited about 2026 than any year in the company's history. The DOJ remedies
+                    against Google, the growth of CTV, and our underappreciated data asset create a
+                    perfect storm of opportunity."
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Page 9: Red Flags -->
+        <section class="section">
+            <span class="section-number">08</span>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+
+            <div class="red-flags">
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Desaceleración crecimiento</strong>
+                        <p style="font-size: 0.9rem; color: #666;">De +43% a +18% en 4 años</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Amazon amenaza CTV</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Deals con Roku, Disney, crecimiento agresivo</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Take rate presión</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Competidores ofrecen fees más bajos</p>
+                    </div>
+                </div>
+
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div>
+                        <strong>Dependencia open web</strong>
+                        <p style="font-size: 0.9rem; color: #666;">No tiene acceso a walled gardens</p>
+                    </div>
+                </div>
+
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div>
+                        <strong>Zero debt</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Balance sheet impecable</p>
+                    </div>
+                </div>
+
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div>
+                        <strong>Márgenes crecientes</strong>
+                        <p style="font-size: 0.9rem; color: #666;">EBITDA 43%, mejorando cada año</p>
+                    </div>
+                </div>
+
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div>
+                        <strong>Catalizador DOJ</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Google remedies en mid-2026</p>
+                    </div>
+                </div>
+
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div>
+                        <strong>Valoración razonable</strong>
+                        <p style="font-size: 0.9rem; color: #666;">P/E ~19x, caída de 70% absorbida</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 10: Valuation -->
+        <section class="section">
+            <span class="section-number">09</span>
+            <h2 class="section-title">Valoración y Escenarios</h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Precio Actual</div>
+                    <div class="metric-value">~$45</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Market Cap</div>
+                    <div class="metric-value">~$22B</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">P/E Forward</div>
+                    <div class="metric-value positive">~19x</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">P/E Histórico</div>
+                    <div class="metric-value">50x+</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">PT Consenso</div>
+                    <div class="metric-value">$71</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Upside PT</div>
+                    <div class="metric-value positive">+58%</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px;">Escenarios a 3 Años (2028)</h3>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull">
+                    <div class="scenario-name">🚀 Optimista</div>
+                    <div class="scenario-price">$120</div>
+                    <div class="scenario-return">+167%</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        DOJ breakup de Google, CTV explota, crecimiento reacelera a 25%+, P/E 35x
+                    </p>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-name">📊 Base</div>
+                    <div class="scenario-price">$75</div>
+                    <div class="scenario-return">+67%</div>
+                    <div class="scenario-prob">Probabilidad: 50%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        Crecimiento 15-18%, DOJ beneficio parcial, P/E se normaliza a 25x
+                    </p>
+                </div>
+                <div class="scenario-card bear">
+                    <div class="scenario-name">🐻 Pesimista</div>
+                    <div class="scenario-price">$35</div>
+                    <div class="scenario-return">-22%</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.9;">
+                        Amazon gana CTV, crecimiento <10%, DOJ sin impacto, P/E 15x
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h4 style="margin-bottom: 15px;">📐 Precio Ponderado por Probabilidad</h4>
+                <table class="data-table">
+                    <tr>
+                        <td>Bull (25%)</td>
+                        <td>$120 × 0.25</td>
+                        <td>= $30</td>
+                    </tr>
+                    <tr>
+                        <td>Base (50%)</td>
+                        <td>$75 × 0.50</td>
+                        <td>= $37.50</td>
+                    </tr>
+                    <tr>
+                        <td>Bear (25%)</td>
+                        <td>$35 × 0.25</td>
+                        <td>= $8.75</td>
+                    </tr>
+                    <tr style="font-weight: bold; background: #d4edda;">
+                        <td colspan="2">Valor Esperado</td>
+                        <td>$76.25</td>
+                    </tr>
+                </table>
+                <p style="margin-top: 15px;">
+                    <strong>Interpretación:</strong> Valor esperado ~$76 vs precio actual ~$45 =
+                    <strong>+69% upside esperado</strong>. Riesgo/recompensa atractivo.
+                </p>
+            </div>
+        </section>
+
+        <!-- Page 11: Conclusion -->
+        <section class="section" style="border-bottom: none;">
+            <span class="section-number">10</span>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">BUENA INVERSIÓN</div>
+                <p class="conclusion-summary">
+                    The Trade Desk es un negocio de alta calidad (márgenes 80%, zero debt, fundador/CEO)
+                    que ha sufrido una corrección severa (-70%) por desaceleración de crecimiento.
+                    A P/E 19x, mucho pesimismo ya está en precio. El catalizador DOJ vs Google
+                    en 2026 podría ser transformador. Buen momento para iniciar posición.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">COMPRAR / INICIAR POSICIÓN</span>
+                    <span class="action-btn secondary">HORIZONTE: 3-5 AÑOS</span>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px;">Acciones Recomendadas</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Acción</th>
+                    <th>Detalle</th>
+                </tr>
+                <tr>
+                    <td>✅ <strong>Iniciar posición</strong></td>
+                    <td>2-4% del portfolio a precios actuales (~$45)</td>
+                </tr>
+                <tr>
+                    <td>📈 <strong>Aumentar si baja</strong></td>
+                    <td>Agregar más si cae a $35-40 (bear scenario)</td>
+                </tr>
+                <tr>
+                    <td>👀 <strong>Catalizador</strong></td>
+                    <td>DOJ remedies en mid-2026 - potencial game changer</td>
+                </tr>
+                <tr>
+                    <td>🎯 <strong>Price target</strong></td>
+                    <td>$75 base case (3 años) = +67% upside</td>
+                </tr>
+            </table>
+
+            <div class="alerts-box" style="margin-top: 30px;">
+                <h4>🔔 Alertas de Seguimiento</h4>
+                <ul>
+                    <li><strong>DOJ vs Google:</strong> Remedies esperados mid-2026</li>
+                    <li><strong>Q4 2025 earnings:</strong> Guía 2026 (febrero)</li>
+                    <li><strong>CTV growth:</strong> Si cae bajo 20%, reevaluar</li>
+                    <li><strong>Amazon DSP:</strong> Seguir evolución de cuota CTV</li>
+                    <li><strong>UID 2.0 adoption:</strong> Más partners = más moat</li>
+                    <li><strong>Midterm elections 2026:</strong> Political ad spend boost</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h4 style="margin-bottom: 15px;">🎯 Resumen en Una Frase</h4>
+                <p style="font-size: 1.2rem;">
+                    <strong>Gran empresa a precio de crisis.</strong> La caída de 70% ya descuenta
+                    los problemas. El upside del DOJ vs Google no está en precio.
+                </p>
+            </div>
+        </section>
+
+        <footer class="report-footer">
+            <p>
+                <strong>Análisis generado por FMA - Agente /analista</strong><br>
+                Framework: Value-Growth Investing | Fecha: 27 Enero 2026<br>
+                Este informe es solo para fines educativos. No constituye asesoramiento financiero.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

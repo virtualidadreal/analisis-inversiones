@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión | FMA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════
+           DESIGN SYSTEM - Lovable Style
+           All colors, spacing, and effects defined here. Never use raw values.
+           ═══════════════════════════════════════════════════════════════════ */
+
+        :root {
+            /* Color Palette - Semantic Tokens */
+            --background: 240 10% 4%;
+            --background-subtle: 240 6% 7%;
+            --foreground: 0 0% 98%;
+
+            --card: 240 6% 9%;
+            --card-hover: 240 6% 12%;
+            --card-foreground: 0 0% 98%;
+
+            --muted: 240 4% 16%;
+            --muted-foreground: 240 5% 65%;
+
+            --border: 240 4% 16%;
+            --border-hover: 240 4% 26%;
+
+            --primary: 217 91% 60%;
+            --primary-foreground: 0 0% 100%;
+
+            --accent: 262 83% 58%;
+            --accent-foreground: 0 0% 100%;
+
+            /* Rating Colors */
+            --rating-excelente: 142 71% 45%;
+            --rating-buena: 84 81% 44%;
+            --rating-aceptable: 48 96% 53%;
+            --rating-precaucion: 25 95% 53%;
+            --rating-evitar: 0 84% 60%;
+
+            /* Typography */
+            --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing Scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.25rem;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 40px -10px hsl(var(--primary) / 0.5);
+            --shadow-card: 0 0 0 1px hsl(var(--border)), 0 2px 4px rgb(0 0 0 / 0.04);
+            --shadow-card-hover: 0 0 0 1px hsl(var(--border-hover)), 0 20px 40px -15px rgb(0 0 0 / 0.3);
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scale-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            from { background-position: -200% 0; }
+            to { background-position: 200% 0; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .animate-fade-up {
+            animation: fade-up 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.4s ease forwards;
+        }
+
+        .animate-scale-in {
+            animation: scale-in 0.3s ease forwards;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           BASE STYLES
+           ═══════════════════════════════════════════════════════════════════ */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-inline: var(--space-6);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════════════════════════════════ */
+
+        header {
+            position: relative;
+            padding: var(--space-20) var(--space-6) var(--space-12);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Gradient orbs background */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, hsl(var(--accent) / 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: hsl(var(--primary) / 0.1);
+            border: 1px solid hsl(var(--primary) / 0.2);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: hsl(var(--primary));
+            margin-bottom: var(--space-6);
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--space-4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.125rem;
+            color: hsl(var(--muted-foreground));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           STATS BAR
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-12);
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid hsl(var(--border));
+            border-bottom: 1px solid hsl(var(--border));
+            background: hsl(var(--background-subtle));
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--muted-foreground));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: var(--space-1);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           FILTERS
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .filters-container {
+            padding: var(--space-6);
+            border-bottom: 1px solid hsl(var(--border));
+            position: sticky;
+            top: 0;
+            background: hsl(var(--background) / 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .filters-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-6);
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .filter-group.search {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+        }
+
+        .filter-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: hsl(var(--muted-foreground));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid hsl(var(--border));
+            background: transparent;
+            color: hsl(var(--muted-foreground));
+            border-radius: var(--radius-full);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: hsl(var(--border-hover));
+            color: hsl(var(--foreground));
+            background: hsl(var(--muted) / 0.5);
+        }
+
+        .filter-btn.active {
+            background: hsl(var(--foreground));
+            color: hsl(var(--background));
+            border-color: hsl(var(--foreground));
+        }
+
+        /* Rating-specific active states */
+        .filter-btn[data-rating="excelente"].active {
+            background: hsl(var(--rating-excelente));
+            border-color: hsl(var(--rating-excelente));
+        }
+        .filter-btn[data-rating="buena"].active {
+            background: hsl(var(--rating-buena));
+            border-color: hsl(var(--rating-buena));
+            color: hsl(var(--background));
+        }
+        .filter-btn[data-rating="aceptable"].active {
+            background: hsl(var(--rating-aceptable));
+            border-color: hsl(var(--rating-aceptable));
+            color: hsl(var(--background));
+        }
+        .filter-btn[data-rating="precaucion"].active {
+            background: hsl(var(--rating-precaucion));
+            border-color: hsl(var(--rating-precaucion));
+        }
+        .filter-btn[data-rating="evitar"].active {
+            background: hsl(var(--rating-evitar));
+            border-color: hsl(var(--rating-evitar));
+        }
+
+        /* Search Input */
+        .search-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            border: 1px solid hsl(var(--border));
+            background: hsl(var(--card));
+            color: hsl(var(--foreground));
+            border-radius: var(--radius-lg);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+        }
+
+        .search-input::placeholder {
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           MAIN CONTENT
+           ═══════════════════════════════════════════════════════════════════ */
+
+        main {
+            padding: var(--space-10) var(--space-6);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: var(--space-6);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           CARDS
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: hsl(var(--card));
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+        }
+
+        /* Glow effect on hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                hsl(var(--card-accent) / 0.1) 0%,
+                transparent 50%,
+                hsl(var(--card-accent) / 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+
+        /* Top accent line */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, hsl(var(--card-accent)), transparent);
+            transform: scaleX(0);
+            transition: transform var(--transition-smooth);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card-hover), 0 0 60px -20px hsl(var(--card-accent) / 0.4);
+            background: hsl(var(--card-hover));
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .card-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .card-company {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-ticker {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .card-score {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 72px;
+            padding: var(--space-3) var(--space-4);
+            background: hsl(var(--card-accent) / 0.15);
+            border-radius: var(--radius-lg);
+            border: 1px solid hsl(var(--card-accent) / 0.2);
+        }
+
+        .score-value {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1;
+            color: hsl(var(--card-accent));
+        }
+
+        .score-max {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: hsl(var(--muted-foreground));
+            margin-top: var(--space-1);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-1) var(--space-3);
+            background: hsl(var(--muted) / 0.5);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .tag.rating {
+            color: hsl(var(--background));
+        }
+
+        .tag.rating.excelente { background: hsl(var(--rating-excelente)); }
+        .tag.rating.buena { background: hsl(var(--rating-buena)); }
+        .tag.rating.aceptable { background: hsl(var(--rating-aceptable)); }
+        .tag.rating.precaucion { background: hsl(var(--rating-precaucion)); color: hsl(var(--foreground)); }
+        .tag.rating.evitar { background: hsl(var(--rating-evitar)); }
+
+        .card-sector {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: auto;
+            padding-bottom: var(--space-4);
+        }
+
+        .card-sector strong {
+            color: hsl(var(--foreground) / 0.8);
+            font-weight: 500;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: var(--space-4);
+            border-top: 1px solid hsl(var(--border));
+            margin-top: auto;
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: hsl(var(--primary));
+        }
+
+        .card-action svg {
+            transition: transform var(--transition-fast);
+        }
+
+        .card:hover .card-action svg {
+            transform: translateX(4px);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           NO RESULTS
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: var(--space-20) var(--space-6);
+        }
+
+        .no-results.visible {
+            display: block;
+        }
+
+        .no-results-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--space-6);
+            color: hsl(var(--muted-foreground));
+            opacity: 0.5;
+        }
+
+        .no-results h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+        }
+
+        .no-results p {
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════════ */
+
+        footer {
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+            border-top: 1px solid hsl(var(--border));
+            background: hsl(var(--background-subtle));
+        }
+
+        footer p {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        footer a {
+            color: hsl(var(--primary));
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+
+        footer a:hover {
+            color: hsl(var(--accent));
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-6);
+            margin-top: var(--space-4);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           MOBILE FILTERS TOGGLE
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .filters-toggle {
+            display: none;
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius-lg);
+            color: hsl(var(--foreground));
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filters-toggle:hover {
+            background: hsl(var(--card-hover));
+            border-color: hsl(var(--border-hover));
+        }
+
+        .filters-toggle svg {
+            transition: transform var(--transition-fast);
+        }
+
+        .filters-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        .filters-toggle-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .filters-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 var(--space-2);
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border-radius: var(--radius-full);
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .filters-collapsible {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+            header {
+                padding: var(--space-12) var(--space-4) var(--space-8);
+            }
+
+            .stats-bar {
+                gap: var(--space-8);
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .filters-container {
+                padding: var(--space-4);
+            }
+
+            .filters-toggle {
+                display: flex;
+                margin-bottom: var(--space-4);
+            }
+
+            .filters-collapsible {
+                display: none;
+                padding-top: var(--space-4);
+                border-top: 1px solid hsl(var(--border));
+                margin-top: var(--space-4);
+            }
+
+            .filters-collapsible.open {
+                display: flex;
+                animation: slide-down 0.3s ease forwards;
+            }
+
+            @keyframes slide-down {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .filter-row {
+                flex-direction: column;
+                gap: var(--space-4);
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-group.search {
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                flex: 1;
+                min-width: calc(33% - var(--space-2));
+                text-align: center;
+                padding: var(--space-3) var(--space-2);
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: var(--space-6) var(--space-4);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-btn {
+                min-width: calc(50% - var(--space-2));
+                font-size: 0.75rem;
+            }
+
+            .stat-value {
+                font-size: 1.75rem;
+            }
+
+            .stats-bar {
+                gap: var(--space-6);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-badge animate-fade-up" style="animation-delay: 0ms;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                Value-Growth Investing
+            </div>
+            <h1 class="animate-fade-up" style="animation-delay: 100ms;">
+                Análisis de <span class="text-gradient">Inversión</span>
+            </h1>
+            <p class="animate-fade-up" style="animation-delay: 200ms;">
+                Informes detallados de empresas con scoring objetivo basado en 5 pilares fundamentales
+            </p>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat animate-fade-up" style="animation-delay: 300ms;">
+            <div class="stat-value">25</div>
+            <div class="stat-label">Análisis</div>
+        </div>
+        <div class="stat animate-fade-up" style="animation-delay: 350ms;">
+            <div class="stat-value">59.4</div>
+            <div class="stat-label">Score Promedio</div>
+        </div>
+        <div class="stat animate-fade-up" style="animation-delay: 400ms;">
+            <div class="stat-value">17</div>
+            <div class="stat-label">Sectores</div>
+        </div>
+    </div>
+
+    <div class="filters-container">
+        <div class="filters-inner">
+            <!-- Mobile Toggle Button -->
+            <button class="filters-toggle" id="filtersToggle">
+                <span class="filters-toggle-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="4" y1="21" y2="14"/>
+                        <line x1="4" x2="4" y1="10" y2="3"/>
+                        <line x1="12" x2="12" y1="21" y2="12"/>
+                        <line x1="12" x2="12" y1="8" y2="3"/>
+                        <line x1="20" x2="20" y1="21" y2="16"/>
+                        <line x1="20" x2="20" y1="12" y2="3"/>
+                        <line x1="2" x2="6" y1="14" y2="14"/>
+                        <line x1="10" x2="14" y1="8" y2="8"/>
+                        <line x1="18" x2="22" y1="16" y2="16"/>
+                    </svg>
+                    Filtros
+                    <span class="filters-badge" id="activeFiltersCount">0</span>
+                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                </svg>
+            </button>
+
+            <!-- Collapsible Filters -->
+            <div class="filters-collapsible" id="filtersCollapsible">
+                <div class="filter-row">
+                    <div class="filter-group search">
+                        <span class="filter-label">Buscar</span>
+                        <input type="text" class="search-input" placeholder="Nombre, ticker o sector..." id="searchInput">
+                    </div>
+
+                    <div class="filter-group">
+                        <span class="filter-label">Ordenar</span>
+                        <div class="filter-buttons" id="sortFilters">
+                            <button class="filter-btn active" data-sort="score-desc">Mayor Score</button>
+                            <button class="filter-btn" data-sort="score-asc">Menor Score</button>
+                            <button class="filter-btn" data-sort="name-asc">A-Z</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <span class="filter-label">Rating</span>
+                        <div class="filter-buttons" id="ratingFilters">
+                            <button class="filter-btn active" data-rating="all">Todos</button>
+                            <button class="filter-btn" data-rating="excelente">Excelente</button>
+                            <button class="filter-btn" data-rating="buena">Buena</button>
+                            <button class="filter-btn" data-rating="aceptable">Aceptable</button>
+                            <button class="filter-btn" data-rating="precaucion">Precaución</button>
+                            <button class="filter-btn" data-rating="evitar">Evitar</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <span class="filter-label">Sector</span>
+                        <div class="filter-buttons" id="sectorFilters">
+                            <button class="filter-btn active" data-sector="all">Todos</button>
+                            <button class="filter-btn" data-sector="tecnologia">Tecnología</button>
+                            <button class="filter-btn" data-sector="salud">Salud</button>
+                            <button class="filter-btn" data-sector="industrial">Industrial</button>
+                            <button class="filter-btn" data-sector="financiero">Financiero</button>
+                            <button class="filter-btn" data-sector="consumo">Consumo</button>
+                            <button class="filter-btn" data-sector="real-estate">Real Estate</button>
+                            <button class="filter-btn" data-sector="servicios">Servicios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="cards-grid" id="cardsGrid"></div>
+        <div class="no-results" id="noResults">
+            <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <h3>Sin resultados</h3>
+            <p>Prueba ajustando los filtros o la búsqueda</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Generado con <a href="#">/analista</a> · FMA</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Última actualización: 28 Enero 2026</p>
+    </footer>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // DATA
+        // ═══════════════════════════════════════════════════════════════════
+
+        const analyses = [
+            { name: "Taiwan Semiconductor", ticker: "TSM", sector: "Tecnología", subsector: "Semiconductores", score: 87, rating: "excelente", date: "2026-01-27", file: "2026-01-27-tsmc-informe.html" },
+            { name: "Copart Inc.", ticker: "CPRT", sector: "Servicios", subsector: "Vehicle Auction", score: 84, rating: "buena", date: "2026-01-28", file: "2026-01-28-copart-informe.html" },
+            { name: "Microsoft Corporation", ticker: "MSFT", sector: "Tecnología", subsector: "Cloud & AI", score: 85, rating: "buena", date: "2026-01-27", file: "2026-01-27-microsoft-informe.html" },
+            { name: "Broadcom Inc.", ticker: "AVGO", sector: "Tecnología", subsector: "Semiconductores", score: 85, rating: "buena", date: "2026-01-27", file: "2026-01-27-broadcom-informe.html" },
+            { name: "NVIDIA Corporation", ticker: "NVDA", sector: "Tecnología", subsector: "Semiconductores", score: 82, rating: "buena", date: "2026-01-25", file: "2026-01-25-nvidia-informe.html" },
+            { name: "The Trade Desk", ticker: "TTD", sector: "Tecnología", subsector: "AdTech", score: 79, rating: "buena", date: "2026-01-27", file: "2026-01-27-tradedesk-informe.html" },
+            { name: "Apple Inc.", ticker: "AAPL", sector: "Tecnología", subsector: "Consumer Electronics", score: 79, rating: "buena", date: "2026-01-25", file: "2026-01-25-apple-informe.html" },
+            { name: "AMD", ticker: "AMD", sector: "Tecnología", subsector: "Semiconductores", score: 74, rating: "buena", date: "2026-01-27", file: "2026-01-27-amd-informe.html" },
+            { name: "Novo Nordisk", ticker: "NVO", sector: "Salud", subsector: "Pharma", score: 72, rating: "buena", date: "2026-01-27", file: "2026-01-27-novo-nordisk-informe.html" },
+            { name: "Airbus SE", ticker: "AIR.PA", sector: "Industrial", subsector: "Aeroespacial", score: 72, rating: "buena", date: "2026-01-27", file: "2026-01-27-airbus-informe.html" },
+            { name: "Oracle Corporation", ticker: "ORCL", sector: "Tecnología", subsector: "Cloud Enterprise", score: 64, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-oracle-informe.html" },
+            { name: "CrowdStrike", ticker: "CRWD", sector: "Tecnología", subsector: "Cybersecurity", score: 64, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-crowdstrike-informe.html" },
+            { name: "UnitedHealth Group", ticker: "UNH", sector: "Salud", subsector: "Seguros", score: 62, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-unitedhealth-informe.html" },
+            { name: "GSK PLC", ticker: "GSK", sector: "Salud", subsector: "Pharma", score: 62, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-gsk-informe.html" },
+            { name: "DraftKings Inc.", ticker: "DKNG", sector: "Consumo", subsector: "Apuestas", score: 58, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-draftkings-informe.html" },
+            { name: "MP Materials Corp.", ticker: "MP", sector: "Industrial", subsector: "Rare Earth", score: 58, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-mp-materials-informe.html" },
+            { name: "Citigroup Inc.", ticker: "C", sector: "Financiero", subsector: "Bancos", score: 55, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-citigroup-informe.html" },
+            { name: "Enovis Corporation", ticker: "ENOV", sector: "Salud", subsector: "MedTech", score: 55, rating: "aceptable", date: "2026-01-27", file: "2026-01-27-enovis-informe.html" },
+            { name: "Carvana Co.", ticker: "CVNA", sector: "Consumo", subsector: "Retail Auto", score: 48, rating: "precaucion", date: "2026-01-27", file: "2026-01-27-carvana-informe.html" },
+            { name: "ImmunityBio Inc.", ticker: "IBRX", sector: "Salud", subsector: "Biotech", score: 45, rating: "precaucion", date: "2026-01-27", file: "2026-01-27-immunitybio-informe.html" },
+            { name: "Opendoor Technologies", ticker: "OPEN", sector: "Real Estate", subsector: "PropTech", score: 42, rating: "precaucion", date: "2026-01-27", file: "2026-01-27-opendoor-informe.html" },
+            { name: "Lithium Americas Corp.", ticker: "LAC", sector: "Industrial", subsector: "Lithium", score: 40, rating: "precaucion", date: "2026-01-27", file: "2026-01-27-lithium-americas-informe.html" },
+            { name: "AST SpaceMobile", ticker: "ASTS", sector: "Tecnología", subsector: "Space", score: 28, rating: "evitar", date: "2026-01-27", file: "2026-01-27-ast-spacemobile-informe.html" },
+            { name: "Oklo Inc.", ticker: "OKLO", sector: "Industrial", subsector: "Nuclear", score: 25, rating: "evitar", date: "2026-01-27", file: "2026-01-27-oklo-informe.html" },
+            { name: "Intel Corporation", ticker: "INTC", sector: "Tecnología", subsector: "Semiconductores", score: 23, rating: "evitar", date: "2026-01-25", file: "2026-01-25-intel-informe.html" }
+        ];
+
+        const ratingConfig = {
+            excelente: { label: 'Excelente', hsl: '142 71% 45%' },
+            buena: { label: 'Buena', hsl: '84 81% 44%' },
+            aceptable: { label: 'Aceptable', hsl: '48 96% 53%' },
+            precaucion: { label: 'Precaución', hsl: '25 95% 53%' },
+            evitar: { label: 'Evitar', hsl: '0 84% 60%' }
+        };
+
+        // ═══════════════════════════════════════════════════════════════════
+        // STATE
+        // ═══════════════════════════════════════════════════════════════════
+
+        let currentRating = 'all';
+        let currentSector = 'all';
+        let currentSort = 'score-desc';
+        let searchQuery = '';
+
+        // ═══════════════════════════════════════════════════════════════════
+        // DOM
+        // ═══════════════════════════════════════════════════════════════════
+
+        const cardsGrid = document.getElementById('cardsGrid');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+        const filtersToggle = document.getElementById('filtersToggle');
+        const filtersCollapsible = document.getElementById('filtersCollapsible');
+        const activeFiltersCount = document.getElementById('activeFiltersCount');
+
+        // ═══════════════════════════════════════════════════════════════════
+        // RENDER
+        // ═══════════════════════════════════════════════════════════════════
+
+        function renderCards() {
+            let filtered = analyses.filter(a => {
+                const matchesRating = currentRating === 'all' || a.rating === currentRating;
+                const matchesSector = currentSector === 'all' || a.sector.toLowerCase().includes(currentSector.replace('-', ' '));
+                const matchesSearch = searchQuery === '' ||
+                    a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    a.ticker.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    a.sector.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    a.subsector.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesRating && matchesSector && matchesSearch;
+            });
+
+            filtered.sort((a, b) => {
+                switch(currentSort) {
+                    case 'score-desc': return b.score - a.score;
+                    case 'score-asc': return a.score - b.score;
+                    case 'name-asc': return a.name.localeCompare(b.name);
+                    default: return 0;
+                }
+            });
+
+            noResults.classList.toggle('visible', filtered.length === 0);
+
+            cardsGrid.innerHTML = filtered.map((analysis, index) => `
+                <a href="${analysis.file}" class="card animate-fade-up" style="--card-accent: ${ratingConfig[analysis.rating].hsl}; animation-delay: ${index * 50}ms;">
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <div class="card-company">
+                                <div class="card-name">${analysis.name}</div>
+                                <div class="card-ticker">${analysis.ticker}</div>
+                            </div>
+                            <div class="card-score">
+                                <div class="score-value">${analysis.score}</div>
+                                <div class="score-max">/ 100</div>
+                            </div>
+                        </div>
+
+                        <div class="card-meta">
+                            <span class="tag rating ${analysis.rating}">${ratingConfig[analysis.rating].label}</span>
+                        </div>
+
+                        <div class="card-sector">
+                            <strong>${analysis.sector}</strong> · ${analysis.subsector}
+                        </div>
+
+                        <div class="card-footer">
+                            <span class="card-date">${formatDate(analysis.date)}</span>
+                            <span class="card-action">
+                                Ver informe
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function formatDate(dateStr) {
+            const [year, month, day] = dateStr.split('-');
+            const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // EVENT LISTENERS
+        // ═══════════════════════════════════════════════════════════════════
+
+        function setupFilterGroup(containerId, updateFn) {
+            document.getElementById(containerId).addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    document.querySelectorAll(`#${containerId} .filter-btn`).forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    updateFn(e.target.dataset);
+                    renderCards();
+                    updateActiveFiltersCount();
+                }
+            });
+        }
+
+        setupFilterGroup('ratingFilters', (data) => currentRating = data.rating);
+        setupFilterGroup('sectorFilters', (data) => currentSector = data.sector);
+        setupFilterGroup('sortFilters', (data) => currentSort = data.sort);
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderCards();
+            updateActiveFiltersCount();
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // MOBILE FILTERS TOGGLE
+        // ═══════════════════════════════════════════════════════════════════
+
+        filtersToggle.addEventListener('click', () => {
+            filtersToggle.classList.toggle('active');
+            filtersCollapsible.classList.toggle('open');
+        });
+
+        function updateActiveFiltersCount() {
+            let count = 0;
+            if (currentRating !== 'all') count++;
+            if (currentSector !== 'all') count++;
+            if (searchQuery !== '') count++;
+            if (currentSort !== 'score-desc') count++;
+
+            activeFiltersCount.textContent = count;
+            activeFiltersCount.style.display = count > 0 ? 'inline-flex' : 'none';
+        }
+
+        // Initial render
+        renderCards();
+        updateActiveFiltersCount();
+    </script>
+</body>
+</html>

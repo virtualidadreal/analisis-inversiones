@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Taiwan Semiconductor (TSM)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0072C6; --primary-light: #E3F2FD; --secondary: #1A1A1A; --accent: #00A651; --success: #2E7D32; --warning: #F57C00; --danger: #C62828; --bg-light: #F9FAFB; --text-primary: #1A1A1A; --text-secondary: #666666; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-light); color: var(--text-primary); line-height: 1.7; }
+        .page { max-width: 1000px; margin: 0 auto; background: white; min-height: 100vh; }
+        .cover { background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%); color: white; padding: 80px 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .report-type { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .report-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; opacity: 0.8; }
+        .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .company-name { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; margin-bottom: 16px; line-height: 1.1; }
+        .company-ticker { font-family: 'JetBrains Mono', monospace; font-size: 24px; opacity: 0.9; margin-bottom: 40px; }
+        .verdict-box { background: rgba(0,114,198,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(0,114,198,0.3); border-radius: 16px; padding: 40px; max-width: 500px; }
+        .verdict-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 12px; }
+        .verdict-text { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+        .verdict-score { font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700; }
+        .verdict-score span { font-size: 24px; opacity: 0.7; }
+        .cover-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .analyst-info { font-size: 14px; opacity: 0.8; }
+        .price-info { text-align: right; }
+        .current-price { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; }
+        .price-label { font-size: 12px; opacity: 0.8; }
+        section { padding: 60px; border-bottom: 1px solid #E5E5E5; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--secondary); margin-bottom: 32px; }
+        h3 { font-size: 20px; font-weight: 600; color: var(--secondary); margin: 32px 0 16px; }
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        .highlight-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 24px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #E5E5E5; }
+        th { font-weight: 600; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        td { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+        .positive { color: var(--success); } .negative { color: var(--danger); } .warning { color: var(--warning); } .neutral { color: var(--text-secondary); }
+        .score-dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 32px 0; }
+        .score-card { background: var(--bg-light); border-radius: 12px; padding: 24px 16px; text-align: center; }
+        .score-card.highlight { background: var(--primary); color: white; }
+        .score-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .score-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .score-max { font-size: 14px; opacity: 0.6; }
+        .progress-container { margin: 16px 0; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .progress-bar { height: 8px; background: #E5E5E5; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; }
+        .progress-fill.excellent { background: var(--success); }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .metric-card { background: var(--bg-light); border-radius: 12px; padding: 24px; }
+        .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: var(--secondary); }
+        .metric-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .metric-change { font-size: 12px; margin-top: 8px; }
+        .moat-visual { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px 0; }
+        .moat-level { width: 80px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+        .moat-level.active { background: var(--primary); color: white; }
+        .moat-level.inactive { background: #E5E5E5; color: #999; }
+        .scenarios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .scenario-card { border-radius: 12px; padding: 32px 24px; text-align: center; }
+        .scenario-card.bull { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
+        .scenario-card.base { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
+        .scenario-card.bear { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); }
+        .scenario-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+        .scenario-return { font-size: 14px; font-weight: 600; }
+        .scenario-prob { font-size: 12px; opacity: 0.7; margin-top: 8px; }
+        .red-flags { display: grid; gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #FFF5F5; border-radius: 8px; border-left: 4px solid var(--danger); }
+        .flag-item.yellow { background: #FFFBF0; border-left-color: var(--warning); }
+        .flag-item.green { background: #F0FFF4; border-left-color: var(--success); }
+        .flag-icon { font-size: 24px; }
+        .flag-content h4 { font-weight: 600; margin-bottom: 4px; }
+        .flag-content p { font-size: 14px; margin: 0; }
+        .conclusion-box { background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%); color: white; border-radius: 16px; padding: 48px; text-align: center; }
+        .conclusion-verdict { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 24px; color: var(--primary); }
+        .conclusion-summary { font-size: 18px; max-width: 600px; margin: 0 auto 32px; opacity: 0.9; }
+        .conclusion-actions { display: flex; justify-content: center; gap: 32px; }
+        .action-item { text-align: center; }
+        .action-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 4px; }
+        .action-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; }
+        @media (max-width: 768px) { .cover { padding: 40px 24px; } section { padding: 40px 24px; } .company-name { font-size: 42px; } .score-dashboard { grid-template-columns: repeat(3, 1fr); } .metrics-grid { grid-template-columns: 1fr; } .scenarios-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <section class="cover">
+            <div class="cover-header">
+                <div class="report-type">Informe de Inversión Value-Growth</div>
+                <div class="report-date">27 Enero 2026</div>
+            </div>
+            <div class="cover-main">
+                <h1 class="company-name">Taiwan<br>Semiconductor</h1>
+                <div class="company-ticker">NYSE: TSM | Tecnología - Foundry Semiconductores</div>
+                <div class="verdict-box">
+                    <div class="verdict-label">Veredicto del Análisis</div>
+                    <div class="verdict-text">EXCELENTE - Monopolio Global</div>
+                    <div class="verdict-score">87<span>/100</span></div>
+                </div>
+            </div>
+            <div class="cover-footer">
+                <div class="analyst-info">Análisis: Sistema FMA<br>Metodología: Value-Growth Investing</div>
+                <div class="price-info">
+                    <div class="current-price">$288</div>
+                    <div class="price-label">Precio ADR | Market Cap ~$1.5T</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 01</div>
+            <h2>Explicación Simple</h2>
+            <div class="highlight-box">
+                <p>TSMC es la fábrica que produce los chips más avanzados del mundo. Apple, NVIDIA, AMD, Broadcom, Qualcomm - ninguno de ellos fabrica sus propios chips. Todos dependen de TSMC. Es como si una sola empresa produjera el 90% de los microprocesadores del planeta.</p>
+            </div>
+            <h3>Lo que hace TSMC</h3>
+            <p>TSMC es una "foundry" - no diseña chips, los fabrica para otros. Sus clientes diseñan el chip (Apple diseña el M4, NVIDIA diseña el H100) y TSMC lo convierte en realidad física. Es el único en el mundo capaz de fabricar chips menores a 5 nanómetros a escala comercial.</p>
+            <h3>Por qué es un monopolio</h3>
+            <p>Intel intentó competir y fracasó. Samsung está años detrás. Para fabricar chips de 3nm se necesitan máquinas de $200M (solo ASML las hace), miles de ingenieros expertos, y décadas de know-how acumulado. TSMC tiene ~90% del mercado de chips avanzados. No hay plan B para Apple ni NVIDIA.</p>
+            <h3>El viento de cola AI</h3>
+            <p>Antes de AI, TSMC crecía 10-15% anual. Ahora crece 36%. Los chips de AI (H100, MI300, TPU) son más grandes, más complejos, y más rentables. NVIDIA está superando a Apple como cliente #1. El segmento HPC (High Performance Computing) pasó de 40% a 55% del revenue.</p>
+            <div class="highlight-box">
+                <p><strong>En una frase:</strong> TSMC es el monopolio más importante de la economía global moderna. Sin TSMC, no hay iPhones, no hay GPUs de AI, no hay computación avanzada. Punto.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 02</div>
+            <h2>Dashboard de Valoración</h2>
+            <div class="score-dashboard">
+                <div class="score-card"><div class="score-value">20</div><div class="score-max">/20</div><div class="score-label">Negocio</div></div>
+                <div class="score-card"><div class="score-value">18</div><div class="score-max">/20</div><div class="score-label">Finanzas</div></div>
+                <div class="score-card"><div class="score-value">19</div><div class="score-max">/20</div><div class="score-label">Moat</div></div>
+                <div class="score-card"><div class="score-value">17</div><div class="score-max">/20</div><div class="score-label">Gestión</div></div>
+                <div class="score-card highlight"><div class="score-value">13</div><div class="score-max">/20</div><div class="score-label">Valoración</div></div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label"><span>Score Total</span><span>87/100 - Excelente</span></div>
+                <div class="progress-bar"><div class="progress-fill excellent" style="width: 87%"></div></div>
+            </div>
+            <h3>Desglose del Scoring</h3>
+            <table>
+                <thead><tr><th>Pilar</th><th>Score</th><th>Factores Clave</th></tr></thead>
+                <tbody>
+                    <tr><td>Calidad del Negocio</td><td class="positive">20/20</td><td>Monopolio global en foundry avanzada, 90%+ share <7nm, pricing power</td></tr>
+                    <tr><td>Solidez Financiera</td><td class="positive">18/20</td><td>Gross margin 60%+, net margin 45%, FCF masivo, balance limpio</td></tr>
+                    <tr><td>Ventaja Competitiva</td><td class="positive">19/20</td><td>Moat tecnológico casi imposible de replicar, 30 años de ventaja</td></tr>
+                    <tr><td>Gestión</td><td class="positive">17/20</td><td>C.C. Wei sólido, legacy Morris Chang, cultura de ejecución</td></tr>
+                    <tr><td>Valoración</td><td class="warning">13/20</td><td>P/E 30x razonable para quality, pero geopolitical risk descuenta</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 03</div>
+            <h2>Análisis del Negocio</h2>
+            <div class="metrics-grid">
+                <div class="metric-card"><div class="metric-value">$122B</div><div class="metric-label">Ingresos FY2025</div><div class="metric-change positive">+35.9% YoY</div></div>
+                <div class="metric-card"><div class="metric-value">59.9%</div><div class="metric-label">Gross Margin FY25</div><div class="metric-change positive">+3.5pts YoY</div></div>
+                <div class="metric-card"><div class="metric-value">74%</div><div class="metric-label">Advanced Tech (<7nm)</div><div class="metric-change positive">Up from 69%</div></div>
+            </div>
+            <h3>Mix de Revenue por Tecnología</h3>
+            <table>
+                <thead><tr><th>Nodo</th><th>% Revenue Q4</th><th>Clientes Típicos</th></tr></thead>
+                <tbody>
+                    <tr><td class="positive">3nm</td><td>26%</td><td>Apple M4, A18</td></tr>
+                    <tr><td class="positive">5nm</td><td>34%</td><td>NVIDIA H100/H200, AMD MI300</td></tr>
+                    <tr><td>7nm</td><td>17%</td><td>AMD Ryzen, NVIDIA gaming</td></tr>
+                    <tr><td>Legacy (>7nm)</td><td>23%</td><td>Automotive, Industrial</td></tr>
+                </tbody>
+            </table>
+            <h3>Mix por Aplicación</h3>
+            <table>
+                <thead><tr><th>Segmento</th><th>% Revenue Q4 25</th><th>vs Q4 22</th><th>Tendencia</th></tr></thead>
+                <tbody>
+                    <tr><td class="positive">HPC (AI/Data Center)</td><td>55%</td><td>40%</td><td class="positive">AI boom</td></tr>
+                    <tr><td>Smartphones</td><td>28%</td><td>42%</td><td>Madurez</td></tr>
+                    <tr><td>IoT</td><td>5%</td><td>8%</td><td>Estable</td></tr>
+                    <tr><td>Automotive</td><td>5%</td><td>4%</td><td>Creciendo</td></tr>
+                    <tr><td>Consumer</td><td>7%</td><td>6%</td><td>Estable</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>Cambio estructural:</strong> HPC/AI pasó de 40% a 55% del revenue en 3 años. NVIDIA está superando a Apple como cliente #1. Los chips AI son más grandes (más wafers) y más rentables (CoWoS packaging $9.6B).</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 04</div>
+            <h2>Evolución Financiera (5 años)</h2>
+            <table>
+                <thead><tr><th>Métrica</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>Tendencia</th></tr></thead>
+                <tbody>
+                    <tr><td>Revenue ($B)</td><td>$57</td><td>$76</td><td>$69</td><td>$90</td><td>$122</td><td class="positive">+114% (5Y)</td></tr>
+                    <tr><td>Gross Margin</td><td>52%</td><td>59%</td><td>54%</td><td>56%</td><td>60%</td><td class="positive">+8pts</td></tr>
+                    <tr><td>Net Margin</td><td>37%</td><td>45%</td><td>39%</td><td>41%</td><td>45%</td><td class="positive">+8pts</td></tr>
+                    <tr><td>EPS (NT$)</td><td>$23.0</td><td>$39.2</td><td>$32.3</td><td>$45.3</td><td>$66.3</td><td class="positive">+188% (5Y)</td></tr>
+                    <tr><td>CapEx ($B)</td><td>$30</td><td>$36</td><td>$29</td><td>$32</td><td>$41</td><td class="positive">Invirtiendo</td></tr>
+                </tbody>
+            </table>
+            <h3>Q4 2025 Record</h3>
+            <div class="highlight-box">
+                <p><strong>Trimestre récord:</strong> Revenue NT$1.046T ($33.7B, +20.5% YoY). Gross margin 62.3% (récord). Net income NT$505B. 8 trimestres consecutivos de crecimiento profit YoY.</p>
+            </div>
+            <h3>CapEx Masivo</h3>
+            <p>2026 CapEx guiado a $52-56B (vs $41B en 2025). Incluye $165B de inversión en Arizona para producir chips AI en USA. Capacidad CoWoS (packaging AI) aumentando 66% a 125,000 wafers/mes para fin de 2026.</p>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 05</div>
+            <h2>Posición Competitiva</h2>
+            <table>
+                <thead><tr><th>Foundry</th><th>Share Avanzado</th><th>Nodo Más Avanzado</th><th>Clientes AI</th></tr></thead>
+                <tbody>
+                    <tr><td class="positive">TSMC</td><td class="positive">~90%</td><td class="positive">3nm (2nm 2025)</td><td>NVIDIA, AMD, Apple, todos</td></tr>
+                    <tr><td>Samsung</td><td>~8%</td><td>3nm (yield issues)</td><td>Qualcomm (algunos)</td></tr>
+                    <tr><td>Intel Foundry</td><td>~2%</td><td>Intel 4 (7nm equiv)</td><td>Ninguno significativo</td></tr>
+                </tbody>
+            </table>
+            <h3>Top Clientes</h3>
+            <table>
+                <thead><tr><th>Cliente</th><th>% Revenue Est.</th><th>Productos</th><th>Tendencia</th></tr></thead>
+                <tbody>
+                    <tr><td>Apple</td><td>~20%</td><td>M-series, A-series</td><td>Estable, perdiendo share relativo</td></tr>
+                    <tr><td class="positive">NVIDIA</td><td>~15-18%</td><td>H100, H200, B100</td><td class="positive">Creciendo a #1</td></tr>
+                    <tr><td>AMD</td><td>~8%</td><td>EPYC, MI300, Ryzen</td><td>Creciendo</td></tr>
+                    <tr><td>Broadcom</td><td>~7%</td><td>ASICs, networking</td><td>Creciendo</td></tr>
+                    <tr><td>Qualcomm</td><td>~6%</td><td>Snapdragon</td><td>Estable</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>NVIDIA #1:</strong> Jensen Huang dijo a Morris Chang hace décadas que NVIDIA sería el cliente más grande. En 2026 se hace realidad. Apple va de 25% peak a ~20% mientras HPC/AI crece.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 06</div>
+            <h2>Análisis del Moat</h2>
+            <div class="moat-visual">
+                <div class="moat-level inactive">Sin Moat</div>
+                <div class="moat-level inactive">Estrecho</div>
+                <div class="moat-level inactive">Moderado</div>
+                <div class="moat-level active">Muy Ancho</div>
+            </div>
+            <div class="red-flags">
+                <div class="flag-item green"><div class="flag-icon">1</div><div class="flag-content"><h4>Ventaja Tecnológica Insuperable (EXTREMA)</h4><p>30 años de R&D acumulado. Yield rates (% de chips funcionales) en 3nm son los mejores del mundo. Samsung y Intel están 2-3 años detrás y no cierran la brecha.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">2</div><div class="flag-content"><h4>Economías de Escala (EXTREMA)</h4><p>$40B+ de CapEx anual. Ningún competidor puede igualar esa inversión. La escala permite amortizar costos y ofrecer mejores precios. Winner takes all.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">3</div><div class="flag-content"><h4>Switching Costs (MUY ALTOS)</h4><p>Migrar un diseño de chip a otra foundry toma 1-2 años y millones de dólares. Apple lleva 10 años con TSMC. El costo de cambiar es prohibitivo.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">4</div><div class="flag-content"><h4>Escasez de Alternativas</h4><p>No hay plan B. Intel Foundry no está listo. Samsung tiene problemas de yield. Para chips de AI de última generación, TSMC es la única opción.</p></div></div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Veredicto Moat:</strong> Moat MUY ANCHO. Es el monopolio natural más importante de la tecnología moderna. La brecha tecnológica es prácticamente imposible de cerrar. El único riesgo real es geopolítico, no competitivo.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 07</div>
+            <h2>El Riesgo Taiwan/China</h2>
+            <div class="red-flags">
+                <div class="flag-item"><div class="flag-icon">!</div><div class="flag-content"><h4>Riesgo Geopolítico</h4><p>Taiwan está a 180km de China. Una invasión o bloqueo destruiría la cadena de suministro global de semiconductores. Es el "single point of failure" de la economía mundial.</p></div></div>
+                <div class="flag-item yellow"><div class="flag-icon">?</div><div class="flag-content"><h4>Mitigación: Diversificación Geográfica</h4><p>TSMC invierte $165B en Arizona (3 fábricas), €10B en Alemania, ¥14.8B en Japón. Para 2030, ~20% de capacidad avanzada fuera de Taiwan.</p></div></div>
+                <div class="flag-item yellow"><div class="flag-icon">?</div><div class="flag-content"><h4>El "Silicon Shield"</h4><p>La dependencia global de Taiwan hace que una invasión sea extremadamente costosa para China. TSMC es la mejor "protección" de Taiwan - destruir la fábrica es destruir la economía global.</p></div></div>
+            </div>
+            <h3>Opinión de Expertos</h3>
+            <p>La mayoría de analistas consideran que una invasión a corto plazo es improbable (probabilidad <5% en 5 años) pero el riesgo justifica un descuento en valoración. TSMC cotiza a P/E 30x vs NVIDIA 50x parcialmente por este riesgo.</p>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 08</div>
+            <h2>Valoración a 5 Años</h2>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull"><div class="scenario-label">Escenario Alcista</div><div class="scenario-price">$550</div><div class="scenario-return positive">+91% vs actual</div><div class="scenario-prob">Probabilidad: 30%</div></div>
+                <div class="scenario-card base"><div class="scenario-label">Escenario Base</div><div class="scenario-price">$420</div><div class="scenario-return positive">+46% vs actual</div><div class="scenario-prob">Probabilidad: 55%</div></div>
+                <div class="scenario-card bear"><div class="scenario-label">Escenario Bajista</div><div class="scenario-price">$200</div><div class="scenario-return negative">-31% vs actual</div><div class="scenario-prob">Probabilidad: 15%</div></div>
+            </div>
+            <h3>Supuestos por Escenario</h3>
+            <table>
+                <thead><tr><th>Variable</th><th>Bull</th><th>Base</th><th>Bear</th></tr></thead>
+                <tbody>
+                    <tr><td>Revenue 2030</td><td class="positive">$250B</td><td>$190B</td><td class="negative">$140B</td></tr>
+                    <tr><td>AI Revenue CAGR</td><td class="positive">55%</td><td>40%</td><td class="negative">25%</td></tr>
+                    <tr><td>Gross Margin</td><td class="positive">62%</td><td>58%</td><td class="negative">52%</td></tr>
+                    <tr><td>Taiwan Risk</td><td>Estable</td><td>Estable</td><td class="negative">Crisis</td></tr>
+                    <tr><td>P/E Terminal</td><td>28x</td><td>24x</td><td>15x</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>Precio objetivo 5 años:</strong> $420 (ponderado)</p>
+                <p>Retorno esperado: +46% (CAGR ~8%/año + 1.5% dividendo = ~9.5% anual)</p>
+                <p><strong>Nota:</strong> El escenario bear asume escalada geopolítica significativa. Sin ese riesgo, TSMC valdría mucho más.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 09</div>
+            <h2>Conclusión Final</h2>
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">EXCELENTE</div>
+                <div class="conclusion-verdict" style="font-size: 24px; color: white;">Monopolio Global - Core Holding</div>
+                <p class="conclusion-summary">TSMC es el monopolio más importante de la economía moderna. Sin ellos, no hay AI, no hay smartphones, no hay computación avanzada. El moat es casi imposible de replicar. El único "pero" es el riesgo geopolítico de Taiwan, que justifica un descuento pero no invalida la tesis.</p>
+                <div class="conclusion-actions">
+                    <div class="action-item"><div class="action-label">Score Final</div><div class="action-value">87/100</div></div>
+                    <div class="action-item"><div class="action-label">Precio Objetivo 5Y</div><div class="action-value">$420</div></div>
+                    <div class="action-item"><div class="action-label">Upside Potencial</div><div class="action-value">+46%</div></div>
+                    <div class="action-item"><div class="action-label">Riesgo</div><div class="action-value">MEDIO (geo)</div></div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">Recomendación de Acción</h3>
+            <div class="highlight-box">
+                <p><strong>Para inversores a largo plazo:</strong> Core holding del 5-8% del portfolio. El moat de TSMC es el más fuerte de cualquier empresa de tecnología.</p>
+                <p><strong>Estrategia:</strong> Comprar y mantener. Usar correcciones por noticias de Taiwan para añadir posición. El riesgo geopolítico crea oportunidades de entrada.</p>
+                <p><strong>Hedge:</strong> Si el riesgo Taiwan preocupa, compensar con posición en ASML (el otro monopolio de semiconductores, basado en Holanda).</p>
+            </div>
+        </section>
+
+        <section style="background: var(--secondary); color: white; text-align: center; padding: 40px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">
+                Informe generado por Sistema FMA | Metodología Value-Growth Investing<br>
+                Este informe no constituye asesoramiento financiero. Invertir conlleva riesgos.<br>
+                Fuentes: TSMC IR, CNBC, SemiAnalysis, TipRanks<br>
+                27 Enero 2026
+            </p>
+        </section>
+    </div>
+</body>
+</html>

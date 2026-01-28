@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus (AIR.PA) - Informe de Inversión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-500: #f59e0b;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--gray-900);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+        .tiny {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 160px);
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-600);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-badge.hold {
+            background: var(--amber-500);
+        }
+
+        .cover-date {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .cover-main {
+            padding: 80px 0;
+        }
+
+        .cover-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .cover-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .cover-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cover-metric {
+            text-align: left;
+        }
+
+        .cover-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .cover-metric-value.positive {
+            color: var(--green-600);
+        }
+
+        .cover-metric-value.negative {
+            color: var(--red-600);
+        }
+
+        .cover-metric-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .cover-rating {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: var(--gray-300);
+        }
+
+        .rating-stars .filled {
+            color: var(--green-500);
+        }
+
+        .rating-verdict {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--green-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rating-verdict.hold {
+            color: var(--amber-500);
+        }
+
+        /* Section Styling */
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gray-300);
+            margin-right: 8px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-white {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-dark {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .card-danger {
+            background: var(--red-50);
+            border: 1px solid var(--red-100);
+        }
+
+        .card-success {
+            background: var(--green-50);
+            border: 1px solid var(--green-100);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Stats */
+        .stat-block {
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-value.danger {
+            color: var(--red-600);
+        }
+
+        .stat-value.success {
+            color: var(--green-600);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .stat-change.negative {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            margin: 32px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9375rem;
+        }
+
+        thead {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .cell-danger {
+            color: var(--red-600);
+            font-weight: 600;
+        }
+
+        .cell-success {
+            color: var(--green-600);
+            font-weight: 600;
+        }
+
+        /* Progress Bars */
+        .progress-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-label {
+            width: 140px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .progress-bar-wrapper {
+            flex: 1;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: width 0.6s ease;
+        }
+
+        .progress-bar.primary {
+            background: var(--gray-800);
+        }
+
+        .progress-bar.danger {
+            background: var(--red-500);
+        }
+
+        .progress-bar.success {
+            background: var(--green-500);
+        }
+
+        .progress-bar.blue {
+            background: var(--blue-500);
+        }
+
+        .progress-value {
+            width: 60px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin: 32px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-danger {
+            background: var(--red-50);
+            border-color: var(--red-500);
+        }
+
+        .callout-warning {
+            background: var(--amber-50);
+            border-color: var(--amber-500);
+        }
+
+        .callout-success {
+            background: var(--green-50);
+            border-color: var(--green-500);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout-text {
+            font-size: 0.9375rem;
+            color: var(--gray-700);
+            margin: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 48px;
+            border-radius: 16px;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            color: var(--gray-700);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            padding: 28px;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .company-card.highlight {
+            border-color: var(--green-300);
+            background: var(--green-50);
+        }
+
+        .company-card.danger {
+            border-color: var(--red-300);
+            background: var(--red-50);
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+
+        .company-card.highlight .company-name {
+            color: var(--green-700);
+        }
+
+        .company-card.danger .company-name {
+            color: var(--red-600);
+        }
+
+        .company-stat {
+            margin: 16px 0;
+        }
+
+        .company-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .company-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .company-rating {
+            margin-top: 20px;
+            font-size: 1.25rem;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scenario-card {
+            padding: 32px;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 1px solid #fca5a5;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .scenario-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .scenario-prob {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.08);
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .scenario-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .scenario-list {
+            list-style: none;
+        }
+
+        .scenario-list li {
+            font-size: 0.875rem;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .scenario-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        /* Verdict Section */
+        .verdict-section {
+            text-align: center;
+            padding: 80px 60px;
+        }
+
+        .verdict-rating {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+
+        .verdict-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--green-500);
+            margin-bottom: 24px;
+        }
+
+        .verdict-title.hold {
+            color: var(--amber-500);
+        }
+
+        .verdict-text {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 32px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--green-500), var(--green-400), var(--green-500));
+            border-radius: 2px;
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border: 3px solid var(--green-500);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-year {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--green-600);
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .page-number {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 48px 0;
+        }
+
+        /* Lists */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-500);
+            font-weight: 700;
+        }
+
+        .check-list li.danger::before {
+            content: '✗';
+            color: var(--red-500);
+        }
+
+        .check-list li.warning::before {
+            content: '!';
+            color: var(--amber-500);
+        }
+
+        /* Scoring */
+        .score-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: 12px;
+        }
+
+        .score-label {
+            width: 200px;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .score-bar-wrapper {
+            flex: 1;
+            height: 12px;
+            background: var(--gray-200);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        .score-bar {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.6s ease;
+        }
+
+        .score-value {
+            width: 80px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                padding: 40px 24px;
+            }
+
+            h1, .cover-title {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .grid-2, .grid-4, .company-grid, .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Conclusión Inmediata -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge hold">
+                    <span>●</span> Mantener / Acumular
+                </div>
+                <div class="cover-date">Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">EURONEXT: AIR.PA</div>
+                <h1 class="cover-title font-display">Airbus SE</h1>
+                <p class="cover-subtitle">El beneficiario de la crisis de Boeing. Duopolio aeroespacial con backlog récord de €629B y posición competitiva dominante en el mercado de aviación comercial.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span>★</span>
+                    </div>
+                    <div class="rating-verdict hold">Mantener / Acumular en correcciones</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">€196</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">€228</div>
+                    <div class="cover-metric-label">Precio objetivo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">+16%</div>
+                    <div class="cover-metric-label">Potencial</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">€155B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Explicación Para Todos -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> ¿Qué Significa Este Análisis?
+        </div>
+
+        <h2>En palabras simples: ¿Por qué Airbus es interesante?</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <h3 style="margin-bottom: 24px; color: var(--blue-600);">IMAGINA QUE...</h3>
+            <p class="lead" style="margin-bottom: 0;">Imagina que en el mundo solo existen dos fábricas de coches: Airbus y Boeing. Todos los países del mundo tienen que comprar sus aviones a una de las dos. Ahora imagina que la otra fábrica (Boeing) ha tenido accidentes graves, problemas de calidad, y los reguladores no les dejan fabricar a toda velocidad. Mientras tanto, Airbus tiene pedidos para los próximos 9 años y puede cobrar el precio que quiera porque no hay alternativa. Esa es la situación actual de Airbus.</p>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">✓ Lo bueno (en simple)</h3>
+                <ul style="list-style: none; line-height: 2.2; font-size: 1rem;">
+                    <li>• <strong>Tiene pedidos para 9 años</strong> — €629B de backlog, el mayor de su historia</li>
+                    <li>• <strong>Su competidor está en crisis</strong> — Boeing perdió $6B solo en un trimestre</li>
+                    <li>• <strong>Gana dinero de verdad</strong> — €4.2B de beneficio neto en 2024</li>
+                    <li>• <strong>Genera caja</strong> — €4.5B de flujo de caja libre</li>
+                    <li>• <strong>Crece</strong> — Ventas +6% y entregas +4% en 2024</li>
+                </ul>
+            </div>
+            <div class="card" style="border: 1px solid var(--amber-500);">
+                <h3 style="color: var(--amber-500); margin-bottom: 16px;">⚠ Lo que vigilar</h3>
+                <ul style="list-style: none; line-height: 2.2; font-size: 1rem;">
+                    <li>• <strong>Problemas de cadena de suministro</strong> — No pueden fabricar tan rápido como quisieran</li>
+                    <li>• <strong>Valoración no barata</strong> — P/E de 30x, por encima de la media histórica</li>
+                    <li>• <strong>Sector cíclico</strong> — Si hay recesión, las aerolíneas cancelan pedidos</li>
+                    <li>• <strong>Dependencia de proveedores</strong> — Retrasos en motores y componentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">🎯 ¿Para quién es esta inversión?</div>
+            <p class="callout-text"><strong>Para inversores pacientes con horizonte de 3-5 años</strong> que buscan exposición al sector aeroespacial sin el riesgo de Boeing. Ideal para carteras diversificadas que quieran un "compounder" europeo de calidad. No es para traders ni para quien busque movimientos rápidos — es una empresa que crece lento pero seguro.</p>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">En un duopolio, cuando uno de los jugadores tropieza, el otro se beneficia durante años. Airbus está viviendo su momento dorado.</p>
+            <p class="quote-author">— Análisis Value-Growth Investing</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard Visual -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard de Inversión
+        </div>
+
+        <h2>Puntuación: 72/100 — Buena calidad</h2>
+
+        <p class="lead">Airbus obtiene una puntuación sólida en nuestro framework de 5 pilares. Destaca en posición competitiva y generación de caja. La valoración actual es el único punto que impide una puntuación más alta.</p>
+
+        <div style="margin: 48px 0;">
+            <div class="score-row">
+                <span class="score-label">Calidad del Negocio</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 85%; background: var(--green-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--green-600);">17/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Duopolio, alta visibilidad, backlog récord</p>
+
+            <div class="score-row">
+                <span class="score-label">Fortaleza Financiera</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 75%; background: var(--green-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--green-600);">15/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">FCF €4.5B, deuda controlada, márgenes estables</p>
+
+            <div class="score-row">
+                <span class="score-label">Ventaja Competitiva</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 90%; background: var(--green-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--green-600);">18/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Moat insuperable: duopolio + certificaciones + backlog</p>
+
+            <div class="score-row">
+                <span class="score-label">Equipo Directivo</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 70%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-500);">14/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Faury sólido pero desafíos de supply chain</p>
+
+            <div class="score-row">
+                <span class="score-label">Precio Atractivo</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 40%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-500);">8/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">P/E 30x — no está barata, pero calidad justifica prima</p>
+        </div>
+
+        <div class="card card-dark" style="text-align: center; padding: 48px;">
+            <div style="font-size: 4rem; margin-bottom: 16px;">★★★★☆</div>
+            <h3 style="color: white; font-size: 2rem; margin-bottom: 12px;">72/100 — Buena</h3>
+            <p style="color: var(--gray-400); margin: 0; font-size: 1.125rem;">Empresa de alta calidad a valoración justa. Acumular en correcciones.</p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 32px;">
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; margin-bottom: 8px;">0-30</div>
+                <div style="font-weight: 600; color: var(--red-600);">Evitar</div>
+            </div>
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; margin-bottom: 8px;">31-50</div>
+                <div style="font-weight: 600; color: var(--amber-500);">Precaución</div>
+            </div>
+            <div style="text-align: center; padding: 20px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; margin-bottom: 8px;">71-85</div>
+                <div style="font-weight: 600; color: var(--green-600);">← Airbus aquí</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: El Negocio -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Entendiendo Airbus: el duopolio aeroespacial</h2>
+
+        <p class="lead">Airbus es uno de los dos únicos fabricantes de aviones comerciales de gran tamaño del mundo. Junto con Boeing, controlan prácticamente el 100% del mercado de aviones de más de 100 pasajeros. Esta estructura de duopolio proporciona ventajas competitivas excepcionales: poder de fijación de precios, alta visibilidad de ingresos y barreras de entrada prácticamente insuperables.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Commercial Aircraft</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 72%;">Aviones comerciales</div>
+                </div>
+                <span class="progress-value">~72%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Defence & Space</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 18%;">Militar y espacio</div>
+                </div>
+                <span class="progress-value">~18%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Helicopters</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar blue" style="width: 10%;"></div>
+                </div>
+                <span class="progress-value">~10%</span>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div>
+                <h3 style="margin-bottom: 16px;">La familia A320 — el caballo de batalla</h3>
+                <p style="font-size: 0.9375rem;">El A320neo y sus variantes (A319, A321) representan el 78% de las entregas de Airbus. Es el avión de pasillo único más vendido del mundo, compitiendo directamente con el Boeing 737 MAX. En octubre 2025, el A320 superó al 737 como el avión más entregado de la historia con 12,260 unidades.</p>
+
+                <div class="table-wrapper" style="margin-top: 24px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Entregas 2024</th>
+                                <th>% del total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A320 Family</td>
+                                <td class="cell-success">602</td>
+                                <td>78%</td>
+                            </tr>
+                            <tr>
+                                <td>A220</td>
+                                <td>75</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td>A350</td>
+                                <td>57</td>
+                                <td>7%</td>
+                            </tr>
+                            <tr>
+                                <td>A330</td>
+                                <td>32</td>
+                                <td>4%</td>
+                            </tr>
+                            <tr style="background: var(--gray-100); font-weight: 600;">
+                                <td>Total</td>
+                                <td>766</td>
+                                <td>100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">El backlog — visibilidad sin precedentes</h3>
+                <p style="font-size: 0.9375rem;">Con €629B en pedidos pendientes, Airbus tiene visibilidad de ingresos para los próximos 9+ años. Este backlog récord proporciona estabilidad excepcional y poder de negociación con proveedores.</p>
+
+                <div class="card" style="margin-top: 24px; text-align: center; padding: 32px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--green-600);">€629B</div>
+                    <div style="color: var(--gray-500); margin-top: 8px;">Backlog récord (FY2024)</div>
+                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200);">
+                        <span style="font-weight: 600;">9+ años</span> de producción asegurada
+                    </div>
+                </div>
+
+                <div class="callout callout-success" style="margin-top: 24px;">
+                    <p class="callout-text" style="margin: 0;"><strong>Book-to-Bill 2024:</strong> 1.14x — Nuevos pedidos (878) superan entregas (766). El backlog sigue creciendo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financieros -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolución Financiera
+        </div>
+
+        <h2>Cinco años de crecimiento sólido</h2>
+
+        <p class="lead">Airbus ha demostrado resiliencia excepcional. Después de la crisis COVID en 2020, la compañía se ha recuperado con fuerza, aumentando entregas, márgenes y generación de caja cada año. El guidance 2025 apunta a continuar esta tendencia.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>€49.9B</td>
+                        <td>€52.1B</td>
+                        <td>€58.8B</td>
+                        <td>€65.4B</td>
+                        <td class="cell-success">€69.2B</td>
+                        <td class="cell-success">↑ +39%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBIT Adjusted</strong></td>
+                        <td>€1.7B</td>
+                        <td>€4.9B</td>
+                        <td>€5.6B</td>
+                        <td>€5.8B</td>
+                        <td class="cell-success">€5.4B</td>
+                        <td>→ Estable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>-€1.1B</td>
+                        <td>€4.2B</td>
+                        <td>€4.2B</td>
+                        <td>€3.8B</td>
+                        <td class="cell-success">€4.2B</td>
+                        <td class="cell-success">↑ Recuperado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow</strong></td>
+                        <td>-€6.9B</td>
+                        <td>€3.5B</td>
+                        <td>€4.7B</td>
+                        <td>€4.1B</td>
+                        <td class="cell-success">€4.5B</td>
+                        <td class="cell-success">↑ +9%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td>-€1.45</td>
+                        <td>€5.36</td>
+                        <td>€5.40</td>
+                        <td>€4.80</td>
+                        <td class="cell-success">€5.36</td>
+                        <td class="cell-success">↑ +12%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Entregas</strong></td>
+                        <td>566</td>
+                        <td>611</td>
+                        <td>661</td>
+                        <td>735</td>
+                        <td class="cell-success">766</td>
+                        <td class="cell-success">↑ +35%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolución del Free Cash Flow</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="border-color: var(--red-500);">2020</div>
+                    <div class="timeline-year">FCF</div>
+                    <div class="timeline-value" style="color: var(--red-600);">-€6.9B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-year">FCF</div>
+                    <div class="timeline-value">€3.5B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-year">FCF</div>
+                    <div class="timeline-value">€4.7B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2023</div>
+                    <div class="timeline-year">FCF</div>
+                    <div class="timeline-value">€4.1B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2024</div>
+                    <div class="timeline-year">FCF</div>
+                    <div class="timeline-value">€4.5B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-4" style="margin: 40px 0;">
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value success">23%</div>
+                <div class="stat-label">ROE</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">10.2%</div>
+                <div class="stat-label">ROIC</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value success">€11.8B</div>
+                <div class="stat-label">Net Cash</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">0.9%</div>
+                <div class="stat-label">Dividend Yield</div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">📈 Guidance 2025</div>
+            <p class="callout-text">Airbus espera entregar ~820 aviones en 2025 (+7%), con EBIT Adjusted de ~€7.0B (+30%) y FCF de ~€4.5B. El aumento de EBIT se debe a mejor mix de productos y resolución de problemas de supply chain.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Comparativa con Competidores -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Análisis Competitivo
+        </div>
+
+        <h2>Airbus vs Boeing: un duopolio desbalanceado</h2>
+
+        <p class="lead">El duopolio Airbus-Boeing se ha desequilibrado dramáticamente a favor de Airbus. Mientras Boeing lucha con problemas de calidad, accidentes, y pérdidas masivas, Airbus captura cuota de mercado, aumenta producción y genera beneficios récord.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">AIRBUS</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">60%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">€4.2B</div>
+                    <div class="company-stat-label">Net Income</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">766</div>
+                    <div class="company-stat-label">Entregas 2024</div>
+                </div>
+                <div class="company-rating">★★★★☆</div>
+            </div>
+
+            <div class="company-card danger">
+                <div class="company-name">BOEING</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">40%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">-$6.1B</div>
+                    <div class="company-stat-label">Net Income</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">348</div>
+                    <div class="company-stat-label">Entregas 2024</div>
+                </div>
+                <div class="company-rating">★★☆☆☆</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">EMBRAER</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">3.6%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$0.3B</div>
+                    <div class="company-stat-label">Net Income</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">75</div>
+                    <div class="company-stat-label">Entregas 2024</div>
+                </div>
+                <div class="company-rating">★★★☆☆</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">COMAC</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">0.4%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">N/A</div>
+                    <div class="company-stat-label">Net Income</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~10</div>
+                    <div class="company-stat-label">Entregas 2024</div>
+                </div>
+                <div class="company-rating">★☆☆☆☆</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Airbus</th>
+                        <th>Boeing</th>
+                        <th>Ventaja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Entregas 2024</strong></td>
+                        <td class="cell-success">766</td>
+                        <td class="cell-danger">348</td>
+                        <td style="color: var(--green-600);">Airbus +120%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pedidos brutos 2024</strong></td>
+                        <td class="cell-success">878</td>
+                        <td>569</td>
+                        <td style="color: var(--green-600);">Airbus +54%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backlog</strong></td>
+                        <td class="cell-success">€629B</td>
+                        <td>$521B</td>
+                        <td style="color: var(--green-600);">Airbus +21%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income 2024</strong></td>
+                        <td class="cell-success">€4.2B</td>
+                        <td class="cell-danger">-$6.1B</td>
+                        <td style="color: var(--green-600);">Airbus rentable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cash Position</strong></td>
+                        <td class="cell-success">€11.8B net cash</td>
+                        <td class="cell-danger">$50B+ net debt</td>
+                        <td style="color: var(--green-600);">Airbus sólido</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Producción mensual A320/737</strong></td>
+                        <td class="cell-success">~50/mes objetivo 75</td>
+                        <td class="cell-danger">~25/mes limitado</td>
+                        <td style="color: var(--green-600);">Airbus 2x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">⚠️ El A320 supera al 737</div>
+            <p class="callout-text">En octubre 2025, el Airbus A320 superó al Boeing 737 como el avión más entregado de la historia con 12,260 unidades. Este hito simbólico refleja el cambio estructural en el duopolio. Los problemas de Boeing (737 MAX, controles de calidad, limitaciones de producción) pueden tardar años en resolverse.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline de Eventos -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Críticos
+        </div>
+
+        <h2>Cómo Airbus ganó la década</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green-500), var(--green-300));"></div>
+
+                <div style="margin-bottom: 40px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 24px; height: 24px; background: var(--green-500); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.875rem;">2018-2019</div>
+                    <h4 style="margin: 8px 0;">Crisis del Boeing 737 MAX</h4>
+                    <p style="font-size: 0.9375rem; margin: 0;">Dos accidentes fatales (Lion Air y Ethiopian Airlines) matan a 346 personas. El 737 MAX es prohibido globalmente. Boeing entra en crisis existencial.</p>
+                </div>
+
+                <div style="margin-bottom: 40px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 24px; height: 24px; background: var(--red-500); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.875rem;">2020</div>
+                    <h4 style="margin: 8px 0;">Pandemia COVID-19</h4>
+                    <p style="font-size: 0.9375rem; margin: 0;">Colapso de la aviación mundial. Airbus reduce producción 40%. Pérdida de €1.1B y FCF negativo de €6.9B. Pero gestión de crisis ejemplar.</p>
+                </div>
+
+                <div style="margin-bottom: 40px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 24px; height: 24px; background: var(--green-500); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.875rem;">2021-2022</div>
+                    <h4 style="margin: 8px 0;">Recuperación récord</h4>
+                    <p style="font-size: 0.9375rem; margin: 0;">Demanda post-COVID dispara pedidos. Boeing sigue limitado por reguladores. Airbus aumenta producción de A320 agresivamente.</p>
+                </div>
+
+                <div style="margin-bottom: 40px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 24px; height: 24px; background: var(--green-500); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.875rem;">2024</div>
+                    <h4 style="margin: 8px 0;">Nuevos problemas de Boeing</h4>
+                    <p style="font-size: 0.9375rem; margin: 0;">Incidente del panel de Alaska Airlines. FAA limita producción del 737 MAX. Boeing reporta pérdida de $6.1B. Airbus consolida liderazgo.</p>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -40px; width: 24px; height: 24px; background: var(--green-600); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.875rem;">2025</div>
+                    <h4 style="margin: 8px 0;">Airbus en máximos</h4>
+                    <p style="font-size: 0.9375rem; margin: 0;">Backlog récord €629B. A320 supera al 737 como avión más entregado. Objetivo 75 aviones/mes para 2027. Dominio del duopolio.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Próximos catalizadores a vigilar</h3>
+
+        <div class="grid-2" style="margin-top: 24px;">
+            <div class="card card-success">
+                <h4 style="color: var(--green-700); margin-bottom: 16px;">Potenciales positivos</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>📈 Ramp-up A320 a 75/mes (2027)</li>
+                    <li>📈 Resolución problemas supply chain</li>
+                    <li>📈 Nuevos pedidos de China</li>
+                    <li>📈 Boeing sigue con problemas</li>
+                    <li>📈 Subida de precios de aviones</li>
+                </ul>
+            </div>
+            <div class="card" style="border: 1px solid var(--red-200);">
+                <h4 style="color: var(--red-600); margin-bottom: 16px;">Riesgos a vigilar</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>⚠️ Recesión global → cancelaciones</li>
+                    <li>⚠️ Retrasos de motores (CFM, PW)</li>
+                    <li>⚠️ Recuperación de Boeing</li>
+                    <li>⚠️ COMAC gana cuota en China</li>
+                    <li>⚠️ Costes laborales en Europa</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat y Ventajas -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Análisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas: un foso casi insuperable</h2>
+
+        <p class="lead">Airbus tiene uno de los moats más anchos del mercado. El duopolio con Boeing, las barreras regulatorias, la base instalada, y los contratos a largo plazo crean ventajas competitivas duraderas que son prácticamente imposibles de replicar.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🏰 Duopolio Global</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Solo Airbus y Boeing pueden fabricar aviones comerciales de +100 pax</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">EXCEPCIONAL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">📜 Certificaciones FAA/EASA</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Certificar un avión nuevo requiere 5-10 años y €10-20B</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">INSUPERABLE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">📋 Backlog de 9+ años</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">€629B en pedidos confirman ingresos hasta 2034+</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">EXCEPCIONAL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🔒 Switching Costs</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Pilotos, mantenimiento, repuestos — cambiar de familia es muy costoso</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🛠️ Base Instalada + Aftermarket</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">12,260 A320 volando = décadas de repuestos y servicios</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">🏆 El moat aeroespacial en números</div>
+            <p class="callout-text">
+                <strong>Barrera de entrada:</strong> Desarrollar un avión comercial desde cero requiere €15-25B de inversión, 7-10 años de desarrollo, y certificación de docenas de reguladores mundiales. Solo COMAC (China) lo ha intentado en 30 años, y aún no compite globalmente.<br><br>
+                <strong>Tiempo para alcanzar a Airbus:</strong> Incluso con recursos ilimitados, un nuevo competidor necesitaría 15-20 años para amenazar seriamente el duopolio.
+            </p>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">En inversión, busco castillos rodeados de fosos anchos y profundos, con un rey honesto dentro. El duopolio aeroespacial es uno de los mejores fosos del capitalismo moderno.</p>
+            <p class="quote-author">— Warren Buffett (parafraseado)</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Red Flags Check
+        </div>
+
+        <h2>Análisis de riesgos: señales de alerta</h2>
+
+        <p class="lead">A diferencia de Boeing, Airbus presenta pocos red flags significativos. Los principales riesgos son externos (supply chain, ciclo económico) más que problemas fundamentales del negocio. El checklist muestra una empresa bien gestionada.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 20px;">✓ Señales positivas</h3>
+                <ul class="check-list">
+                    <li>Revenue creciendo consistentemente (+6% YoY)</li>
+                    <li>Márgenes estables, no inflados artificialmente</li>
+                    <li>Net Income = FCF — beneficios de calidad</li>
+                    <li>ROIC positivo y estable (~10%)</li>
+                    <li>CEO estable (Guillaume Faury desde 2019)</li>
+                    <li>Cuota de mercado creciendo vs Boeing</li>
+                    <li>Balance sólido: €11.8B net cash</li>
+                    <li>Backlog récord, visibilidad excepcional</li>
+                    <li>Sin cambios de auditor ni CFO</li>
+                </ul>
+            </div>
+            <div class="card" style="border: 1px solid var(--amber-500);">
+                <h3 style="color: var(--amber-500); margin-bottom: 20px;">⚠ Puntos de atención</h3>
+                <ul class="check-list">
+                    <li class="warning">Supply chain constraints — limitan ramp-up</li>
+                    <li class="warning">Retrasos en motores (CFM, Pratt & Whitney)</li>
+                    <li class="warning">Valoración no barata (P/E 30x)</li>
+                    <li class="warning">Sector cíclico — sensible a recesiones</li>
+                    <li class="warning">Dependencia de pocos proveedores clave</li>
+                    <li class="warning">Riesgo geopolítico (China, proteccionismo)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Red Flag</th>
+                        <th>Airbus</th>
+                        <th>Boeing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revenue declinando</td>
+                        <td style="color: var(--green-600);">✓ No — +6% YoY</td>
+                        <td style="color: var(--red-600);">✗ Sí — inestable</td>
+                    </tr>
+                    <tr>
+                        <td>Márgenes colapsando</td>
+                        <td style="color: var(--green-600);">✓ No — estables</td>
+                        <td style="color: var(--red-600);">✗ Sí — negativos</td>
+                    </tr>
+                    <tr>
+                        <td>Net Income → Pérdidas</td>
+                        <td style="color: var(--green-600);">✓ No — €4.2B beneficio</td>
+                        <td style="color: var(--red-600);">✗ Sí — -$6.1B</td>
+                    </tr>
+                    <tr>
+                        <td>ROIC negativo</td>
+                        <td style="color: var(--green-600);">✓ No — +10%</td>
+                        <td style="color: var(--red-600);">✗ Sí — negativo</td>
+                    </tr>
+                    <tr>
+                        <td>CEO despedido/inestable</td>
+                        <td style="color: var(--green-600);">✓ No — Faury desde 2019</td>
+                        <td style="color: var(--red-600);">✗ Sí — múltiples cambios</td>
+                    </tr>
+                    <tr>
+                        <td>Cuota de mercado cayendo</td>
+                        <td style="color: var(--green-600);">✓ No — ganando</td>
+                        <td style="color: var(--red-600);">✗ Sí — perdiendo</td>
+                    </tr>
+                    <tr>
+                        <td>Deuda excesiva</td>
+                        <td style="color: var(--green-600);">✓ No — net cash €11.8B</td>
+                        <td style="color: var(--red-600);">✗ Sí — net debt $50B+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card card-dark" style="text-align: center; padding: 48px; margin-top: 40px;">
+            <div style="font-size: 4rem; margin-bottom: 16px;">✓</div>
+            <h3 style="color: white; font-size: 1.75rem; margin-bottom: 12px;">0 de 9 Red Flags Activos</h3>
+            <p style="color: var(--gray-400); margin: 0; font-size: 1.125rem;">Airbus pasa el checklist de calidad. Los riesgos son externos, no fundamentales.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Valoración -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Valoración a 5 Años
+        </div>
+
+        <h2>Proyección y escenarios de inversión</h2>
+
+        <p class="lead">Utilizando estimaciones de consenso y múltiplos históricos, proyectamos tres escenarios para 2030. El caso base sugiere un CAGR del 9-11% anual, atractivo para una empresa de esta calidad y previsibilidad.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Estimaciones de consenso</h3>
+            <div class="table-wrapper" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>EPS</th>
+                            <th>Revenue</th>
+                            <th>FCF Est.</th>
+                            <th>Crecimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024 (actual)</td>
+                            <td>€5.36</td>
+                            <td>€69.2B</td>
+                            <td>€4.5B</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>2025E</td>
+                            <td>€6.49</td>
+                            <td>€76B</td>
+                            <td>€5.0B</td>
+                            <td class="cell-success">+10%</td>
+                        </tr>
+                        <tr>
+                            <td>2026E</td>
+                            <td>€7.50</td>
+                            <td>€84B</td>
+                            <td>€5.8B</td>
+                            <td class="cell-success">+11%</td>
+                        </tr>
+                        <tr>
+                            <td>2027E</td>
+                            <td>€8.50</td>
+                            <td>€92B</td>
+                            <td>€6.5B</td>
+                            <td class="cell-success">+10%</td>
+                        </tr>
+                        <tr>
+                            <td>2030E</td>
+                            <td>€11.00</td>
+                            <td>€115B</td>
+                            <td>€8.5B</td>
+                            <td class="cell-success">+9% CAGR</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #065f46;">🟢 Bull Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #065f46;">€320-350</div>
+                <div class="scenario-change" style="color: #065f46;">+65-80% (CAGR 11-13%)</div>
+                <ul class="scenario-list">
+                    <li>Ramp-up a 75/mes exitoso</li>
+                    <li>Boeing sigue con problemas 3+ años</li>
+                    <li>Múltiplo P/E expande a 35x</li>
+                    <li>EPS 2030 alcanza €12+</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">🟡 Base Case</span>
+                    <span class="scenario-prob">55%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">€260-290</div>
+                <div class="scenario-change" style="color: #92400e;">+35-50% (CAGR 7-9%)</div>
+                <ul class="scenario-list">
+                    <li>Crecimiento en línea con consenso</li>
+                    <li>Múltiplo P/E estable 25-28x</li>
+                    <li>EPS 2030 ~€11</li>
+                    <li>Boeing se recupera parcialmente</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #991b1b;">🔴 Bear Case</span>
+                    <span class="scenario-prob">20%</span>
+                </div>
+                <div class="scenario-price" style="color: #991b1b;">€150-180</div>
+                <div class="scenario-change" style="color: #991b1b;">-10-25% (pérdida)</div>
+                <ul class="scenario-list">
+                    <li>Recesión global profunda</li>
+                    <li>Cancelaciones masivas de pedidos</li>
+                    <li>Supply chain colapsa</li>
+                    <li>Múltiplo comprime a 15-18x</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Cálculo de valor esperado</h3>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2; margin-bottom: 24px;">
+                <div>Valor Esperado = <span style="color: var(--green-600);">(0.25 × €335)</span> + <span style="color: var(--amber-500);">(0.55 × €275)</span> + <span style="color: var(--red-500);">(0.20 × €165)</span></div>
+                <div style="padding-left: 140px;">= €84 + €151 + €33</div>
+                <div style="padding-left: 140px;">= <strong>€268</strong></div>
+            </div>
+
+            <div class="grid-3">
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">€196</div>
+                    <div class="stat-label">Precio actual</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value success">€268</div>
+                    <div class="stat-label">Valor esperado 2030</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value success">+37%</div>
+                    <div class="stat-label">Potencial (7% CAGR)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Management
+        </div>
+
+        <h2>Guillaume Faury: el ingeniero al mando</h2>
+
+        <p class="lead">Guillaume Faury lidera Airbus desde abril 2019. Ingeniero aeronáutico de formación, ha gestionado la empresa a través del COVID, la crisis de Boeing, y los desafíos de supply chain. Su enfoque disciplinado ha mantenido a Airbus rentable y en crecimiento.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card" style="border: 2px solid var(--green-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--green-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Guillaume Faury</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO desde Abril 2019</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ Ingeniero aeronáutico (École Polytechnique)</li>
+                    <li>✓ 20+ años en Airbus antes de ser CEO</li>
+                    <li>✓ Gestionó crisis COVID con éxito</li>
+                    <li>✓ Aumentó cuota vs Boeing consistentemente</li>
+                    <li>✓ Foco en disciplina operativa y calidad</li>
+                    <li>✓ Comunicación clara con inversores</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>Track record:</strong> Bajo su liderazgo, Airbus pasó de entregar 566 aviones en 2020 a 766 en 2024. El backlog creció de €373B a €629B. FCF pasó de -€6.9B a +€4.5B.
+                </p>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 20px;">Evaluación de management</h3>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Evaluación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Track record</td>
+                                <td class="cell-success">🟢 Excelente</td>
+                            </tr>
+                            <tr>
+                                <td>Estabilidad equipo</td>
+                                <td class="cell-success">🟢 Alta (6 años CEO)</td>
+                            </tr>
+                            <tr>
+                                <td>Comunicación</td>
+                                <td class="cell-success">🟢 Transparente</td>
+                            </tr>
+                            <tr>
+                                <td>Capital allocation</td>
+                                <td style="color: var(--green-600);">🟢 Disciplinada</td>
+                            </tr>
+                            <tr>
+                                <td>Skin in the game</td>
+                                <td>🟡 Moderado</td>
+                            </tr>
+                            <tr>
+                                <td>Ejecución</td>
+                                <td class="cell-success">🟢 Sólida</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-success" style="margin-top: 24px;">
+                    <div class="callout-title">Compensación</div>
+                    <p class="callout-text">La compensación de Faury está vinculada a métricas de largo plazo: EBIT, FCF, y metas de sostenibilidad. Alineación razonable con accionistas, aunque la participación directa en acciones es modesta comparada con CEOs americanos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ El principal desafío de Faury</div>
+            <p class="callout-text">El ramp-up de producción a 75 A320/mes para 2027 es el reto más importante. Los cuellos de botella en supply chain (especialmente motores) han forzado a reducir objetivos antes. La credibilidad del equipo depende de alcanzar este objetivo sin comprometer calidad.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Escenarios Detallados -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios Detallados
+        </div>
+
+        <h2>Análisis de sensibilidad y triggers</h2>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 20px;">Bull Case Detallado</h3>
+                <p style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 16px;">Probabilidad: 25%</p>
+
+                <h4 style="font-size: 1rem; margin-bottom: 12px;">Supuestos:</h4>
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 1.8;">
+                    <li>• Boeing no se recupera hasta 2028+</li>
+                    <li>• A320 alcanza 75/mes en 2027</li>
+                    <li>• Supply chain se normaliza</li>
+                    <li>• EPS crece 12% anual (vs 9% consenso)</li>
+                    <li>• Múltiplo expande a 32-35x</li>
+                </ul>
+
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--green-200);">
+                    <div style="font-family: 'JetBrains Mono', monospace;">
+                        <div>EPS 2030: €13.00</div>
+                        <div>P/E: 28x</div>
+                        <div style="font-weight: 600; color: var(--green-700);">Precio: €364</div>
+                        <div style="color: var(--green-600);">CAGR: 13%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="border: 1px solid var(--red-200);">
+                <h3 style="color: var(--red-600); margin-bottom: 20px;">Bear Case Detallado</h3>
+                <p style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 16px;">Probabilidad: 20%</p>
+
+                <h4 style="font-size: 1rem; margin-bottom: 12px;">Supuestos:</h4>
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 1.8;">
+                    <li>• Recesión global 2026-2027</li>
+                    <li>• Cancelaciones de pedidos 10-15%</li>
+                    <li>• Boeing se recupera rápidamente</li>
+                    <li>• EPS crece solo 3% anual</li>
+                    <li>• Múltiplo comprime a 15-18x</li>
+                </ul>
+
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--red-200);">
+                    <div style="font-family: 'JetBrains Mono', monospace;">
+                        <div>EPS 2030: €6.50</div>
+                        <div>P/E: 18x</div>
+                        <div style="font-weight: 600; color: var(--red-600);">Precio: €117</div>
+                        <div style="color: var(--red-600);">CAGR: -10%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Triggers de reevaluación</h3>
+
+        <div class="grid-2" style="margin-top: 24px;">
+            <div class="card">
+                <h4 style="color: var(--green-600); margin-bottom: 16px;">🟢 Señales para aumentar posición</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>• Precio cae a <€170 (P/E <26x)</li>
+                    <li>• Boeing reporta más problemas de calidad</li>
+                    <li>• Airbus confirma 75/mes antes de lo esperado</li>
+                    <li>• Pedido masivo de China o India</li>
+                    <li>• FCF supera €6B</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 style="color: var(--red-600); margin-bottom: 16px;">🔴 Señales para reducir/salir</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>• Cancelaciones superan 10% del backlog</li>
+                    <li>• Márgenes caen significativamente</li>
+                    <li>• Boeing recupera paridad de entregas</li>
+                    <li>• P/E supera 40x sin justificación</li>
+                    <li>• Cambio de CEO inesperado</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">📊 Validación: DCF inverso</div>
+            <p class="callout-text">
+                <strong>¿Qué implica el precio actual de €196?</strong><br>
+                Con un WACC del 8% y crecimiento perpetuo del 2%, el precio actual implica que el FCF debe crecer al 7% anual durante 10 años. Dado que el consenso espera 10%+ de crecimiento, el precio actual parece razonable — ni caro ni barato. La valoración asume ejecución en línea con expectativas.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Airbus (AIR.PA) · Informe de Inversión</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusión Final -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">★★★★☆</div>
+                <div class="verdict-title hold font-display">Mantener / Acumular</div>
+                <p class="verdict-text">Airbus es una empresa de alta calidad en un duopolio privilegiado. No está barata, pero la calidad del negocio justifica la prima. Ideal para carteras de largo plazo que busquen exposición aeroespacial sin el riesgo de Boeing.</p>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-4" style="margin: 48px 0; text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: white;">€196</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">€228</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio objetivo 12m</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">+16%</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Potencial</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">72/100</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Score</div>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-2" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Fortalezas clave</h3>
+                    <ul style="list-style: none; color: var(--gray-300); line-height: 2;">
+                        <li>✓ Duopolio con barreras insuperables</li>
+                        <li>✓ Backlog récord de €629B (9+ años)</li>
+                        <li>✓ Boeing en crisis beneficia a Airbus</li>
+                        <li>✓ FCF sólido y creciente</li>
+                        <li>✓ Management estable y competente</li>
+                        <li>✓ Balance fuerte (net cash €11.8B)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Riesgos principales</h3>
+                    <ul style="list-style: none; color: var(--gray-300); line-height: 2;">
+                        <li>⚠ Valoración no barata (P/E 30x)</li>
+                        <li>⚠ Supply chain constraints</li>
+                        <li>⚠ Exposición a ciclo económico</li>
+                        <li>⚠ Dependencia de pocos proveedores</li>
+                        <li>⚠ Posible recuperación de Boeing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700); margin-top: 48px;"></div>
+
+            <div style="margin-top: 40px;">
+                <h3 style="color: white; margin-bottom: 20px;">Lo que me falta (transparencia)</h3>
+                <ul style="list-style: none; color: var(--gray-400); line-height: 2;">
+                    <li>❓ Detalles de contratos con aerolíneas (pricing, términos)</li>
+                    <li>❓ Estado exacto de negociaciones con proveedores de motores</li>
+                    <li>❓ Impacto real de tensiones geopolíticas en pedidos de China</li>
+                    <li>❓ Timeline exacto de resolución de supply chain</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--gray-700); display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: var(--gray-500); font-size: 0.875rem;">
+                    <div>Análisis realizado: 27 Enero 2026</div>
+                    <div>Framework: Value-Growth Investing</div>
+                    <div>Fuentes: Airbus IR, Yahoo Finance, MarketScreener</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">"En un duopolio, cuando uno tropieza,</div>
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">el otro recoge los frutos durante años."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citigroup (C) - Informe de Inversión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; letter-spacing: -0.02em; }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--amber-500); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--amber-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 12px; }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-warning { background: var(--amber-50); border: 1px solid var(--amber-100); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.warning { color: var(--amber-600); }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-warning { color: var(--amber-600); font-weight: 600; }
+
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 140px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.warning { background: var(--amber-500); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.blue { background: var(--blue-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        .quote-box { background: var(--gray-900); color: var(--white); padding: 48px; border-radius: 16px; margin: 48px 0; position: relative; }
+        .quote-box::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 8rem; position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1; }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; }
+        .company-card.highlight { border-color: var(--amber-300); background: var(--amber-50); }
+        .company-card.best { border-color: var(--green-300); background: var(--green-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '→'; position: absolute; left: 0; color: var(--gray-400); }
+
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        .page-footer { margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--gray-400); }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.danger::before { content: '✗'; color: var(--red-500); }
+        .check-list li.warning::before { content: '!'; color: var(--amber-500); }
+
+        .score-row { display: flex; align-items: center; margin-bottom: 20px; padding: 16px; background: var(--gray-50); border-radius: 12px; }
+        .score-label { width: 200px; font-weight: 600; color: var(--gray-800); }
+        .score-bar-wrapper { flex: 1; height: 12px; background: var(--gray-200); border-radius: 6px; overflow: hidden; margin: 0 20px; }
+        .score-bar { height: 100%; border-radius: 6px; }
+        .score-value { width: 80px; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>●</span> Value Play — Especulativo
+                </div>
+                <div class="cover-date">Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NYSE: C</div>
+                <h1 class="cover-title font-display">Citigroup Inc.</h1>
+                <p class="cover-subtitle">El banco global en transformación. Cotiza por debajo de su valor en libros con catalizadores de mejora claros, pero el turnaround requiere paciencia y fe en la gestión.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="rating-verdict">Value Play — Precaución</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$117</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">$127</div>
+                    <div class="cover-metric-label">Precio objetivo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">0.81x</div>
+                    <div class="cover-metric-label">P/B (< Book Value)</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$220B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Explicación Simple -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> ¿Qué Significa Este Análisis?
+        </div>
+
+        <h2>En palabras simples: la oportunidad value</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <h3 style="margin-bottom: 24px; color: var(--amber-600);">IMAGINA QUE...</h3>
+            <p class="lead" style="margin-bottom: 0;">Imagina que puedes comprar un piso valorado en 100,000€ por solo 81,000€. Suena genial, ¿verdad? Pero hay una razón: el piso necesita reformas, el inquilino actual paga poco, y los vecinos (JPMorgan, Bank of America) tienen pisos mejor mantenidos. Citigroup es ese piso. Cotiza por debajo de lo que "vale" en libros, pero necesita una gestión que lo arregle. Si la nueva dueña (Jane Fraser) consigue subir el alquiler y mejorar el piso, valdrá mucho más. Si fracasa, seguirá barato o empeorará.</p>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">✓ Lo bueno (en simple)</h3>
+                <ul style="list-style: none; line-height: 2.2; font-size: 1rem;">
+                    <li>• <strong>Está barata</strong> — P/B 0.81x, pagas 81 céntimos por cada euro de valor</li>
+                    <li>• <strong>Gana dinero</strong> — $14.3B de beneficio en 2025</li>
+                    <li>• <strong>Devuelve dinero</strong> — $20B en recompras anunciadas</li>
+                    <li>• <strong>Se está simplificando</strong> — Vendiendo negocios que no funcionan</li>
+                    <li>• <strong>Analistas optimistas</strong> — 15 de 19 dicen "comprar"</li>
+                </ul>
+            </div>
+            <div class="card card-warning">
+                <h3 style="color: var(--amber-600); margin-bottom: 16px;">⚠ Lo que vigilar</h3>
+                <ul style="list-style: none; line-height: 2.2; font-size: 1rem;">
+                    <li>• <strong>ROE bajo</strong> — Solo 7%, los competidores hacen 12-17%</li>
+                    <li>• <strong>Historial de decepciones</strong> — Ha fallado turnarounds antes</li>
+                    <li>• <strong>Complejo</strong> — Operaciones en 160+ países</li>
+                    <li>• <strong>Buffett no lo tiene</strong> — Tiene JPM, BAC, WFC, pero no Citi</li>
+                    <li>• <strong>Execution risk</strong> — El plan depende de Jane Fraser</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ ¿Para quién es esta inversión?</div>
+            <p class="callout-text"><strong>Para inversores value con paciencia y tolerancia al riesgo.</strong> Si buscas exposición bancaria segura, compra JPMorgan. Si buscas una apuesta contrarian con potencial de +50-100% si el turnaround funciona, Citigroup puede ser interesante. No es para carteras conservadoras ni para quien no pueda esperar 3-5 años.</p>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Compra cuando hay sangre en las calles, incluso si la sangre es tuya.</p>
+            <p class="quote-author">— Baron Rothschild</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard de Inversión
+        </div>
+
+        <h2>Puntuación: 55/100 — Aceptable con riesgos</h2>
+
+        <p class="lead">Citigroup obtiene una puntuación mixta. La valoración es atractiva (cotiza bajo book value), pero la calidad del negocio y ejecución reciente son mediocres comparadas con sus peers. Es una apuesta de valor, no una inversión de calidad.</p>
+
+        <div style="margin: 48px 0;">
+            <div class="score-row">
+                <span class="score-label">Calidad del Negocio</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 50%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-600);">10/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Banco global diversificado pero complejo y difícil de gestionar</p>
+
+            <div class="score-row">
+                <span class="score-label">Fortaleza Financiera</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 60%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-600);">12/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">CET1 sólido, pero ROE bajo (7%) y efficiency ratio alto (66%)</p>
+
+            <div class="score-row">
+                <span class="score-label">Ventaja Competitiva</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 45%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-600);">9/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Escala global pero sin ventajas claras vs JPM/BAC/WFC</p>
+
+            <div class="score-row">
+                <span class="score-label">Equipo Directivo</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 55%; background: var(--amber-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--amber-600);">11/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">Jane Fraser tiene plan claro, pero ejecución por demostrar</p>
+
+            <div class="score-row">
+                <span class="score-label">Precio Atractivo</span>
+                <div class="score-bar-wrapper">
+                    <div class="score-bar" style="width: 65%; background: var(--green-500);"></div>
+                </div>
+                <span class="score-value" style="color: var(--green-600);">13/20</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: -12px 0 24px 220px;">P/B 0.81x — descuento significativo vs book value y peers</p>
+        </div>
+
+        <div class="card card-dark" style="text-align: center; padding: 48px;">
+            <div style="font-size: 4rem; margin-bottom: 16px;">★★★☆☆</div>
+            <h3 style="color: white; font-size: 2rem; margin-bottom: 12px;">55/100 — Aceptable</h3>
+            <p style="color: var(--gray-400); margin: 0; font-size: 1.125rem;">Value play especulativo. Atractivo por valoración, pero con riesgos de ejecución.</p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 32px; text-align: center;">
+            <div style="padding: 20px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase;">0-30: EVITAR</div>
+            </div>
+            <div style="padding: 20px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase;">51-70: ACEPTABLE</div>
+                <div style="font-weight: 600; color: var(--amber-600);">← Citigroup aquí</div>
+            </div>
+            <div style="padding: 20px;">
+                <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase;">71-85: BUENA</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: El Negocio -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Entendiendo Citigroup: el banco global en simplificación</h2>
+
+        <p class="lead">Citigroup es uno de los cuatro grandes bancos de EE.UU. y el más global de todos: opera en 160+ países. Sin embargo, esta complejidad ha sido su maldición — difícil de gestionar, múltiples crisis, y rentabilidad inferior a sus peers durante una década. La CEO Jane Fraser está ejecutando "The Great Simplification" para arreglarlo.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio (post-reestructuración)</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Services (TTS)</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 30%;">Treasury & Trade Solutions</div>
+                </div>
+                <span class="progress-value">~30%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Markets</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 25%;">Trading FICC + Equities</div>
+                </div>
+                <span class="progress-value">~25%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Banking</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 20%;">Investment Banking + Lending</div>
+                </div>
+                <span class="progress-value">~20%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Wealth</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar blue" style="width: 15%;"></div>
+                </div>
+                <span class="progress-value">~15%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">US Personal Banking</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar warning" style="width: 10%;"></div>
+                </div>
+                <span class="progress-value">~10%</span>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div>
+                <h3 style="margin-bottom: 16px;">La transformación de Jane Fraser</h3>
+                <p style="font-size: 0.9375rem;">Desde 2021, Fraser ha simplificado radicalmente Citigroup:</p>
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ Vendiendo banca de consumo en 13 mercados (Asia, EMEA)</li>
+                    <li>✓ Saliendo de Rusia (pérdida de $1.1B en 2025)</li>
+                    <li>✓ Reduciendo costes y plantilla</li>
+                    <li>✓ Enfocándose en TTS, Markets y Wealth</li>
+                    <li>✓ Objetivo: ROTCE 10-11% para 2026</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">El negocio crown jewel: TTS</h3>
+                <p style="font-size: 0.9375rem;">Treasury and Trade Solutions es la joya de Citigroup:</p>
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>• Gestiona pagos y tesorería para multinacionales</li>
+                    <li>• Presente en 90+ países (nadie más puede hacerlo)</li>
+                    <li>• Relaciones de décadas con clientes Fortune 500</li>
+                    <li>• Ingresos recurrentes y predecibles</li>
+                    <li>• Margen alto y creciendo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ El problema histórico de Citi</div>
+            <p class="callout-text"><strong>Citigroup ha sido el "hermano pequeño" de los grandes bancos durante 15+ años.</strong> Después de la crisis de 2008 (recibió el mayor rescate del gobierno), nunca recuperó el liderazgo. Múltiples CEOs han prometido turnarounds que no se materializaron. Jane Fraser es la primera mujer CEO de un gran banco de Wall Street, y tiene credibilidad, pero el historial de Citi invita al escepticismo.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financieros -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolución Financiera
+        </div>
+
+        <h2>Métricas bancarias: progreso lento pero visible</h2>
+
+        <p class="lead">Los números de Citigroup muestran mejora gradual. Revenue y Net Income crecen, la eficiencia mejora lentamente, y los ratios de capital son sólidos. El problema: sigue muy por detrás de JPMorgan en todas las métricas de rentabilidad.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$75.3B</td>
+                        <td>$78.5B</td>
+                        <td>$81.1B</td>
+                        <td class="cell-success">$85.2B</td>
+                        <td class="cell-success">↑ +8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>$14.8B</td>
+                        <td>$9.2B</td>
+                        <td>$12.7B</td>
+                        <td class="cell-success">$14.3B</td>
+                        <td class="cell-success">↑ +13%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td>$7.00</td>
+                        <td>$4.04</td>
+                        <td>$5.80</td>
+                        <td class="cell-success">$7.50</td>
+                        <td class="cell-success">↑ +29%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROE</strong></td>
+                        <td>8.5%</td>
+                        <td>5.0%</td>
+                        <td>6.5%</td>
+                        <td class="cell-warning">7.0%</td>
+                        <td>→ Mejorando</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Efficiency Ratio</strong></td>
+                        <td>68%</td>
+                        <td>70%</td>
+                        <td>67%</td>
+                        <td class="cell-warning">66%</td>
+                        <td>→ Objetivo: 60%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CET1 Ratio</strong></td>
+                        <td>12.2%</td>
+                        <td>13.3%</td>
+                        <td>13.5%</td>
+                        <td class="cell-success">13.6%</td>
+                        <td class="cell-success">✓ Sólido</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">El gap con los peers: el problema de Citi</h3>
+
+        <div class="grid-4" style="margin: 32px 0;">
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value" style="font-size: 2rem;">7%</div>
+                <div class="stat-label">ROE Citigroup</div>
+                <div style="margin-top: 8px; font-size: 0.75rem; color: var(--red-500);">Mediocre</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value success" style="font-size: 2rem;">17%</div>
+                <div class="stat-label">ROE JPMorgan</div>
+                <div style="margin-top: 8px; font-size: 0.75rem; color: var(--green-500);">Excelente</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value" style="font-size: 2rem;">66%</div>
+                <div class="stat-label">Efficiency Citi</div>
+                <div style="margin-top: 8px; font-size: 0.75rem; color: var(--amber-500);">Alto</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value success" style="font-size: 2rem;">47%</div>
+                <div class="stat-label">Efficiency JPM</div>
+                <div style="margin-top: 8px; font-size: 0.75rem; color: var(--green-500);">Mejor clase</div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">📈 Guidance y objetivos 2026</div>
+            <p class="callout-text">
+                <strong>Jane Fraser ha puesto objetivos claros:</strong><br>
+                • ROTCE: 10-11% (vs 9% actual)<br>
+                • Efficiency Ratio: 60% (vs 66% actual)<br>
+                • Net Interest Income: +5-6% crecimiento<br>
+                • Buybacks: $20B anunciados<br><br>
+                Si los alcanza, el múltiplo debería expandirse significativamente.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Comparativa -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Análisis Competitivo
+        </div>
+
+        <h2>Citigroup vs los Big Four: el rezagado del grupo</h2>
+
+        <p class="lead">Comparado con JPMorgan, Bank of America y Wells Fargo, Citigroup es claramente el eslabón más débil. Menor ROE, mayor efficiency ratio, y valoración más baja. Pero esto también crea la oportunidad: si mejora, tiene más upside que los otros.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card best">
+                <div class="company-name">JPMorgan</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">17%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">2.0x</div>
+                    <div class="company-stat-label">P/B</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">47%</div>
+                    <div class="company-stat-label">Efficiency</div>
+                </div>
+                <div class="company-rating">★★★★★</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">Bank of America</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">12%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">1.3x</div>
+                    <div class="company-stat-label">P/B</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">65%</div>
+                    <div class="company-stat-label">Efficiency</div>
+                </div>
+                <div class="company-rating">★★★★☆</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">Wells Fargo</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">13%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">1.6x</div>
+                    <div class="company-stat-label">P/B</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">64%</div>
+                    <div class="company-stat-label">Efficiency</div>
+                </div>
+                <div class="company-rating">★★★★☆</div>
+            </div>
+
+            <div class="company-card highlight">
+                <div class="company-name" style="color: var(--amber-600);">Citigroup</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--amber-600);">7%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">0.81x</div>
+                    <div class="company-stat-label">P/B</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--amber-600);">66%</div>
+                    <div class="company-stat-label">Efficiency</div>
+                </div>
+                <div class="company-rating">★★★☆☆</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>JPMorgan</th>
+                        <th>BofA</th>
+                        <th>Wells Fargo</th>
+                        <th>Citigroup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Market Cap</strong></td>
+                        <td>$670B</td>
+                        <td>$360B</td>
+                        <td>$250B</td>
+                        <td>$220B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P/E (Forward)</strong></td>
+                        <td>12x</td>
+                        <td>11x</td>
+                        <td>12x</td>
+                        <td class="cell-success">13x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P/B</strong></td>
+                        <td>2.0x</td>
+                        <td>1.3x</td>
+                        <td>1.6x</td>
+                        <td class="cell-success">0.81x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROE</strong></td>
+                        <td class="cell-success">17%</td>
+                        <td>12%</td>
+                        <td>13%</td>
+                        <td class="cell-warning">7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dividend Yield</strong></td>
+                        <td>2.0%</td>
+                        <td>2.3%</td>
+                        <td>2.2%</td>
+                        <td class="cell-success">2.5%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Buffett lo tiene</strong></td>
+                        <td style="color: var(--green-600);">✓ Sí</td>
+                        <td style="color: var(--green-600);">✓ Sí (grande)</td>
+                        <td style="color: var(--green-600);">✓ Sí</td>
+                        <td style="color: var(--red-600);">✗ No</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">📊 La tesis value de Citigroup</div>
+            <p class="callout-text">
+                <strong>Fórmula simple para bancos:</strong> P/B ≈ ROE / 10%<br><br>
+                Si Citi logra ROE del 10-11% (vs 7% actual), su P/B justo sería 1.0-1.1x (vs 0.81x actual).<br>
+                Eso implica un upside del 25-35% solo por normalización de múltiplo, sin contar crecimiento.<br><br>
+                <strong>El riesgo:</strong> Si no mejora el ROE, seguirá cotizando con descuento indefinidamente.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Moat y Ventajas -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Análisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas: limitadas pero existentes</h2>
+
+        <p class="lead">A diferencia de JPMorgan, Citigroup no tiene un moat claro y amplio. Su principal ventaja es la red global de TTS (Treasury and Trade Solutions), que es difícil de replicar. El resto del negocio compite en mercados donde no tiene ventajas significativas.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🌍 Red Global TTS</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Única red de treasury services en 90+ países</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🔒 Switching Costs (TTS)</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Integración profunda con sistemas de clientes Fortune 500</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">📏 Escala</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Top 4 banco USA pero menos eficiente que peers</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: var(--amber-600); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MEDIA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🏷️ Marca</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Reconocida pero sin premium vs competidores</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: var(--amber-600); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MEDIA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">💰 Coste de Funding</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Base de depósitos grande pero no la mejor del sector</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: var(--amber-600); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MEDIA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h4 style="color: var(--green-700); margin-bottom: 16px;">Donde Citi gana</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✓ <strong>TTS:</strong> Nadie tiene su red global</li>
+                    <li>✓ <strong>Markets:</strong> Top 3 en FICC trading</li>
+                    <li>✓ <strong>Emerging Markets:</strong> Presencia única</li>
+                    <li>✓ <strong>Corporate clients:</strong> Relaciones de décadas</li>
+                </ul>
+            </div>
+            <div class="card" style="border: 1px solid var(--red-200);">
+                <h4 style="color: var(--red-600); margin-bottom: 16px;">Donde Citi pierde</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✗ <strong>Consumer Banking:</strong> Sin diferenciación</li>
+                    <li>✗ <strong>Wealth Management:</strong> Lejos de Morgan Stanley</li>
+                    <li>✗ <strong>Eficiencia:</strong> Peor que todos los peers</li>
+                    <li>✗ <strong>Technology:</strong> Sistemas legacy problemáticos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Citi tiene un negocio de joyas oculto en TTS. El problema es que está enterrado bajo capas de negocios mediocres que diluyen el retorno total.</p>
+            <p class="quote-author">— Análisis Value-Growth Investing</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Management
+        </div>
+
+        <h2>Jane Fraser: la primera mujer CEO de Wall Street</h2>
+
+        <p class="lead">Jane Fraser asumió como CEO en marzo 2021, convirtiéndose en la primera mujer en liderar un gran banco de Wall Street. Ha lanzado una transformación radical, simplificando el negocio y estableciendo objetivos claros. Los resultados iniciales son mixtos.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card" style="border: 2px solid var(--amber-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--amber-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Jane Fraser</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO desde Marzo 2021</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ Primera mujer CEO de un big bank</li>
+                    <li>✓ 25+ años en Citigroup</li>
+                    <li>✓ Experiencia en Latin America y Consumer</li>
+                    <li>✓ Plan de simplificación claro</li>
+                    <li>? Resultados por demostrar</li>
+                    <li>? ROTCE 10% aún no alcanzado</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>El reto:</strong> Fraser heredó décadas de complejidad. Está haciendo lo correcto (simplificar, enfocar), pero el mercado quiere ver resultados, no promesas.
+                </p>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 20px;">Evaluación del equipo directivo</h3>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Evaluación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Experiencia CEO</td>
+                                <td style="color: var(--green-600);">🟢 25+ años en Citi</td>
+                            </tr>
+                            <tr>
+                                <td>Estrategia</td>
+                                <td style="color: var(--green-600);">🟢 Clara y sensata</td>
+                            </tr>
+                            <tr>
+                                <td>Ejecución hasta ahora</td>
+                                <td style="color: var(--amber-600);">🟡 Mixta</td>
+                            </tr>
+                            <tr>
+                                <td>Comunicación</td>
+                                <td style="color: var(--green-600);">🟢 Transparente</td>
+                            </tr>
+                            <tr>
+                                <td>Skin in the game</td>
+                                <td style="color: var(--amber-600);">🟡 Moderado</td>
+                            </tr>
+                            <tr>
+                                <td>Track record histórico Citi</td>
+                                <td style="color: var(--red-600);">🔴 Decepcionante</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-warning" style="margin-top: 24px;">
+                    <div class="callout-title">La pregunta clave</div>
+                    <p class="callout-text">¿Por qué Jane Fraser tendrá éxito donde otros fallaron? Su respuesta: está haciendo lo que nadie quiso hacer (vender negocios, reducir complejidad). Si tiene razón, la recompensa será grande. Si no, será otro capítulo en la historia de decepciones de Citi.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">El plan "The Great Simplification"</h3>
+
+        <div class="grid-3" style="margin-top: 24px;">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">🎯</div>
+                <h4 style="margin-bottom: 8px;">Objetivo ROTCE</h4>
+                <p style="font-size: 0.875rem; margin: 0;">10-11% para 2026<br>(vs 9% actual)</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">📉</div>
+                <h4 style="margin-bottom: 8px;">Efficiency Ratio</h4>
+                <p style="font-size: 0.875rem; margin: 0;">60% objetivo<br>(vs 66% actual)</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 16px;">💰</div>
+                <h4 style="margin-bottom: 8px;">Buybacks</h4>
+                <p style="font-size: 0.875rem; margin: 0;">$20B anunciados<br>(~9% del market cap)</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Red Flags Check
+        </div>
+
+        <h2>Análisis de riesgos: señales mixtas</h2>
+
+        <p class="lead">Citigroup no tiene red flags críticos, pero tampoco pasa el test con colores brillantes. El banco está en transformación, lo cual es inherentemente arriesgado. El historial de turnarounds fallidos es el principal motivo de precaución.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 20px;">✓ Señales positivas</h3>
+                <ul class="check-list">
+                    <li>CET1 ratio sólido (13.6%)</li>
+                    <li>NPL ratio bajo (<1.5%)</li>
+                    <li>Revenue y Net Income creciendo</li>
+                    <li>Buybacks significativos ($20B)</li>
+                    <li>Estrategia clara de simplificación</li>
+                    <li>Pasó stress tests de la Fed</li>
+                    <li>CEO con plan y credibilidad</li>
+                </ul>
+            </div>
+            <div class="card card-warning">
+                <h3 style="color: var(--amber-600); margin-bottom: 20px;">⚠ Señales de precaución</h3>
+                <ul class="check-list">
+                    <li class="warning">ROE muy por debajo de peers (7% vs 12-17%)</li>
+                    <li class="warning">Efficiency ratio alto (66% vs 47-65%)</li>
+                    <li class="warning">Historial de turnarounds fallidos</li>
+                    <li class="warning">Complejidad de 160+ países</li>
+                    <li class="warning">Exposición a Rusia (pérdida $1.1B)</li>
+                    <li class="warning">Consent orders de reguladores (Fed)</li>
+                    <li class="warning">Sistemas legacy problemáticos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin: 32px 0;">
+            <div class="callout-title">🚨 El elefante en la habitación</div>
+            <p class="callout-text">
+                <strong>Buffett no tiene Citigroup.</strong> Warren Buffett posee participaciones significativas en JPMorgan, Bank of America y Wells Fargo. Nunca ha comprado Citigroup, ni siquiera cuando cotizaba a descuentos mayores. Esto no es prueba de nada, pero es una señal que los inversores value deberían considerar.
+            </p>
+        </div>
+
+        <h3 style="margin-top: 40px;">Historial de decepciones de Citi</h3>
+
+        <div class="card" style="margin-top: 24px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--red-300);"></div>
+
+                <div style="margin-bottom: 24px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 20px; height: 20px; background: var(--red-500); border-radius: 50%;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.75rem;">2008</div>
+                    <p style="font-size: 0.9375rem; margin: 4px 0 0;">Mayor rescate bancario de la historia. $45B del gobierno.</p>
+                </div>
+
+                <div style="margin-bottom: 24px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 20px; height: 20px; background: var(--red-400); border-radius: 50%;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.75rem;">2012-2019</div>
+                    <p style="font-size: 0.9375rem; margin: 4px 0 0;">Múltiples planes de turnaround que no funcionaron. ROE estancado.</p>
+                </div>
+
+                <div style="margin-bottom: 24px; position: relative;">
+                    <div style="position: absolute; left: -40px; width: 20px; height: 20px; background: var(--amber-500); border-radius: 50%;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.75rem;">2020</div>
+                    <p style="font-size: 0.9375rem; margin: 4px 0 0;">Error de $900M enviando dinero a acreedores por equivocación.</p>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -40px; width: 20px; height: 20px; background: var(--amber-400); border-radius: 50%;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400); font-size: 0.75rem;">2021-hoy</div>
+                    <p style="font-size: 0.9375rem; margin: 4px 0 0;">Jane Fraser intenta lo que nadie logró. Resultados mixtos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Valoración -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Valoración a 5 Años
+        </div>
+
+        <h2>Escenarios de inversión: la asimetría value</h2>
+
+        <p class="lead">Citigroup ofrece una asimetría atractiva: cotiza bajo book value, con catalizadores de mejora claros. Si el turnaround funciona, el upside es significativo. Si falla, el downside es limitado por el descuento actual.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">La fórmula de valoración para bancos</h3>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2.5; background: var(--gray-100); padding: 24px; border-radius: 12px;">
+                <div>P/B justo ≈ ROE / Coste de Equity</div>
+                <div style="color: var(--gray-500);">Si ROE = 10% y Coste = 10% → P/B justo = 1.0x</div>
+                <div style="color: var(--gray-500);">Citi actual: ROE 7%, P/B 0.81x (coherente)</div>
+                <div style="color: var(--green-600); margin-top: 16px;">Si ROE sube a 10-11% → P/B justo = 1.0-1.1x</div>
+                <div style="color: var(--green-600);">Upside potencial: +25-35%</div>
+            </div>
+        </div>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #065f46;">🟢 Bull Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #065f46;">$180-200</div>
+                <div class="scenario-change" style="color: #065f46;">+55-70% (CAGR 10-12%)</div>
+                <ul class="scenario-list">
+                    <li>ROTCE alcanza 12%+</li>
+                    <li>Efficiency baja a 55%</li>
+                    <li>P/B expande a 1.2-1.3x</li>
+                    <li>TTS crece aceleradamente</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">🟡 Base Case</span>
+                    <span class="scenario-prob">50%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">$140-160</div>
+                <div class="scenario-change" style="color: #92400e;">+20-35% (CAGR 4-7%)</div>
+                <ul class="scenario-list">
+                    <li>ROTCE alcanza 10-11%</li>
+                    <li>Efficiency baja a 60%</li>
+                    <li>P/B sube a 1.0x</li>
+                    <li>Progreso lento pero real</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #991b1b;">🔴 Bear Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #991b1b;">$80-100</div>
+                <div class="scenario-change" style="color: #991b1b;">-15-30%</div>
+                <ul class="scenario-list">
+                    <li>Turnaround falla</li>
+                    <li>ROE estancado en 7%</li>
+                    <li>Nueva recesión bancaria</li>
+                    <li>P/B comprime a 0.6x</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Cálculo de valor esperado</h3>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2;">
+                <div>Valor Esperado = <span style="color: var(--green-600);">(0.25 × $190)</span> + <span style="color: var(--amber-500);">(0.50 × $150)</span> + <span style="color: var(--red-500);">(0.25 × $90)</span></div>
+                <div style="padding-left: 140px;">= $47.5 + $75 + $22.5</div>
+                <div style="padding-left: 140px;">= <strong>$145</strong></div>
+            </div>
+
+            <div class="grid-3" style="margin-top: 32px;">
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">$117</div>
+                    <div class="stat-label">Precio actual</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value success">$145</div>
+                    <div class="stat-label">Valor esperado</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value success">+24%</div>
+                    <div class="stat-label">Potencial</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Citigroup (C) · Informe de Inversión</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Conclusión -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">★★★☆☆</div>
+                <div class="verdict-title" style="color: var(--amber-500);">Value Play Especulativo</div>
+                <p class="verdict-text">Citigroup ofrece valor claro (P/B 0.81x) con catalizadores de mejora. Pero es una apuesta en la ejecución de Jane Fraser, no una inversión de calidad. Para inversores value con paciencia y tolerancia al riesgo.</p>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-4" style="margin: 48px 0; text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: white;">$117</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">$145</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Valor esperado</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">0.81x</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">P/B (descuento)</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--amber-400);">55/100</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Score</div>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-2" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Por qué considerar Citi</h3>
+                    <ul style="list-style: none; color: var(--gray-300); line-height: 2;">
+                        <li>✓ P/B 0.81x — pagas 81¢ por cada $1 de valor</li>
+                        <li>✓ Catalizadores claros (ROTCE, efficiency)</li>
+                        <li>✓ $20B en buybacks (~9% del market cap)</li>
+                        <li>✓ TTS es un negocio excelente</li>
+                        <li>✓ Upside significativo si turnaround funciona</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Por qué ser cauteloso</h3>
+                    <ul style="list-style: none; color: var(--gray-300); line-height: 2;">
+                        <li>⚠ Historial de decepciones</li>
+                        <li>⚠ ROE muy inferior a peers</li>
+                        <li>⚠ Complejidad operativa</li>
+                        <li>⚠ Buffett no lo tiene</li>
+                        <li>⚠ Execution risk alto</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700); margin-top: 48px;"></div>
+
+            <div style="margin-top: 40px;">
+                <h3 style="color: white; margin-bottom: 20px;">Triggers de reevaluación</h3>
+                <div class="grid-2">
+                    <ul style="list-style: none; color: var(--green-400); line-height: 2;">
+                        <li>🟢 Comprar más si: ROTCE supera 10%, efficiency <62%, precio <$100</li>
+                    </ul>
+                    <ul style="list-style: none; color: var(--red-400); line-height: 2;">
+                        <li>🔴 Vender si: ROTCE estancado 2+ años, nuevo escándalo, CEO sale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--gray-700); display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: var(--gray-500); font-size: 0.875rem;">
+                    <div>Análisis realizado: 27 Enero 2026</div>
+                    <div>Framework: Value-Growth Investing</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1rem;">"Price is what you pay.</div>
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1rem;">Value is what you get."</div>
+                    <div style="color: var(--gray-500); font-size: 0.75rem; margin-top: 8px;">— Warren Buffett</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

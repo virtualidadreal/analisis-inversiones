@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple (AAPL) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--gray-900);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+        .tiny {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 160px);
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-600);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-badge.hold {
+            background: var(--amber-500);
+        }
+
+        .cover-date {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .cover-main {
+            padding: 80px 0;
+        }
+
+        .cover-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .cover-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .cover-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cover-metric {
+            text-align: left;
+        }
+
+        .cover-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .cover-metric-value.positive {
+            color: var(--green-600);
+        }
+
+        .cover-metric-value.negative {
+            color: var(--red-600);
+        }
+
+        .cover-metric-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .cover-rating {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: var(--gray-300);
+        }
+
+        .rating-stars .filled {
+            color: var(--green-500);
+        }
+
+        .rating-verdict {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--green-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rating-verdict.hold {
+            color: var(--amber-500);
+        }
+
+        /* Section Styling */
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gray-300);
+            margin-right: 8px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-white {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-dark {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .card-success {
+            background: var(--green-50);
+            border: 1px solid var(--green-100);
+        }
+
+        .card-warning {
+            background: var(--amber-50);
+            border: 1px solid var(--amber-100);
+        }
+
+        .card-danger {
+            background: var(--red-50);
+            border: 1px solid var(--red-100);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        /* Stats */
+        .stat-block {
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-value.danger {
+            color: var(--red-600);
+        }
+
+        .stat-value.success {
+            color: var(--green-600);
+        }
+
+        .stat-value.warning {
+            color: var(--amber-500);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .stat-change.negative {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            margin: 32px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9375rem;
+        }
+
+        thead {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .cell-danger {
+            color: var(--red-600);
+            font-weight: 600;
+        }
+
+        .cell-success {
+            color: var(--green-600);
+            font-weight: 600;
+        }
+
+        .cell-warning {
+            color: var(--amber-500);
+            font-weight: 600;
+        }
+
+        /* Progress Bars */
+        .progress-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-label {
+            width: 140px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .progress-bar-wrapper {
+            flex: 1;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: width 0.6s ease;
+        }
+
+        .progress-bar.primary {
+            background: var(--gray-800);
+        }
+
+        .progress-bar.success {
+            background: var(--green-500);
+        }
+
+        .progress-bar.warning {
+            background: var(--amber-500);
+        }
+
+        .progress-bar.danger {
+            background: var(--red-500);
+        }
+
+        .progress-value {
+            width: 60px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin: 32px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-success {
+            background: var(--green-50);
+            border-color: var(--green-500);
+        }
+
+        .callout-warning {
+            background: var(--amber-50);
+            border-color: var(--amber-500);
+        }
+
+        .callout-danger {
+            background: var(--red-50);
+            border-color: var(--red-500);
+        }
+
+        .callout-info {
+            background: var(--blue-50);
+            border-color: var(--blue-500);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout-text {
+            font-size: 0.9375rem;
+            color: var(--gray-700);
+            margin: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 48px;
+            border-radius: 16px;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            color: var(--gray-700);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 32px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gray-300), var(--green-500));
+            border-radius: 2px;
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border: 3px solid var(--gray-300);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-dot.success {
+            border-color: var(--green-500);
+            background: var(--green-50);
+        }
+
+        .timeline-year {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timeline-value.success {
+            color: var(--green-600);
+        }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            padding: 28px;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .company-card.highlight {
+            border-color: var(--green-300);
+            background: var(--green-50);
+        }
+
+        .company-card.best {
+            border-color: var(--green-500);
+            background: var(--green-50);
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+
+        .company-card.highlight .company-name {
+            color: var(--green-700);
+        }
+
+        .company-stat {
+            margin: 16px 0;
+        }
+
+        .company-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .company-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .company-rating {
+            margin-top: 20px;
+            font-size: 1.25rem;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scenario-card {
+            padding: 32px;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 1px solid #fca5a5;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .scenario-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .scenario-prob {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.08);
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .scenario-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .scenario-list {
+            list-style: none;
+        }
+
+        .scenario-list li {
+            font-size: 0.875rem;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .scenario-list li::before {
+            content: '->';
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        /* Verdict Section */
+        .verdict-section {
+            text-align: center;
+            padding: 80px 60px;
+        }
+
+        .verdict-rating {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+
+        .verdict-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--green-500);
+            margin-bottom: 24px;
+        }
+
+        .verdict-title.hold {
+            color: var(--amber-500);
+        }
+
+        .verdict-text {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .page-number {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 48px 0;
+        }
+
+        /* Check Lists */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            content: 'OK';
+            position: absolute;
+            left: 0;
+            color: var(--green-500);
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .check-list li.warning::before {
+            content: '!';
+            color: var(--amber-500);
+        }
+
+        .check-list li.danger::before {
+            content: 'X';
+            color: var(--red-500);
+        }
+
+        /* Moat indicators */
+        .moat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .moat-item:last-child {
+            border-bottom: none;
+        }
+
+        .moat-info h4 {
+            font-size: 1rem;
+            margin: 0 0 4px 0;
+        }
+
+        .moat-info p {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        .moat-badge {
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .moat-badge.strong {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .moat-badge.moderate {
+            background: var(--amber-100);
+            color: #92400e;
+        }
+
+        .moat-badge.weak {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+
+        /* Valuation box */
+        .valuation-box {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            border-radius: 16px;
+            padding: 40px;
+            color: white;
+            margin: 40px 0;
+        }
+
+        .valuation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .valuation-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .valuation-badge {
+            background: var(--amber-500);
+            color: var(--gray-900);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                padding: 40px 24px;
+            }
+
+            h1, .cover-title {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .grid-2, .grid-4, .company-grid, .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Conclusion -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge hold">
+                    <span>*</span> Mantener
+                </div>
+                <div class="cover-date">Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: AAPL</div>
+                <h1 class="cover-title font-display">Apple Inc.</h1>
+                <p class="cover-subtitle">El ecosistema mas valioso del mundo. Maquina de generar caja con crecimiento modesto. Analisis fundamental completo bajo el framework Value-Growth Investing.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">*</span><span class="filled">*</span><span class="filled">*</span><span class="filled">*</span><span>*</span>
+                    </div>
+                    <div class="rating-verdict hold">Mantener</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$260</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$298</div>
+                    <div class="cover-metric-label">Precio objetivo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">+15%</div>
+                    <div class="cover-metric-label">Potencial 12m</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$3.9T</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Explanation for Everyone -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Que Significa Este Analisis
+        </div>
+
+        <h2>Apple explicado sin jerga financiera</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <h3 style="margin-bottom: 20px; color: var(--gray-500);">IMAGINA QUE...</h3>
+            <p class="lead" style="margin-bottom: 0;">Apple es como un club exclusivo con 2.000 millones de miembros. Una vez que entras (compras un iPhone), te quedas porque tus fotos, musica, apps y amigos estan ahi. Ademas, el club te cobra 100 euros al ano por servicios premium (iCloud, Apple Music, TV+). Apple gana dinero vendiendo nuevos telefonos, pero el negocio real es que los miembros sigan pagando ano tras ano.</p>
+        </div>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 20px;">Lo bueno (en simple)</h3>
+                <ul style="list-style: none; line-height: 2.2;">
+                    <li>+ La gente ama sus productos y no se va</li>
+                    <li>+ Genera 100.000 millones en caja al ano</li>
+                    <li>+ Servicios crecen 15%+ cada ano</li>
+                    <li>+ Marca mas valiosa del mundo</li>
+                    <li>+ Recompra sus propias acciones constantemente</li>
+                </ul>
+            </div>
+            <div class="card card-warning">
+                <h3 style="color: #92400e; margin-bottom: 20px;">Lo malo (en simple)</h3>
+                <ul style="list-style: none; line-height: 2.2;">
+                    <li>- El iPhone ya no crece como antes</li>
+                    <li>- Las gafas Vision Pro no han funcionado</li>
+                    <li>- La accion esta cara vs su historia</li>
+                    <li>- Mucha dependencia de China</li>
+                    <li>- La IA no esta tan avanzada como la competencia</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Para quien puede ser esta inversion?</div>
+            <p class="callout-text"><strong>Inversores conservadores</strong> que buscan una empresa de maxima calidad con flujos predecibles. Apple es ideal para carteras a largo plazo (10+ anos) donde la prioridad es preservar capital con crecimiento moderado. No esperes rentabilidades explosivas, pero tampoco perdidas permanentes de capital.</p>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Apple no es una empresa de tecnologia. Es una empresa de lujo que vende tecnologia.</p>
+            <p class="quote-author">- Analisis Value-Growth</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard de Inversion
+        </div>
+
+        <h2>Puntuacion: 79/100 - Buena</h2>
+
+        <p class="lead">Apple obtiene una puntuacion alta gracias a la calidad excepcional de su negocio, moat ancho y finanzas solidas. La puntuacion se ve reducida por una valoracion exigente y crecimiento moderado.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Calidad Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 90%;">Ecosistema Premium</div>
+                </div>
+                <span class="progress-value">90/100</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Fortaleza Financiera</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 85%;">$100B+ FCF anual</div>
+                </div>
+                <span class="progress-value">85/100</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Ventaja Competitiva</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 90%;">Moat muy ancho</div>
+                </div>
+                <span class="progress-value">90/100</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Equipo Directivo</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Tim Cook excelente</div>
+                </div>
+                <span class="progress-value">80/100</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Precio Atractivo</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar warning" style="width: 50%;">Cara vs historico</div>
+                </div>
+                <span class="progress-value">50/100</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--green-600);">79/100</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--green-600);">BUENA</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">71-85 = Calidad alta</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-4">
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value" style="font-size: 1.75rem;">0-30</div>
+                <div class="stat-label">Evitar</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value" style="font-size: 1.75rem;">31-50</div>
+                <div class="stat-label">Precaucion</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value" style="font-size: 1.75rem;">51-70</div>
+                <div class="stat-label">Aceptable</div>
+            </div>
+            <div class="stat-block" style="text-align: center; background: var(--green-50); border-color: var(--green-200);">
+                <div class="stat-value success" style="font-size: 1.75rem;">71-85</div>
+                <div class="stat-label">Buena <--</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Entendiendo Apple: el ecosistema que atrapa</h2>
+
+        <p class="lead">Apple disena, fabrica y vende productos electronicos de consumo premium (iPhone, Mac, iPad, Watch, AirPods) y ofrece servicios digitales (App Store, iCloud, Apple Music, TV+, Apple Pay). El verdadero negocio es el ecosistema: una vez dentro, cambiar a Android significa perder fotos, apps, mensajes y la integracion con otros dispositivos Apple.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio (FY2025: $416B)</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">iPhone</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 52%;">$216B - Hardware core</div>
+                </div>
+                <span class="progress-value">~52%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Services</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 25%;">$104B - 75% margen</div>
+                </div>
+                <span class="progress-value">~25%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Mac</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 8%;"></div>
+                </div>
+                <span class="progress-value">~8%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">iPad</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 7%;"></div>
+                </div>
+                <span class="progress-value">~7%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Wearables</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 8%;"></div>
+                </div>
+                <span class="progress-value">~8%</span>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">El motor de crecimiento: Services</div>
+            <p class="callout-text"><strong>Services es el verdadero negocio.</strong> Con mas de 1.200 millones de suscripciones de pago y margenes brutos del 75%, Services genera casi el mismo beneficio que el iPhone con la mitad de revenue. App Store, iCloud, Apple Music, TV+ y Apple Pay representan ingresos recurrentes y predecibles que crecen 15%+ anual.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 40px;">
+            <div>
+                <h3 style="margin-bottom: 16px;">Distribucion geografica</h3>
+                <div class="progress-row">
+                    <span class="progress-label">Americas</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar primary" style="width: 42%;">42%</div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <span class="progress-label">Europa</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar primary" style="width: 25%;">25%</div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <span class="progress-label">China</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar warning" style="width: 18%;">18%</div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <span class="progress-label">Resto Asia</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar primary" style="width: 15%;">15%</div>
+                    </div>
+                </div>
+                <p class="small" style="color: var(--gray-500); margin-top: 8px;">China: 18% revenue pero alto riesgo geopolitico</p>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Metricas clave del ecosistema</h3>
+                <div class="stat-block" style="margin-bottom: 16px;">
+                    <div class="stat-value" style="font-size: 2rem;">2.2B</div>
+                    <div class="stat-label">Dispositivos activos globalmente</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-value success" style="font-size: 2rem;">1.2B</div>
+                    <div class="stat-label">Suscripciones de pago activas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Analisis Financiero
+        </div>
+
+        <h2>Cinco anos de crecimiento estable</h2>
+
+        <p class="lead">Apple es una maquina de generar caja. En FY2025 genero $112B de beneficio neto y $99B de Free Cash Flow. Los margenes brutos han expandido de 38% a 47% gracias al mix favorable hacia Services y chips propios (M-series).</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$366B</td>
+                        <td>$394B</td>
+                        <td>$383B</td>
+                        <td>$391B</td>
+                        <td class="cell-success">$416B</td>
+                        <td class="cell-success">+14% 5y</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>$95B</td>
+                        <td>$100B</td>
+                        <td>$97B</td>
+                        <td>$94B</td>
+                        <td class="cell-success">$112B</td>
+                        <td class="cell-success">+18% 5y</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow</strong></td>
+                        <td>$93B</td>
+                        <td>$111B</td>
+                        <td>$99B</td>
+                        <td>$109B</td>
+                        <td class="cell-warning">$99B</td>
+                        <td>+6% 5y</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Margin</strong></td>
+                        <td>42%</td>
+                        <td>43%</td>
+                        <td>44%</td>
+                        <td>46%</td>
+                        <td class="cell-success">47%</td>
+                        <td class="cell-success">+5pp</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td>$5.67</td>
+                        <td>$6.15</td>
+                        <td>$6.16</td>
+                        <td>$6.13</td>
+                        <td class="cell-success">$7.46</td>
+                        <td class="cell-success">+32% 5y</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion del margen bruto: expansion sostenida</h3>
+
+        <p>El margen bruto ha mejorado 5 puntos porcentuales en 5 anos, impulsado por: (1) crecimiento de Services (75% margen), (2) chips M-series propios que reducen costes, (3) mix hacia modelos Pro de mayor margen.</p>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value">42%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value">43%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2023</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value">44%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2024</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value">46%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot success">2025</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value success">47%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-4" style="margin-top: 40px;">
+            <div class="stat-block">
+                <div class="stat-value success" style="font-size: 1.75rem;">27%</div>
+                <div class="stat-label">Net Margin</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success" style="font-size: 1.75rem;">32%</div>
+                <div class="stat-label">Op Margin</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success" style="font-size: 1.75rem;">147%</div>
+                <div class="stat-label">ROE</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success" style="font-size: 1.75rem;">54%</div>
+                <div class="stat-label">ROIC</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitor Comparison -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Comparativa Competidores
+        </div>
+
+        <h2>Apple vs Big Tech: calidad premium</h2>
+
+        <p class="lead">Apple compite en multiples frentes: con Samsung en smartphones, con Microsoft en PCs, con Google en servicios digitales, y con todos en AI. En terminos de calidad financiera, solo Microsoft se le acerca. Apple destaca por margenes superiores y generacion de caja.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">APPLE</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">147%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">47%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">32%</div>
+                    <div class="company-stat-label">Op Margin</div>
+                </div>
+                <div class="company-rating">****-</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">MICROSOFT</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">35%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">70%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">45%</div>
+                    <div class="company-stat-label">Op Margin</div>
+                </div>
+                <div class="company-rating">*****</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">GOOGLE</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">28%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">58%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">30%</div>
+                    <div class="company-stat-label">Op Margin</div>
+                </div>
+                <div class="company-rating">****-</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">SAMSUNG</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">8%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">32%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">10%</div>
+                    <div class="company-stat-label">Op Margin</div>
+                </div>
+                <div class="company-rating">**---</div>
+            </div>
+        </div>
+
+        <h3>Cuota de mercado smartphones (2025)</h3>
+
+        <p>Apple supero a Samsung como lider global en smartphones en 2025, con un 20% de cuota de mercado. Sin embargo, Apple captura ~80% de los beneficios del sector gracias a su posicionamiento premium.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Cuota 2025</th>
+                        <th>Crecimiento YoY</th>
+                        <th>Segmento</th>
+                        <th>Beneficios Sector</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: var(--green-50);">
+                        <td><strong style="color: var(--green-700);">Apple</strong></td>
+                        <td class="cell-success">20%</td>
+                        <td class="cell-success">+10%</td>
+                        <td>Premium</td>
+                        <td class="cell-success">~80%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Samsung</strong></td>
+                        <td>19%</td>
+                        <td>+5%</td>
+                        <td>Multi-segmento</td>
+                        <td>~15%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xiaomi</strong></td>
+                        <td>13%</td>
+                        <td>+8%</td>
+                        <td>Value</td>
+                        <td>~2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oppo</strong></td>
+                        <td>8%</td>
+                        <td>+2%</td>
+                        <td>Value</td>
+                        <td>~1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vivo</strong></td>
+                        <td>8%</td>
+                        <td>+3%</td>
+                        <td>Value</td>
+                        <td>~1%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 32px;">
+            <div class="callout-title">Posicion competitiva excepcional</div>
+            <p class="callout-text">Apple tiene solo el 20% de cuota pero captura el 80% de los beneficios del sector. Esto refleja el poder de pricing de la marca y la lealtad del ecosistema. Samsung vende mas unidades pero gana menos dinero.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos
+        </div>
+
+        <h2>Eventos criticos que han moldeado Apple</h2>
+
+        <p class="lead">Los ultimos 5 anos han sido de consolidacion para Apple: transicion a chips propios, expansion de servicios, y primeros pasos en AI y realidad espacial. El Vision Pro ha sido el unico fracaso notable.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--green-600); min-width: 60px;">2020</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Lanzamiento chips M1</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">Transicion de Intel a silicio propio. Mejora dramatica en rendimiento y margenes.</p>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--green-600); min-width: 60px;">2021</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Revenue record: $366B</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">Boom de ventas post-COVID. iPhone 12/13 con 5G impulsa el crecimiento.</p>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--amber-500); min-width: 60px;">2022</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Problemas de supply chain</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">Lockdowns en China afectan produccion. Revenue crece pero menor de lo esperado.</p>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; min-width: 60px;">2023</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Presentacion Vision Pro</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">Primera entrada en realidad espacial. Producto ambicioso pero caro ($3,499).</p>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--red-500); min-width: 60px;">2024</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Vision Pro: adopcion decepcionante</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">Solo 45K unidades en Q4. Apple reduce produccion y marketing.</p>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: var(--green-600); min-width: 60px;">2025</div>
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Apple Intelligence y revenue record</h4>
+                    <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--gray-500);">$416B revenue (+6.4%). Lanzamiento de Apple Intelligence con adopcion mixta.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Proximos catalizadores</h3>
+
+        <div class="grid-2" style="margin-top: 24px;">
+            <div class="card card-success">
+                <h4 style="color: var(--green-700);">Positivos</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>+ iPhone 17 con mejoras de AI (Sep 2026)</li>
+                    <li>+ Apple Intelligence Pro (suscripcion)</li>
+                    <li>+ Gafas AR asequibles (2026-2027)</li>
+                    <li>+ Expansion Services en mercados emergentes</li>
+                </ul>
+            </div>
+            <div class="card card-warning">
+                <h4 style="color: #92400e;">Riesgos a vigilar</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>! Sucesion Tim Cook (posible 2026-2027)</li>
+                    <li>! Regulacion App Store (EU, US)</li>
+                    <li>! Tensiones China-US</li>
+                    <li>! Competencia AI (Google, OpenAI)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Analisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas: moat muy ancho</h2>
+
+        <p class="lead">Apple tiene uno de los moats mas anchos del mundo tecnologico. La combinacion de ecosistema cerrado, marca premium, integracion vertical de hardware/software y switching costs altisimos crea barreras practicamente insuperables. El unico riesgo serio seria una disrupcion tecnologica que haga el iPhone irrelevante.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>Ecosistema cerrado</h4>
+                    <p>iPhone + Mac + iPad + Watch + AirPods integrados. Cambiar significa perder todo.</p>
+                </div>
+                <span class="moat-badge strong">MUY FUERTE</span>
+            </div>
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>Marca premium</h4>
+                    <p>Apple es sinonimo de calidad y estatus. Pricing power excepcional.</p>
+                </div>
+                <span class="moat-badge strong">MUY FUERTE</span>
+            </div>
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>Switching costs</h4>
+                    <p>Fotos en iCloud, apps compradas, mensajes, configuraciones. Cambiar es doloroso.</p>
+                </div>
+                <span class="moat-badge strong">MUY FUERTE</span>
+            </div>
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>Integracion vertical (chips M-series)</h4>
+                    <p>Disena su propio silicio. Mejor rendimiento y margenes que competidores.</p>
+                </div>
+                <span class="moat-badge strong">MUY FUERTE</span>
+            </div>
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>Network effects (App Store)</h4>
+                    <p>Mas usuarios = mas desarrolladores = mejores apps = mas usuarios.</p>
+                </div>
+                <span class="moat-badge moderate">FUERTE</span>
+            </div>
+            <div class="moat-item">
+                <div class="moat-info">
+                    <h4>AI y servicios cloud</h4>
+                    <p>Rezagado vs Google/Microsoft. Apple Intelligence todavia en desarrollo.</p>
+                </div>
+                <span class="moat-badge moderate">MODERADO</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Durabilidad del moat</h3>
+                <p style="font-size: 0.9375rem;">El moat de Apple es extremadamente durable porque esta construido sobre multiples pilares reforzados entre si. Un competidor tendria que superar Apple simultaneamente en: hardware, software, servicios, marca y distribucion. Historicamente, ninguna empresa lo ha logrado.</p>
+                <p style="font-size: 0.9375rem; margin-top: 16px;"><strong>Horizonte estimado:</strong> 10-15+ anos, salvo disrupcion tecnologica mayor (ej: un dispositivo que reemplace el smartphone).</p>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Amenazas al moat</h3>
+                <ul style="list-style: none; line-height: 2; font-size: 0.9375rem;">
+                    <li style="color: var(--amber-600);">! Regulacion forzando apertura de App Store</li>
+                    <li style="color: var(--amber-600);">! AI de competidores muy superior</li>
+                    <li style="color: var(--amber-600);">! Huawei en China recuperando cuota</li>
+                    <li style="color: var(--gray-500);">? Dispositivo post-smartphone (AR glasses)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-box" style="margin-top: 40px;">
+            <p class="quote-text">El switching cost mas poderoso no es tecnologico, es emocional. Las fotos de tus hijos, los mensajes con tu pareja, anos de recuerdos digitales. Eso no tiene precio.</p>
+            <p class="quote-author">- Analisis de ecosistema Apple</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management
+        </div>
+
+        <h2>Tim Cook: 14 anos de excelencia operativa</h2>
+
+        <p class="lead">Tim Cook ha sido CEO desde agosto 2011. Bajo su liderazgo, Apple ha multiplicado su valor por 18x, de $350B a $3.9T. Ha expandido Services de casi cero a $100B+, ejecutado la transicion a chips propios, y mantenido margenes record. La unica incognita es la sucesion.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card" style="border: 2px solid var(--green-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--green-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">TC</div>
+                    <h3 style="margin: 0;">Tim Cook</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO desde Agosto 2011</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>OK +1,829% retorno desde que es CEO</li>
+                    <li>OK Services de ~0 a $100B+ revenue</li>
+                    <li>OK Transicion a chips M-series (exito)</li>
+                    <li>OK $74.3M compensacion 2025</li>
+                    <li>! Especulacion de retiro 2026-2027</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--amber-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">JT</div>
+                    <h3 style="margin: 0;">John Ternus</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">SVP Hardware Engineering (sucesor probable)</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>OK Lidera desarrollo de todos los productos</li>
+                    <li>OK M-series chips bajo su supervision</li>
+                    <li>OK Respetado internamente</li>
+                    <li>? Capacidad para liderar empresa completa</li>
+                    <li>? Sin experiencia publica como CEO</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor de Evaluacion</th>
+                        <th>Estado</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Track record CEO</td>
+                        <td class="cell-success">Excelente</td>
+                        <td>+1,829% en 14 anos, expansion a Services</td>
+                    </tr>
+                    <tr>
+                        <td>Compensacion</td>
+                        <td class="cell-success">Razonable</td>
+                        <td>$74M alineado con performance</td>
+                    </tr>
+                    <tr>
+                        <td>Skin in the game</td>
+                        <td class="cell-success">Alto</td>
+                        <td>Mayoria de comp en acciones</td>
+                    </tr>
+                    <tr>
+                        <td>Capital allocation</td>
+                        <td class="cell-success">Excelente</td>
+                        <td>$90B+ buybacks/ano, dividendos crecientes</td>
+                    </tr>
+                    <tr>
+                        <td>Plan de sucesion</td>
+                        <td class="cell-warning">Incertidumbre</td>
+                        <td>Ternus probable pero no confirmado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo de sucesion</div>
+            <p class="callout-text">Tim Cook tiene 65 anos y hay especulacion de retiro en 2026-2027. John Ternus es el favorito pero no hay confirmacion oficial. Una transicion mal ejecutada podria afectar temporalmente la cotizacion, aunque la calidad del negocio permaneceria intacta.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de senales de alerta: 2 de 10</h2>
+
+        <p class="lead">Apple activa muy pocos red flags. Los unicos puntos de atencion son la valoracion exigente y la dependencia de China. Esto es excepcional para una empresa de este tamano - la mayoria tienen 3-5 flags activos.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-success" style="padding: 0;">
+                <div style="padding: 20px 24px; border-bottom: 1px solid var(--green-200);">
+                    <h3 style="color: var(--green-700); margin: 0; font-size: 1.125rem;">Sin problemas (8/10)</h3>
+                </div>
+                <ul class="check-list" style="padding: 0 24px;">
+                    <li>Revenue creciendo (no cayendo)</li>
+                    <li>Margenes expandiendose</li>
+                    <li>FCF positivo y creciente</li>
+                    <li>ROIC muy por encima del WACC</li>
+                    <li>CEO estable (14 anos)</li>
+                    <li>Cuota de mercado estable</li>
+                    <li>Sin cambios de auditor sospechosos</li>
+                    <li>GAAP y Non-GAAP alineados</li>
+                </ul>
+            </div>
+
+            <div class="card card-warning" style="padding: 0;">
+                <div style="padding: 20px 24px; border-bottom: 1px solid var(--amber-200);">
+                    <h3 style="color: #92400e; margin: 0; font-size: 1.125rem;">Puntos de atencion (2/10)</h3>
+                </div>
+                <ul class="check-list" style="padding: 0 24px;">
+                    <li class="warning">Valoracion cara vs historico (P/E 35x vs media 25x)</li>
+                    <li class="warning">Dependencia de China (18% revenue + supply chain)</li>
+                </ul>
+                <div style="padding: 20px 24px;">
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Estos no son red flags criticos, pero merecen atencion. La valoracion es el factor mas relevante para retornos futuros.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Detalle de los puntos de atencion</h3>
+
+        <div class="card" style="margin-top: 24px;">
+            <div style="display: flex; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-200); margin-bottom: 24px;">
+                <div style="min-width: 80px;">
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">FLAG 1</span>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0;">Valoracion exigente</h4>
+                    <p style="margin: 0; font-size: 0.9375rem; color: var(--gray-600);">P/E de 35x esta en el extremo alto del rango historico (20-35x). EV/FCF de 38x vs media historica de 24x. La accion ya descuenta mucho optimismo. Para generar retornos atractivos, Apple necesita crecer mas de lo esperado o los multiplos deben expandirse aun mas (poco probable desde estos niveles).</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 24px;">
+                <div style="min-width: 80px;">
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">FLAG 2</span>
+                </div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0;">Riesgo China</h4>
+                    <p style="margin: 0; font-size: 0.9375rem; color: var(--gray-600);">18% del revenue viene de China, donde Huawei esta recuperando cuota. Ademas, la mayoria de la produccion esta en China. Tensiones geopoliticas podrian afectar tanto ventas como supply chain. Apple esta diversificando hacia India y Vietnam, pero el proceso es lento.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-dark" style="text-align: center; padding: 40px; margin-top: 40px;">
+            <div style="font-size: 3rem; margin-bottom: 12px;">OK</div>
+            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 8px;">2 de 10 Red Flags</h3>
+            <p style="color: var(--gray-400); margin: 0;">Empresa de maxima calidad con pocos riesgos fundamentales. La valoracion es el unico obstaculo para retornos excepcionales.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: 5-Year Valuation (NEW) -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>Proyeccion 2030: Modelo hibrido EV/FCF</h2>
+
+        <p class="lead">Usando las estimaciones de consenso y aplicando escenarios de multiplo, proyectamos el valor de Apple a 5 anos. El modelo hibrido combina estimaciones de FCF con diferentes escenarios de multiplo para capturar la incertidumbre.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>FCF Est. (B)</th>
+                        <th>EPS Est.</th>
+                        <th>Revenue Est. (B)</th>
+                        <th>Crecimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2025 (actual)</strong></td>
+                        <td>$99</td>
+                        <td>$7.46</td>
+                        <td>$416</td>
+                        <td>+6.4%</td>
+                    </tr>
+                    <tr>
+                        <td>2026E</td>
+                        <td>$105</td>
+                        <td>$8.42</td>
+                        <td>$442</td>
+                        <td>+6%</td>
+                    </tr>
+                    <tr>
+                        <td>2027E</td>
+                        <td>$112</td>
+                        <td>$9.10</td>
+                        <td>$468</td>
+                        <td>+6%</td>
+                    </tr>
+                    <tr>
+                        <td>2028E</td>
+                        <td>$118</td>
+                        <td>$9.65</td>
+                        <td>$492</td>
+                        <td>+5%</td>
+                    </tr>
+                    <tr>
+                        <td>2029E</td>
+                        <td>$124</td>
+                        <td>$10.15</td>
+                        <td>$515</td>
+                        <td>+5%</td>
+                    </tr>
+                    <tr style="background: var(--gray-100);">
+                        <td><strong>2030E</strong></td>
+                        <td><strong>$130</strong></td>
+                        <td><strong>$10.65</strong></td>
+                        <td><strong>$540</strong></td>
+                        <td>+5%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="valuation-box">
+            <div class="valuation-header">
+                <div class="valuation-title">Analisis de Multiplos</div>
+                <div class="valuation-badge">EV/FCF</div>
+            </div>
+            <div class="grid-4" style="text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem;">38x</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 4px;">EV/FCF Actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem;">24x</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 4px;">Media 5 anos</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem;">20x</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 4px;">Sector Hardware</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem;">9-42x</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 4px;">Rango Historico</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Proyeccion de precio 2030</h3>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Escenario</th>
+                        <th>Multiplo</th>
+                        <th>EV 2030</th>
+                        <th>Precio</th>
+                        <th>CAGR 5y</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: var(--red-600);">Bear</strong></td>
+                        <td>22x (contraccion)</td>
+                        <td>$2.86T</td>
+                        <td class="cell-danger">$195</td>
+                        <td class="cell-danger">-5.6%</td>
+                    </tr>
+                    <tr style="background: var(--amber-50);">
+                        <td><strong style="color: var(--amber-600);">Base</strong></td>
+                        <td>28x (normalizacion)</td>
+                        <td>$3.64T</td>
+                        <td>$250</td>
+                        <td>-0.8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--green-600);">Bull</strong></td>
+                        <td>35x (expansion)</td>
+                        <td>$4.55T</td>
+                        <td class="cell-success">$315</td>
+                        <td class="cell-success">+3.9%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Validacion DCF inverso</div>
+            <p class="callout-text">El precio actual de $260 implica un crecimiento de FCF del 8% anual con multiplo terminal de 30x. El consenso espera 5-6%. Esto sugiere que la accion esta <strong>ligeramente sobrevalorada</strong> o que el mercado espera expansion de multiplo sostenida.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios Detallados
+        </div>
+
+        <h2>Tres caminos posibles para Apple</h2>
+
+        <p class="lead">Dado que Apple es una empresa de maxima calidad, incluso el escenario pesimista no implica destruccion de valor permanente. El rango de resultados es estrecho comparado con empresas de menor calidad.</p>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #065f46;">Bull Case</span>
+                    <span class="scenario-prob">20%</span>
+                </div>
+                <div class="scenario-price" style="color: #065f46;">$315</div>
+                <div class="scenario-change" style="color: #065f46;">+21% (CAGR +3.9%)</div>
+                <ul class="scenario-list">
+                    <li>Apple Intelligence se convierte en must-have</li>
+                    <li>Gafas AR asequibles exitosas</li>
+                    <li>Services mantiene +15% crecimiento</li>
+                    <li>iPhone 17/18 ciclo fuerte</li>
+                    <li>Expansion en mercados emergentes (India)</li>
+                    <li>Multiplo se mantiene 35x+</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">Base Case</span>
+                    <span class="scenario-prob">55%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">$250</div>
+                <div class="scenario-change" style="color: #92400e;">-4% (CAGR -0.8%)</div>
+                <ul class="scenario-list">
+                    <li>Crecimiento modesto 5-6% anual</li>
+                    <li>Services crece 10-12%</li>
+                    <li>iPhone estable, sin sorpresas</li>
+                    <li>AI competitiva pero no lider</li>
+                    <li>Multiplo normaliza a 28x</li>
+                    <li>Dividendos y buybacks continuan</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #991b1b;">Bear Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #991b1b;">$195</div>
+                <div class="scenario-change" style="color: #991b1b;">-25% (CAGR -5.6%)</div>
+                <ul class="scenario-list">
+                    <li>China revenue cae 30%+ (Huawei)</li>
+                    <li>Regulacion fuerza apertura App Store</li>
+                    <li>AI de competidores muy superior</li>
+                    <li>iPhone en declive estructural</li>
+                    <li>Multiplo contrae a 22x</li>
+                    <li>Sucesion de Tim Cook problematica</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Calculo de valor esperado ponderado</h3>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2; margin-bottom: 24px;">
+                <div>Valor Esperado = <span style="color: var(--green-600);">(0.20 x $315)</span> + <span style="color: var(--amber-500);">(0.55 x $250)</span> + <span style="color: var(--red-500);">(0.25 x $195)</span></div>
+                <div style="padding-left: 140px;">= $63 + $137.50 + $48.75</div>
+                <div style="padding-left: 140px;">= <strong>$249</strong></div>
+            </div>
+
+            <div class="grid-3">
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">$260</div>
+                    <div class="stat-label">Precio actual</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">$249</div>
+                    <div class="stat-label">Valor esperado 2030</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value warning">-4%</div>
+                    <div class="stat-label">Potencial 5y</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Interpretacion</div>
+            <p class="callout-text">El valor esperado ponderado sugiere un retorno cercano a 0% en 5 anos desde el precio actual. Esto no significa que Apple sea mala empresa, sino que <strong>la valoracion actual ya descuenta la mayor parte del valor futuro</strong>. Para inversores nuevos, hay mejores puntos de entrada. Para quienes ya tienen Apple, mantener tiene sentido.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Apple (AAPL) - Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">****-</div>
+                <div class="verdict-title hold font-display">Mantener</div>
+                <p class="verdict-text">Apple es una empresa excepcional a un precio justo. No esta barata, pero tampoco hay razon para vender. La calidad del negocio justifica una posicion a largo plazo, pero nuevas compras deberian esperar mejor punto de entrada.</p>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-4" style="margin: 48px 0; text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: white;">$260</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-500);">$298</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Objetivo 12m</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--amber-500);">$220</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Compra atractiva</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-500);">79/100</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Score calidad</div>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-2" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Fortalezas clave</h3>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">Ecosistema</strong> - Moat muy ancho con 2.2B dispositivos activos
+                        </li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">Services</strong> - $100B+ revenue recurrente, 75% margen
+                        </li>
+                        <li style="padding: 12px 0;">
+                            <strong style="color: white;">Cash machine</strong> - $99B FCF anual, buybacks masivos
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Cuando actuar</h3>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">Comprar si cae a <$220 (P/E ~28x)</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">Mantener posiciones actuales</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">Vigilar sucesion de Tim Cook</li>
+                        <li style="padding: 12px 0;">Revisar tras resultados Q1 2026</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-700); display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: var(--gray-500); font-size: 0.875rem;">
+                    <div>Analisis realizado: 25 Enero 2026</div>
+                    <div>Framework: Value-Growth Investing</div>
+                    <div>Fuentes: Yahoo Finance, MacroTrends, TIKR</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">"El precio es lo que pagas.</div>
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">El valor es lo que obtienes."</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 8px;">- Warren Buffett</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: MP Materials (MP)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #f4a940;
+            --success: #00d26a;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --rare-earth: #6366f1;
+            --text: #333;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.6; background: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+            color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 2rem; position: relative;
+        }
+
+        .cover-content { position: relative; z-index: 1; }
+
+        .company-logo {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, var(--rare-earth), #818cf8);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 2rem; font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(99,102,241,0.4);
+        }
+
+        .cover h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 0.5rem; }
+        .cover .ticker { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; opacity: 0.8; margin-bottom: 2rem; }
+        .cover .tagline { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin-bottom: 3rem; }
+
+        .verdict-badge {
+            display: inline-block; padding: 1rem 3rem; border-radius: 50px;
+            font-size: 1.5rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 2rem;
+        }
+        .verdict-aceptable { background: linear-gradient(135deg, var(--warning), #ff9800); color: #000; }
+
+        .score-display { font-family: 'Playfair Display', serif; font-size: 6rem; font-weight: 700; }
+        .score-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .cover-meta { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.875rem; opacity: 0.6; }
+
+        .section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+        .section-dark { background: var(--bg-light); }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-light); font-size: 1.1rem; margin-bottom: 2rem; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+
+        .simple-box {
+            background: linear-gradient(135deg, var(--rare-earth) 0%, #4f46e5 100%);
+            color: white; padding: 3rem; border-radius: 20px; margin-bottom: 2rem;
+        }
+        .simple-box h3 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1.5rem; }
+        .simple-box p { font-size: 1.2rem; line-height: 1.8; }
+
+        .analogy-box { background: white; padding: 2rem; border-radius: 15px; border-left: 4px solid var(--gold); margin-top: 2rem; }
+        .analogy-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .analogy-box p { color: var(--text); font-size: 1rem; }
+
+        .dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+        .score-card { background: white; border-radius: 15px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .score-card .icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; }
+        .score-card .value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .score-card .label { font-size: 0.875rem; color: var(--text-light); margin-top: 0.5rem; }
+        .score-card .max { font-size: 0.75rem; color: var(--text-light); opacity: 0.6; }
+
+        .pillar-1 .icon { background: #e3f2fd; color: #1976d2; }
+        .pillar-2 .icon { background: #e8f5e9; color: #388e3c; }
+        .pillar-3 .icon { background: #fff3e0; color: #f57c00; }
+        .pillar-4 .icon { background: #f3e5f5; color: #7b1fa2; }
+        .pillar-5 .icon { background: #fce4ec; color: #c2185b; }
+
+        .total-score {
+            background: linear-gradient(135deg, var(--rare-earth) 0%, #4f46e5 100%);
+            color: white; padding: 2rem; border-radius: 15px; text-align: center;
+        }
+        .total-score .value { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; }
+        .total-score .label { font-size: 1rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; }
+
+        .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .data-card { background: white; border-radius: 15px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .data-card h4 { font-size: 0.875rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .data-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 600; color: var(--primary); }
+        .data-card .change { font-size: 0.875rem; margin-top: 0.25rem; }
+        .change.positive { color: var(--success); }
+        .change.negative { color: var(--danger); }
+        .change.neutral { color: var(--text-light); }
+
+        .styled-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .styled-table th { background: var(--primary); color: white; padding: 1rem; text-align: left; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; }
+        .styled-table td { padding: 1rem; border-bottom: 1px solid var(--border); }
+        .styled-table tr:last-child td { border-bottom: none; }
+
+        .deal-card {
+            background: white; border-radius: 15px; padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+            border-left: 4px solid var(--success);
+        }
+        .deal-card h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .deal-card .amount { font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--success); margin-bottom: 0.5rem; }
+        .deal-card p { color: var(--text-light); }
+
+        .flag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .flag-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border-radius: 10px; border-left: 4px solid var(--danger); }
+        .flag-item.warning { border-left-color: var(--warning); }
+        .flag-item.ok { border-left-color: var(--success); }
+        .flag-icon { font-size: 1.5rem; }
+        .flag-content h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .flag-content p { font-size: 0.85rem; color: var(--text-light); }
+
+        .scenario-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .scenario-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .scenario-card.bull { border-top: 4px solid var(--success); }
+        .scenario-card.base { border-top: 4px solid var(--warning); }
+        .scenario-card.bear { border-top: 4px solid var(--danger); }
+        .scenario-card h4 { font-size: 1rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 1rem; }
+        .scenario-card .price { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+        .scenario-card .return { font-size: 1.25rem; font-weight: 600; }
+        .scenario-card .return.positive { color: var(--success); }
+        .scenario-card .return.negative { color: var(--danger); }
+        .scenario-card .probability { font-size: 0.875rem; color: var(--text-light); margin-top: 1rem; }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--rare-earth) 0%, #4f46e5 100%);
+            color: white; padding: 3rem; border-radius: 20px; text-align: center;
+        }
+        .conclusion-box h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1.5rem; }
+        .conclusion-box p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8; }
+        .action-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .action-btn { padding: 1rem 2rem; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.875rem; }
+        .action-btn.primary { background: var(--gold); color: var(--primary); }
+        .action-btn.secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+        @media (max-width: 968px) { .dashboard, .data-grid { grid-template-columns: repeat(2, 1fr); } .scenario-cards, .flag-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <div class="cover-content">
+            <div class="company-logo">⛏️</div>
+            <h1>MP Materials</h1>
+            <div class="ticker">NYSE: MP</div>
+            <p class="tagline">Minerales de tierras raras para la revolución eléctrica - Independencia de China</p>
+            <div class="verdict-badge verdict-aceptable">⚠️ Aceptable - Alto Crecimiento</div>
+            <div class="score-display">58/100</div>
+            <div class="score-label">Puntuación de Inversión</div>
+        </div>
+        <div class="cover-meta">Análisis generado el 27 de Enero, 2026 · Agente /analista · FMA System</div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 01</div>
+            <h2 class="section-title">Explicación Simple</h2>
+            <p class="section-subtitle">Entendiendo MP Materials sin jerga financiera</p>
+
+            <div class="simple-box">
+                <h3>¿Qué hace MP Materials?</h3>
+                <p>
+                    MP Materials extrae y procesa minerales de "tierras raras" - elementos con nombres
+                    como neodimio y praseodimio - que son esenciales para fabricar los imanes más
+                    potentes del mundo. Estos imanes están en cada motor de auto eléctrico, turbina
+                    eólica, robot, drone militar y iPhone. China controla el 90%+ de este mercado,
+                    y MP es la única alternativa occidental a escala.
+                </p>
+                <div class="analogy-box">
+                    <h4>🔋 Analogía: El petróleo del siglo XXI</h4>
+                    <p>
+                        Si el petróleo fue el recurso estratégico del siglo XX, las tierras raras
+                        son el del siglo XXI. MP Materials es como descubrir una reserva de petróleo
+                        en California cuando el mundo depende de Medio Oriente. El gobierno de EEUU
+                        está tan interesado que acaba de invertir $400M directamente en la empresa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 02</div>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+            <p class="section-subtitle">Evaluación basada en 5 pilares fundamentales</p>
+
+            <div class="dashboard">
+                <div class="score-card pillar-1">
+                    <div class="icon">📊</div>
+                    <div class="value">12</div>
+                    <div class="max">/20</div>
+                    <div class="label">Calidad del Negocio</div>
+                </div>
+                <div class="score-card pillar-2">
+                    <div class="icon">💰</div>
+                    <div class="value">10</div>
+                    <div class="max">/20</div>
+                    <div class="label">Fortaleza Financiera</div>
+                </div>
+                <div class="score-card pillar-3">
+                    <div class="icon">🏰</div>
+                    <div class="value">16</div>
+                    <div class="max">/20</div>
+                    <div class="label">Ventaja Competitiva</div>
+                </div>
+                <div class="score-card pillar-4">
+                    <div class="icon">👔</div>
+                    <div class="value">12</div>
+                    <div class="max">/20</div>
+                    <div class="label">Gestión</div>
+                </div>
+                <div class="score-card pillar-5">
+                    <div class="icon">💵</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Valoración</div>
+                </div>
+            </div>
+
+            <div class="total-score">
+                <div class="value">58/100</div>
+                <div class="label">Puntuación Total · Aceptable con Potencial</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 03</div>
+            <h2 class="section-title">Análisis del Negocio</h2>
+            <p class="section-subtitle">Modelo de negocio y posición competitiva</p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>Rendimiento 2025</h4>
+                    <div class="value">+230%</div>
+                    <div class="change positive">Subida masiva</div>
+                </div>
+                <div class="data-card">
+                    <h4>Producción NdPr Q3</h4>
+                    <div class="value">721 MT</div>
+                    <div class="change positive">+51% YoY (récord)</div>
+                </div>
+                <div class="data-card">
+                    <h4>Revenue Q3 2025</h4>
+                    <div class="value">$53.6M</div>
+                    <div class="change negative">-15% YoY</div>
+                </div>
+                <div class="data-card">
+                    <h4>EPS 2025E</h4>
+                    <div class="value">-$0.22</div>
+                    <div class="change negative">Pérdida</div>
+                </div>
+                <div class="data-card">
+                    <h4>EPS 2026E</h4>
+                    <div class="value">+$0.68</div>
+                    <div class="change positive">Retorno a profit</div>
+                </div>
+                <div class="data-card">
+                    <h4>Capacidad 2028</h4>
+                    <div class="value">10,000 MT</div>
+                    <div class="change positive">10X Facility</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Operaciones</h3>
+                <ul style="color: var(--text-light); line-height: 2; padding-left: 1.5rem;">
+                    <li><strong>Mountain Pass (California):</strong> Única mina de tierras raras a escala en Occidente</li>
+                    <li><strong>Independence (Texas):</strong> Planta de metales, aleaciones y magnetos en construcción</li>
+                    <li><strong>Heavy Rare Earth Facility:</strong> Comisionamiento mid-2026 (Dy/Tb, 200 MT/año)</li>
+                    <li><strong>10X Facility:</strong> 10,000 MT magnetos/año, comisionamiento 2028</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 04</div>
+            <h2 class="section-title">Mega-Contratos 2025</h2>
+            <p class="section-subtitle">Los deals que transformaron MP Materials</p>
+
+            <div class="deal-card" style="border-left-color: #1e40af;">
+                <h4>🇺🇸 Departamento de Defensa</h4>
+                <div class="amount">$400M + $150M</div>
+                <p>
+                    <strong>$400M en compra de acciones</strong> - El DoD se convierte en el mayor accionista.<br>
+                    <strong>$150M en préstamo</strong> para expansión de capacidad.<br>
+                    <strong>Precio garantizado:</strong> $110/kg para NdPr por 10 años.<br>
+                    <strong>Offtake 100%:</strong> Todo lo que produzca la 10X Facility tiene comprador garantizado.<br>
+                    <em>Esto es un "blank check" del gobierno de EEUU.</em>
+                </p>
+            </div>
+
+            <div class="deal-card" style="border-left-color: #000;">
+                <h4>🍎 Apple</h4>
+                <div class="amount">$500M</div>
+                <p>
+                    Contrato multianual para compra de magnetos de alto rendimiento.<br>
+                    <strong>$200M prepago</strong> para financiar expansión de manufactura.<br>
+                    Los iPhones, AirPods y MacBooks dependen de estos magnetos.
+                </p>
+            </div>
+
+            <div class="deal-card" style="border-left-color: #065f46;">
+                <h4>🇸🇦 Joint Venture Arabia Saudí</h4>
+                <div class="amount">49% stake</div>
+                <p>
+                    JV con Saudi Arabian Mining Company + DoD para construir refinería de tierras raras en Arabia Saudí.
+                    Diversificación geográfica y acceso a nuevo mercado.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 05</div>
+            <h2 class="section-title">El Factor China</h2>
+            <p class="section-subtitle">Por qué MP es estratégicamente vital</p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Dominio de China</th>
+                        <th>Porcentaje</th>
+                        <th>Implicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Minería de tierras raras</td>
+                        <td>60%</td>
+                        <td>Controla la extracción</td>
+                    </tr>
+                    <tr>
+                        <td>Procesamiento/refinación</td>
+                        <td>85%+</td>
+                        <td>Monopolio virtual</td>
+                    </tr>
+                    <tr>
+                        <td>Manufactura de magnetos</td>
+                        <td>90%+</td>
+                        <td>Casi total</td>
+                    </tr>
+                    <tr>
+                        <td>Restricciones de exportación</td>
+                        <td>En vigor</td>
+                        <td>Arma geopolítica</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px; border-left: 4px solid var(--danger);">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🚨 Riesgo geopolítico = Oportunidad para MP</h4>
+                <p style="color: var(--text-light);">
+                    Si China decide restringir exportaciones de tierras raras (como hizo con galio y germanio),
+                    MP Materials sería uno de los únicos proveedores alternativos para EEUU y aliados.
+                    El acuerdo con el DoD convierte a MP en un activo de seguridad nacional, no solo una empresa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 06</div>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+            <p class="section-subtitle">Señales de alerta para inversores</p>
+
+            <div class="flag-grid">
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Rally del 230% puede estar agotado</h4>
+                        <p>Mucho del upside ya está priced in. Entrada ahora es más arriesgada</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Aún no es rentable (2025)</h4>
+                        <p>EPS -$0.22 en 2025. Rentabilidad esperada en 2026</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Precios de tierras raras volátiles</h4>
+                        <p>Revenue Q3 cayó 15% por precios más bajos, no por volumen</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Ejecución de expansión crítica</h4>
+                        <p>10X Facility y heavy RE separation deben ejecutarse a tiempo</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Activos reales y únicos</h4>
+                        <p>Mountain Pass es la única mina occidental a escala. No replicable fácilmente</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Gobierno como socio y cliente</h4>
+                        <p>DoD es accionista + cliente + financiador. Alineación total de intereses</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Precio garantizado 10 años</h4>
+                        <p>$110/kg floor elimina riesgo de commodity para la producción de magnetos</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Demanda estructural creciente</h4>
+                        <p>EVs, wind, AI robots, defense - todos necesitan tierras raras</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 07</div>
+            <h2 class="section-title">Valoración a 5 Años</h2>
+            <p class="section-subtitle">Escenarios proyectados</p>
+
+            <div class="scenario-cards">
+                <div class="scenario-card bull">
+                    <h4>🚀 Independencia Lograda</h4>
+                    <div class="price">$60+</div>
+                    <div class="return positive">+100%+</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        10X Facility a tiempo. China restringe exports. MP domina Occidente.
+                        Márgenes de magnetos superiores. $500M+ revenue.
+                    </p>
+                    <div class="probability">Probabilidad: 30%</div>
+                </div>
+                <div class="scenario-card base">
+                    <h4>📊 Ejecución Normal</h4>
+                    <div class="price">$35</div>
+                    <div class="return positive">+17%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Expansiones con retrasos moderados. China no escala conflicto.
+                        Revenue $250-300M. Márgenes OK pero no excepcionales.
+                    </p>
+                    <div class="probability">Probabilidad: 45%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <h4>🐻 Vientos en Contra</h4>
+                    <div class="price">$15</div>
+                    <div class="return negative">-50%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Precios de tierras raras colapsan. China dumping.
+                        Ejecución fallida. Pérdidas prolongadas.
+                    </p>
+                    <div class="probability">Probabilidad: 25%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 15px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Valor Esperado</h4>
+                <p style="color: var(--text-light);">
+                    <strong>Valor ponderado: $35.25</strong> (+18% desde ~$30)<br>
+                    El valor esperado es ligeramente positivo, pero la dispersión es alta.
+                    La tesis depende de ejecución de expansiones y contexto geopolítico.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 08</div>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+            <p class="section-subtitle">Veredicto final del análisis</p>
+
+            <div class="conclusion-box">
+                <h3>⚠️ ACEPTABLE - Esperar Mejor Entrada</h3>
+                <p>
+                    MP Materials es una empresa real con activos únicos, contratos gubernamentales
+                    transformacionales, y una posición estratégica en un mercado crítico para la
+                    seguridad nacional de EEUU. Sin embargo, el rally del 230% en 2025 significa que
+                    mucho del upside ya está priced in. Para nuevas posiciones, esperar una corrección
+                    del 20-30% sería prudente. Para holders existentes, mantener tiene sentido dado
+                    el apoyo gubernamental y catalizadores de 2026-2028.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">Watchlist - Esperar Corrección</span>
+                    <span class="action-btn secondary">Posición Máxima 3-4%</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Alertas de Seguimiento</h3>
+                <ul style="color: var(--text-light); line-height: 2;">
+                    <li><strong>Entrada ideal:</strong> Si corrige a $22-25 (-25% desde máximos)</li>
+                    <li><strong>Catalizador 2026:</strong> Heavy RE separation comisionamiento (mid-2026)</li>
+                    <li><strong>Risk event:</strong> China inunda mercado con tierras raras baratas</li>
+                    <li><strong>Long-term:</strong> 10X Facility comisionamiento (2028)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--primary); color: white; padding: 2rem; text-align: center;">
+        <p style="opacity: 0.8; font-size: 0.875rem;">Análisis generado por Agente /analista · FMA System · 27 Enero 2026</p>
+        <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 0.5rem;">Este análisis es solo informativo. Realiza tu propia investigación antes de invertir.</p>
+    </footer>
+</body>
+</html>

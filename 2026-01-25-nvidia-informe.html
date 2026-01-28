@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Inversión: NVIDIA (NVDA) - Enero 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --bg-card: #fafafa;
+            --text-primary: #171717;
+            --text-secondary: #525252;
+            --text-muted: #a3a3a3;
+            --accent-red: #ef4444;
+            --accent-green: #22c55e;
+            --accent-amber: #f59e0b;
+            --accent-blue: #3b82f6;
+            --border: #e5e5e5;
+            --nvidia-green: #76b900;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 80px 60px;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--text-primary);
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .cover-logo {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+        }
+
+        .cover h1 {
+            color: white;
+            font-size: 4.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cover .ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--nvidia-green);
+            margin-bottom: 3rem;
+            letter-spacing: 0.3em;
+        }
+
+        .cover .verdict-box {
+            background: var(--nvidia-green);
+            color: #000;
+            padding: 1.5rem 4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        .cover .stars {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--nvidia-green);
+        }
+
+        .cover .score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .cover .summary-phrase {
+            max-width: 700px;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+            padding: 2rem;
+            border-left: 4px solid var(--nvidia-green);
+            text-align: left;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .cover .date {
+            position: absolute;
+            bottom: 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Explanation Page */
+        .explanation-box {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .analogy {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            padding: 2rem;
+            background: white;
+            border-left: 4px solid var(--nvidia-green);
+            margin-bottom: 2rem;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pros, .cons {
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--accent-green);
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .pros h4 { color: var(--accent-green); }
+        .cons h4 { color: var(--accent-red); }
+
+        .pros li, .cons li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .investor-profile {
+            padding: 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+        }
+
+        /* Scorecard */
+        .scorecard {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 8px;
+        }
+
+        .score-item {
+            margin-bottom: 2rem;
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-weight: 600;
+        }
+
+        .score-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .score-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-green { background: var(--accent-green); }
+        .progress-amber { background: var(--accent-amber); }
+        .progress-red { background: var(--accent-red); }
+        .progress-nvidia { background: var(--nvidia-green); }
+
+        .total-score {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--text-primary);
+        }
+
+        .total-score .score-value {
+            font-size: 2rem;
+        }
+
+        .score-legend {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            text-align: center;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+        }
+
+        td {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        .neutral { color: var(--accent-amber); }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .card-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .card-change {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background: var(--nvidia-green);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--nvidia-green);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--nvidia-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            color: var(--text-secondary);
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .callout-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent-amber);
+        }
+
+        .callout-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .callout-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        /* Red Flags Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .check-pass {
+            color: var(--accent-green);
+            font-size: 1.25rem;
+        }
+
+        .check-fail {
+            color: var(--accent-red);
+            font-size: 1.25rem;
+        }
+
+        .check-warn {
+            color: var(--accent-amber);
+            font-size: 1.25rem;
+        }
+
+        /* Scenarios */
+        .scenarios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .scenario {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .scenario-bull {
+            background: rgba(34, 197, 94, 0.05);
+            border-color: var(--accent-green);
+        }
+
+        .scenario-base {
+            background: rgba(59, 130, 246, 0.05);
+            border-color: var(--accent-blue);
+        }
+
+        .scenario-bear {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--accent-red);
+        }
+
+        .scenario h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-probability {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Moat bars */
+        .moat-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .moat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .moat-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .moat-fill {
+            height: 100%;
+            background: var(--nvidia-green);
+            border-radius: 4px;
+        }
+
+        /* Print styles */
+        @media print {
+            .page {
+                page-break-after: always;
+                padding: 40px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Two column layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--nvidia-green);
+        }
+    </style>
+</head>
+<body>
+
+<!-- PÁGINA 1: PORTADA + CONCLUSIÓN -->
+<div class="page cover">
+    <div class="cover-logo">GPU</div>
+    <h1>NVIDIA</h1>
+    <div class="ticker">NASDAQ: NVDA</div>
+
+    <div class="verdict-box">BUENA INVERSIÓN</div>
+
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+    <div class="score">82/100</div>
+
+    <div class="summary-phrase">
+        "NVIDIA es el rey indiscutible de los chips para inteligencia artificial. Es como tener el peaje de la autopista por la que todo el mundo tiene que pasar para llegar al futuro de la IA. La empresa gana mucho dinero, tiene una ventaja tecnológica enorme, y su jefe es un visionario. El problema: ya no es un secreto. El precio de la acción refleja gran parte de este éxito, así que aunque es una gran empresa, hay que entrar con expectativas moderadas."
+    </div>
+
+    <div class="date">Análisis realizado el 25 de enero de 2026</div>
+</div>
+
+<!-- PÁGINA 2: EXPLICACIÓN PARA TODOS -->
+<div class="page">
+    <h2>&#128161; ¿Qué significa este análisis?</h2>
+
+    <div class="explanation-box">
+        <h3>IMAGINA QUE...</h3>
+        <div class="analogy">
+            NVIDIA es como el fabricante de los picos y palas durante la fiebre del oro. Todos quieren minar oro (crear inteligencia artificial), pero para hacerlo necesitan herramientas especiales. Y resulta que NVIDIA hace las mejores herramientas del mundo, con mucha diferencia.<br><br>
+
+            Además, no solo vende las palas: también enseñó a millones de mineros a usar sus palas de una forma especial (se llama CUDA). Ahora, aunque alguien invente una pala igual de buena, los mineros no quieren cambiar porque ya saben usar la de NVIDIA y cambiar sería carísimo y complicado.<br><br>
+
+            El resultado: NVIDIA controla más del 85% de este mercado, cobra precios altísimos, y gana márgenes de beneficio que parecen de empresa de lujo (75%).
+        </div>
+    </div>
+
+    <div class="pros-cons">
+        <div class="pros">
+            <h4>&#9989; LO BUENO (en simple)</h4>
+            <ul>
+                <li><strong>Dominio absoluto:</strong> Controla 85-90% del mercado de chips de IA</li>
+                <li><strong>Genera muchísimo dinero:</strong> $130.000 millones en ventas en 2025</li>
+                <li><strong>Ventaja difícil de copiar:</strong> Su software (CUDA) tiene 4 millones de programadores</li>
+                <li><strong>Crecimiento brutal:</strong> Las ventas se duplicaron en un año</li>
+                <li><strong>Futuro prometedor:</strong> La IA apenas está empezando</li>
+            </ul>
+        </div>
+        <div class="cons">
+            <h4>&#10060; LO MALO (en simple)</h4>
+            <ul>
+                <li><strong>Precio de la acción muy alto:</strong> Ya refleja mucho del éxito futuro</li>
+                <li><strong>Competencia creciendo:</strong> Google, Amazon, Microsoft hacen sus propios chips</li>
+                <li><strong>Depende de una persona:</strong> Jensen Huang es clave (riesgo "key man")</li>
+                <li><strong>Problemas con China:</strong> No puede vender sus mejores chips allí</li>
+                <li><strong>Sector cíclico:</strong> Los semiconductores tienen altibajos fuertes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="investor-profile">
+        <h4>&#127919; ¿PARA QUIÉN ES ESTA INVERSIÓN?</h4>
+        <p style="margin-bottom: 0;">
+            <strong>Ideal para:</strong> Inversores de largo plazo (5+ años) que creen en el futuro de la inteligencia artificial y pueden tolerar volatilidad alta. Personas que entienden que pueden perder un 30-40% en un mal año pero están dispuestas a mantener.<br><br>
+            <strong>No recomendada para:</strong> Quien busca una ganga o duplicar su dinero rápido. NVIDIA ya no es el "secreto mejor guardado" - es una empresa de 2,8 billones de dólares.
+        </p>
+    </div>
+
+    <div class="page-number">2</div>
+</div>
+
+<!-- PÁGINA 3: SCORECARD -->
+<div class="page">
+    <h2>&#128202; Scorecard de Inversión</h2>
+
+    <div class="scorecard">
+        <div class="score-item">
+            <div class="score-header">
+                <span class="score-label">Calidad del Negocio</span>
+                <span class="score-value positive">18/20</span>
+            </div>
+            <div class="score-description">¿Es fácil de entender? ¿Es predecible? ¿Crece de forma sostenible?</div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-green" style="width: 90%;"></div>
+            </div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-header">
+                <span class="score-label">Fortaleza Financiera</span>
+                <span class="score-value positive">20/20</span>
+            </div>
+            <div class="score-description">¿Genera dinero? ¿Tiene poca deuda? ¿Márgenes saludables?</div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-green" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-header">
+                <span class="score-label">Ventaja Competitiva (Moat)</span>
+                <span class="score-value positive">18/20</span>
+            </div>
+            <div class="score-description">¿Puede defenderse de la competencia? ¿Es duradera?</div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-green" style="width: 90%;"></div>
+            </div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-header">
+                <span class="score-label">Equipo Directivo</span>
+                <span class="score-value positive">16/20</span>
+            </div>
+            <div class="score-description">¿Track record? ¿Alineados con accionistas? ¿Comunicación honesta?</div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-nvidia" style="width: 80%;"></div>
+            </div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-header">
+                <span class="score-label">Valoración (Precio Atractivo)</span>
+                <span class="score-value neutral">10/20</span>
+            </div>
+            <div class="score-description">¿Está barata respecto a su valor? ¿Hay margen de seguridad?</div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-amber" style="width: 50%;"></div>
+            </div>
+        </div>
+
+        <div class="score-item total-score">
+            <div class="score-header">
+                <span class="score-label" style="font-size: 1.25rem;">PUNTUACIÓN TOTAL</span>
+                <span class="score-value positive">82/100</span>
+            </div>
+            <div class="progress-bar" style="height: 16px;">
+                <div class="progress-fill progress-nvidia" style="width: 82%;"></div>
+            </div>
+        </div>
+
+        <div class="score-legend">
+            <div class="legend-item"><span class="negative">0-30</span><br>EVITAR</div>
+            <div class="legend-item"><span class="neutral">31-50</span><br>PRECAUCIÓN</div>
+            <div class="legend-item"><span class="neutral">51-70</span><br>ACEPTABLE</div>
+            <div class="legend-item"><span class="positive">71-85</span><br>BUENA</div>
+            <div class="legend-item"><span class="positive">86-100</span><br>EXCELENTE</div>
+        </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top: 2rem;">
+        <strong>Interpretación:</strong> NVIDIA obtiene una puntuación de 82/100, clasificándose como "BUENA inversión". La calificación refleja un negocio excepcional con finanzas sobresalientes, pero penalizado por una valoración exigente que limita el potencial alcista a corto plazo.
+    </div>
+
+    <div class="page-number">3</div>
+</div>
+
+<!-- PÁGINA 4: EL NEGOCIO -->
+<div class="page">
+    <h2>&#127981; El Negocio</h2>
+
+    <h3>¿Qué hace NVIDIA?</h3>
+    <p>
+        NVIDIA Corporation diseña y vende unidades de procesamiento gráfico (GPUs) y los sistemas de software que las potencian. Fundada en 1993 por Jensen Huang, Chris Malachowsky y Curtis Priem, la empresa pasó de fabricar chips para videojuegos a convertirse en el proveedor dominante de infraestructura para inteligencia artificial.
+    </p>
+
+    <p>
+        La clave de su éxito no es solo el hardware: es el ecosistema completo. CUDA, su plataforma de programación paralela, lleva 19 años en desarrollo y tiene más de 4 millones de desarrolladores. Esto crea costes de cambio enormes - las empresas que quieren usar IA ya tienen todo programado para NVIDIA.
+    </p>
+
+    <h3>Segmentos de Negocio (FY2025)</h3>
+
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-label">Data Center (IA)</div>
+            <div class="card-value positive">85%</div>
+            <div class="card-change">$110B+ en ventas anuales</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Gaming</div>
+            <div class="card-value">10%</div>
+            <div class="card-change">Tarjetas RTX para gamers</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Auto + Prof. Viz</div>
+            <div class="card-value">5%</div>
+            <div class="card-change">Vehículos autónomos, diseño</div>
+        </div>
+    </div>
+
+    <h3>Modelo de Negocio</h3>
+    <p>
+        NVIDIA opera como empresa "fabless" - diseña los chips pero los fabrica TSMC (Taiwan Semiconductor). Esto permite enfocarse en I+D mientras evita el capex masivo de tener fábricas propias. El modelo ha resultado extraordinariamente rentable: márgenes brutos del 75%+, comparables con empresas de software, no de hardware.
+    </p>
+
+    <div class="highlight-box">
+        <h3>La Máquina de Imprimir Dinero</h3>
+        <p style="color: rgba(255,255,255,0.9); margin-bottom: 0;">
+            En FY2025, NVIDIA generó <strong>$130.500 millones</strong> en ingresos, un aumento del 114% respecto al año anterior. El margen operativo supera el 55%. Para contexto: Apple, con 50 años de historia, genera $385B. NVIDIA llegó a $130B en apenas 3 años de explosión de IA.
+        </p>
+    </div>
+
+    <h3>Geografías</h3>
+    <p>
+        Estados Unidos y mercados occidentales representan la mayoría de ventas. China fue históricamente un mercado importante (~20% de ingresos) pero las restricciones de exportación de EE.UU. han limitado severamente las ventas de chips avanzados al país.
+    </p>
+
+    <div class="page-number">4</div>
+</div>
+
+<!-- PÁGINA 5: ANÁLISIS FINANCIERO -->
+<div class="page">
+    <h2>&#128176; Análisis Financiero</h2>
+
+    <h3>Evolución 5 Años</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>FY2021</th>
+                <th>FY2022</th>
+                <th>FY2023</th>
+                <th>FY2024</th>
+                <th>FY2025</th>
+                <th>Tendencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Revenue ($B)</td>
+                <td>16.7</td>
+                <td>26.9</td>
+                <td>27.0</td>
+                <td>60.9</td>
+                <td>130.5</td>
+                <td class="positive">+114% YoY</td>
+            </tr>
+            <tr>
+                <td>Gross Margin</td>
+                <td>62%</td>
+                <td>65%</td>
+                <td>57%</td>
+                <td>73%</td>
+                <td>75%</td>
+                <td class="positive">&#9650;</td>
+            </tr>
+            <tr>
+                <td>Operating Margin</td>
+                <td>27%</td>
+                <td>38%</td>
+                <td>21%</td>
+                <td>54%</td>
+                <td>62%</td>
+                <td class="positive">&#9650;</td>
+            </tr>
+            <tr>
+                <td>Net Income ($B)</td>
+                <td>4.3</td>
+                <td>9.8</td>
+                <td>4.4</td>
+                <td>29.8</td>
+                <td>72.9</td>
+                <td class="positive">+145% YoY</td>
+            </tr>
+            <tr>
+                <td>EPS (diluted)</td>
+                <td>$0.17</td>
+                <td>$0.39</td>
+                <td>$0.17</td>
+                <td>$1.19</td>
+                <td>$2.94</td>
+                <td class="positive">+147% YoY</td>
+            </tr>
+            <tr>
+                <td>FCF ($B)</td>
+                <td>4.7</td>
+                <td>8.1</td>
+                <td>3.8</td>
+                <td>27.0</td>
+                <td>65.0</td>
+                <td class="positive">+141% YoY</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Métricas de Rentabilidad</h3>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-label">ROIC</div>
+            <div class="card-value positive">66.9%</div>
+            <div class="card-change">Excepcional (>15% es bueno)</div>
+        </div>
+        <div class="card">
+            <div class="card-label">ROE</div>
+            <div class="card-value positive">107%</div>
+            <div class="card-change">Extraordinario</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Deuda Neta</div>
+            <div class="card-value positive">Negativa</div>
+            <div class="card-change">Más caja que deuda</div>
+        </div>
+    </div>
+
+    <div class="callout callout-success">
+        <strong>Análisis:</strong> Los números financieros de NVIDIA son extraordinarios. Un ROIC del 67% significa que por cada dólar invertido en el negocio, genera 67 centavos de beneficio operativo después de impuestos. Esto está entre los mejores del mundo. Los márgenes brutos del 75% son propios de software, no de hardware. Y todo esto con deuda neta negativa (tienen más caja que deuda).
+    </div>
+
+    <h3>Guía Q1 FY2026</h3>
+    <p>
+        La empresa proyecta ingresos de <strong>$43.000 millones</strong> para Q1 FY2026 (+9% secuencial), con márgenes brutos del ~71%. Los últimos resultados reportados (Q3 FY2026) mostraron <strong>$57.000 millones</strong> en revenue trimestral, confirmando la continuación del crecimiento explosivo.
+    </p>
+
+    <div class="page-number">5</div>
+</div>
+
+<!-- PÁGINA 6: COMPETENCIA -->
+<div class="page">
+    <h2>&#9876; Posición Competitiva</h2>
+
+    <h3>Cuota de Mercado AI Chips (2025)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>Cuota Mercado</th>
+                <th>Producto Principal</th>
+                <th>Fortaleza</th>
+                <th>Debilidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>NVIDIA</strong></td>
+                <td class="positive">85-90%</td>
+                <td>H100, Blackwell</td>
+                <td>CUDA ecosystem</td>
+                <td>Valoración alta</td>
+            </tr>
+            <tr>
+                <td>AMD</td>
+                <td class="neutral">8-10%</td>
+                <td>MI300X</td>
+                <td>Specs superiores</td>
+                <td>Software inmaduro</td>
+            </tr>
+            <tr>
+                <td>Intel</td>
+                <td class="negative">&lt;2%</td>
+                <td>Gaudi 3</td>
+                <td>Precio</td>
+                <td>Reputación dañada</td>
+            </tr>
+            <tr>
+                <td>Google (TPU)</td>
+                <td class="neutral">~5%</td>
+                <td>Ironwood TPU v7</td>
+                <td>Integración cloud</td>
+                <td>Solo uso interno</td>
+            </tr>
+            <tr>
+                <td>Amazon</td>
+                <td class="neutral">~3%</td>
+                <td>Trainium2</td>
+                <td>AWS integration</td>
+                <td>Solo AWS</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+        <strong>Amenaza en el horizonte:</strong> Según JPMorgan, los chips custom diseñados por hyperscalers (Google, Amazon, Meta, OpenAI) pasarán del 37% del mercado en 2024 al 45% en 2028. Esta es la mayor amenaza competitiva a largo plazo para NVIDIA.
+    </div>
+
+    <h3>Comparativa Financiera con Peers</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>NVIDIA</th>
+                <th>AMD</th>
+                <th>Intel</th>
+                <th>Broadcom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Revenue TTM ($B)</td>
+                <td class="positive">130.5</td>
+                <td>23.3</td>
+                <td>52.8</td>
+                <td>46.9</td>
+            </tr>
+            <tr>
+                <td>Gross Margin</td>
+                <td class="positive">75%</td>
+                <td>49%</td>
+                <td>34%</td>
+                <td>63%</td>
+            </tr>
+            <tr>
+                <td>Operating Margin</td>
+                <td class="positive">62%</td>
+                <td>5%</td>
+                <td class="negative">-8%</td>
+                <td>31%</td>
+            </tr>
+            <tr>
+                <td>ROIC</td>
+                <td class="positive">67%</td>
+                <td>3%</td>
+                <td class="negative">-5%</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td>P/E Forward</td>
+                <td class="neutral">~27x</td>
+                <td>~45x</td>
+                <td>N/A</td>
+                <td>~24x</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        La comparativa es reveladora: NVIDIA tiene márgenes y rentabilidad muy superiores a cualquier competidor. AMD es el único rival real en AI chips pero opera con márgenes mucho menores. Intel está en crisis profunda. Broadcom compite en chips custom pero no en GPUs de propósito general.
+    </p>
+
+    <div class="page-number">6</div>
+</div>
+
+<!-- PÁGINA 7: TIMELINE -->
+<div class="page">
+    <h2>&#128197; Timeline de Eventos Críticos</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-year">2006</div>
+            <div class="timeline-content">Lanzamiento de CUDA, la plataforma que se convertiría en el moat más importante de la empresa.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2012</div>
+            <div class="timeline-content">AlexNet usa GPUs NVIDIA para ganar ImageNet, marcando el inicio del deep learning moderno.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-content">Adquisición de Mellanox por $7B (networking para data centers). Intento fallido de comprar ARM.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-content">Lanzamiento de ChatGPT desata la fiebre de IA. NVIDIA es el mayor beneficiario.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-content">Ingresos se disparan. Market cap supera $1 trillón. H100 se convierte en el chip más demandado del mundo.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-content">Revenue crece 126%. Restricciones de exportación a China se endurecen. Lanzamiento de Blackwell.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2025</div>
+            <div class="timeline-content">Revenue $130.5B (+114%). Blackwell genera $11B en Q4. Competencia de hyperscalers se intensifica. NVIDIA invierte $5B en Intel.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">2026</div>
+            <div class="timeline-content">Q3 FY2026: Revenue récord de $57B trimestral. AMD anuncia partnership con OpenAI para MI450.</div>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Próximos Catalizadores a Vigilar</h3>
+    <ul style="list-style: none; padding: 0;">
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+            <strong>&#128205; Q4 FY2026 Results (Febrero 2026):</strong> Se espera ~$60B+ en revenue. Confirmación de sostenibilidad del crecimiento.
+        </li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+            <strong>&#128205; Blackwell Ramp:</strong> Producción a escala completa en H1 2026. "El ramp más rápido en la historia de la compañía."
+        </li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+            <strong>&#128205; AMD MI450 + OpenAI:</strong> H2 2026. Primera amenaza seria al dominio en entrenamiento de modelos grandes.
+        </li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+            <strong>&#128205; Regulación China:</strong> Cualquier relajación de restricciones de exportación sería un catalizador positivo.
+        </li>
+    </ul>
+
+    <div class="page-number">7</div>
+</div>
+
+<!-- PÁGINA 8: MOAT Y VENTAJAS -->
+<div class="page">
+    <h2>&#127968; Moat y Ventajas Competitivas</h2>
+
+    <p>
+        NVIDIA posee uno de los moats más anchos del sector tecnológico. A diferencia de empresas que dependen de una sola ventaja, NVIDIA combina múltiples fuentes de defensa que se refuerzan mutuamente.
+    </p>
+
+    <h3>Análisis de Ventajas</h3>
+
+    <div class="moat-item">
+        <div class="moat-header">
+            <span><strong>1. Ecosistema CUDA (Switching Costs)</strong></span>
+            <span class="mono positive">95/100</span>
+        </div>
+        <div class="moat-bar"><div class="moat-fill" style="width: 95%;"></div></div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            19 años de desarrollo. 4+ millones de desarrolladores. Más de 3.000 aplicaciones optimizadas. Cada generación de ingenieros aprende CUDA en la universidad. El coste de cambiar a otra plataforma supera cualquier ventaja de hardware del competidor.
+        </p>
+    </div>
+
+    <div class="moat-item">
+        <div class="moat-header">
+            <span><strong>2. Ventaja Tecnológica (5+ años adelante)</strong></span>
+            <span class="mono positive">85/100</span>
+        </div>
+        <div class="moat-bar"><div class="moat-fill" style="width: 85%;"></div></div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            Generaciones de chips (A100 → H100 → Blackwell) consistentemente superan a la competencia. AMD tiene specs superiores en papel, pero el software de NVIDIA entrega 10-30% mejor rendimiento real. La inversión en I+D ($7B+/año) mantiene la distancia.
+        </p>
+    </div>
+
+    <div class="moat-item">
+        <div class="moat-header">
+            <span><strong>3. Economías de Escala</strong></span>
+            <span class="mono positive">80/100</span>
+        </div>
+        <div class="moat-bar"><div class="moat-fill" style="width: 80%;"></div></div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            A $130B en revenue, NVIDIA puede invertir en I+D más que cualquier competidor combinado. Los márgenes brutos del 75% financian el desarrollo de siguiente generación mientras competidores luchan por ser rentables.
+        </p>
+    </div>
+
+    <div class="moat-item">
+        <div class="moat-header">
+            <span><strong>4. Efecto Red (Developers → Apps → Users)</strong></span>
+            <span class="mono positive">75/100</span>
+        </div>
+        <div class="moat-bar"><div class="moat-fill" style="width: 75%;"></div></div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            Más desarrolladores CUDA → Más software optimizado → Más empresas eligen NVIDIA → Más desarrolladores aprenden CUDA. Flywheel auto-reforzante.
+        </p>
+    </div>
+
+    <div class="callout callout-warning" style="margin-top: 2rem;">
+        <strong>&#9888; Amenazas al Moat:</strong>
+        <ul style="margin: 0.5rem 0 0 1rem;">
+            <li><strong>OpenAI + AMD:</strong> Si OpenAI tiene éxito con MI450, validará alternativas a CUDA</li>
+            <li><strong>Chips custom:</strong> Hyperscalers están reduciendo dependencia de NVIDIA</li>
+            <li><strong>Software abierto:</strong> Proyectos como ROCm (AMD) y TorchTPU (Google) erosionan lock-in</li>
+        </ul>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Veredicto del Moat</h3>
+        <p style="color: rgba(255,255,255,0.9); margin-bottom: 0;">
+            <strong>Moat: ANCHO</strong>. NVIDIA tiene múltiples ventajas competitivas que se refuerzan mutuamente. Sin embargo, la intensidad de la competencia está aumentando. Estimamos que el moat permanecerá fuerte al menos 5 años, pero podría estrecharse gradualmente después de eso si los hyperscalers tienen éxito con sus chips propios.
+        </p>
+    </div>
+
+    <div class="page-number">8</div>
+</div>
+
+<!-- PÁGINA 9: MANAGEMENT -->
+<div class="page">
+    <h2>&#128100; Management y Gobierno Corporativo</h2>
+
+    <h3>Jensen Huang - CEO y Co-Fundador</h3>
+
+    <div class="two-columns">
+        <div>
+            <p>
+                Jensen Huang, nacido en Taiwán, co-fundó NVIDIA en 1993 y la ha liderado como CEO desde entonces - más de 30 años al frente. Es considerado uno de los CEOs más visionarios de la industria tecnológica.
+            </p>
+
+            <p>
+                Su track record es extraordinario: transformó NVIDIA de una empresa de chips gráficos para gaming a líder mundial en infraestructura de IA. Su visión de invertir en CUDA desde 2006 - años antes de que el deep learning explotara - demuestra capacidad de anticipación única.
+            </p>
+
+            <h4>Skin in the Game</h4>
+            <table style="font-size: 0.9rem;">
+                <tr>
+                    <td>Acciones directas e indirectas</td>
+                    <td class="mono">~920M acciones (3.77%)</td>
+                </tr>
+                <tr>
+                    <td>Valor de participación</td>
+                    <td class="mono positive">~$164.000 millones</td>
+                </tr>
+                <tr>
+                    <td>Compensación FY2025</td>
+                    <td class="mono">$49.9 millones</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h4>Transacciones Insider (2025)</h4>
+            <table style="font-size: 0.9rem;">
+                <tr>
+                    <td>Compras</td>
+                    <td class="mono negative">0</td>
+                </tr>
+                <tr>
+                    <td>Ventas</td>
+                    <td class="mono">65 transacciones (5 años)</td>
+                </tr>
+                <tr>
+                    <td>Método</td>
+                    <td class="mono">Plan 10b5-1 (programado)</td>
+                </tr>
+            </table>
+
+            <div class="callout callout-warning" style="margin-top: 1rem;">
+                <strong>Nota:</strong> Las ventas son bajo plan 10b5-1 (pre-programadas), no decisiones activas. Sin embargo, la ausencia de compras y el volumen de ventas ($925M+ anunciado) genera ruido. Es interpretable como gestión de patrimonio más que pesimismo sobre la empresa.
+            </div>
+        </div>
+    </div>
+
+    <h3>Equipo Directivo</h3>
+    <p>
+        NVIDIA ha creado "más billonarios en el equipo directivo que cualquier otra empresa", según Huang. Colette Kress (CFO) y Jay Puri (VP Operaciones) superan cada uno los $1.000 millones en acciones de la compañía. Esta alineación extrema con accionistas es positiva.
+    </p>
+
+    <h3>Riesgo "Key Man"</h3>
+    <div class="callout callout-danger">
+        <p style="margin-bottom: 0;">
+            <strong>&#9888; Riesgo significativo:</strong> Jensen Huang tiene 62 años y no hay un plan de sucesión público claro. Si bien está sano y activo, la empresa depende intensamente de su visión. Un evento inesperado tendría impacto material en la acción. Este riesgo está parcialmente mitigado por la profundidad del equipo directivo y la fortaleza del moat institucional.
+        </p>
+    </div>
+
+    <h3>Capital Allocation</h3>
+    <p>
+        Historial excepcional: inversiones en CUDA, adquisición de Mellanox, y reciente inversión de $5B en Intel demuestran pensamiento estratégico. Las recompras de acciones han sido constantes. No paga dividendo significativo, priorizando reinversión en crecimiento.
+    </p>
+
+    <div class="page-number">9</div>
+</div>
+
+<!-- PÁGINA 10: RED FLAGS + ESCENARIOS -->
+<div class="page">
+    <h2>&#128680; Red Flags y Escenarios de Valoración</h2>
+
+    <h3>Checklist de Red Flags</h3>
+
+    <ul class="checklist">
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Revenue vs CFO divergencia:</strong> No. FCF crece al ritmo de ingresos.</span>
+        </li>
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Márgenes irreales vs peers:</strong> Sí son altos (75%), pero justificados por posición de mercado.</span>
+        </li>
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Gastos "one-time" recurrentes:</strong> No. Contabilidad limpia.</span>
+        </li>
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Cuentas por cobrar creciendo > revenue:</strong> No. DSO estable.</span>
+        </li>
+        <li>
+            <span class="check-warn">&#9888;</span>
+            <span><strong>Insider selling:</strong> Sí, pero bajo plan 10b5-1. No indica pesimismo necesariamente.</span>
+        </li>
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Cambios de auditor/CFO:</strong> No. Estabilidad en equipo.</span>
+        </li>
+        <li>
+            <span class="check-pass">&#10004;</span>
+            <span><strong>Related party transactions:</strong> No significativas.</span>
+        </li>
+        <li>
+            <span class="check-warn">&#9888;</span>
+            <span><strong>Dependencia key man:</strong> Alta dependencia de Jensen Huang.</span>
+        </li>
+        <li>
+            <span class="check-warn">&#9888;</span>
+            <span><strong>Concentración de clientes:</strong> Hyperscalers representan >50% de ventas.</span>
+        </li>
+    </ul>
+
+    <p style="margin-top: 1rem;"><strong>Contador:</strong> <span class="positive">6/9 flags limpios</span>, <span class="neutral">3/9 precaución</span>, <span class="positive">0/9 red flags críticos</span></p>
+
+    <h3>Escenarios de Valoración</h3>
+
+    <div class="scenarios">
+        <div class="scenario scenario-bull">
+            <h4 class="positive">&#128640; BULL CASE</h4>
+            <div class="scenario-probability">Probabilidad: 25%</div>
+            <p style="font-size: 0.9rem;">
+                IA se acelera más de lo esperado. Competencia no logra escalar. NVIDIA mantiene 80%+ cuota. Revenue 2027: $250B+.
+            </p>
+            <div class="scenario-price positive">$280 (+50%)</div>
+        </div>
+
+        <div class="scenario scenario-base">
+            <h4 style="color: var(--accent-blue);">&#127919; BASE CASE</h4>
+            <div class="scenario-probability">Probabilidad: 50%</div>
+            <p style="font-size: 0.9rem;">
+                Crecimiento se normaliza a 30-40% anual. Cuota cae a 70-75% por competencia. Márgenes se mantienen. Revenue 2027: $180B.
+            </p>
+            <div class="scenario-price" style="color: var(--accent-blue);">$210 (+12%)</div>
+        </div>
+
+        <div class="scenario scenario-bear">
+            <h4 class="negative">&#128200; BEAR CASE</h4>
+            <div class="scenario-probability">Probabilidad: 25%</div>
+            <p style="font-size: 0.9rem;">
+                Hyperscalers adoptan chips propios agresivamente. AMD gana tracción con OpenAI. Ciclo de semiconductores se invierte. Cuota cae a 60%.
+            </p>
+            <div class="scenario-price negative">$120 (-35%)</div>
+        </div>
+    </div>
+
+    <h3>Valoración Actual</h3>
+    <table style="margin-top: 1rem;">
+        <thead>
+            <tr>
+                <th>Múltiplo</th>
+                <th>Actual</th>
+                <th>Media 5Y</th>
+                <th>Sector</th>
+                <th>Evaluación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>P/E Trailing</td>
+                <td class="mono">46x</td>
+                <td class="mono">74x</td>
+                <td class="mono">37x</td>
+                <td class="neutral">Premium justificado</td>
+            </tr>
+            <tr>
+                <td>P/E Forward</td>
+                <td class="mono">27x</td>
+                <td class="mono">-</td>
+                <td class="mono">25x</td>
+                <td class="positive">Razonable</td>
+            </tr>
+            <tr>
+                <td>PEG</td>
+                <td class="mono">0.73</td>
+                <td class="mono">-</td>
+                <td class="mono">1.5</td>
+                <td class="positive">Atractivo</td>
+            </tr>
+            <tr>
+                <td>EV/Sales</td>
+                <td class="mono">22x</td>
+                <td class="mono">20x</td>
+                <td class="mono">6x</td>
+                <td class="neutral">Premium alto</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-number">10</div>
+</div>
+
+<!-- PÁGINA 11: CONCLUSIÓN -->
+<div class="page">
+    <h2>&#128221; Conclusión Final</h2>
+
+    <div class="highlight-box" style="margin-bottom: 2rem;">
+        <h3>Veredicto: BUENA INVERSIÓN (82/100)</h3>
+        <p style="color: rgba(255,255,255,0.9);">
+            NVIDIA es una empresa excepcional con el mejor moat del sector de semiconductores. Sus finanzas son extraordinarias, su management es de primer nivel, y está posicionada en el centro de la revolución de IA. Sin embargo, gran parte de este éxito ya está reflejado en el precio de la acción. No es una ganga, pero tampoco está sobrevalorada para quien crea en el largo plazo de la IA.
+        </p>
+    </div>
+
+    <div class="two-columns">
+        <div>
+            <h3 class="positive">&#128170; Fortalezas Clave</h3>
+            <ul>
+                <li>Dominio del 85%+ en chips de IA</li>
+                <li>Moat CUDA difícil de replicar (19 años)</li>
+                <li>ROIC del 67% (extraordinario)</li>
+                <li>Márgenes brutos del 75%</li>
+                <li>Jensen Huang como visionario</li>
+                <li>Balance sólido (caja neta positiva)</li>
+                <li>Secular trend de IA a favor</li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="negative">&#9888; Debilidades y Riesgos</h3>
+            <ul>
+                <li>Valoración exigente (P/E 46x)</li>
+                <li>Competencia de hyperscalers creciendo</li>
+                <li>Dependencia de Jensen Huang</li>
+                <li>Restricciones de exportación a China</li>
+                <li>Sector cíclico (volatilidad)</li>
+                <li>Concentración en pocos clientes</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 2rem;">&#128269; Qué Vigilar (Alertas de Seguimiento)</h3>
+    <ul style="list-style: none; padding: 0;">
+        <li style="padding: 0.75rem; background: var(--bg-secondary); margin-bottom: 0.5rem; border-radius: 4px;">
+            &#128276; <strong>Revisar si:</strong> Cuota de mercado cae por debajo del 75%
+        </li>
+        <li style="padding: 0.75rem; background: var(--bg-secondary); margin-bottom: 0.5rem; border-radius: 4px;">
+            &#128276; <strong>Reevaluar:</strong> Resultados Q4 FY2026 (febrero 2026)
+        </li>
+        <li style="padding: 0.75rem; background: var(--bg-secondary); margin-bottom: 0.5rem; border-radius: 4px;">
+            &#128276; <strong>Vigilar:</strong> Éxito del partnership AMD-OpenAI (H2 2026)
+        </li>
+        <li style="padding: 0.75rem; background: var(--bg-secondary); margin-bottom: 0.5rem; border-radius: 4px;">
+            &#128276; <strong>Atención a:</strong> Cualquier noticia sobre sucesión de Jensen Huang
+        </li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">&#128300; Lo Que No Sé (Transparencia)</h3>
+    <div class="callout callout-info">
+        <ul style="margin: 0;">
+            <li><strong>Adopción real de chips custom:</strong> No hay datos públicos sobre qué porcentaje de workloads de hyperscalers ya usan TPUs/Trainium vs NVIDIA</li>
+            <li><strong>Impacto de DeepSeek:</strong> El modelo chino eficiente podría reducir demanda de GPUs premium, pero el impacto real es incierto</li>
+            <li><strong>Plan de sucesión:</strong> No hay información pública sobre quién sucedería a Jensen Huang</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--text-primary); text-align: center;">
+        <p style="font-style: italic; color: var(--text-muted);">
+            "El precio es lo que pagas. El valor es lo que obtienes." — Warren Buffett
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem;">
+            Este análisis es educativo e informativo. No constituye recomendación de compra o venta.<br>
+            Hacer siempre due diligence propia antes de invertir.
+        </p>
+    </div>
+
+    <div class="page-number">11</div>
+</div>
+
+</body>
+</html>

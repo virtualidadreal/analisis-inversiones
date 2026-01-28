@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Lithium Americas (LAC)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #f4a940;
+            --success: #00d26a;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --lithium: #10b981;
+            --text: #333;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+            color: white; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 2rem;
+        }
+        .cover-content { position: relative; z-index: 1; }
+        .company-logo {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, var(--lithium), #34d399);
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 2rem; font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(16,185,129,0.4);
+        }
+        .cover h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .cover .ticker { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; opacity: 0.8; margin-bottom: 2rem; }
+        .cover .tagline { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin-bottom: 3rem; }
+
+        .verdict-badge {
+            display: inline-block; padding: 1rem 3rem; border-radius: 50px;
+            font-size: 1.5rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 2rem;
+        }
+        .verdict-precaucion { background: linear-gradient(135deg, var(--warning), #ff9800); color: #000; }
+
+        .score-display { font-family: 'Playfair Display', serif; font-size: 6rem; font-weight: 700; }
+        .score-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .cover-meta { position: absolute; bottom: 2rem; font-size: 0.875rem; opacity: 0.6; }
+
+        .section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+        .section-dark { background: var(--bg-light); }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-light); font-size: 1.1rem; margin-bottom: 2rem; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+
+        .simple-box {
+            background: linear-gradient(135deg, var(--lithium) 0%, #059669 100%);
+            color: white; padding: 3rem; border-radius: 20px; margin-bottom: 2rem;
+        }
+        .simple-box h3 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1.5rem; }
+        .simple-box p { font-size: 1.2rem; line-height: 1.8; }
+
+        .analogy-box { background: white; padding: 2rem; border-radius: 15px; border-left: 4px solid var(--gold); margin-top: 2rem; }
+        .analogy-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .analogy-box p { color: var(--text); }
+
+        .dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+        .score-card { background: white; border-radius: 15px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .score-card .icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; }
+        .score-card .value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .score-card .label { font-size: 0.875rem; color: var(--text-light); margin-top: 0.5rem; }
+        .score-card .max { font-size: 0.75rem; color: var(--text-light); opacity: 0.6; }
+        .pillar-1 .icon { background: #e3f2fd; color: #1976d2; }
+        .pillar-2 .icon { background: #e8f5e9; color: #388e3c; }
+        .pillar-3 .icon { background: #fff3e0; color: #f57c00; }
+        .pillar-4 .icon { background: #f3e5f5; color: #7b1fa2; }
+        .pillar-5 .icon { background: #fce4ec; color: #c2185b; }
+
+        .total-score {
+            background: linear-gradient(135deg, var(--lithium) 0%, #059669 100%);
+            color: white; padding: 2rem; border-radius: 15px; text-align: center;
+        }
+        .total-score .value { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; }
+        .total-score .label { font-size: 1rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; }
+
+        .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .data-card { background: white; border-radius: 15px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .data-card h4 { font-size: 0.875rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .data-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 600; color: var(--primary); }
+        .data-card .change { font-size: 0.875rem; margin-top: 0.25rem; }
+        .change.positive { color: var(--success); }
+        .change.negative { color: var(--danger); }
+        .change.neutral { color: var(--text-light); }
+
+        .styled-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .styled-table th { background: var(--primary); color: white; padding: 1rem; text-align: left; font-weight: 600; }
+        .styled-table td { padding: 1rem; border-bottom: 1px solid var(--border); }
+        .styled-table tr:last-child td { border-bottom: none; }
+
+        .milestone-card { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 1.5rem; border-left: 4px solid var(--lithium); }
+        .milestone-card h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .milestone-card .status { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--lithium); margin-bottom: 0.5rem; }
+
+        .flag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .flag-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border-radius: 10px; border-left: 4px solid var(--danger); }
+        .flag-item.warning { border-left-color: var(--warning); }
+        .flag-item.ok { border-left-color: var(--success); }
+        .flag-icon { font-size: 1.5rem; }
+        .flag-content h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .flag-content p { font-size: 0.85rem; color: var(--text-light); }
+
+        .scenario-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .scenario-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .scenario-card.bull { border-top: 4px solid var(--success); }
+        .scenario-card.base { border-top: 4px solid var(--warning); }
+        .scenario-card.bear { border-top: 4px solid var(--danger); }
+        .scenario-card h4 { font-size: 1rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 1rem; }
+        .scenario-card .price { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+        .scenario-card .return { font-size: 1.25rem; font-weight: 600; }
+        .scenario-card .return.positive { color: var(--success); }
+        .scenario-card .return.negative { color: var(--danger); }
+        .scenario-card .probability { font-size: 0.875rem; color: var(--text-light); margin-top: 1rem; }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--lithium) 0%, #059669 100%);
+            color: white; padding: 3rem; border-radius: 20px; text-align: center;
+        }
+        .conclusion-box h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1.5rem; }
+        .conclusion-box p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8; }
+        .action-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .action-btn { padding: 1rem 2rem; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.875rem; }
+        .action-btn.primary { background: var(--gold); color: var(--primary); }
+        .action-btn.secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+        @media (max-width: 968px) { .dashboard, .data-grid { grid-template-columns: repeat(2, 1fr); } .scenario-cards, .flag-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <div class="cover-content">
+            <div class="company-logo">⚡</div>
+            <h1>Lithium Americas</h1>
+            <div class="ticker">NYSE: LAC</div>
+            <p class="tagline">Thacker Pass: La mayor reserva de litio del mundo occidental</p>
+            <div class="verdict-badge verdict-precaucion">⚠️ Precaución - Pre-Revenue</div>
+            <div class="score-display">40/100</div>
+            <div class="score-label">Puntuación de Inversión</div>
+        </div>
+        <div class="cover-meta">Análisis generado el 27 de Enero, 2026 · Agente /analista · FMA System</div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 01</div>
+            <h2 class="section-title">Explicación Simple</h2>
+            <p class="section-subtitle">Entendiendo Lithium Americas sin jerga financiera</p>
+
+            <div class="simple-box">
+                <h3>¿Qué hace Lithium Americas?</h3>
+                <p>
+                    Lithium Americas está construyendo la mina de litio más grande del hemisferio occidental
+                    en Nevada, llamada Thacker Pass. El litio es el ingrediente clave de las baterías de
+                    todos los autos eléctricos, desde Teslas hasta GM. Sin litio, no hay revolución eléctrica.
+                    GM invirtió $945M y el gobierno de EEUU prestó $2.26B para este proyecto.
+                </p>
+                <div class="analogy-box">
+                    <h4>🔋 Analogía: La fábrica de gasolina del futuro</h4>
+                    <p>
+                        Si los autos del futuro son eléctricos, el litio es su "gasolina". Lithium Americas
+                        es como construir una de las refinerías más grandes de EEUU, con General Motors
+                        como socio y el gobierno garantizando el préstamo. Pero la fábrica aún no está
+                        terminada y no producirá hasta finales de 2027.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 02</div>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+            <div class="dashboard">
+                <div class="score-card pillar-1">
+                    <div class="icon">📊</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Calidad del Negocio</div>
+                </div>
+                <div class="score-card pillar-2">
+                    <div class="icon">💰</div>
+                    <div class="value">10</div>
+                    <div class="max">/20</div>
+                    <div class="label">Fortaleza Financiera</div>
+                </div>
+                <div class="score-card pillar-3">
+                    <div class="icon">🏰</div>
+                    <div class="value">12</div>
+                    <div class="max">/20</div>
+                    <div class="label">Ventaja Competitiva</div>
+                </div>
+                <div class="score-card pillar-4">
+                    <div class="icon">👔</div>
+                    <div class="value">6</div>
+                    <div class="max">/20</div>
+                    <div class="label">Gestión</div>
+                </div>
+                <div class="score-card pillar-5">
+                    <div class="icon">💵</div>
+                    <div class="value">4</div>
+                    <div class="max">/20</div>
+                    <div class="label">Valoración</div>
+                </div>
+            </div>
+            <div class="total-score">
+                <div class="value">40/100</div>
+                <div class="label">Puntuación Total · Precaución</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 03</div>
+            <h2 class="section-title">Análisis del Negocio</h2>
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>Precio Acción</h4>
+                    <div class="value">~$5.87</div>
+                    <div class="change neutral">Analyst target: $6.17</div>
+                </div>
+                <div class="data-card">
+                    <h4>Ingresos 2025</h4>
+                    <div class="value">$0</div>
+                    <div class="change negative">Pre-revenue</div>
+                </div>
+                <div class="data-card">
+                    <h4>Net Loss 9M 2025</h4>
+                    <div class="value">-$223.9M</div>
+                    <div class="change negative">Construcción</div>
+                </div>
+                <div class="data-card">
+                    <h4>Cash Position</h4>
+                    <div class="value">$385.6M</div>
+                    <div class="change positive">+ DOE facility</div>
+                </div>
+                <div class="data-card">
+                    <h4>Total Assets</h4>
+                    <div class="value">$1.45B</div>
+                    <div class="change neutral">Thacker Pass</div>
+                </div>
+                <div class="data-card">
+                    <h4>Analyst Rating</h4>
+                    <div class="value">HOLD</div>
+                    <div class="change neutral">6 analistas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 04</div>
+            <h2 class="section-title">Thacker Pass: El Proyecto</h2>
+
+            <div class="milestone-card">
+                <div class="status">🏔️ RECURSO</div>
+                <h4>Mayor reserva de litio del mundo occidental</h4>
+                <p style="color: var(--text-light);">Measured and Indicated resource más grande fuera de Sudamérica/China. Ubicación estratégica en Nevada, cerca de Tesla Gigafactory.</p>
+            </div>
+
+            <div class="milestone-card">
+                <div class="status">🤝 JOINT VENTURE</div>
+                <h4>62% LAC / 38% GM</h4>
+                <p style="color: var(--text-light);">GM invirtió $945M para asegurar suministro de litio para sus EVs. LAC opera el proyecto como manager.</p>
+            </div>
+
+            <div class="milestone-card">
+                <div class="status">💰 FINANCIAMIENTO</div>
+                <h4>$2.26B préstamo DOE (ATVM)</h4>
+                <p style="color: var(--text-light);">$1.97B principal + $256M interés capitalizado. Tasa Treasury + 0% spread. 23 años plazo. DOE recibe 5% warrants + 5% económico del JV.</p>
+            </div>
+
+            <div class="milestone-card">
+                <div class="status">🏗️ CONSTRUCCIÓN</div>
+                <h4>En progreso - Pico en 2026</h4>
+                <p style="color: var(--text-light);">~700 trabajadores actualmente (objetivo 1,800 en pico). Ingeniería >80% completa. Primera colada Q3 2025. $720M capitalizado a Sep 2025.</p>
+            </div>
+
+            <table class="styled-table" style="margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th>Hito</th>
+                        <th>Fecha Target</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primer drawdown DOE</td>
+                        <td>Q3 2025</td>
+                        <td>✅ Completado ($435M)</td>
+                    </tr>
+                    <tr>
+                        <td>Pico de construcción</td>
+                        <td>2026</td>
+                        <td>🔄 En camino</td>
+                    </tr>
+                    <tr>
+                        <td>Mechanical completion</td>
+                        <td>Late 2027</td>
+                        <td>⏳ Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>Primera producción comercial</td>
+                        <td>Late 2027/2028</td>
+                        <td>⏳ Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad nominal Phase 1</td>
+                        <td>2028+</td>
+                        <td>40,000 t/año LCE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 05</div>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+            <div class="flag-grid">
+                <div class="flag-item">
+                    <div class="flag-icon">🚩</div>
+                    <div class="flag-content">
+                        <h4>Cero ingresos hasta late 2027+</h4>
+                        <p>Pre-revenue puro. Años de construcción por delante sin cash flow</p>
+                    </div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-icon">🚩</div>
+                    <div class="flag-content">
+                        <h4>Riesgo de ejecución alto</h4>
+                        <p>Proyectos mineros típicamente se retrasan y exceden presupuesto</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Precios de litio volátiles</h4>
+                        <p>Lithium spot cayó 80%+ desde máximos 2022. Recuperación incierta</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Single-asset concentration</h4>
+                        <p>Todo depende de un proyecto. Si falla Thacker Pass, la empresa vale 0</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Fully funded Phase 1</h4>
+                        <p>$2.26B DOE + $945M GM + $250M Orion. No necesitan levantar capital</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>GM como offtaker</h4>
+                        <p>38% del proyecto garantiza demanda para su producción</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>IRA incentives</h4>
+                        <p>Inflation Reduction Act favorece producción doméstica de litio</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Recurso de clase mundial</h4>
+                        <p>Reservas para décadas de producción. Posibilidad de Phase 2, 3...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 06</div>
+            <h2 class="section-title">Valoración a 5 Años</h2>
+            <div class="scenario-cards">
+                <div class="scenario-card bull">
+                    <h4>🚀 Producción Exitosa</h4>
+                    <div class="price">$18+</div>
+                    <div class="return positive">+206%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        On-time, on-budget. Precios litio se recuperan. Phase 2 anunciado.
+                        40,000+ t/año producción. FCF positivo.
+                    </p>
+                    <div class="probability">Probabilidad: 25%</div>
+                </div>
+                <div class="scenario-card base">
+                    <h4>📊 Retrasos Moderados</h4>
+                    <div class="price">$7</div>
+                    <div class="return positive">+19%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        1-2 años de retraso. Costos algo elevados.
+                        Precios litio estables. Producción ~30,000 t/año.
+                    </p>
+                    <div class="probability">Probabilidad: 45%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <h4>🐻 Problemas Serios</h4>
+                    <div class="price">$1.50</div>
+                    <div class="return negative">-74%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Cost overruns masivos. Precios litio colapsan.
+                        Dilución forzada. Proyecto en duda.
+                    </p>
+                    <div class="probability">Probabilidad: 30%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 15px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Valor Esperado</h4>
+                <p style="color: var(--text-light);">
+                    <strong>Valor ponderado: $7.10</strong> (+21% desde $5.87)<br>
+                    El valor esperado es ligeramente positivo, pero la dispersión es extrema.
+                    Es una apuesta binaria sobre ejecución de construcción y precios del litio.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 07</div>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+
+            <div class="conclusion-box">
+                <h3>⚠️ PRECAUCIÓN - Solo Para Especuladores Pacientes</h3>
+                <p>
+                    Lithium Americas tiene el recurso, los socios (GM) y el financiamiento (DOE) para
+                    construir la mina de litio más grande de Occidente. Pero es una empresa pre-revenue
+                    con años de construcción por delante y un mercado de litio volátil. Los analistas
+                    tienen target de $6.17 (+5%), sugiriendo que el mercado ya incorpora el escenario base.
+                    Solo para inversores con horizonte 3-5 años y tolerancia alta a volatilidad.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">Watchlist - No Urgente</span>
+                    <span class="action-btn secondary">Máximo 1-2% Portfolio</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Alertas de Seguimiento</h3>
+                <ul style="color: var(--text-light); line-height: 2;">
+                    <li><strong>Catalizador:</strong> Hitos de construcción (cada quarter report)</li>
+                    <li><strong>Entrada:</strong> Si litio spot sube y acción no reacciona proporcionalmente</li>
+                    <li><strong>Risk:</strong> Cost overruns o retrasos significativos</li>
+                    <li><strong>Long-term:</strong> Mechanical completion (late 2027)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--primary); color: white; padding: 2rem; text-align: center;">
+        <p style="opacity: 0.8; font-size: 0.875rem;">Análisis generado por Agente /analista · FMA System · 27 Enero 2026</p>
+        <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 0.5rem;">Este análisis es solo informativo. Realiza tu propia investigación.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Carvana Co. (CVNA)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #f4a940;
+            --silver: #c0c0c0;
+            --success: #00d26a;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --text: #333;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Cover Page */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cover .ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .cover .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .verdict-precaucion { background: linear-gradient(135deg, var(--warning), #ff8c00); color: #000; }
+
+        .score-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .cover-meta {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            opacity: 0.6;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-dark {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Simple Explanation */
+        .simple-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .simple-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .simple-box p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .analogy-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+            margin-top: 2rem;
+        }
+
+        .analogy-box h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .analogy-box p {
+            color: var(--text);
+            opacity: 1;
+            font-size: 1rem;
+        }
+
+        /* Score Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .score-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .score-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .score-card .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .score-card .label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .score-card .max {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            opacity: 0.6;
+        }
+
+        .pillar-1 .icon { background: #e3f2fd; color: #1976d2; }
+        .pillar-2 .icon { background: #e8f5e9; color: #388e3c; }
+        .pillar-3 .icon { background: #fff3e0; color: #f57c00; }
+        .pillar-4 .icon { background: #f3e5f5; color: #7b1fa2; }
+        .pillar-5 .icon { background: #fce4ec; color: #c2185b; }
+
+        .total-score {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .total-score .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        .total-score .label {
+            font-size: 1rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Data Grid */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .data-card h4 {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-card .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .data-card .change {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .change.positive { color: var(--success); }
+        .change.negative { color: var(--danger); }
+        .change.neutral { color: var(--text-light); }
+
+        /* Tables */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .styled-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .styled-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .styled-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .styled-table tr:hover {
+            background: var(--bg-light);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+
+        .timeline-item.positive::before { background: var(--success); box-shadow: 0 0 0 3px var(--success); }
+        .timeline-item.negative::before { background: var(--danger); box-shadow: 0 0 0 3px var(--danger); }
+        .timeline-item.neutral::before { background: var(--warning); box-shadow: 0 0 0 3px var(--warning); }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Moat Visualization */
+        .moat-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .moat-visual {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .moat-castle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+
+        .moat-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 3px dashed;
+            opacity: 0.3;
+        }
+
+        .moat-ring-1 { width: 100px; height: 100px; border-color: var(--warning); }
+        .moat-ring-2 { width: 140px; height: 140px; border-color: var(--warning); }
+        .moat-ring-3 { width: 180px; height: 180px; border-color: var(--warning); }
+
+        .moat-details {
+            flex: 1;
+        }
+
+        .moat-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .moat-rating .stars {
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .moat-rating .label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Red Flags */
+        .flag-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .flag-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .flag-item.ok {
+            border-left-color: var(--success);
+        }
+
+        .flag-icon {
+            font-size: 1.5rem;
+        }
+
+        .flag-content h4 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .flag-content p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Valuation */
+        .scenario-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .scenario-card.bull { border-top: 4px solid var(--success); }
+        .scenario-card.base { border-top: 4px solid var(--warning); }
+        .scenario-card.bear { border-top: 4px solid var(--danger); }
+
+        .scenario-card h4 {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-card .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-card .return {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .scenario-card .return.positive { color: var(--success); }
+        .scenario-card .return.negative { color: var(--danger); }
+
+        .scenario-card .probability {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        /* Conclusion */
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .conclusion-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conclusion-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.875rem;
+        }
+
+        .action-btn.primary {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .action-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .dashboard {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .data-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .scenario-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .flag-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .moat-container {
+                flex-direction: column;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .cover {
+                min-height: auto;
+                padding: 3rem;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .score-card, .data-card, .scenario-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PORTADA -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="company-logo">🚗</div>
+            <h1>Carvana Co.</h1>
+            <div class="ticker">NYSE: CVNA</div>
+            <p class="tagline">Plataforma digital de venta de autos usados con modelo de comercio electrónico</p>
+
+            <div class="verdict-badge verdict-precaucion">⚠️ Precaución</div>
+
+            <div class="score-display">48/100</div>
+            <div class="score-label">Puntuación de Inversión</div>
+        </div>
+        <div class="cover-meta">
+            Análisis generado el 27 de Enero, 2026 · Agente /analista · FMA System
+        </div>
+    </div>
+
+    <!-- EXPLICACIÓN SIMPLE -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 01</div>
+            <h2 class="section-title">Explicación Simple</h2>
+            <p class="section-subtitle">Entendiendo Carvana sin jerga financiera</p>
+
+            <div class="simple-box">
+                <h3>¿Qué hace Carvana?</h3>
+                <p>
+                    Carvana es el "Amazon de los autos usados". Te permite comprar un coche desde tu sofá,
+                    con entrega a domicilio y 7 días para devolverlo. Su innovación icónica son las
+                    "vending machines" gigantes de autos que funcionan como torres de estacionamiento
+                    automatizadas donde recoges tu vehículo.
+                </p>
+                <div class="analogy-box">
+                    <h4>🎢 Analogía: La montaña rusa extrema</h4>
+                    <p>
+                        Imagina una montaña rusa que cayó 99% desde la cima (de $370 a $3.55) y ahora
+                        ha subido 12,000% hasta $473. La subida es impresionante, pero la acción sigue
+                        siendo una de las más volátiles del mercado. Los que compraron en el fondo
+                        se hicieron millonarios; los que compraron en la cima perdieron casi todo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCORING DASHBOARD -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 02</div>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+            <p class="section-subtitle">Evaluación basada en 5 pilares fundamentales</p>
+
+            <div class="dashboard">
+                <div class="score-card pillar-1">
+                    <div class="icon">📊</div>
+                    <div class="value">12</div>
+                    <div class="max">/20</div>
+                    <div class="label">Calidad del Negocio</div>
+                </div>
+                <div class="score-card pillar-2">
+                    <div class="icon">💰</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Fortaleza Financiera</div>
+                </div>
+                <div class="score-card pillar-3">
+                    <div class="icon">🏰</div>
+                    <div class="value">10</div>
+                    <div class="max">/20</div>
+                    <div class="label">Ventaja Competitiva</div>
+                </div>
+                <div class="score-card pillar-4">
+                    <div class="icon">👔</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Gestión</div>
+                </div>
+                <div class="score-card pillar-5">
+                    <div class="icon">💵</div>
+                    <div class="value">10</div>
+                    <div class="max">/20</div>
+                    <div class="label">Valoración</div>
+                </div>
+            </div>
+
+            <div class="total-score">
+                <div class="value">48/100</div>
+                <div class="label">Puntuación Total · Precaución</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANÁLISIS DEL NEGOCIO -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 03</div>
+            <h2 class="section-title">Análisis del Negocio</h2>
+            <p class="section-subtitle">Modelo de negocio y posición competitiva</p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>Ingresos Q3 2025</h4>
+                    <div class="value">$5.65B</div>
+                    <div class="change positive">+55% YoY</div>
+                </div>
+                <div class="data-card">
+                    <h4>Unidades Vendidas Q3</h4>
+                    <div class="value">155,941</div>
+                    <div class="change positive">+44% YoY</div>
+                </div>
+                <div class="data-card">
+                    <h4>Ingreso Neto Q3</h4>
+                    <div class="value">$263M</div>
+                    <div class="change positive">Primer beneficio</div>
+                </div>
+                <div class="data-card">
+                    <h4>Market Cap</h4>
+                    <div class="value">~$47B</div>
+                    <div class="change neutral">Al cierre Enero 2026</div>
+                </div>
+                <div class="data-card">
+                    <h4>P/E Ratio</h4>
+                    <div class="value">~107x</div>
+                    <div class="change negative">Muy elevado</div>
+                </div>
+                <div class="data-card">
+                    <h4>Precio Acción</h4>
+                    <div class="value">$473</div>
+                    <div class="change positive">+12,000% desde mín.</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Modelo de Negocio</h3>
+                <p style="color: var(--text-light); line-height: 1.8;">
+                    Carvana opera una plataforma 100% digital para compra/venta de autos usados. Su propuesta de valor:
+                </p>
+                <ul style="color: var(--text-light); line-height: 2; margin-top: 1rem; padding-left: 1.5rem;">
+                    <li><strong>Compra online:</strong> Todo el proceso desde tu casa, financiamiento incluido</li>
+                    <li><strong>Entrega a domicilio:</strong> O recogida en las icónicas "vending machines"</li>
+                    <li><strong>7 días de prueba:</strong> Devolución sin preguntas</li>
+                    <li><strong>Reconocimiento + adquisición:</strong> También compran tu auto usado</li>
+                    <li><strong>Reconocimiento de vehículos:</strong> Procesan y certifican miles de autos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVOLUCIÓN FINANCIERA -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 04</div>
+            <h2 class="section-title">Evolución Financiera</h2>
+            <p class="section-subtitle">Histórico de 5 años y proyecciones</p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024E</th>
+                        <th>2025E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ingresos ($B)</strong></td>
+                        <td>$12.8</td>
+                        <td>$13.6</td>
+                        <td>$10.8</td>
+                        <td>$13.5</td>
+                        <td>$20.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Unidades Vendidas (K)</strong></td>
+                        <td>425</td>
+                        <td>412</td>
+                        <td>312</td>
+                        <td>430</td>
+                        <td>600+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Margen Bruto</strong></td>
+                        <td>13.8%</td>
+                        <td>10.5%</td>
+                        <td>13.5%</td>
+                        <td>16%</td>
+                        <td>18%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBITDA ($M)</strong></td>
+                        <td>($385)</td>
+                        <td>($1,800)</td>
+                        <td>($390)</td>
+                        <td>$850</td>
+                        <td>$1,500+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deuda Total ($B)</strong></td>
+                        <td>$3.3</td>
+                        <td>$8.8</td>
+                        <td>$6.1</td>
+                        <td>$5.6</td>
+                        <td>$5.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precio Acción (fin año)</strong></td>
+                        <td>$231</td>
+                        <td>$4.53</td>
+                        <td>$51</td>
+                        <td>$230</td>
+                        <td>$473</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📈 El turnaround más espectacular</h4>
+                <p style="color: var(--text-light);">
+                    En 2022 Carvana casi quiebra. La acción cayó de $370 a $3.55 (-99%). La empresa tenía
+                    $8.8B en deuda tras la adquisición de ADESA. Pero a través de una reestructuración
+                    agresiva (reducción de $3.2B en deuda), recortes de personal (2,500 empleados) y
+                    mejora de eficiencia, lograron dar la vuelta. Hoy la acción vale 100x más que en
+                    el punto más bajo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARATIVA COMPETITIVA -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 05</div>
+            <h2 class="section-title">Comparativa Competitiva</h2>
+            <p class="section-subtitle">Carvana vs competidores</p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Modelo</th>
+                        <th>Ingresos (2025E)</th>
+                        <th>Valoración</th>
+                        <th>Diferenciación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Carvana</strong></td>
+                        <td>100% Online</td>
+                        <td>$20B</td>
+                        <td>P/S 2.3x</td>
+                        <td>Vending machines, UX</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CarMax</strong></td>
+                        <td>Omnicanal</td>
+                        <td>$28B</td>
+                        <td>P/S 0.4x</td>
+                        <td>Escala, reconocimiento marca</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AutoNation</strong></td>
+                        <td>Dealership</td>
+                        <td>$27B</td>
+                        <td>P/S 0.2x</td>
+                        <td>Red física, servicio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vroom</strong></td>
+                        <td>Online (quebró)</td>
+                        <td>N/A</td>
+                        <td>$0</td>
+                        <td>Salió del mercado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shift</strong></td>
+                        <td>Online (quebró)</td>
+                        <td>N/A</td>
+                        <td>$0</td>
+                        <td>Salió del mercado</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px; border-left: 4px solid var(--warning);">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">⚠️ Competidores online fracasaron</h4>
+                <p style="color: var(--text-light);">
+                    Vroom y Shift, los principales competidores online, quebraron o salieron del mercado.
+                    Carvana es el único sobreviviente del modelo 100% digital, lo que podría darle ventaja
+                    o indicar que el modelo tiene problemas estructurales de rentabilidad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 06</div>
+            <h2 class="section-title">Timeline de Eventos Críticos</h2>
+            <p class="section-subtitle">Momentos clave que definen la narrativa</p>
+
+            <div class="timeline">
+                <div class="timeline-item positive">
+                    <div class="timeline-date">Diciembre 2025</div>
+                    <div class="timeline-title">Inclusión en S&P 500</div>
+                    <div class="timeline-desc">
+                        Carvana entra al índice S&P 500, validando su turnaround y atrayendo
+                        compradores institucionales obligados a incluirla en sus fondos indexados.
+                    </div>
+                </div>
+                <div class="timeline-item positive">
+                    <div class="timeline-date">Q3 2025</div>
+                    <div class="timeline-title">Primer trimestre rentable significativo</div>
+                    <div class="timeline-desc">
+                        $263M de ingreso neto, 155,941 unidades vendidas (+44%). La empresa
+                        demuestra que el modelo puede ser rentable a escala.
+                    </div>
+                </div>
+                <div class="timeline-item positive">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">Reestructuración de deuda exitosa</div>
+                    <div class="timeline-desc">
+                        Reduce deuda de $8.8B a $5.6B. Extiende vencimientos. Evita la bancarrota
+                        que parecía inevitable en 2022.
+                    </div>
+                </div>
+                <div class="timeline-item negative">
+                    <div class="timeline-date">2023-2024</div>
+                    <div class="timeline-title">Informe Hindenburg Research</div>
+                    <div class="timeline-desc">
+                        Short seller publica informe alegando contabilidad cuestionable,
+                        préstamos relacionados con la familia García, y métricas infladas.
+                    </div>
+                </div>
+                <div class="timeline-item negative">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-title">Colapso del 99%</div>
+                    <div class="timeline-desc">
+                        La acción cae de $370 a $3.55. Crisis de liquidez. Despide 2,500 empleados.
+                        Mercado asume bancarrota inminente.
+                    </div>
+                </div>
+                <div class="timeline-item neutral">
+                    <div class="timeline-date">Feb 2022</div>
+                    <div class="timeline-title">Adquisición de ADESA ($2.2B)</div>
+                    <div class="timeline-desc">
+                        Compra la red de subastas de autos de KAR Global. Añade capacidad de
+                        reconocimiento pero también $5B en deuda adicional.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOAT -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 07</div>
+            <h2 class="section-title">Análisis del Moat</h2>
+            <p class="section-subtitle">Evaluación de ventajas competitivas sostenibles</p>
+
+            <div class="moat-container">
+                <div class="moat-visual">
+                    <div class="moat-ring moat-ring-1"></div>
+                    <div class="moat-ring moat-ring-2"></div>
+                    <div class="moat-ring moat-ring-3"></div>
+                    <div class="moat-castle">🚗</div>
+                </div>
+                <div class="moat-details">
+                    <div class="moat-rating">
+                        <span class="stars">★★☆☆☆</span>
+                        <span class="label">Moat Estrecho</span>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">
+                        Carvana tiene ventajas operativas pero el moat es débil y replicable.
+                    </p>
+                    <ul style="color: var(--text-light); line-height: 2;">
+                        <li><strong>✓ Escala operativa:</strong> 43 centros de reconocimiento (ADESA)</li>
+                        <li><strong>✓ Marca reconocida:</strong> Las "vending machines" son icónicas</li>
+                        <li><strong>✓ Superviviente único:</strong> Vroom y Shift quebraron</li>
+                        <li><strong>✗ Sin switching costs:</strong> Fácil comparar con CarMax/dealers</li>
+                        <li><strong>✗ Sin diferenciación de producto:</strong> Venden los mismos autos</li>
+                        <li><strong>✗ Modelo capital-intensivo:</strong> Requiere mucha inversión continua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANAGEMENT -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 08</div>
+            <h2 class="section-title">Evaluación del Management</h2>
+            <p class="section-subtitle">Liderazgo y gobierno corporativo</p>
+
+            <div class="data-grid">
+                <div class="data-card" style="border-left: 4px solid var(--warning);">
+                    <h4>CEO</h4>
+                    <div class="value" style="font-size: 1.3rem;">Ernie Garcia III</div>
+                    <div class="change neutral">Co-fundador desde 2012</div>
+                </div>
+                <div class="data-card" style="border-left: 4px solid var(--danger);">
+                    <h4>Padre del CEO</h4>
+                    <div class="value" style="font-size: 1.3rem;">Ernest Garcia II</div>
+                    <div class="change negative">Convicto por fraude bancario</div>
+                </div>
+                <div class="data-card" style="border-left: 4px solid var(--warning);">
+                    <h4>Control Familiar</h4>
+                    <div class="value" style="font-size: 1.3rem;">~80%</div>
+                    <div class="change negative">Poder de voto concentrado</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Evaluación</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Visión estratégica</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>Pioneros del modelo, ejecución del turnaround impresionante</td>
+                        </tr>
+                        <tr>
+                            <td>Ejecución operativa</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>Transformaron una empresa moribunda en rentable</td>
+                        </tr>
+                        <tr>
+                            <td>Gobierno corporativo</td>
+                            <td>⭐⭐</td>
+                            <td>Control familiar excesivo, transacciones con partes relacionadas</td>
+                        </tr>
+                        <tr>
+                            <td>Alineación accionistas</td>
+                            <td>⭐⭐</td>
+                            <td>Garcia II vendió $3.6B en acciones en 2021</td>
+                        </tr>
+                        <tr>
+                            <td>Transparencia</td>
+                            <td>⭐⭐</td>
+                            <td>Cuestionada por Hindenburg, métricas no-GAAP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px; border-left: 4px solid var(--danger);">
+                <h4 style="color: var(--danger); margin-bottom: 0.5rem;">🚩 Riesgo de Gobierno Corporativo</h4>
+                <p style="color: var(--text-light);">
+                    Ernest Garcia II (padre del CEO) fue convicto en el escándalo de Charles Keating
+                    (Savings & Loan crisis de los 80s). Controla ~80% del poder de voto a través de
+                    acciones clase B. Vendió $3.6B en acciones en el pico de 2021 antes del colapso.
+                    Hay múltiples transacciones con partes relacionadas que generan conflictos de interés.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RED FLAGS -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 09</div>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+            <p class="section-subtitle">Señales de alerta para inversores</p>
+
+            <div class="flag-grid">
+                <div class="flag-item">
+                    <div class="flag-icon">🚩</div>
+                    <div class="flag-content">
+                        <h4>Gobierno corporativo cuestionable</h4>
+                        <p>Control familiar concentrado, padre con antecedentes criminales, ventas de insiders</p>
+                    </div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-icon">🚩</div>
+                    <div class="flag-content">
+                        <h4>Alegaciones de Hindenburg Research</h4>
+                        <p>Short seller publicó informe alegando contabilidad agresiva y préstamos subprime</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Deuda elevada ($5.6B)</h4>
+                        <p>Aunque reducida, sigue siendo alta. Pagos de $215M/año comenzando Feb 2025</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Valoración extrema (P/E 107x)</h4>
+                        <p>El precio ya refleja un escenario muy optimista de crecimiento</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Volatilidad histórica extrema</h4>
+                        <p>De $370 a $3.55 a $473. No apto para inversores con aversión al riesgo</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Competidores eliminados</h4>
+                        <p>Vroom y Shift quebraron, dejando a Carvana como líder online</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Inclusión S&P 500</h4>
+                        <p>Valida el turnaround, atrae capital institucional indexado</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Primeros beneficios consistentes</h4>
+                        <p>Q3 2025 mostró $263M de ingreso neto, modelo probando viabilidad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALORACIÓN -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 10</div>
+            <h2 class="section-title">Valoración a 5 Años</h2>
+            <p class="section-subtitle">Escenarios proyectados 2026-2030</p>
+
+            <div class="scenario-cards">
+                <div class="scenario-card bull">
+                    <h4>🐂 Escenario Alcista</h4>
+                    <div class="price">$800</div>
+                    <div class="return positive">+69%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Domina el mercado online de autos usados. Ingresos $40B.
+                        Márgenes EBITDA 10%+. P/E se normaliza a 40x.
+                    </p>
+                    <div class="probability">Probabilidad: 20%</div>
+                </div>
+                <div class="scenario-card base">
+                    <h4>📊 Escenario Base</h4>
+                    <div class="price">$350</div>
+                    <div class="return negative">-26%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Crecimiento moderado. Ingresos $28B. Compite con CarMax.
+                        P/E se comprime a 25x como retail maduro.
+                    </p>
+                    <div class="probability">Probabilidad: 50%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <h4>🐻 Escenario Bajista</h4>
+                    <div class="price">$100</div>
+                    <div class="return negative">-79%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Recesión golpea demanda. Márgenes se comprimen.
+                        Deuda vuelve a ser problema. Repetición de 2022.
+                    </p>
+                    <div class="probability">Probabilidad: 30%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 15px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Valor Esperado Ponderado</h4>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Precio 2030</th>
+                            <th>Retorno</th>
+                            <th>Probabilidad</th>
+                            <th>Valor Ponderado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alcista</td>
+                            <td>$800</td>
+                            <td>+69%</td>
+                            <td>20%</td>
+                            <td>$160</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>$350</td>
+                            <td>-26%</td>
+                            <td>50%</td>
+                            <td>$175</td>
+                        </tr>
+                        <tr>
+                            <td>Bajista</td>
+                            <td>$100</td>
+                            <td>-79%</td>
+                            <td>30%</td>
+                            <td>$30</td>
+                        </tr>
+                        <tr style="background: var(--bg-light); font-weight: 600;">
+                            <td colspan="3">Valor Esperado</td>
+                            <td>100%</td>
+                            <td>$365 (-23%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCLUSIÓN -->
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 11</div>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+            <p class="section-subtitle">Veredicto final del análisis</p>
+
+            <div class="conclusion-box">
+                <h3>⚠️ PRECAUCIÓN - Esperar Mejor Entrada</h3>
+                <p>
+                    Carvana ha ejecutado uno de los turnarounds más impresionantes de la historia
+                    bursátil. De estar al borde de la quiebra a entrar en el S&P 500 en menos de 3 años.
+                    Sin embargo, a $473 y P/E 107x, el precio ya refleja un escenario muy optimista.
+                    Los riesgos de gobierno corporativo (familia García), las alegaciones de Hindenburg,
+                    y la volatilidad extrema hacen que NO sea una inversión adecuada para la mayoría.
+                    Solo para especuladores con alta tolerancia al riesgo.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">Esperar Corrección 40%+</span>
+                    <span class="action-btn secondary">No Para Value Investors</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Alertas de Seguimiento</h3>
+                <ul style="color: var(--text-light); line-height: 2;">
+                    <li><strong>Precio entrada:</strong> Considerar solo si cae a $250-280 (P/E ~50x)</li>
+                    <li><strong>Resultados trimestrales:</strong> Verificar que la rentabilidad es sostenible</li>
+                    <li><strong>Deuda:</strong> Monitorear pagos y posibles refinanciaciones</li>
+                    <li><strong>Investigaciones:</strong> SEC o DOJ siguiendo alegaciones de Hindenburg</li>
+                    <li><strong>Ventas de insiders:</strong> Si García II vuelve a vender masivamente</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--primary); color: white; padding: 2rem; text-align: center;">
+        <p style="opacity: 0.8; font-size: 0.875rem;">
+            Análisis generado por Agente /analista · FMA System · 27 Enero 2026
+        </p>
+        <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 0.5rem;">
+            Este análisis es solo para fines informativos y no constituye asesoramiento financiero.
+            Realiza tu propia investigación antes de invertir.
+        </p>
+    </footer>
+</body>
+</html>

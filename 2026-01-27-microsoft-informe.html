@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Microsoft Corporation (MSFT)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00A4EF;
+            --primary-dark: #0078D4;
+            --primary-light: #E8F4FD;
+            --secondary: #243A5E;
+            --accent: #7FBA00;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --danger: #C62828;
+            --bg-light: #F9FAFB;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* PORTADA */
+        .cover {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0F1A2E 100%);
+            color: white;
+            padding: 80px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .report-type {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .report-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .cover-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .company-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .verdict-box {
+            background: rgba(0,164,239,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,164,239,0.3);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        .verdict-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .verdict-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .verdict-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .verdict-score span {
+            font-size: 24px;
+            opacity: 0.7;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .analyst-info {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .price-info {
+            text-align: right;
+        }
+
+        .current-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .price-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* SECCIONES */
+        section {
+            padding: 60px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--secondary);
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 32px 0 16px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary-dark);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .warning { color: var(--warning); }
+        .neutral { color: var(--text-secondary); }
+
+        /* SCORING DASHBOARD */
+        .score-dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .score-card.highlight {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .score-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .score-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .score-max {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            margin: 16px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E5E5E5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-fill.excellent { background: var(--success); }
+        .progress-fill.good { background: #66BB6A; }
+        .progress-fill.acceptable { background: var(--warning); }
+        .progress-fill.caution { background: #FF9800; }
+        .progress-fill.avoid { background: var(--danger); }
+
+        /* GRID LAYOUTS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .metric-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .metric-change {
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E5E5E5;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-dark);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* MOAT VISUAL */
+        .moat-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 32px 0;
+        }
+
+        .moat-level {
+            width: 80px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .moat-level.active {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .moat-level.inactive {
+            background: #E5E5E5;
+            color: #999;
+        }
+
+        /* SCENARIOS */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .scenario-card {
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+        }
+
+        .scenario-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .scenario-return {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenario-prob {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* RED FLAGS */
+        .red-flags {
+            display: grid;
+            gap: 16px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: #FFF5F5;
+            border-radius: 8px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .flag-item.yellow {
+            background: #FFFBF0;
+            border-left-color: var(--warning);
+        }
+
+        .flag-item.green {
+            background: #F0FFF4;
+            border-left-color: var(--success);
+        }
+
+        .flag-icon {
+            font-size: 24px;
+        }
+
+        .flag-content h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .flag-content p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* CONCLUSION */
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0F1A2E 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .conclusion-verdict {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--accent);
+        }
+
+        .conclusion-summary {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            opacity: 0.9;
+        }
+
+        .conclusion-actions {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .action-item {
+            text-align: center;
+        }
+
+        .action-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .action-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .page { box-shadow: none; }
+            section { break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .cover { padding: 40px 24px; }
+            section { padding: 40px 24px; }
+            .company-name { font-size: 48px; }
+            .score-dashboard { grid-template-columns: repeat(3, 1fr); }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .scenarios-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- PORTADA -->
+        <section class="cover">
+            <div class="cover-header">
+                <div class="report-type">Informe de Inversión Value-Growth</div>
+                <div class="report-date">27 Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <h1 class="company-name">Microsoft<br>Corporation</h1>
+                <div class="company-ticker">NASDAQ: MSFT | Tecnología - Cloud & AI</div>
+
+                <div class="verdict-box">
+                    <div class="verdict-label">Veredicto del Análisis</div>
+                    <div class="verdict-text">BUENA - Core Holding</div>
+                    <div class="verdict-score">85<span>/100</span></div>
+                </div>
+            </div>
+
+            <div class="cover-footer">
+                <div class="analyst-info">
+                    Análisis: Sistema FMA<br>
+                    Metodología: Value-Growth Investing
+                </div>
+                <div class="price-info">
+                    <div class="current-price">$459.86</div>
+                    <div class="price-label">Precio al cierre</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+        <section>
+            <div class="section-number">Sección 01</div>
+            <h2>Explicación Simple</h2>
+
+            <div class="highlight-box">
+                <p>Microsoft es la "empresa de software que se convirtió en el sistema operativo de la era AI". Imagina que además de Windows y Office, ahora controla la infraestructura cloud donde se entrena ChatGPT, los copilots que escriben código, y las herramientas que usa el 80% de las Fortune 500 para inteligencia artificial.</p>
+            </div>
+
+            <h3>Lo que hace Microsoft</h3>
+            <p>Microsoft tiene tres motores de crecimiento: (1) Azure - la nube #2 del mundo con $75B en ingresos y el crecimiento más rápido del sector, (2) Office 365/Microsoft 365 - el software de productividad que usan mil millones de personas, y (3) Gaming/LinkedIn/Hardware - negocios complementarios que diversifican ingresos.</p>
+
+            <h3>La jugada maestra: OpenAI</h3>
+            <p>Microsoft posee el 27% de OpenAI (valorado en $135B). Más importante: tiene exclusividad para vender los modelos de OpenAI hasta 2030 y derechos sobre su tecnología hasta 2032. OpenAI pagará $250B+ a Microsoft por servicios cloud. Es como tener el monopolio de vender iPhone pero que Apple te pague por fabricarlo.</p>
+
+            <h3>Por qué es una "Core Holding"</h3>
+            <p>Microsoft combina crecimiento (Azure +40%, AI +175%) con estabilidad (márgenes 46%, $72B en free cash flow). Es de las pocas empresas de $3.5 trillones que aún crece a doble dígito. Bajo el liderazgo de Satya Nadella desde 2014, ha sido uno de los mayores turnarounds corporativos de la historia.</p>
+
+            <div class="highlight-box">
+                <p><strong>En una frase:</strong> Microsoft es la infraestructura de la revolución AI con el moat más ancho del sector tecnológico. Core holding para cualquier portfolio.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: SCORING DASHBOARD -->
+        <section>
+            <div class="section-number">Sección 02</div>
+            <h2>Dashboard de Valoración</h2>
+
+            <div class="score-dashboard">
+                <div class="score-card">
+                    <div class="score-value">19</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Negocio</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">18</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Finanzas</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">18</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Moat</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">17</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Gestión</div>
+                </div>
+                <div class="score-card highlight">
+                    <div class="score-value">13</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Valoración</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Score Total</span>
+                    <span>85/100 - Buena</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill good" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <h3>Desglose del Scoring</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pilar</th>
+                        <th>Score</th>
+                        <th>Factores Clave</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calidad del Negocio</td>
+                        <td class="positive">19/20</td>
+                        <td>Diversificación excepcional, ingresos recurrentes 95%, Azure #2, OpenAI exclusividad</td>
+                    </tr>
+                    <tr>
+                        <td>Solidez Financiera</td>
+                        <td class="positive">18/20</td>
+                        <td>FCF $72B, margen op. 46%, bajo apalancamiento, rating AAA</td>
+                    </tr>
+                    <tr>
+                        <td>Ventaja Competitiva</td>
+                        <td class="positive">18/20</td>
+                        <td>Moat ancho: ecosistema, switching costs, network effects, OpenAI lock-in</td>
+                    </tr>
+                    <tr>
+                        <td>Gestión</td>
+                        <td class="positive">17/20</td>
+                        <td>Nadella es excepcional, capital allocation disciplinada, insider selling normal</td>
+                    </tr>
+                    <tr>
+                        <td>Valoración</td>
+                        <td class="warning">13/20</td>
+                        <td>P/E 33x en línea con histórico pero no barato, mucho growth priced in</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 3: ANÁLISIS DEL NEGOCIO -->
+        <section>
+            <div class="section-number">Sección 03</div>
+            <h2>Análisis del Negocio</h2>
+
+            <h3>Modelo de Negocio</h3>
+            <p>Microsoft opera en tres segmentos: Intelligent Cloud (Azure, servidor), Productivity & Business Processes (Office, LinkedIn, Dynamics), y More Personal Computing (Windows, Gaming, Surface). El negocio cloud representa ya el 60% de ingresos y crece al 23% anual.</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$281.7B</div>
+                    <div class="metric-label">Ingresos FY2025</div>
+                    <div class="metric-change positive">+15% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$128.5B</div>
+                    <div class="metric-label">Beneficio Operativo</div>
+                    <div class="metric-change positive">+17% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$168.9B</div>
+                    <div class="metric-label">Microsoft Cloud</div>
+                    <div class="metric-change positive">+23% YoY</div>
+                </div>
+            </div>
+
+            <h3>Segmentos de Negocio</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Segmento</th>
+                        <th>Ingresos FY25</th>
+                        <th>Crecimiento</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Azure + Cloud Services</td>
+                        <td>$75B+</td>
+                        <td class="positive">+34% YoY (40% Q1 FY26)</td>
+                        <td>Acelerando (AI boom)</td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft 365 Commercial</td>
+                        <td>$65B</td>
+                        <td class="positive">+14% YoY</td>
+                        <td>Estable, Copilot upside</td>
+                    </tr>
+                    <tr>
+                        <td>LinkedIn</td>
+                        <td>$17B</td>
+                        <td class="positive">+10% YoY</td>
+                        <td>Monetización AI</td>
+                    </tr>
+                    <tr>
+                        <td>Gaming (Xbox)</td>
+                        <td>$24B</td>
+                        <td class="positive">+16% YoY</td>
+                        <td>Activision integración</td>
+                    </tr>
+                    <tr>
+                        <td>Windows/Devices</td>
+                        <td>$22B</td>
+                        <td class="warning">+3% YoY</td>
+                        <td>Maduro, Copilot+ PCs</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>El Negocio AI</h3>
+            <div class="highlight-box">
+                <p><strong>Run rate AI:</strong> $13B+ anuales (+175% YoY). AI contribuye 15 puntos porcentuales al crecimiento de Azure. Copilot tiene 150M usuarios mensuales. El 80% de Fortune 500 usa Azure AI Foundry. Microsoft es el líder indiscutible en monetización de AI empresarial.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: EVOLUCIÓN FINANCIERA -->
+        <section>
+            <div class="section-number">Sección 04</div>
+            <h2>Evolución Financiera (5 años)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ingresos ($B)</td>
+                        <td>$168</td>
+                        <td>$198</td>
+                        <td>$212</td>
+                        <td>$245</td>
+                        <td>$282</td>
+                        <td class="positive">+68% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>EBIT ($B)</td>
+                        <td>$70</td>
+                        <td>$83</td>
+                        <td>$88</td>
+                        <td>$110</td>
+                        <td>$129</td>
+                        <td class="positive">+84% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>EPS</td>
+                        <td>$8.05</td>
+                        <td>$9.21</td>
+                        <td>$9.68</td>
+                        <td>$11.86</td>
+                        <td>$14.11</td>
+                        <td class="positive">+75% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Op.</td>
+                        <td>42%</td>
+                        <td>42%</td>
+                        <td>41%</td>
+                        <td>45%</td>
+                        <td>46%</td>
+                        <td class="positive">+4pts</td>
+                    </tr>
+                    <tr>
+                        <td>FCF ($B)</td>
+                        <td>$56</td>
+                        <td>$65</td>
+                        <td>$59</td>
+                        <td>$74</td>
+                        <td>$72</td>
+                        <td class="positive">+29% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud Revenue ($B)</td>
+                        <td>$69</td>
+                        <td>$91</td>
+                        <td>$111</td>
+                        <td>$137</td>
+                        <td>$169</td>
+                        <td class="positive">+145% (5Y)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Métricas de Rentabilidad</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">68.8%</div>
+                    <div class="metric-label">Margen Bruto</div>
+                    <div class="metric-change neutral">Estable</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">45.6%</div>
+                    <div class="metric-label">Margen Operativo</div>
+                    <div class="metric-change positive">Best-in-class</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">35.7%</div>
+                    <div class="metric-label">Margen Neto</div>
+                    <div class="metric-change positive">Excepcional</div>
+                </div>
+            </div>
+
+            <h3>Balance Sheet</h3>
+            <div class="highlight-box">
+                <p><strong>Fortaleza financiera:</strong> Total assets $619B, equity $344B, rating crediticio AAA. Microsoft genera $72B de FCF al año después de invertir $89B en CapEx para AI. Una de las empresas con mejor perfil financiero del mundo.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: COMPARATIVA COMPETITIVA -->
+        <section>
+            <div class="section-number">Sección 05</div>
+            <h2>Comparativa Competitiva</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Microsoft</th>
+                        <th>Amazon (AWS)</th>
+                        <th>Google</th>
+                        <th>Apple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Market Cap</td>
+                        <td class="positive">$3.4T</td>
+                        <td>$2.3T</td>
+                        <td>$2.4T</td>
+                        <td class="positive">$3.5T</td>
+                    </tr>
+                    <tr>
+                        <td>Cuota Cloud</td>
+                        <td>20%</td>
+                        <td class="positive">30%</td>
+                        <td>13%</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Crecimiento Cloud</td>
+                        <td class="positive">40%</td>
+                        <td>19%</td>
+                        <td>28%</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>P/E Ratio</td>
+                        <td>33x</td>
+                        <td>45x</td>
+                        <td>25x</td>
+                        <td>33x</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Op.</td>
+                        <td class="positive">46%</td>
+                        <td>10%</td>
+                        <td>32%</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>AI Partnership</td>
+                        <td class="positive">OpenAI (exclusiva)</td>
+                        <td>Anthropic</td>
+                        <td>Gemini (interno)</td>
+                        <td>Apple Intelligence</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise AI</td>
+                        <td class="positive">80% F500</td>
+                        <td>60% F500</td>
+                        <td>45% F500</td>
+                        <td>Consumer focus</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <p><strong>Ventaja diferencial:</strong> Microsoft es el único hyperscaler que combina: (1) cloud #2 con mayor crecimiento, (2) exclusividad sobre el líder de AI generativa (OpenAI), (3) distribución masiva vía Office/Windows para Copilot, y (4) márgenes operativos del 46%.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: TIMELINE -->
+        <section>
+            <div class="section-number">Sección 06</div>
+            <h2>Timeline de Eventos Críticos</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Enero 2026</div>
+                    <div class="timeline-title">Q1 FY26: Azure acelera a 40%</div>
+                    <div class="timeline-desc">Revenue $78B. AI contribuye 15 puntos al crecimiento de Azure. Copilot alcanza 150M usuarios. Supera expectativas del mercado.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Julio 2025</div>
+                    <div class="timeline-title">FY25 récord: $282B revenue</div>
+                    <div class="timeline-desc">Azure supera $75B por primera vez. Cloud total $169B (+23%). Operating income $129B (+17%). AI business >$13B run rate.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-title">$89B en CapEx AI</div>
+                    <div class="timeline-desc">Mayor inversión en data centers y GPUs de la historia. Construcción masiva de infraestructura H100/B200 para Azure AI.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Octubre 2023</div>
+                    <div class="timeline-title">Adquisición Activision $69B</div>
+                    <div class="timeline-desc">Mayor adquisición gaming de la historia. Xbox pasa a ser #2 global en gaming. Content and services +16% en FY25.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-title">Inversión OpenAI $10B+</div>
+                    <div class="timeline-desc">Microsoft asegura 27% de OpenAI, exclusividad comercial hasta 2030, acceso a IP hasta 2032. OpenAI compromete $250B+ en Azure.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2014</div>
+                    <div class="timeline-title">Satya Nadella CEO</div>
+                    <div class="timeline-desc">Inicia el turnaround más exitoso de la historia tech. Pivote a "cloud-first, mobile-first". Acción de $40 a $460.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: MOAT ANALYSIS -->
+        <section>
+            <div class="section-number">Sección 07</div>
+            <h2>Análisis del Moat</h2>
+
+            <div class="moat-visual">
+                <div class="moat-level inactive">Sin Moat</div>
+                <div class="moat-level inactive">Estrecho</div>
+                <div class="moat-level inactive">Moderado</div>
+                <div class="moat-level active">Ancho</div>
+            </div>
+
+            <h3>Fuentes de Ventaja Competitiva</h3>
+
+            <div class="red-flags">
+                <div class="flag-item green">
+                    <div class="flag-icon">1</div>
+                    <div class="flag-content">
+                        <h4>Switching Costs (MUY FUERTE)</h4>
+                        <p>Migrar de Microsoft 365 + Azure + Dynamics es virtualmente imposible para enterprises. La integración entre productos crea dependencia total. El 95% de Fortune 500 usa Microsoft.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">2</div>
+                    <div class="flag-content">
+                        <h4>Network Effects (FUERTE)</h4>
+                        <p>Teams tiene 320M usuarios, LinkedIn 1B. Cada usuario adicional aumenta el valor para todos. Windows + Office es el estándar de facto del trabajo empresarial.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">3</div>
+                    <div class="flag-content">
+                        <h4>OpenAI Exclusividad (ÚNICO)</h4>
+                        <p>Exclusividad comercial de modelos OpenAI hasta 2030. IP rights hasta 2032. OpenAI compromete $250B+ en Azure. Ningún competidor tiene este asset.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">4</div>
+                    <div class="flag-content">
+                        <h4>Distribución Copilot (ESCALA)</h4>
+                        <p>400M+ licencias Office donde vender Copilot a $30/mes. 150M usuarios ya activos. 70% Fortune 500 integrando Copilot. Canal de distribución inigualable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Veredicto Moat:</strong> Moat ancho y creciendo. Microsoft tiene la combinación más completa de switching costs + network effects + activo estratégico único (OpenAI). El moat se ha fortalecido significativamente con AI.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 8: MANAGEMENT -->
+        <section>
+            <div class="section-number">Sección 08</div>
+            <h2>Evaluación del Management</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ejecutivo</th>
+                        <th>Cargo</th>
+                        <th>Track Record</th>
+                        <th>Evaluación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Satya Nadella</td>
+                        <td>CEO (desde 2014)</td>
+                        <td>Acción $40→$460 (+1,050%). Turnaround histórico</td>
+                        <td class="positive">Excepcional</td>
+                    </tr>
+                    <tr>
+                        <td>Amy Hood</td>
+                        <td>CFO (desde 2013)</td>
+                        <td>Disciplina capital allocation, $60B buyback</td>
+                        <td class="positive">Excelente</td>
+                    </tr>
+                    <tr>
+                        <td>Brad Smith</td>
+                        <td>Vice Chair</td>
+                        <td>Navegación regulatoria, government relations</td>
+                        <td class="positive">Sólido</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>El Factor Nadella</h3>
+            <div class="highlight-box">
+                <p>Satya Nadella ha ejecutado uno de los mayores turnarounds de la historia corporativa. Cambió la cultura de "know-it-all" a "learn-it-all", pivotó a cloud cuando era arriesgado, y posicionó a Microsoft como líder de AI antes que nadie con la inversión en OpenAI. Bajo su liderazgo, Microsoft pasó de $300B a $3.4T de market cap.</p>
+            </div>
+
+            <h3>Capital Allocation FY2025</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Uso del Capital</th>
+                        <th>Cantidad</th>
+                        <th>% FCF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CapEx (AI infrastructure)</td>
+                        <td>$89B</td>
+                        <td class="positive">Inversión agresiva</td>
+                    </tr>
+                    <tr>
+                        <td>Dividendos</td>
+                        <td>$24.7B</td>
+                        <td>34%</td>
+                    </tr>
+                    <tr>
+                        <td>Buybacks</td>
+                        <td>$18.4B</td>
+                        <td>26%</td>
+                    </tr>
+                    <tr>
+                        <td>Total Shareholders</td>
+                        <td>$43.1B</td>
+                        <td>60%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Microsoft anunció un nuevo programa de buybacks de $60B. El dividendo se incrementó 10% a $0.91/trimestre ($3.64/año). Payout ratio conservador del 24% deja espacio para crecimiento sostenido.</p>
+        </section>
+
+        <!-- SECCIÓN 9: RED FLAGS -->
+        <section>
+            <div class="section-number">Sección 09</div>
+            <h2>Checklist de Red Flags</h2>
+
+            <div class="red-flags">
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Valoración Elevada (pero justificada)</h4>
+                        <p>P/E 33x está en el rango alto histórico. A $3.4T, necesita ejecutar perfectamente para justificar valoración. No es barata, pero el quality premium es merecido.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>CapEx Masivo</h4>
+                        <p>$89B en CapEx (2025) presiona FCF a corto plazo. Si la demanda de AI decepciona, habrá overcapacity. Por ahora, backlog justifica inversión.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Dependencia OpenAI</h4>
+                        <p>La relación con OpenAI se ha "frayed under pressure". Si OpenAI pivota a otros proveedores post-2030, Microsoft pierde asset clave. Por ahora, contrato sólido.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Balance Sheet Impecable</h4>
+                        <p>Rating AAA. $72B FCF. Bajo apalancamiento. Microsoft puede absorber cualquier shock macroeconómico. Fortaleza financiera de primer nivel.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Diversificación de Ingresos</h4>
+                        <p>No depende de un solo producto. Cloud, Office, Gaming, LinkedIn, Windows - múltiples motores de crecimiento. Resiliencia ante ciclos.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Riesgo Regulatorio Manejable</h4>
+                        <p>A diferencia de Google/Meta, Microsoft tiene mejor relación con reguladores. La adquisición de Activision se aprobó. Brad Smith navega bien DC.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: VALORACIÓN 5 AÑOS -->
+        <section>
+            <div class="section-number">Sección 10</div>
+            <h2>Valoración a 5 Años</h2>
+
+            <h3>Escenarios de Precio Objetivo</h3>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull">
+                    <div class="scenario-label">Escenario Alcista</div>
+                    <div class="scenario-price">$850</div>
+                    <div class="scenario-return positive">+85% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-label">Escenario Base</div>
+                    <div class="scenario-price">$680</div>
+                    <div class="scenario-return positive">+48% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 55%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <div class="scenario-label">Escenario Bajista</div>
+                    <div class="scenario-price">$450</div>
+                    <div class="scenario-return negative">-2% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 20%</div>
+                </div>
+            </div>
+
+            <h3>Supuestos por Escenario</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Bull</th>
+                        <th>Base</th>
+                        <th>Bear</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revenue CAGR (5Y)</td>
+                        <td class="positive">14%</td>
+                        <td>11%</td>
+                        <td class="negative">7%</td>
+                    </tr>
+                    <tr>
+                        <td>Azure Growth 2030</td>
+                        <td class="positive">25%</td>
+                        <td>18%</td>
+                        <td class="negative">12%</td>
+                    </tr>
+                    <tr>
+                        <td>AI Revenue 2030</td>
+                        <td class="positive">$80B</td>
+                        <td>$50B</td>
+                        <td class="negative">$25B</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Operativo</td>
+                        <td class="positive">48%</td>
+                        <td>45%</td>
+                        <td class="negative">40%</td>
+                    </tr>
+                    <tr>
+                        <td>P/E Terminal</td>
+                        <td>32x</td>
+                        <td>28x</td>
+                        <td>22x</td>
+                    </tr>
+                    <tr>
+                        <td>EPS 2030</td>
+                        <td>$26.50</td>
+                        <td>$24.30</td>
+                        <td>$20.50</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Precio Objetivo Ponderado</h3>
+            <div class="highlight-box">
+                <p><strong>Precio objetivo 5 años:</strong> $665 (ponderado por probabilidades)</p>
+                <p>Retorno esperado: +45% (CAGR ~8%/año + 0.7% dividendo = ~8.7% anual)</p>
+                <p><strong>Validación DCF inverso:</strong> Al precio actual de $460, el mercado implica un crecimiento de EPS del 10% anual durante 5 años. Alcanzable dado el momentum de Azure y AI.</p>
+            </div>
+
+            <h3>Sensibilidad a Múltiplos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EPS 2030 \ P/E</th>
+                        <th>22x</th>
+                        <th>25x</th>
+                        <th>28x</th>
+                        <th>32x</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$20.00</td>
+                        <td>$440</td>
+                        <td>$500</td>
+                        <td>$560</td>
+                        <td>$640</td>
+                    </tr>
+                    <tr>
+                        <td>$24.00</td>
+                        <td>$528</td>
+                        <td>$600</td>
+                        <td>$672</td>
+                        <td>$768</td>
+                    </tr>
+                    <tr>
+                        <td>$28.00</td>
+                        <td>$616</td>
+                        <td>$700</td>
+                        <td>$784</td>
+                        <td>$896</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 11: ALERTAS DE SEGUIMIENTO -->
+        <section>
+            <div class="section-number">Sección 11</div>
+            <h2>Alertas de Seguimiento</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Alerta</th>
+                        <th>Condición</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Resultados Q2 FY26</td>
+                        <td>28 Enero 2026</td>
+                        <td>Verificar si Azure mantiene >35% growth</td>
+                    </tr>
+                    <tr>
+                        <td>Crecimiento AI</td>
+                        <td>AI run rate >$20B</td>
+                        <td>Confirma tesis, considerar añadir</td>
+                    </tr>
+                    <tr>
+                        <td>Margen operativo</td>
+                        <td>Si cae bajo 42%</td>
+                        <td>Revisar impacto CapEx en rentabilidad</td>
+                    </tr>
+                    <tr>
+                        <td>Relación OpenAI</td>
+                        <td>Cualquier cambio contractual</td>
+                        <td>Reevaluar moat AI</td>
+                    </tr>
+                    <tr>
+                        <td>Copilot monetización</td>
+                        <td>Revenue >$10B</td>
+                        <td>Valida distribución advantage</td>
+                    </tr>
+                    <tr>
+                        <td>Competencia Google/AWS</td>
+                        <td>Si pierden cuota cloud</td>
+                        <td>Revisar posición competitiva</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 12: CONCLUSIÓN FINAL -->
+        <section>
+            <div class="section-number">Sección 12</div>
+            <h2>Conclusión Final</h2>
+
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">BUENA INVERSIÓN</div>
+                <div class="conclusion-verdict" style="font-size: 24px; color: white;">Core Holding para Todo Portfolio</div>
+                <p class="conclusion-summary">
+                    Microsoft es la mejor combinación de calidad, crecimiento y posicionamiento AI en el mercado. Con Azure acelerando (+40%), exclusividad OpenAI, y Satya Nadella al mando, es el "sistema operativo de la era AI". La valoración es justa pero no barata - comprar en correcciones del 10-15%.
+                </p>
+
+                <div class="conclusion-actions">
+                    <div class="action-item">
+                        <div class="action-label">Score Final</div>
+                        <div class="action-value">85/100</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Precio Objetivo 5Y</div>
+                        <div class="action-value">$665</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Upside Potencial</div>
+                        <div class="action-value">+45%</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Riesgo</div>
+                        <div class="action-value">BAJO-MEDIO</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">Recomendación de Acción</h3>
+            <div class="highlight-box">
+                <p><strong>Para la mayoría de inversores:</strong> Core holding. Posición del 5-10% del portfolio. Comprar en correcciones del mercado cuando P/E baje a 28-30x.</p>
+                <p><strong>Precio de entrada ideal:</strong> $400-420 (P/E ~28x). A $460 actual es fair value, no ganga.</p>
+                <p><strong>Horizonte temporal:</strong> Largo plazo (5+ años). No es para trading. Beneficiarse de compounding.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section style="background: var(--secondary); color: white; text-align: center; padding: 40px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">
+                Informe generado por Sistema FMA | Metodología Value-Growth Investing<br>
+                Este informe no constituye asesoramiento financiero. Invertir conlleva riesgos.<br>
+                Fuentes: Microsoft IR, SEC Filings, Synergy Research, Business of Apps<br>
+                27 Enero 2026
+            </p>
+        </section>
+    </div>
+</body>
+</html>

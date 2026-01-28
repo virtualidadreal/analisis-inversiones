@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intel (INTC) - Informe de Inversión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --amber-50: #fffbeb;
+            --amber-500: #f59e0b;
+            --blue-600: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Page Structure */
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Typography */
+        .font-display {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--gray-900);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+        .tiny {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 160px);
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--red-600);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-date {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .cover-main {
+            padding: 80px 0;
+        }
+
+        .cover-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .cover-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        .cover-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cover-metric {
+            text-align: left;
+        }
+
+        .cover-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .cover-metric-value.negative {
+            color: var(--red-600);
+        }
+
+        .cover-metric-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .cover-rating {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: var(--gray-300);
+        }
+
+        .rating-stars .filled {
+            color: var(--red-500);
+        }
+
+        .rating-verdict {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--red-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Styling */
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gray-300);
+            margin-right: 8px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-white {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-dark {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .card-danger {
+            background: var(--red-50);
+            border: 1px solid var(--red-100);
+        }
+
+        .card-success {
+            background: var(--green-50);
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Stats */
+        .stat-block {
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-value.danger {
+            color: var(--red-600);
+        }
+
+        .stat-value.success {
+            color: var(--green-600);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .stat-change.negative {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            margin: 32px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9375rem;
+        }
+
+        thead {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .cell-danger {
+            color: var(--red-600);
+            font-weight: 600;
+        }
+
+        .cell-success {
+            color: var(--green-600);
+            font-weight: 600;
+        }
+
+        /* Progress Bars */
+        .progress-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-label {
+            width: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .progress-bar-wrapper {
+            flex: 1;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: width 0.6s ease;
+        }
+
+        .progress-bar.primary {
+            background: var(--gray-800);
+        }
+
+        .progress-bar.danger {
+            background: var(--red-500);
+        }
+
+        .progress-bar.success {
+            background: var(--green-500);
+        }
+
+        .progress-value {
+            width: 60px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin: 32px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-danger {
+            background: var(--red-50);
+            border-color: var(--red-500);
+        }
+
+        .callout-warning {
+            background: var(--amber-50);
+            border-color: var(--amber-500);
+        }
+
+        .callout-success {
+            background: var(--green-50);
+            border-color: var(--green-500);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout-text {
+            font-size: 0.9375rem;
+            color: var(--gray-700);
+            margin: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 48px;
+            border-radius: 16px;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            color: var(--gray-700);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* Red Flag List */
+        .flag-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--red-50);
+            border-radius: 12px;
+            border: 1px solid var(--red-100);
+        }
+
+        .flag-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--red-500);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .flag-content h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--gray-900);
+        }
+
+        .flag-content p {
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 32px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--green-500), var(--amber-500), var(--red-500));
+            border-radius: 2px;
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border: 3px solid var(--gray-300);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-dot.danger {
+            border-color: var(--red-500);
+            background: var(--red-50);
+        }
+
+        .timeline-year {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-value.danger {
+            color: var(--red-600);
+        }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            padding: 28px;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .company-card.highlight {
+            border-color: var(--red-300);
+            background: var(--red-50);
+        }
+
+        .company-card.best {
+            border-color: var(--green-300);
+            background: var(--green-50);
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+
+        .company-card.highlight .company-name {
+            color: var(--red-600);
+        }
+
+        .company-stat {
+            margin: 16px 0;
+        }
+
+        .company-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .company-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .company-rating {
+            margin-top: 20px;
+            font-size: 1.25rem;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scenario-card {
+            padding: 32px;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 1px solid #fca5a5;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .scenario-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .scenario-prob {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.08);
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .scenario-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .scenario-list {
+            list-style: none;
+        }
+
+        .scenario-list li {
+            font-size: 0.875rem;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .scenario-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        /* Verdict Section */
+        .verdict-section {
+            text-align: center;
+            padding: 80px 60px;
+        }
+
+        .verdict-rating {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+
+        .verdict-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--red-500);
+            margin-bottom: 24px;
+        }
+
+        .verdict-text {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .page-number {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 48px 0;
+        }
+
+        /* Lists */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-500);
+            font-weight: 700;
+        }
+
+        .check-list li.danger::before {
+            content: '✗';
+            color: var(--red-500);
+        }
+
+        /* Print Styles */
+        @media print {
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                padding: 40px 24px;
+            }
+
+            h1, .cover-title {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .grid-2, .grid-4, .company-grid, .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flag-list {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>●</span> Evitar
+                </div>
+                <div class="cover-date">Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: INTC</div>
+                <h1 class="cover-title font-display">Intel Corporation</h1>
+                <p class="cover-subtitle">Un gigante de semiconductores en crisis existencial. Análisis fundamental completo bajo el framework Value-Growth Investing.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="rating-verdict">Evitar</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$44.25</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">$35.67</div>
+                    <div class="cover-metric-label">Precio objetivo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">-24%</div>
+                    <div class="cover-metric-label">Potencial</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$225B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Por qué Intel es una inversión a evitar en 2026</h2>
+
+        <p class="lead">Intel atraviesa la peor crisis de sus 55 años de historia. Lo que fue el líder indiscutible de semiconductores durante tres décadas ha perdido su ventaja competitiva frente a TSMC, AMD y Nvidia. El despido del CEO en diciembre 2024, las pérdidas récord de $18.8B, y un ROIC negativo confirman que la empresa destruye valor para los accionistas.</p>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value danger">-12%</div>
+                <div class="stat-label">ROE (Return on Equity)</div>
+                <div class="stat-change negative">Negativo por 2 años</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">33%</div>
+                <div class="stat-label">Gross Margin</div>
+                <div class="stat-change negative">Era 56% en 2020</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">9/9</div>
+                <div class="stat-label">Red Flags Activos</div>
+                <div class="stat-change negative">Crisis profunda</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">0%</div>
+                <div class="stat-label">Crecimiento</div>
+                <div class="stat-change negative">Excluido de AI boom</div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">⚠️ Tesis Principal</div>
+            <p class="callout-text">Intel perdió su moat tecnológico. TSMC fabrica chips 2-3 generaciones más avanzados. Los clientes más importantes (Apple, AMD, Nvidia) fabrican con TSMC, no con Intel. La estrategia de foundry ha costado $20B+ sin retorno visible, y el nuevo CEO hereda una empresa sin dirección clara.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 48px;">
+            <div class="card card-danger">
+                <h3 style="color: var(--red-700); margin-bottom: 16px;">Razones para evitar</h3>
+                <ul class="check-list">
+                    <li class="danger">ROIC negativo — destruye valor para accionistas</li>
+                    <li class="danger">2-3 generaciones detrás de TSMC en fabricación</li>
+                    <li class="danger">CEO despedido, nueva estrategia incierta</li>
+                    <li class="danger">No participa del boom de AI</li>
+                    <li class="danger">Cuota de mercado en declive constante</li>
+                    <li class="danger">P/E forward 77x para empresa en crisis</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Cuándo reconsiderar</h3>
+                <ul class="check-list">
+                    <li>Lip-Bu Tan presenta plan creíble (3-6 meses)</li>
+                    <li>Foundry consigue cliente externo significativo</li>
+                    <li>Márgenes brutos vuelven a >45%</li>
+                    <li>ROIC vuelve a terreno positivo</li>
+                    <li>Precio cae a <$25 (valoración atractiva)</li>
+                    <li>Proceso 18A demuestra competitividad</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> El Negocio
+        </div>
+
+        <h2>Entendiendo Intel: de líder absoluto a empresa en crisis</h2>
+
+        <p class="lead">Intel es un IDM (Integrated Device Manufacturer) — diseña Y fabrica sus propios semiconductores. Durante décadas, esta integración vertical fue su mayor fortaleza: controlaba todo el proceso y mantenía la ventaja tecnológica. Hoy, esa misma estructura se ha convertido en su mayor debilidad.</p>
+
+        <p>A diferencia de AMD o Nvidia, que son "fabless" y externalizan la fabricación a TSMC, Intel mantiene fábricas propias que requieren inversiones de $20-25 billones anuales. Cuando perdió el liderazgo en tecnología de fabricación, estas fábricas pasaron de ser un activo a ser un pasivo.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">CCG</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 50%;">CPUs para PCs y laptops</div>
+                </div>
+                <span class="progress-value">~50%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">DCAI</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 30%;">Data Center & AI</div>
+                </div>
+                <span class="progress-value">~30%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Foundry</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 8%;"></div>
+                </div>
+                <span class="progress-value">~8%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">NEX</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 7%;"></div>
+                </div>
+                <span class="progress-value">~7%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Mobileye</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 5%;"></div>
+                </div>
+                <span class="progress-value">~5%</span>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">🔴 El problema central</div>
+            <p class="callout-text"><strong>Intel perdió la carrera de fabricación.</strong> TSMC fabrica en proceso de 3nm mientras Intel apenas llega a 18A (equivalente a ~2nm). Esta brecha de 2-3 generaciones significa que los clientes más importantes del mundo — Apple, AMD, Nvidia, Qualcomm — fabrican sus chips con TSMC, no con Intel. La estrategia de Pat Gelsinger de convertir a Intel en foundry para terceros ha fracasado: Intel Foundry tiene menos del 3% del mercado global.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 40px;">
+            <div>
+                <h3 style="margin-bottom: 16px;">Cuota de mercado CPUs</h3>
+                <p style="font-size: 0.9375rem;">AMD ha ganado terreno consistentemente en los últimos 5 años, pasando de menos del 10% a más del 25% en PCs y casi 28% en servidores. Intel sigue siendo líder pero la tendencia es negativa.</p>
+
+                <div style="margin-top: 24px;">
+                    <div class="progress-row">
+                        <span class="progress-label">Intel</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar primary" style="width: 74.6%;">74.6%</div>
+                        </div>
+                    </div>
+                    <div class="progress-row">
+                        <span class="progress-label">AMD</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar danger" style="width: 25.4%;">25.4%</div>
+                        </div>
+                    </div>
+                    <p class="small" style="color: var(--gray-500); margin-top: 8px;">AMD +1.4pp YoY en PC, +3.6pp YoY en servidores</p>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Mercado Foundry global</h3>
+                <p style="font-size: 0.9375rem;">TSMC domina con el 70% del mercado. Intel Foundry, la apuesta estratégica de Gelsinger, tiene menos del 3%. La brecha es prácticamente insuperable.</p>
+
+                <div style="margin-top: 24px;">
+                    <div class="progress-row">
+                        <span class="progress-label">TSMC</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar success" style="width: 70%;">70%</div>
+                        </div>
+                    </div>
+                    <div class="progress-row">
+                        <span class="progress-label">Samsung</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar primary" style="width: 7%;">7%</div>
+                        </div>
+                    </div>
+                    <div class="progress-row">
+                        <span class="progress-label">Intel</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar danger" style="width: 3%;"><3%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> Evolución Financiera
+        </div>
+
+        <h2>Cinco años de deterioro constante</h2>
+
+        <p class="lead">Los números cuentan una historia de declive sistemático. Revenue ha caído un 32% desde 2021. Los márgenes brutos colapsaron de 56% a 33%. El ROE pasó de un saludable 26% a un devastador -19%. En Q3 2024, Intel registró la mayor pérdida trimestral de su historia: $16.6 billones.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2020</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$77.9B</td>
+                        <td>$79B</td>
+                        <td>$63B</td>
+                        <td>$54B</td>
+                        <td class="cell-danger">$53B</td>
+                        <td class="cell-danger">↓ -32%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>$20.9B</td>
+                        <td>$19.9B</td>
+                        <td>$8B</td>
+                        <td>$1.7B</td>
+                        <td class="cell-danger">-$18.8B</td>
+                        <td class="cell-danger">↓ Pérdidas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Margin</strong></td>
+                        <td>56%</td>
+                        <td>55%</td>
+                        <td>43%</td>
+                        <td>40%</td>
+                        <td class="cell-danger">33%</td>
+                        <td class="cell-danger">↓ -23pp</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operating Margin</strong></td>
+                        <td>30%</td>
+                        <td>25%</td>
+                        <td>10%</td>
+                        <td>0.4%</td>
+                        <td class="cell-danger">-22%</td>
+                        <td class="cell-danger">↓ Negativo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROE</strong></td>
+                        <td>26%</td>
+                        <td>21%</td>
+                        <td>8%</td>
+                        <td>1.6%</td>
+                        <td class="cell-danger">-19%</td>
+                        <td class="cell-danger">↓ Destruye valor</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolución del ROE: de crear a destruir valor</h3>
+
+        <p>El Return on Equity (ROE) mide cuánto beneficio genera la empresa por cada euro de capital de los accionistas. Un ROE del 15-20% es excelente. Un ROE negativo significa que la empresa destruye valor — cada euro invertido genera pérdidas.</p>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2020</div>
+                    <div class="timeline-year">ROE</div>
+                    <div class="timeline-value" style="color: var(--green-600);">+26%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-year">ROE</div>
+                    <div class="timeline-value" style="color: var(--green-600);">+21%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-year">ROE</div>
+                    <div class="timeline-value" style="color: var(--amber-500);">+8%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2023</div>
+                    <div class="timeline-year">ROE</div>
+                    <div class="timeline-value" style="color: var(--amber-500);">+1.6%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot danger">2024</div>
+                    <div class="timeline-year">ROE</div>
+                    <div class="timeline-value danger">-19%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Buffett y Munger buscan empresas con ROIC superior al 15% sostenido durante 10 años o más. Intel tiene ROIC negativo.</p>
+            <p class="quote-author">— Framework Value-Growth Investing</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Análisis Competitivo
+        </div>
+
+        <h2>Intel vs la competencia: una brecha insalvable</h2>
+
+        <p class="lead">La comparativa con sus competidores directos revela la magnitud del problema. Nvidia es 10 veces más rentable que Intel. TSMC controla el 70% del mercado de fabricación. AMD gana cuota de mercado cada trimestre. Intel es la única empresa del sector con métricas negativas.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card best">
+                <div class="company-name">NVIDIA</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">+105%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">75%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">55%</div>
+                    <div class="company-stat-label">Op. Margin</div>
+                </div>
+                <div class="company-rating">★★★★★</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">TSMC</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">+34%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">54%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">45%</div>
+                    <div class="company-stat-label">Op. Margin</div>
+                </div>
+                <div class="company-rating">★★★★★</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">AMD</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">+4%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">48%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">6%</div>
+                    <div class="company-stat-label">Op. Margin</div>
+                </div>
+                <div class="company-rating">★★★☆☆</div>
+            </div>
+
+            <div class="company-card highlight">
+                <div class="company-name">INTEL</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">-12%</div>
+                    <div class="company-stat-label">ROE</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">33%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">NEG</div>
+                    <div class="company-stat-label">Op. Margin</div>
+                </div>
+                <div class="company-rating">★☆☆☆☆</div>
+            </div>
+        </div>
+
+        <h3>Intel excluido del boom de AI</h3>
+
+        <p>El mercado de semiconductores crece un 26% anual impulsado por la inteligencia artificial. Nvidia, TSMC y AMD capturan la mayor parte de este crecimiento. Intel, a pesar de sus intentos con chips Gaudi, tiene participación insignificante en el mercado de AI.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Crecimiento 2025</th>
+                        <th>Market Cap</th>
+                        <th>Rol en AI</th>
+                        <th>Beneficiario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NVIDIA</strong></td>
+                        <td class="cell-success">+100%</td>
+                        <td>$4.6T</td>
+                        <td>Líder absoluto GPUs</td>
+                        <td style="color: var(--green-600);">✓ Sí</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TSMC</strong></td>
+                        <td class="cell-success">+25%</td>
+                        <td>$1.6T</td>
+                        <td>Fabrica todos los chips AI</td>
+                        <td style="color: var(--green-600);">✓ Sí</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AMD</strong></td>
+                        <td class="cell-success">+15%</td>
+                        <td>$0.3T</td>
+                        <td>Ganando share MI300</td>
+                        <td style="color: var(--green-600);">✓ Sí</td>
+                    </tr>
+                    <tr style="background: var(--red-50);">
+                        <td><strong style="color: var(--red-600);">INTEL</strong></td>
+                        <td class="cell-danger">0%</td>
+                        <td>$0.2T</td>
+                        <td>Gaudi irrelevante</td>
+                        <td style="color: var(--red-600);">✗ No</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">📊 Perspectiva de mercado</div>
+            <p class="callout-text">NVIDIA es 20 veces más valiosa que Intel ($4.6T vs $0.2T). Hace apenas 5 años, Intel valía más que Nvidia. Este cambio dramático refleja quién ganó la carrera de AI y semiconductores avanzados.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Moat Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Análisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas: erosión severa</h2>
+
+        <p class="lead">Warren Buffett define el "moat" como la ventaja competitiva duradera que protege a una empresa de la competencia. Intel tuvo uno de los moats más anchos de la historia tecnológica: liderazgo en fabricación, marca "Intel Inside", arquitectura x86 dominante. Hoy, cada uno de estos pilares está erosionado o ha desaparecido.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🏷️ Marca</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">"Intel Inside" ya no es sinónimo de calidad premium</p>
+                    </div>
+                    <span style="background: var(--red-100); color: var(--red-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">EROSIONADA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">📜 Patentes / IP</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Portfolio grande pero menos relevante sin liderazgo tecnológico</p>
+                    </div>
+                    <span style="background: var(--amber-50); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">PARCIAL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">🔒 Switching Costs</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">x86 tiene lock-in pero ARM amenaza en servidores y PCs</p>
+                    </div>
+                    <span style="background: var(--amber-50); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">PARCIAL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">📏 Economías de Escala</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Las fábricas son ahora un pasivo, no un activo — requieren $25B/año</p>
+                    </div>
+                    <span style="background: var(--red-100); color: var(--red-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">PASIVO</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">⚡ Ventaja Tecnológica</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">2-3 generaciones detrás de TSMC en nodos de fabricación</p>
+                    </div>
+                    <span style="background: var(--gray-200); color: var(--gray-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">INEXISTENTE</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>El moat que existía vs el moat actual</h3>
+
+        <div class="grid-2" style="margin-top: 24px;">
+            <div class="card">
+                <h4 style="margin-bottom: 16px; color: var(--gray-500);">Intel 2015 — Moat Ancho</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✓ Liderazgo absoluto en fabricación (14nm)</li>
+                    <li>✓ "Intel Inside" = premium y confianza</li>
+                    <li>✓ x86 sin competencia real</li>
+                    <li>✓ 95%+ cuota en servidores</li>
+                    <li>✓ Márgenes brutos >60%</li>
+                    <li>✓ ROIC >20% sostenido</li>
+                </ul>
+            </div>
+            <div class="card card-danger">
+                <h4 style="margin-bottom: 16px; color: var(--red-700);">Intel 2026 — Moat Erosionado</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✗ 2-3 generaciones detrás de TSMC</li>
+                    <li>✗ AMD percibido como igual o mejor</li>
+                    <li>✗ ARM ganando en servidores (AWS Graviton)</li>
+                    <li>✗ 72% cuota servidores, cayendo</li>
+                    <li>✗ Márgenes brutos 33%</li>
+                    <li>✗ ROIC negativo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-box" style="margin-top: 40px;">
+            <p class="quote-text">Lo que buscamos es un negocio con un foso ancho y duradero alrededor de él, protegiendo un castillo económico, con un señor honesto a cargo.</p>
+            <p class="quote-author">— Warren Buffett, 1995</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Management
+        </div>
+
+        <h2>Crisis de liderazgo: el despido de Gelsinger</h2>
+
+        <p class="lead">En diciembre de 2024, el board de Intel despidió a Pat Gelsinger tras casi cuatro años de mandato. Durante su gestión, la acción perdió un 62% de su valor y la empresa registró la mayor pérdida de su historia. En marzo 2025, nombraron a Lip-Bu Tan, ex-CEO de Cadence, como nuevo líder.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card" style="border: 2px solid var(--red-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--red-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Pat Gelsinger</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO Febrero 2021 — Diciembre 2024</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>❌ Despedido por pérdida de confianza del board</li>
+                    <li>❌ -62% en valor de la acción bajo su mandato</li>
+                    <li>❌ Estrategia Foundry costó $20B+ sin retorno</li>
+                    <li>❌ Pérdida récord de $16.6B en Q3 2024</li>
+                    <li>❌ No logró cerrar la brecha con TSMC</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>Contexto:</strong> Gelsinger fue un ingeniero legendario de Intel que volvió a la empresa con la misión de recuperar el liderazgo en fabricación. Su visión era ambiciosa pero la ejecución falló. El board perdió la paciencia ante las pérdidas continuas.
+                </p>
+            </div>
+
+            <div class="card" style="border: 2px solid var(--amber-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--amber-50); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Lip-Bu Tan</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO desde Marzo 2025</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ Ex-CEO de Cadence Design Systems (exitoso)</li>
+                    <li>✓ Experiencia profunda en semiconductores</li>
+                    <li>✓ Conoce Intel (fue miembro del board)</li>
+                    <li>? Estrategia aún por definir</li>
+                    <li>? Sin track record operando empresa de esta escala</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>Incógnita:</strong> ¿Continuará con la estrategia foundry o la abandonará? ¿Venderá activos? ¿Hará spin-offs? El mercado espera claridad, pero aún no hay un plan definido.
+                </p>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">⚠️ Red Flag de Management</div>
+            <p class="callout-text">El despido de un CEO por el board es una señal inequívoca de pérdida total de confianza. Significa que la estrategia fracasó y que la nueva dirección hereda una empresa sin rumbo claro. Históricamente, estos cambios forzados tardan 2-3 años en estabilizarse.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor de Evaluación</th>
+                        <th>Estado</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Track record CEO anterior</td>
+                        <td class="cell-danger">🔴 Desastroso</td>
+                        <td>-62% en acción, pérdidas récord</td>
+                    </tr>
+                    <tr>
+                        <td>Experiencia nuevo CEO</td>
+                        <td class="cell-success">🟢 Buena</td>
+                        <td>Cadence fue exitoso bajo su liderazgo</td>
+                    </tr>
+                    <tr>
+                        <td>Skin in the game</td>
+                        <td>🟡 Por determinar</td>
+                        <td>Aún no hay información suficiente</td>
+                    </tr>
+                    <tr>
+                        <td>Estrategia clara</td>
+                        <td class="cell-danger">🔴 Incierta</td>
+                        <td>¿Foundry sigue siendo prioridad?</td>
+                    </tr>
+                    <tr>
+                        <td>Confianza del board</td>
+                        <td class="cell-danger">🔴 Perdida</td>
+                        <td>Despidieron al CEO anterior</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Red Flags
+        </div>
+
+        <h2>9 de 9 señales de alarma activas</h2>
+
+        <p class="lead">El análisis de red flags es una herramienta fundamental para detectar problemas antes de que sea demasiado tarde. Intel activa todos los indicadores de alerta de nuestro framework. Esto no es común — la mayoría de empresas tienen 2-3 red flags. Tener 9/9 indica una crisis sistémica.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item">
+                <div class="flag-icon">1</div>
+                <div class="flag-content">
+                    <h4>Revenue cayendo 3+ años</h4>
+                    <p>De $79B en 2021 a $53B en 2024. Una caída del 32% indica pérdida de competitividad estructural, no un problema cíclico.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">2</div>
+                <div class="flag-content">
+                    <h4>Márgenes colapsando</h4>
+                    <p>Gross margin de 56% a 33%. Cuando los márgenes caen así de rápido, significa que el producto pierde diferenciación.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">3</div>
+                <div class="flag-content">
+                    <h4>Net Income → Pérdidas</h4>
+                    <p>De $20.9B de beneficio en 2020 a -$18.8B de pérdida en 2024. Un swing de casi $40B en 4 años.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">4</div>
+                <div class="flag-content">
+                    <h4>ROIC negativo</h4>
+                    <p>Return on Invested Capital negativo significa que cada euro invertido en el negocio genera pérdidas para los accionistas.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">5</div>
+                <div class="flag-content">
+                    <h4>CEO despedido</h4>
+                    <p>El board forzó la salida de Gelsinger. Esto indica pérdida total de confianza en la estrategia y ejecución.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">6</div>
+                <div class="flag-content">
+                    <h4>Cuota de mercado en declive</h4>
+                    <p>AMD gana 1-4 puntos porcentuales cada año en CPUs. Intel pierde terreno consistentemente desde 2019.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">7</div>
+                <div class="flag-content">
+                    <h4>Competidor con ventaja tecnológica</h4>
+                    <p>TSMC fabrica chips 2-3 generaciones más avanzados. Esta brecha es prácticamente insuperable a corto plazo.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">8</div>
+                <div class="flag-content">
+                    <h4>Capex masivo sin retorno</h4>
+                    <p>$25B+ anuales en fábricas que no generan el retorno esperado. Intel Foundry tiene <3% del mercado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin: 32px 0;">
+            <div class="callout-title">🚨 Red Flag #9: Non-GAAP >> GAAP</div>
+            <p class="callout-text">Intel reporta EPS Non-GAAP de $0.42 vs GAAP de -$0.06. Esta diferencia extrema indica que la empresa usa ajustes contables agresivos para hacer que los resultados parezcan mejores de lo que son. Siempre usar GAAP para valorar.</p>
+        </div>
+
+        <div class="card card-dark" style="text-align: center; padding: 48px;">
+            <div style="font-size: 4rem; margin-bottom: 16px;">⚠️</div>
+            <h3 style="color: white; font-size: 1.75rem; margin-bottom: 12px;">9 de 9 Red Flags Activos</h3>
+            <p style="color: var(--gray-400); margin: 0; font-size: 1.125rem;">Esta es una empresa en crisis profunda. El framework indica evitar hasta que se resuelvan al menos 5 de estos indicadores.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Valuation Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Valoración
+        </div>
+
+        <h2>Escenarios de valoración y precio objetivo</h2>
+
+        <p class="lead">Dado el alto nivel de incertidumbre, presentamos tres escenarios posibles para Intel. El valor esperado ponderado sugiere un downside del 17% desde niveles actuales. Incluso en el escenario optimista, el upside es limitado frente al riesgo.</p>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #065f46;">🟢 Bull Case</span>
+                    <span class="scenario-prob">15%</span>
+                </div>
+                <div class="scenario-price" style="color: #065f46;">$60-70</div>
+                <div class="scenario-change" style="color: #065f46;">+40% upside</div>
+                <ul class="scenario-list">
+                    <li>Lip-Bu Tan ejecuta turnaround exitoso</li>
+                    <li>Intel Foundry gana clientes externos significativos</li>
+                    <li>Proceso 18A resulta competitivo vs TSMC</li>
+                    <li>Márgenes se recuperan a >45%</li>
+                    <li>AI chips Gaudi ganan tracción</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">🟡 Base Case</span>
+                    <span class="scenario-prob">50%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">$35-45</div>
+                <div class="scenario-change" style="color: #92400e;">Flat a -20%</div>
+                <ul class="scenario-list">
+                    <li>Turnaround lento, toma 3-5 años</li>
+                    <li>Foundry sigue perdiendo dinero</li>
+                    <li>CCG y DCAI estables sin crecimiento</li>
+                    <li>Cuota de mercado sigue cayendo</li>
+                    <li>Nueva estrategia tarda en definirse</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #991b1b;">🔴 Bear Case</span>
+                    <span class="scenario-prob">35%</span>
+                </div>
+                <div class="scenario-price" style="color: #991b1b;">$15-25</div>
+                <div class="scenario-change" style="color: #991b1b;">-50% downside</div>
+                <ul class="scenario-list">
+                    <li>Foundry fracasa y se vende o cierra</li>
+                    <li>AMD acelera ganancia de cuota</li>
+                    <li>ARM disrumpe x86 en data centers</li>
+                    <li>Pérdidas continúan varios años más</li>
+                    <li>Posible reestructuración profunda</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Cálculo de valor esperado</h3>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2; margin-bottom: 24px;">
+                <div>Valor Esperado = <span style="color: var(--green-600);">(0.15 × $65)</span> + <span style="color: var(--amber-500);">(0.50 × $40)</span> + <span style="color: var(--red-500);">(0.35 × $20)</span></div>
+                <div style="padding-left: 140px;">= $9.75 + $20 + $7</div>
+                <div style="padding-left: 140px;">= <strong>$36.75</strong></div>
+            </div>
+
+            <div class="grid-3">
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">$44.25</div>
+                    <div class="stat-label">Precio actual</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value">$36.75</div>
+                    <div class="stat-label">Valor esperado</div>
+                </div>
+                <div class="stat-block" style="text-align: center;">
+                    <div class="stat-value danger">-17%</div>
+                    <div class="stat-label">Potencial</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">📊 Consenso de analistas</div>
+            <p class="callout-text">32 analistas cubren Intel. El precio objetivo medio es $35.67, lo que implica un downside del 24%. El consenso es "Hold" (mantener), no "Buy". Los analistas ven más riesgo que oportunidad en estos niveles.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Conclusion -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">★☆☆☆☆</div>
+                <div class="verdict-title font-display">Evitar</div>
+                <p class="verdict-text">Intel es un caso de estudio de cómo perder una ventaja competitiva de 30 años. Tiene assets valiosos — fábricas, talento, marca, patentes — pero la ejecución ha sido desastrosa y el nuevo liderazgo hereda una empresa sin dirección clara.</p>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-4" style="margin: 48px 0; text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: white;">$44.25</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--red-500);">$35.67</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio objetivo</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--red-500);">-24%</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Potencial</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--red-500);">-12%</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">ROE</div>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-2" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Mejor alternativa</h3>
+                    <p style="color: var(--gray-400);">Si buscas exposición a semiconductores, considera estas opciones con mejor moat y ejecución probada:</p>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">TSMC</strong> — 70% del mercado foundry, fabrica para todos los líderes
+                        </li>
+                        <li style="padding: 12px 0;">
+                            <strong style="color: white;">NVIDIA</strong> — Líder indiscutible en AI/GPUs, +100% crecimiento
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Cuándo reconsiderar</h3>
+                    <p style="color: var(--gray-400);">Volver a analizar Intel si se cumplen al menos 3 de estas condiciones:</p>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">☐ Nuevo CEO presenta plan creíble</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">☐ Foundry gana cliente externo importante</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">☐ Márgenes brutos vuelven a >45%</li>
+                        <li style="padding: 12px 0;">☐ Precio cae a <$25</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-700); display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: var(--gray-500); font-size: 0.875rem;">
+                    <div>Análisis realizado: Enero 2026</div>
+                    <div>Framework: Value-Growth Investing</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">"El precio es lo que pagas.</div>
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">El valor es lo que obtienes."</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 8px;">— Warren Buffett</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Sources -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Fuentes y Metodología
+        </div>
+
+        <h2>Referencias y disclaimers</h2>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div>
+                <h3 style="margin-bottom: 20px;">Datos financieros</h3>
+                <ul style="list-style: none; line-height: 2; font-size: 0.9375rem;">
+                    <li>• <a href="https://www.intc.com/news-events/press-releases/detail/1759/intel-reports-fourth-quarter-and-full-year-2025-financial" style="color: var(--blue-600);">Intel Q4 2025 Financial Results</a></li>
+                    <li>• <a href="https://stockanalysis.com/stocks/intc/statistics/" style="color: var(--blue-600);">Stock Analysis - INTC Statistics</a></li>
+                    <li>• <a href="https://m.macrotrends.net/stocks/charts/INTC/intel/roe" style="color: var(--blue-600);">MacroTrends - Intel ROE Historical</a></li>
+                </ul>
+
+                <h3 style="margin: 32px 0 20px;">Noticias de management</h3>
+                <ul style="list-style: none; line-height: 2; font-size: 0.9375rem;">
+                    <li>• <a href="https://www.cnbc.com/2024/12/02/intel-ceo-pat-gelsinger-is-out.html" style="color: var(--blue-600);">CNBC - Intel CEO Pat Gelsinger ousted</a></li>
+                    <li>• <a href="https://www.cnbc.com/2025/03/12/intel-appoints-lip-bu-tan-as-new-ceo-stock-up-11percent.html" style="color: var(--blue-600);">CNBC - Lip-Bu Tan appointed CEO</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 20px;">Análisis sectorial</h3>
+                <ul style="list-style: none; line-height: 2; font-size: 0.9375rem;">
+                    <li>• <a href="https://www.tomshardware.com/tech-industry/tsmc-revenues-hit-record-high-in-q2-2025-earnings" style="color: var(--blue-600);">Tom's Hardware - TSMC Market Share</a></li>
+                    <li>• <a href="https://www.statista.com/statistics/283359/top-20-semiconductor-companies/" style="color: var(--blue-600);">Statista - Semiconductor Market Data</a></li>
+                </ul>
+
+                <h3 style="margin: 32px 0 20px;">Metodología</h3>
+                <p style="font-size: 0.9375rem; color: var(--gray-600);">Este análisis sigue el framework Value-Growth Investing, que combina análisis fundamental de calidad (moat, management, financieros) con valoración por múltiplos y escenarios. Las métricas de referencia están basadas en los estándares de Buffett/Munger: ROIC >15%, ROE >15% con deuda moderada, márgenes estables.</p>
+            </div>
+        </div>
+
+        <div class="callout" style="background: var(--gray-100); border-color: var(--gray-300);">
+            <div class="callout-title" style="color: var(--gray-700);">⚖️ Disclaimer</div>
+            <p class="callout-text">Este informe es únicamente con fines educativos y de análisis. No constituye asesoramiento financiero ni recomendación de compra o venta. Cada inversor debe realizar su propia investigación y consultar con un asesor financiero cualificado antes de tomar decisiones de inversión. El autor no tiene posición en Intel ni en las empresas mencionadas.</p>
+        </div>
+
+        <div class="card" style="margin-top: 40px; text-align: center; padding: 48px;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gray-400); margin-bottom: 16px;">Framework</div>
+            <div style="font-size: 2.5rem; font-weight: 700; color: var(--gray-900);">Value-Growth Investing</div>
+            <div style="color: var(--gray-500); margin-top: 12px;">Análisis realizado: 25 Enero 2026</div>
+        </div>
+
+        <div class="page-footer">
+            <span>Intel (INTC) · Informe de Inversión</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+</body>
+</html>

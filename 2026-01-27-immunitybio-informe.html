@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: ImmunityBio (IBRX)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #f4a940;
+            --success: #00d26a;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --biotech: #00bcd4;
+            --text: #333;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --border: #dee2e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.6; background: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0d1a2e 0%, #1a2e3e 50%, #0a1a2e 100%);
+            color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 2rem; position: relative;
+        }
+
+        .cover-content { position: relative; z-index: 1; }
+
+        .company-logo {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, var(--biotech), #0097a7);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 2rem; font-size: 3rem;
+            box-shadow: 0 0 60px rgba(0,188,212,0.5);
+        }
+
+        .cover h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 0.5rem; }
+        .cover .ticker { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; opacity: 0.8; margin-bottom: 2rem; }
+        .cover .tagline { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin-bottom: 3rem; }
+
+        .verdict-badge {
+            display: inline-block; padding: 1rem 3rem; border-radius: 50px;
+            font-size: 1.5rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 2rem;
+        }
+        .verdict-especulativa { background: linear-gradient(135deg, var(--biotech), #0097a7); color: white; }
+
+        .score-display { font-family: 'Playfair Display', serif; font-size: 6rem; font-weight: 700; }
+        .score-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .cover-meta { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.875rem; opacity: 0.6; }
+
+        .section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+        .section-dark { background: var(--bg-light); }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-light); font-size: 1.1rem; margin-bottom: 2rem; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+
+        .simple-box {
+            background: linear-gradient(135deg, var(--biotech) 0%, #0097a7 100%);
+            color: white; padding: 3rem; border-radius: 20px; margin-bottom: 2rem;
+        }
+        .simple-box h3 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1.5rem; }
+        .simple-box p { font-size: 1.2rem; line-height: 1.8; }
+
+        .analogy-box {
+            background: white; padding: 2rem; border-radius: 15px;
+            border-left: 4px solid var(--gold); margin-top: 2rem;
+        }
+        .analogy-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .analogy-box p { color: var(--text); font-size: 1rem; }
+
+        .dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+        .score-card {
+            background: white; border-radius: 15px; padding: 1.5rem; text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .score-card .icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; }
+        .score-card .value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .score-card .label { font-size: 0.875rem; color: var(--text-light); margin-top: 0.5rem; }
+        .score-card .max { font-size: 0.75rem; color: var(--text-light); opacity: 0.6; }
+
+        .pillar-1 .icon { background: #e3f2fd; color: #1976d2; }
+        .pillar-2 .icon { background: #e8f5e9; color: #388e3c; }
+        .pillar-3 .icon { background: #fff3e0; color: #f57c00; }
+        .pillar-4 .icon { background: #f3e5f5; color: #7b1fa2; }
+        .pillar-5 .icon { background: #fce4ec; color: #c2185b; }
+
+        .total-score {
+            background: linear-gradient(135deg, var(--biotech) 0%, #0097a7 100%);
+            color: white; padding: 2rem; border-radius: 15px; text-align: center;
+        }
+        .total-score .value { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; }
+        .total-score .label { font-size: 1rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; }
+
+        .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .data-card { background: white; border-radius: 15px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .data-card h4 { font-size: 0.875rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .data-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 600; color: var(--primary); }
+        .data-card .change { font-size: 0.875rem; margin-top: 0.25rem; }
+        .change.positive { color: var(--success); }
+        .change.negative { color: var(--danger); }
+        .change.neutral { color: var(--text-light); }
+
+        .styled-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .styled-table th { background: var(--primary); color: white; padding: 1rem; text-align: left; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; }
+        .styled-table td { padding: 1rem; border-bottom: 1px solid var(--border); }
+        .styled-table tr:last-child td { border-bottom: none; }
+
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; padding-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid white; box-shadow: 0 0 0 3px var(--accent); }
+        .timeline-item.positive::before { background: var(--success); box-shadow: 0 0 0 3px var(--success); }
+        .timeline-item.negative::before { background: var(--danger); box-shadow: 0 0 0 3px var(--danger); }
+        .timeline-item.neutral::before { background: var(--warning); box-shadow: 0 0 0 3px var(--warning); }
+        .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.25rem; }
+        .timeline-title { font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
+        .timeline-desc { color: var(--text-light); font-size: 0.95rem; }
+
+        .flag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .flag-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border-radius: 10px; border-left: 4px solid var(--danger); }
+        .flag-item.warning { border-left-color: var(--warning); }
+        .flag-item.ok { border-left-color: var(--success); }
+        .flag-icon { font-size: 1.5rem; }
+        .flag-content h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .flag-content p { font-size: 0.85rem; color: var(--text-light); }
+
+        .scenario-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .scenario-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .scenario-card.bull { border-top: 4px solid var(--success); }
+        .scenario-card.base { border-top: 4px solid var(--warning); }
+        .scenario-card.bear { border-top: 4px solid var(--danger); }
+        .scenario-card h4 { font-size: 1rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 1rem; }
+        .scenario-card .price { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+        .scenario-card .return { font-size: 1.25rem; font-weight: 600; }
+        .scenario-card .return.positive { color: var(--success); }
+        .scenario-card .return.negative { color: var(--danger); }
+        .scenario-card .probability { font-size: 0.875rem; color: var(--text-light); margin-top: 1rem; }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--biotech) 0%, #0097a7 100%);
+            color: white; padding: 3rem; border-radius: 20px; text-align: center;
+        }
+        .conclusion-box h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1.5rem; }
+        .conclusion-box p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8; }
+        .action-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .action-btn { padding: 1rem 2rem; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.875rem; }
+        .action-btn.primary { background: var(--gold); color: var(--primary); }
+        .action-btn.secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+        @media (max-width: 968px) { .dashboard, .data-grid { grid-template-columns: repeat(2, 1fr); } .scenario-cards, .flag-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <div class="cover-content">
+            <div class="company-logo">🧬</div>
+            <h1>ImmunityBio</h1>
+            <div class="ticker">NASDAQ: IBRX</div>
+            <p class="tagline">Inmunoterapia oncológica de próxima generación - ANKTIVA para cáncer</p>
+            <div class="verdict-badge verdict-especulativa">🧬 Especulativa con Fundamento</div>
+            <div class="score-display">45/100</div>
+            <div class="score-label">Puntuación de Inversión</div>
+        </div>
+        <div class="cover-meta">Análisis generado el 27 de Enero, 2026 · Agente /analista · FMA System</div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 01</div>
+            <h2 class="section-title">Explicación Simple</h2>
+            <p class="section-subtitle">Entendiendo ImmunityBio sin jerga financiera</p>
+
+            <div class="simple-box">
+                <h3>¿Qué hace ImmunityBio?</h3>
+                <p>
+                    ImmunityBio desarrolla tratamientos que "despiertan" tu sistema inmune para que
+                    ataque el cáncer. Su producto estrella, ANKTIVA, es una proteína que potencia
+                    las células NK (Natural Killer) y T del cuerpo para destruir tumores. Ya está
+                    aprobado para cáncer de vejiga y en ensayos para pulmón, páncreas y más.
+                </p>
+                <div class="analogy-box">
+                    <h4>🛡️ Analogía: El entrenador del ejército interno</h4>
+                    <p>
+                        Tu cuerpo tiene un ejército (sistema inmune) pero a veces el cáncer lo
+                        "adormece". ANKTIVA es como un entrenador que despierta y fortalece a
+                        tus soldados naturales para que ataquen los tumores. A diferencia de la
+                        quimioterapia que mata todo, esto es más selectivo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 02</div>
+            <h2 class="section-title">Dashboard de Puntuación</h2>
+            <p class="section-subtitle">Evaluación basada en 5 pilares fundamentales</p>
+
+            <div class="dashboard">
+                <div class="score-card pillar-1">
+                    <div class="icon">📊</div>
+                    <div class="value">10</div>
+                    <div class="max">/20</div>
+                    <div class="label">Calidad del Negocio</div>
+                </div>
+                <div class="score-card pillar-2">
+                    <div class="icon">💰</div>
+                    <div class="value">7</div>
+                    <div class="max">/20</div>
+                    <div class="label">Fortaleza Financiera</div>
+                </div>
+                <div class="score-card pillar-3">
+                    <div class="icon">🏰</div>
+                    <div class="value">12</div>
+                    <div class="max">/20</div>
+                    <div class="label">Ventaja Competitiva</div>
+                </div>
+                <div class="score-card pillar-4">
+                    <div class="icon">👔</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Gestión</div>
+                </div>
+                <div class="score-card pillar-5">
+                    <div class="icon">💵</div>
+                    <div class="value">8</div>
+                    <div class="max">/20</div>
+                    <div class="label">Valoración</div>
+                </div>
+            </div>
+
+            <div class="total-score">
+                <div class="value">45/100</div>
+                <div class="label">Puntuación Total · Especulativa con Fundamento</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 03</div>
+            <h2 class="section-title">Análisis del Negocio</h2>
+            <p class="section-subtitle">Modelo de negocio y posición competitiva</p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <h4>Precio Acción</h4>
+                    <div class="value">~$5.52</div>
+                    <div class="change positive">+227% en enero 2026</div>
+                </div>
+                <div class="data-card">
+                    <h4>Ingresos 2025</h4>
+                    <div class="value">$113M</div>
+                    <div class="change positive">+700% YoY</div>
+                </div>
+                <div class="data-card">
+                    <h4>Ingresos Q4 2025</h4>
+                    <div class="value">$38.3M</div>
+                    <div class="change positive">+431% YoY</div>
+                </div>
+                <div class="data-card">
+                    <h4>Cash Position</h4>
+                    <div class="value">$242.8M</div>
+                    <div class="change neutral">Dic 2025</div>
+                </div>
+                <div class="data-card">
+                    <h4>Net Loss Q3</h4>
+                    <div class="value">-$67.3M</div>
+                    <div class="change positive">Mejorando vs -$85.7M</div>
+                </div>
+                <div class="data-card">
+                    <h4>Analyst Target</h4>
+                    <div class="value">$10.40</div>
+                    <div class="change positive">+88% upside</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Pipeline de ANKTIVA</h3>
+                <ul style="color: var(--text-light); line-height: 2; padding-left: 1.5rem;">
+                    <li><strong>Vejiga (NMIBC):</strong> ✅ Aprobado FDA (BCG-unresponsive)</li>
+                    <li><strong>Vejiga (Papillary):</strong> FDA resubmisión en proceso (30 días)</li>
+                    <li><strong>Vejiga (BCG-naïve):</strong> Trial QUILT-2.005, 85% enrolled, BLA fin 2026</li>
+                    <li><strong>Pulmón (NSCLC):</strong> ✅ Aprobado Arabia Saudí, Fase 3 global iniciada</li>
+                    <li><strong>Glioblastoma:</strong> 100% control de enfermedad en 5 pacientes (early data)</li>
+                    <li><strong>Linfopenia:</strong> FDA Expanded Access autorizado</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 04</div>
+            <h2 class="section-title">Evolución Financiera</h2>
+            <p class="section-subtitle">Trayectoria hacia la rentabilidad</p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
+                        <th>2026E</th>
+                        <th>2027E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ingresos ANKTIVA ($M)</strong></td>
+                        <td>~$5</td>
+                        <td>~$14</td>
+                        <td>$113</td>
+                        <td>$200+?</td>
+                        <td>$400+?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crecimiento YoY</strong></td>
+                        <td>N/A</td>
+                        <td>+180%</td>
+                        <td>+700%</td>
+                        <td>+77%?</td>
+                        <td>+100%?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Loss ($M)</strong></td>
+                        <td>~$450</td>
+                        <td>~$380</td>
+                        <td>~$290</td>
+                        <td>~$150?</td>
+                        <td>Breakeven?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Indicaciones Aprobadas</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3-4?</td>
+                        <td>5+?</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px; border-left: 4px solid var(--success);">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">📈 El momentum es real</h4>
+                <p style="color: var(--text-light);">
+                    A diferencia de otras biotechs especulativas, ImmunityBio tiene un producto
+                    aprobado con ingresos crecientes. El crecimiento del 700% en ANKTIVA y la
+                    reducción de pérdidas muestran progreso hacia la sostenibilidad. El pipeline
+                    tiene múltiples catalizadores en 2026.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 05</div>
+            <h2 class="section-title">Timeline de Catalizadores 2026</h2>
+            <p class="section-subtitle">Eventos clave que moverán la acción</p>
+
+            <div class="timeline">
+                <div class="timeline-item positive">
+                    <div class="timeline-date">Enero 2026</div>
+                    <div class="timeline-title">Rally del 227%</div>
+                    <div class="timeline-desc">
+                        12 días consecutivos de subida. Aprobación Arabia Saudí + FDA progress +
+                        short squeeze. Hedge funds como Citadel y Renaissance aumentan posiciones.
+                    </div>
+                </div>
+                <div class="timeline-item positive">
+                    <div class="timeline-date">Enero 2026</div>
+                    <div class="timeline-title">Aprobación Arabia Saudí (NSCLC)</div>
+                    <div class="timeline-desc">
+                        Primera aprobación mundial para ANKTIVA en cáncer de pulmón metastásico.
+                        Validación del pipeline más allá de vejiga.
+                    </div>
+                </div>
+                <div class="timeline-item neutral">
+                    <div class="timeline-date">Q1 2026</div>
+                    <div class="timeline-title">FDA Resubmisión (Papillary Bladder)</div>
+                    <div class="timeline-desc">
+                        Información adicional solicitada por FDA se enviará en 30 días.
+                        No requiere nuevo ensayo clínico. Potencial aprobación H1 2026.
+                    </div>
+                </div>
+                <div class="timeline-item neutral">
+                    <div class="timeline-date">Q2 2026</div>
+                    <div class="timeline-title">Full Enrollment BCG-naïve trial</div>
+                    <div class="timeline-desc">
+                        QUILT-2.005 alcanzará full enrollment. 84% vs 52% respuesta completa
+                        en interim analysis. BLA submission planeado fin de año.
+                    </div>
+                </div>
+                <div class="timeline-item positive">
+                    <div class="timeline-date">2026</div>
+                    <div class="timeline-title">Fase 3 Global NSCLC (ResQ201A)</div>
+                    <div class="timeline-desc">
+                        Ensayo registracional iniciado. Si es exitoso, podría llevar a
+                        aprobación FDA para cáncer de pulmón en 2027-2028.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 06</div>
+            <h2 class="section-title">Patrick Soon-Shiong</h2>
+            <p class="section-subtitle">El visionario controversial detrás de ImmunityBio</p>
+
+            <div class="data-grid">
+                <div class="data-card" style="border-left: 4px solid var(--biotech);">
+                    <h4>Rol</h4>
+                    <div class="value" style="font-size: 1.2rem;">Founder & Chairman</div>
+                    <div class="change neutral">Global Chief Scientific Officer</div>
+                </div>
+                <div class="data-card" style="border-left: 4px solid var(--success);">
+                    <h4>Net Worth</h4>
+                    <div class="value" style="font-size: 1.2rem;">~$7B</div>
+                    <div class="change positive">Skin in the game</div>
+                </div>
+                <div class="data-card" style="border-left: 4px solid var(--warning);">
+                    <h4>Reconocimiento</h4>
+                    <div class="value" style="font-size: 1rem;">Top 100 Oncology</div>
+                    <div class="change neutral">OncoDaily 2025</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Perfil del Fundador</h4>
+                <ul style="color: var(--text-light); line-height: 2;">
+                    <li><strong>Background:</strong> Cirujano, científico, billonario</li>
+                    <li><strong>Éxito previo:</strong> Vendió Abraxane (cáncer) por $2.9B a Celgene</li>
+                    <li><strong>Controversias:</strong> LA Times (dueño), NantHealth fracasó</li>
+                    <li><strong>Commitment:</strong> Ha invertido personalmente $billions en ImmunityBio</li>
+                    <li><strong>Visión:</strong> "Cancer Moonshot" - cura personalizada para cada paciente</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 07</div>
+            <h2 class="section-title">Checklist de Red Flags</h2>
+            <p class="section-subtitle">Señales de alerta para inversores</p>
+
+            <div class="flag-grid">
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Aún no rentable</h4>
+                        <p>Pérdidas de ~$290M en 2025 a pesar de crecimiento de ingresos</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Competencia en inmunoterapia</h4>
+                        <p>Bristol-Myers, Merck, Roche dominan el espacio. Difícil competir</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Volatilidad extrema</h4>
+                        <p>+227% en 12 días sugiere especulación y potencial reversión</p>
+                    </div>
+                </div>
+                <div class="flag-item warning">
+                    <div class="flag-icon">⚠️</div>
+                    <div class="flag-content">
+                        <h4>Historia mixta de Soon-Shiong</h4>
+                        <p>NantHealth fue un fracaso. Track record no es perfecto</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Producto aprobado con ingresos reales</h4>
+                        <p>ANKTIVA genera $113M/año y crece 700%</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Múltiples catalizadores 2026</h4>
+                        <p>FDA resubmisión, full enrollment, nueva indicación</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Insider conviction</h4>
+                        <p>Soon-Shiong ha puesto $billions de su propio dinero</p>
+                    </div>
+                </div>
+                <div class="flag-item ok">
+                    <div class="flag-icon">✅</div>
+                    <div class="flag-content">
+                        <h4>Smart money entrando</h4>
+                        <p>Renaissance, Citadel aumentando posiciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-number">Sección 08</div>
+            <h2 class="section-title">Valoración a 5 Años</h2>
+            <p class="section-subtitle">Escenarios proyectados</p>
+
+            <div class="scenario-cards">
+                <div class="scenario-card bull">
+                    <h4>🚀 Éxito del Pipeline</h4>
+                    <div class="price">$25+</div>
+                    <div class="return positive">+353%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Múltiples aprobaciones FDA. NSCLC exitoso. Ingresos $1B+.
+                        Rentabilidad operativa. Partnership o adquisición.
+                    </p>
+                    <div class="probability">Probabilidad: 25%</div>
+                </div>
+                <div class="scenario-card base">
+                    <h4>📊 Crecimiento Moderado</h4>
+                    <div class="price">$8</div>
+                    <div class="return positive">+45%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        Vejiga domina pero NSCLC decepciona. Ingresos $300-400M.
+                        Breakeven tardío. Dilución moderada.
+                    </p>
+                    <div class="probability">Probabilidad: 45%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <h4>💀 Fracaso de Ensayos</h4>
+                    <div class="price">$1</div>
+                    <div class="return negative">-82%</div>
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                        FDA rechaza expansiones. Ensayo NSCLC falla.
+                        Competencia aplasta. Se acaba el cash.
+                    </p>
+                    <div class="probability">Probabilidad: 30%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 15px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">📊 Valor Esperado</h4>
+                <p style="color: var(--text-light);">
+                    <strong>Valor ponderado: $8.95</strong> (+62% desde ~$5.52)<br>
+                    El valor esperado es positivo, pero la dispersión de resultados es enorme.
+                    Esto es una apuesta asimétrica: si funciona, puede multiplicar varias veces;
+                    si falla, puede perder 80%+.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-number">Sección 09</div>
+            <h2 class="section-title">Conclusión y Recomendaciones</h2>
+            <p class="section-subtitle">Veredicto final del análisis</p>
+
+            <div class="conclusion-box">
+                <h3>🧬 ESPECULATIVA CON FUNDAMENTO - Para Risk Takers</h3>
+                <p>
+                    ImmunityBio es la mejor de las especulativas analizadas. A diferencia de ASTS u Oklo,
+                    tiene un producto aprobado con ingresos de $113M creciendo 700%. Patrick Soon-Shiong
+                    tiene skin in the game y el pipeline tiene catalizadores concretos en 2026.
+                    Sin embargo, el rally del 227% en 12 días sugiere que mucho optimismo ya está
+                    priced in. Esperar corrección sería prudente.
+                </p>
+                <div class="action-buttons">
+                    <span class="action-btn primary">Watchlist - Esperar Pullback</span>
+                    <span class="action-btn secondary">Máximo 2-3% del Portfolio</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Alertas de Seguimiento</h3>
+                <ul style="color: var(--text-light); line-height: 2;">
+                    <li><strong>Entrada ideal:</strong> Si corrige a $3.50-4.00 (-30% desde máximos)</li>
+                    <li><strong>Catalizador:</strong> FDA response a resubmisión papillary bladder</li>
+                    <li><strong>Risk event:</strong> Si ensayo NSCLC muestra datos negativos</li>
+                    <li><strong>Cash runway:</strong> $242M debe durar hasta 2027 o necesitarán raise</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--primary); color: white; padding: 2rem; text-align: center;">
+        <p style="opacity: 0.8; font-size: 0.875rem;">Análisis generado por Agente /analista · FMA System · 27 Enero 2026</p>
+        <p style="opacity: 0.6; font-size: 0.75rem; margin-top: 0.5rem;">Este análisis es solo informativo. Realiza tu propia investigación antes de invertir.</p>
+    </footer>
+</body>
+</html>

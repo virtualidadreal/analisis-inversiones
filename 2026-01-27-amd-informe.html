@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Advanced Micro Devices (AMD)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ED1C24;
+            --primary-light: #FDE8E9;
+            --secondary: #1A1A1A;
+            --accent: #00A651;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --danger: #C62828;
+            --bg-light: #F9FAFB;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .page { max-width: 1000px; margin: 0 auto; background: white; min-height: 100vh; }
+
+        .cover {
+            background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%);
+            color: white;
+            padding: 80px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .report-type { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .report-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; opacity: 0.8; }
+        .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .company-name { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; margin-bottom: 16px; line-height: 1.1; }
+        .company-ticker { font-family: 'JetBrains Mono', monospace; font-size: 24px; opacity: 0.9; margin-bottom: 40px; }
+
+        .verdict-box {
+            background: rgba(237,28,36,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(237,28,36,0.3);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        .verdict-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 12px; }
+        .verdict-text { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+        .verdict-score { font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700; }
+        .verdict-score span { font-size: 24px; opacity: 0.7; }
+        .cover-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .analyst-info { font-size: 14px; opacity: 0.8; }
+        .price-info { text-align: right; }
+        .current-price { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; }
+        .price-label { font-size: 12px; opacity: 0.8; }
+
+        section { padding: 60px; border-bottom: 1px solid #E5E5E5; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--secondary); margin-bottom: 32px; }
+        h3 { font-size: 20px; font-weight: 600; color: var(--secondary); margin: 32px 0 16px; }
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+
+        .highlight-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box p { margin: 0; color: var(--text-primary); font-weight: 500; }
+
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #E5E5E5; }
+        th { font-weight: 600; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        td { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .warning { color: var(--warning); }
+        .neutral { color: var(--text-secondary); }
+
+        .score-dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 32px 0; }
+        .score-card { background: var(--bg-light); border-radius: 12px; padding: 24px 16px; text-align: center; }
+        .score-card.highlight { background: var(--primary); color: white; }
+        .score-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .score-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .score-max { font-size: 14px; opacity: 0.6; }
+
+        .progress-container { margin: 16px 0; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .progress-bar { height: 8px; background: #E5E5E5; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; }
+        .progress-fill.good { background: #66BB6A; }
+
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .metric-card { background: var(--bg-light); border-radius: 12px; padding: 24px; }
+        .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: var(--secondary); }
+        .metric-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .metric-change { font-size: 12px; margin-top: 8px; }
+
+        .timeline { position: relative; padding-left: 32px; }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #E5E5E5; }
+        .timeline-item { position: relative; padding-bottom: 32px; }
+        .timeline-item::before { content: ''; position: absolute; left: -29px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary); }
+        .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); margin-bottom: 4px; }
+        .timeline-title { font-weight: 600; margin-bottom: 4px; }
+        .timeline-desc { font-size: 14px; color: var(--text-secondary); }
+
+        .moat-visual { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px 0; }
+        .moat-level { width: 80px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+        .moat-level.active { background: var(--primary); color: white; }
+        .moat-level.inactive { background: #E5E5E5; color: #999; }
+
+        .scenarios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .scenario-card { border-radius: 12px; padding: 32px 24px; text-align: center; }
+        .scenario-card.bull { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
+        .scenario-card.base { background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); }
+        .scenario-card.bear { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); }
+        .scenario-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+        .scenario-return { font-size: 14px; font-weight: 600; }
+        .scenario-prob { font-size: 12px; opacity: 0.7; margin-top: 8px; }
+
+        .red-flags { display: grid; gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #FFF5F5; border-radius: 8px; border-left: 4px solid var(--danger); }
+        .flag-item.yellow { background: #FFFBF0; border-left-color: var(--warning); }
+        .flag-item.green { background: #F0FFF4; border-left-color: var(--success); }
+        .flag-icon { font-size: 24px; }
+        .flag-content h4 { font-weight: 600; margin-bottom: 4px; }
+        .flag-content p { font-size: 14px; margin: 0; }
+
+        .conclusion-box { background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%); color: white; border-radius: 16px; padding: 48px; text-align: center; }
+        .conclusion-verdict { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 24px; color: var(--primary); }
+        .conclusion-summary { font-size: 18px; max-width: 600px; margin: 0 auto 32px; opacity: 0.9; }
+        .conclusion-actions { display: flex; justify-content: center; gap: 32px; }
+        .action-item { text-align: center; }
+        .action-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 4px; }
+        .action-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; }
+
+        @media (max-width: 768px) {
+            .cover { padding: 40px 24px; }
+            section { padding: 40px 24px; }
+            .company-name { font-size: 48px; }
+            .score-dashboard { grid-template-columns: repeat(3, 1fr); }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .scenarios-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- PORTADA -->
+        <section class="cover">
+            <div class="cover-header">
+                <div class="report-type">Informe de Inversión Value-Growth</div>
+                <div class="report-date">27 Enero 2026</div>
+            </div>
+            <div class="cover-main">
+                <h1 class="company-name">Advanced<br>Micro Devices</h1>
+                <div class="company-ticker">NASDAQ: AMD | Tecnología - Semiconductores</div>
+                <div class="verdict-box">
+                    <div class="verdict-label">Veredicto del Análisis</div>
+                    <div class="verdict-text">BUENA - Challenger AI</div>
+                    <div class="verdict-score">74<span>/100</span></div>
+                </div>
+            </div>
+            <div class="cover-footer">
+                <div class="analyst-info">Análisis: Sistema FMA<br>Metodología: Value-Growth Investing</div>
+                <div class="price-info">
+                    <div class="current-price">$206.13</div>
+                    <div class="price-label">Precio al cierre</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+        <section>
+            <div class="section-number">Sección 01</div>
+            <h2>Explicación Simple</h2>
+            <div class="highlight-box">
+                <p>AMD es el challenger que está plantando cara a NVIDIA en la carrera de chips para inteligencia artificial. Imagina a NVIDIA como Apple (dominante, premium) y AMD como Samsung (competitivo, ganando terreno). AMD está pasando de ser "la alternativa barata" a convertirse en un player serio con contratos con OpenAI, Microsoft y Meta.</p>
+            </div>
+            <h3>Lo que hace AMD</h3>
+            <p>AMD diseña chips en tres categorías: (1) GPUs para Data Center/AI (Instinct MI300/MI350), donde compite con NVIDIA, (2) CPUs para servidores (EPYC), donde domina vs Intel con >50% cuota, y (3) CPUs/GPUs para PCs y gaming (Ryzen/Radeon). El negocio de Data Center es el motor de crecimiento (+94% en 2024).</p>
+            <h3>El Turnaround de Lisa Su</h3>
+            <p>Cuando Lisa Su se convirtió en CEO en 2014, AMD valía $3B y estaba al borde de la bancarrota. Hoy vale $200B+. Es uno de los turnarounds corporativos más impresionantes de la historia, comparable a Nadella en Microsoft. Forbes la nombró una de las 10 mujeres más poderosas del mundo en 2025.</p>
+            <h3>La batalla contra NVIDIA</h3>
+            <p>NVIDIA tiene ~85-90% del mercado de AI GPUs gracias a su ecosistema de software CUDA. AMD está cerrando esa brecha con ROCm 7 (su alternativa a CUDA) y hardware competitivo (MI300X tiene 2.4x más memoria que H100). OpenAI acaba de firmar un acuerdo para 6 gigawatts de GPUs AMD.</p>
+            <div class="highlight-box">
+                <p><strong>En una frase:</strong> AMD es la mejor apuesta como "segundo ganador" de la revolución AI. No necesita derrotar a NVIDIA - solo capturar el 10-15% de un mercado de $400B es suficiente para triplicar su negocio.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: SCORING DASHBOARD -->
+        <section>
+            <div class="section-number">Sección 02</div>
+            <h2>Dashboard de Valoración</h2>
+            <div class="score-dashboard">
+                <div class="score-card">
+                    <div class="score-value">17</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Negocio</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">15</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Finanzas</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">12</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Moat</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">18</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Gestión</div>
+                </div>
+                <div class="score-card highlight">
+                    <div class="score-value">12</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Valoración</div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Score Total</span>
+                    <span>74/100 - Buena</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill good" style="width: 74%"></div>
+                </div>
+            </div>
+            <h3>Desglose del Scoring</h3>
+            <table>
+                <thead>
+                    <tr><th>Pilar</th><th>Score</th><th>Factores Clave</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Calidad del Negocio</td><td class="positive">17/20</td><td>Data Center +94%, OpenAI/Oracle/Meta contracts, diversificado</td></tr>
+                    <tr><td>Solidez Financiera</td><td class="positive">15/20</td><td>$7.2B cash, FCF récord, márgenes mejorando a 54%</td></tr>
+                    <tr><td>Ventaja Competitiva</td><td class="warning">12/20</td><td>Hardware competitivo pero CUDA software moat de NVIDIA brutal</td></tr>
+                    <tr><td>Gestión</td><td class="positive">18/20</td><td>Lisa Su excepcional, turnaround $3B→$200B, alineación total</td></tr>
+                    <tr><td>Valoración</td><td class="warning">12/20</td><td>P/E 34x forward alto, pero crecimiento 35%+ lo justifica parcialmente</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 3: ANÁLISIS DEL NEGOCIO -->
+        <section>
+            <div class="section-number">Sección 03</div>
+            <h2>Análisis del Negocio</h2>
+            <h3>Modelo de Negocio</h3>
+            <p>AMD es una "fabless" semiconductor company - diseña chips pero no los fabrica (usa TSMC). Esto le permite ser ágil y evitar el capex masivo de fábricas. Compite en CPU (vs Intel), GPU para gaming (vs NVIDIA), y GPU para AI/Data Center (vs NVIDIA).</p>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$25.8B</div>
+                    <div class="metric-label">Ingresos FY2024</div>
+                    <div class="metric-change positive">+24% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$9.2B</div>
+                    <div class="metric-label">Ingresos Q3 2025</div>
+                    <div class="metric-change positive">+36% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$12.6B</div>
+                    <div class="metric-label">Data Center FY2024</div>
+                    <div class="metric-change positive">+94% YoY</div>
+                </div>
+            </div>
+            <h3>Segmentos de Negocio</h3>
+            <table>
+                <thead>
+                    <tr><th>Segmento</th><th>Revenue</th><th>Crecimiento</th><th>Tendencia</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Data Center (EPYC + Instinct)</td><td>$4.3B Q3</td><td class="positive">+22% YoY</td><td>Motor principal, AI boom</td></tr>
+                    <tr><td>Client (Ryzen CPUs)</td><td>$1.9B Q3</td><td class="positive">+29% YoY</td><td>Recuperación PC</td></tr>
+                    <tr><td>Gaming (Radeon + consolas)</td><td>$0.5B Q3</td><td class="negative">-69% YoY</td><td>Ciclo bajo consolas</td></tr>
+                    <tr><td>Embedded</td><td>$0.9B Q3</td><td class="negative">-25% YoY</td><td>Digiriendo inventario</td></tr>
+                </tbody>
+            </table>
+            <h3>AI GPU Revenue</h3>
+            <div class="highlight-box">
+                <p><strong>Instinct AI GPUs:</strong> $5B en FY2024 (desde casi $0 en 2022). Lisa Su proyecta "tens of billions in AI revenue by 2027". Con OpenAI (6GW), Oracle (50K chips), y Meta corriendo Llama en MI300X, la tracción es real.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: EVOLUCIÓN FINANCIERA -->
+        <section>
+            <div class="section-number">Sección 04</div>
+            <h2>Evolución Financiera (5 años)</h2>
+            <table>
+                <thead>
+                    <tr><th>Métrica</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025E</th><th>Tendencia</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Ingresos ($B)</td><td>$16.4</td><td>$23.6</td><td>$22.7</td><td>$25.8</td><td>$35.0</td><td class="positive">+113% (5Y)</td></tr>
+                    <tr><td>Gross Margin</td><td>48%</td><td>45%</td><td>47%</td><td>49%</td><td>54%</td><td class="positive">+6pts</td></tr>
+                    <tr><td>EPS (non-GAAP)</td><td>$2.79</td><td>$3.50</td><td>$2.65</td><td>$3.31</td><td>$5.00E</td><td class="positive">+79% (5Y)</td></tr>
+                    <tr><td>Data Center ($B)</td><td>$3.7</td><td>$6.0</td><td>$6.5</td><td>$12.6</td><td>$20.0E</td><td class="positive">+441% (5Y)</td></tr>
+                    <tr><td>FCF ($B)</td><td>$3.2</td><td>$1.3</td><td>$1.5</td><td>$2.8</td><td>$5.0E</td><td class="positive">Récord 2025</td></tr>
+                </tbody>
+            </table>
+            <h3>Métricas de Rentabilidad</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">54%</div>
+                    <div class="metric-label">Gross Margin (non-GAAP)</div>
+                    <div class="metric-change positive">+5pts vs 2023</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24%</div>
+                    <div class="metric-label">Operating Margin Q3</div>
+                    <div class="metric-change positive">Expandiendo</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$7.2B</div>
+                    <div class="metric-label">Cash Position</div>
+                    <div class="metric-change positive">Fortaleza</div>
+                </div>
+            </div>
+            <h3>Q2 2025 Export Control Impact</h3>
+            <div class="highlight-box">
+                <p><strong>One-time charge:</strong> $800M en Q2 2025 por restricciones de exportación de MI308 a China. Impacto temporal pero demuestra riesgo geopolítico del negocio semiconductor.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: COMPARATIVA AMD vs NVIDIA -->
+        <section>
+            <div class="section-number">Sección 05</div>
+            <h2>Comparativa: AMD vs NVIDIA</h2>
+            <table>
+                <thead>
+                    <tr><th>Métrica</th><th>AMD</th><th>NVIDIA</th><th>Ventaja</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cuota AI GPU</td><td>~10%</td><td class="positive">~85-90%</td><td>NVIDIA</td></tr>
+                    <tr><td>Revenue Data Center</td><td>$4.3B Q3</td><td class="positive">$51.2B Q3</td><td>NVIDIA (12x)</td></tr>
+                    <tr><td>Crecimiento DC</td><td class="positive">+22%</td><td>+112%</td><td>NVIDIA</td></tr>
+                    <tr><td>Gross Margin</td><td>54%</td><td class="positive">75%</td><td>NVIDIA</td></tr>
+                    <tr><td>P/E Forward</td><td class="positive">34x</td><td>24x</td><td>NVIDIA (más barato)</td></tr>
+                    <tr><td>MI300X Memory</td><td class="positive">192GB</td><td>80GB (H100)</td><td>AMD (2.4x)</td></tr>
+                    <tr><td>Software Ecosystem</td><td>ROCm</td><td class="positive">CUDA</td><td>NVIDIA (dominante)</td></tr>
+                    <tr><td>OpenAI Partnership</td><td class="positive">6GW deal</td><td>Incumbent</td><td>Ambos</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>La tesis AMD:</strong> No necesita ganar a NVIDIA. Si captura 15% de un mercado de $400B, eso es $60B en revenue - más del doble de su Data Center actual. Es el "segundo ganador" de AI.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: TIMELINE -->
+        <section>
+            <div class="section-number">Sección 06</div>
+            <h2>Timeline de Eventos Críticos</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Noviembre 2025</div>
+                    <div class="timeline-title">OpenAI Partnership</div>
+                    <div class="timeline-desc">AMD anuncia acuerdo estratégico con OpenAI para 6 gigawatts de GPUs. Primer despliegue MI450 en H2 2026.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q3 2025</div>
+                    <div class="timeline-title">Revenue récord $9.2B</div>
+                    <div class="timeline-desc">Data Center $4.3B. MI350 es el producto de más rápido crecimiento en historia de AMD. Free cash flow récord.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025</div>
+                    <div class="timeline-title">Oracle 50K MI450</div>
+                    <div class="timeline-desc">Oracle anuncia despliegue de 50,000 chips MI450 en OCI. Validación de cliente enterprise clave.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">Meta en MI300X</div>
+                    <div class="timeline-desc">Meta corre 100% de tráfico Llama 405B en MI300X. Prueba de que ROCm funciona en producción real.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">Data Center +94%</div>
+                    <div class="timeline-desc">$12.6B en Data Center, de los cuales $5B son Instinct AI GPUs. Punto de inflexión del negocio AI.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2014</div>
+                    <div class="timeline-title">Lisa Su CEO</div>
+                    <div class="timeline-desc">AMD valía $3B y casi en bancarrota. Inicia turnaround que llevará a $200B+ market cap.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: MOAT ANALYSIS -->
+        <section>
+            <div class="section-number">Sección 07</div>
+            <h2>Análisis del Moat</h2>
+            <div class="moat-visual">
+                <div class="moat-level inactive">Sin Moat</div>
+                <div class="moat-level active">Estrecho</div>
+                <div class="moat-level inactive">Moderado</div>
+                <div class="moat-level inactive">Ancho</div>
+            </div>
+            <h3>Fuentes de Ventaja Competitiva</h3>
+            <div class="red-flags">
+                <div class="flag-item green">
+                    <div class="flag-icon">1</div>
+                    <div class="flag-content">
+                        <h4>Diseño de Chips (FUERTE)</h4>
+                        <p>Arquitectura Zen (CPUs) y CDNA (GPUs) son competitivas. MI300X tiene especificaciones superiores en memoria (192GB vs 80GB). Chiplet design innovador.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">2</div>
+                    <div class="flag-content">
+                        <h4>EPYC Dominance (FUERTE)</h4>
+                        <p>AMD ha tomado >50% del mercado de CPUs para servidores vs Intel. Esta posición en Data Center abre puertas para vender GPUs al mismo cliente.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">3</div>
+                    <div class="flag-content">
+                        <h4>ROCm Software (MEJORANDO)</h4>
+                        <p>ROCm 7 cierra la brecha vs CUDA. Meta y Microsoft lo usan en producción. Pero aún falta madurez de ecosystem y developer mindshare.</p>
+                    </div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-icon">X</div>
+                    <div class="flag-content">
+                        <h4>CUDA Lock-in (DEBILIDAD)</h4>
+                        <p>NVIDIA tiene 15+ años de inversión en CUDA. La mayoría de código AI está escrito para CUDA. AMD necesita que clientes reescriban código o usen translation layers.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Veredicto Moat:</strong> Moat estrecho basado en diseño de chips y posición en EPYC. El software ecosystem es el talón de Aquiles - CUDA de NVIDIA sigue siendo el standard. AMD gana cuando los clientes priorizan precio/performance sobre software maturity.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 8: MANAGEMENT -->
+        <section>
+            <div class="section-number">Sección 08</div>
+            <h2>Evaluación del Management</h2>
+            <table>
+                <thead>
+                    <tr><th>Ejecutivo</th><th>Cargo</th><th>Ownership</th><th>Track Record</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Lisa Su</td><td>Chair, President & CEO</td><td>4.1M shares (~$850M)</td><td class="positive">$3B→$200B turnaround</td></tr>
+                    <tr><td>Mark Papermaster</td><td>CTO</td><td>Menor</td><td>Arquitecto de Zen/CDNA</td></tr>
+                    <tr><td>Jean Hu</td><td>CFO</td><td>Menor</td><td>Ex-Marvell, sólida</td></tr>
+                </tbody>
+            </table>
+            <h3>Lisa Su: El Factor Diferencial</h3>
+            <div class="highlight-box">
+                <p>Lisa Su es una de las CEOs más respetadas de la industria tech. PhD MIT, ingeniera de semiconductores. Bajo su liderazgo (2014-presente), AMD pasó de casi bancarrota a superar a Intel en market cap. Forbes Top 10 mujeres más poderosas 2025. Time "Architects of AI" 2025.</p>
+            </div>
+            <h3>Insider Activity</h3>
+            <p>Lisa Su vende acciones regularmente via 10b5-1 plan (compensación), pero mantiene ~4.1M shares (~$850M). Las ventas son rutinarias de ejecutivos tech, no señal de alarma. Alineación total con accionistas.</p>
+        </section>
+
+        <!-- SECCIÓN 9: RED FLAGS -->
+        <section>
+            <div class="section-number">Sección 09</div>
+            <h2>Checklist de Red Flags</h2>
+            <div class="red-flags">
+                <div class="flag-item">
+                    <div class="flag-icon">X</div>
+                    <div class="flag-content">
+                        <h4>CUDA Software Moat</h4>
+                        <p>El ecosistema CUDA de NVIDIA es un moat formidable. La mayoría del código AI está escrito para CUDA. AMD pelea una batalla de software además de hardware.</p>
+                    </div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-icon">X</div>
+                    <div class="flag-content">
+                        <h4>Riesgo Geopolítico China</h4>
+                        <p>$800M charge en Q2 2025 por restricciones de exportación. China era mercado importante para AI chips. Riesgo de más restricciones.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Valoración Elevada</h4>
+                        <p>P/E forward 34x es caro. Si el crecimiento de AI decepciona, múltiplo puede comprimir significativamente.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Dependencia de TSMC</h4>
+                        <p>AMD depende 100% de TSMC para fabricación. Cualquier disrupción (Taiwan, capacidad) afecta directamente.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Balance Sheet Sólido</h4>
+                        <p>$7.2B cash, FCF récord, bajo apalancamiento. Puede invertir agresivamente en I+D y aguantar guerra de precios.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Diversificación</h4>
+                        <p>No es 100% AI. EPYC CPUs dominan servidores, Ryzen sólido en PCs. Embedded y consolas diversifican ingresos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: VALORACIÓN 5 AÑOS -->
+        <section>
+            <div class="section-number">Sección 10</div>
+            <h2>Valoración a 5 Años</h2>
+            <h3>Escenarios de Precio Objetivo</h3>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull">
+                    <div class="scenario-label">Escenario Alcista</div>
+                    <div class="scenario-price">$450</div>
+                    <div class="scenario-return positive">+118% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-label">Escenario Base</div>
+                    <div class="scenario-price">$320</div>
+                    <div class="scenario-return positive">+55% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 50%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <div class="scenario-label">Escenario Bajista</div>
+                    <div class="scenario-price">$140</div>
+                    <div class="scenario-return negative">-32% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                </div>
+            </div>
+            <h3>Supuestos por Escenario</h3>
+            <table>
+                <thead>
+                    <tr><th>Variable</th><th>Bull</th><th>Base</th><th>Bear</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Revenue 2030</td><td class="positive">$80B</td><td>$55B</td><td class="negative">$35B</td></tr>
+                    <tr><td>Cuota AI GPU</td><td class="positive">20%</td><td>12%</td><td class="negative">5%</td></tr>
+                    <tr><td>Data Center Growth</td><td class="positive">45% CAGR</td><td>30% CAGR</td><td class="negative">15% CAGR</td></tr>
+                    <tr><td>Gross Margin</td><td class="positive">58%</td><td>54%</td><td class="negative">48%</td></tr>
+                    <tr><td>P/E Terminal</td><td>30x</td><td>25x</td><td>18x</td></tr>
+                    <tr><td>EPS 2030</td><td>$15.00</td><td>$12.80</td><td>$7.80</td></tr>
+                </tbody>
+            </table>
+            <h3>Precio Objetivo Ponderado</h3>
+            <div class="highlight-box">
+                <p><strong>Precio objetivo 5 años:</strong> $305 (ponderado por probabilidades)</p>
+                <p>Retorno esperado: +48% (CAGR ~8%/año)</p>
+                <p><strong>Validación:</strong> Para justificar $206 hoy, AMD necesita crecer EPS ~35% anual durante 5 años. Ambicioso pero alcanzable si ejecuta en AI.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 11: ALERTAS DE SEGUIMIENTO -->
+        <section>
+            <div class="section-number">Sección 11</div>
+            <h2>Alertas de Seguimiento</h2>
+            <table>
+                <thead>
+                    <tr><th>Alerta</th><th>Condición</th><th>Acción</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cuota AI GPU</td><td>Si supera 15%</td><td>Upgrade tesis, considerar añadir</td></tr>
+                    <tr><td>MI450/MI500 launch</td><td>H2 2026 / 2027</td><td>Verificar benchmarks vs Blackwell</td></tr>
+                    <tr><td>OpenAI deployment</td><td>Primeros 1GW H2 2026</td><td>Validación de partnership</td></tr>
+                    <tr><td>ROCm adoption</td><td>Más anuncios hyperscalers</td><td>Software gap cerrándose</td></tr>
+                    <tr><td>Restricciones China</td><td>Nuevas regulaciones</td><td>Impacto en guidance</td></tr>
+                    <tr><td>NVIDIA Blackwell</td><td>Performance vs MI350/MI450</td><td>Competitividad relativa</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 12: CONCLUSIÓN FINAL -->
+        <section>
+            <div class="section-number">Sección 12</div>
+            <h2>Conclusión Final</h2>
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">BUENA INVERSIÓN</div>
+                <div class="conclusion-verdict" style="font-size: 24px; color: white;">Challenger AI con Upside Significativo</div>
+                <p class="conclusion-summary">
+                    AMD es la mejor apuesta como "segundo ganador" de la revolución AI. Lisa Su ha demostrado ejecución excepcional, los partnerships con OpenAI/Oracle/Meta validan la tecnología, y solo necesita capturar el 10-15% del mercado de $400B para multiplicar su negocio. Riesgo: CUDA moat de NVIDIA.
+                </p>
+                <div class="conclusion-actions">
+                    <div class="action-item">
+                        <div class="action-label">Score Final</div>
+                        <div class="action-value">74/100</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Precio Objetivo 5Y</div>
+                        <div class="action-value">$305</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Upside Potencial</div>
+                        <div class="action-value">+48%</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Riesgo</div>
+                        <div class="action-value">MEDIO-ALTO</div>
+                    </div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">Recomendación de Acción</h3>
+            <div class="highlight-box">
+                <p><strong>Para inversores growth:</strong> Posición del 3-5% del portfolio. AMD es un complemento a NVIDIA, no un sustituto. Ambas pueden ganar en un mercado de $400B+.</p>
+                <p><strong>Precio de entrada ideal:</strong> $180-200 para mayor margen de seguridad. A $206 actual es fair value.</p>
+                <p><strong>Catalizador:</strong> Lanzamiento MI450 (H2 2026) y resultados del partnership OpenAI serán claves para re-rating.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section style="background: var(--secondary); color: white; text-align: center; padding: 40px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">
+                Informe generado por Sistema FMA | Metodología Value-Growth Investing<br>
+                Este informe no constituye asesoramiento financiero. Invertir conlleva riesgos.<br>
+                Fuentes: AMD IR, SEC Filings, CNBC, SemiAnalysis, TipRanks<br>
+                27 Enero 2026
+            </p>
+        </section>
+    </div>
+</body>
+</html>

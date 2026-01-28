@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Broadcom Inc. (AVGO)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #CC092F;
+            --primary-light: #FCE8EC;
+            --secondary: #1A1A1A;
+            --accent: #00A3E0;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --danger: #C62828;
+            --bg-light: #F9FAFB;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-light); color: var(--text-primary); line-height: 1.7; }
+        .page { max-width: 1000px; margin: 0 auto; background: white; min-height: 100vh; }
+        .cover { background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%); color: white; padding: 80px 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .report-type { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
+        .report-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; opacity: 0.8; }
+        .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .company-name { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; margin-bottom: 16px; line-height: 1.1; }
+        .company-ticker { font-family: 'JetBrains Mono', monospace; font-size: 24px; opacity: 0.9; margin-bottom: 40px; }
+        .verdict-box { background: rgba(204,9,47,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(204,9,47,0.3); border-radius: 16px; padding: 40px; max-width: 500px; }
+        .verdict-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 12px; }
+        .verdict-text { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+        .verdict-score { font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700; }
+        .verdict-score span { font-size: 24px; opacity: 0.7; }
+        .cover-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .analyst-info { font-size: 14px; opacity: 0.8; }
+        .price-info { text-align: right; }
+        .current-price { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; }
+        .price-label { font-size: 12px; opacity: 0.8; }
+        section { padding: 60px; border-bottom: 1px solid #E5E5E5; }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--secondary); margin-bottom: 32px; }
+        h3 { font-size: 20px; font-weight: 600; color: var(--secondary); margin: 32px 0 16px; }
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        .highlight-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 24px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #E5E5E5; }
+        th { font-weight: 600; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        td { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .warning { color: var(--warning); }
+        .neutral { color: var(--text-secondary); }
+        .score-dashboard { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 32px 0; }
+        .score-card { background: var(--bg-light); border-radius: 12px; padding: 24px 16px; text-align: center; }
+        .score-card.highlight { background: var(--primary); color: white; }
+        .score-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .score-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .score-max { font-size: 14px; opacity: 0.6; }
+        .progress-container { margin: 16px 0; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .progress-bar { height: 8px; background: #E5E5E5; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; }
+        .progress-fill.good { background: #66BB6A; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .metric-card { background: var(--bg-light); border-radius: 12px; padding: 24px; }
+        .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: var(--secondary); }
+        .metric-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .metric-change { font-size: 12px; margin-top: 8px; }
+        .timeline { position: relative; padding-left: 32px; }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #E5E5E5; }
+        .timeline-item { position: relative; padding-bottom: 32px; }
+        .timeline-item::before { content: ''; position: absolute; left: -29px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary); }
+        .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); margin-bottom: 4px; }
+        .timeline-title { font-weight: 600; margin-bottom: 4px; }
+        .timeline-desc { font-size: 14px; color: var(--text-secondary); }
+        .moat-visual { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px 0; }
+        .moat-level { width: 80px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+        .moat-level.active { background: var(--primary); color: white; }
+        .moat-level.inactive { background: #E5E5E5; color: #999; }
+        .scenarios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+        .scenario-card { border-radius: 12px; padding: 32px 24px; text-align: center; }
+        .scenario-card.bull { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
+        .scenario-card.base { background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); }
+        .scenario-card.bear { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); }
+        .scenario-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+        .scenario-return { font-size: 14px; font-weight: 600; }
+        .scenario-prob { font-size: 12px; opacity: 0.7; margin-top: 8px; }
+        .red-flags { display: grid; gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #FFF5F5; border-radius: 8px; border-left: 4px solid var(--danger); }
+        .flag-item.yellow { background: #FFFBF0; border-left-color: var(--warning); }
+        .flag-item.green { background: #F0FFF4; border-left-color: var(--success); }
+        .flag-icon { font-size: 24px; }
+        .flag-content h4 { font-weight: 600; margin-bottom: 4px; }
+        .flag-content p { font-size: 14px; margin: 0; }
+        .conclusion-box { background: linear-gradient(135deg, var(--secondary) 0%, #2D2D2D 100%); color: white; border-radius: 16px; padding: 48px; text-align: center; }
+        .conclusion-verdict { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 24px; color: var(--primary); }
+        .conclusion-summary { font-size: 18px; max-width: 600px; margin: 0 auto 32px; opacity: 0.9; }
+        .conclusion-actions { display: flex; justify-content: center; gap: 32px; }
+        .action-item { text-align: center; }
+        .action-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 4px; }
+        .action-value { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; }
+        @media (max-width: 768px) { .cover { padding: 40px 24px; } section { padding: 40px 24px; } .company-name { font-size: 48px; } .score-dashboard { grid-template-columns: repeat(3, 1fr); } .metrics-grid { grid-template-columns: 1fr; } .scenarios-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <section class="cover">
+            <div class="cover-header">
+                <div class="report-type">Informe de Inversión Value-Growth</div>
+                <div class="report-date">27 Enero 2026</div>
+            </div>
+            <div class="cover-main">
+                <h1 class="company-name">Broadcom<br>Inc.</h1>
+                <div class="company-ticker">NASDAQ: AVGO | Tecnología - Semiconductores & Software</div>
+                <div class="verdict-box">
+                    <div class="verdict-label">Veredicto del Análisis</div>
+                    <div class="verdict-text">BUENA - AI Infrastructure</div>
+                    <div class="verdict-score">85<span>/100</span></div>
+                </div>
+            </div>
+            <div class="cover-footer">
+                <div class="analyst-info">Análisis: Sistema FMA<br>Metodología: Value-Growth Investing</div>
+                <div class="price-info">
+                    <div class="current-price">$351.72</div>
+                    <div class="price-label">Precio al cierre | Market Cap $1.6T</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 01</div>
+            <h2>Explicación Simple</h2>
+            <div class="highlight-box">
+                <p>Broadcom es el "arquitecto silencioso" de la era AI. Mientras todos hablan de NVIDIA, Broadcom diseña los chips personalizados que usan Google (TPU), Meta, OpenAI, Anthropic y Apple para sus centros de datos de IA. También domina el mercado de networking con el 90% de los switches que conectan los servidores AI.</p>
+            </div>
+            <h3>Lo que hace Broadcom</h3>
+            <p>Broadcom opera en dos segmentos: (1) Semiconductores - chips personalizados (ASICs) para hyperscalers y networking para data centers, y (2) Software de Infraestructura - VMware, que virtualiza los servidores de las empresas. Es como diseñar tanto los cerebros (chips AI) como el sistema nervioso (networking) de la infraestructura de IA.</p>
+            <h3>Por qué es diferente a NVIDIA</h3>
+            <p>NVIDIA vende GPUs "estándar" que cualquier empresa puede comprar. Broadcom diseña chips PERSONALIZADOS para cada hyperscaler. Google no quiere usar los mismos chips que Meta - quiere algo optimizado para sus necesidades específicas. Broadcom es el socio de diseño exclusivo para estos proyectos multimillonarios.</p>
+            <h3>El factor Hock Tan</h3>
+            <p>El CEO Hock Tan es considerado uno de los mejores ejecutivos de la industria tech. Su estrategia de adquirir empresas (Avago→Broadcom→CA→Symantec→VMware) y extraer sinergias ha multiplicado el valor de la empresa. VMware ($69B en 2023) ya genera $27B anuales con márgenes del 93%.</p>
+            <div class="highlight-box">
+                <p><strong>En una frase:</strong> Broadcom es la "picks and shovels" de la fiebre del oro AI - no compite por hacer el mejor modelo de IA, sino por ser el proveedor indispensable de infraestructura para todos los que lo intentan.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 02</div>
+            <h2>Dashboard de Valoración</h2>
+            <div class="score-dashboard">
+                <div class="score-card"><div class="score-value">19</div><div class="score-max">/20</div><div class="score-label">Negocio</div></div>
+                <div class="score-card"><div class="score-value">18</div><div class="score-max">/20</div><div class="score-label">Finanzas</div></div>
+                <div class="score-card"><div class="score-value">18</div><div class="score-max">/20</div><div class="score-label">Moat</div></div>
+                <div class="score-card"><div class="score-value">18</div><div class="score-max">/20</div><div class="score-label">Gestión</div></div>
+                <div class="score-card highlight"><div class="score-value">12</div><div class="score-max">/20</div><div class="score-label">Valoración</div></div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label"><span>Score Total</span><span>85/100 - Buena</span></div>
+                <div class="progress-bar"><div class="progress-fill good" style="width: 85%"></div></div>
+            </div>
+            <h3>Desglose del Scoring</h3>
+            <table>
+                <thead><tr><th>Pilar</th><th>Score</th><th>Factores Clave</th></tr></thead>
+                <tbody>
+                    <tr><td>Calidad del Negocio</td><td class="positive">19/20</td><td>Dominante en ASICs (89%) y networking (90%), VMware sticky, AI $20B</td></tr>
+                    <tr><td>Solidez Financiera</td><td class="positive">18/20</td><td>FCF $27B, EBITDA margin 67%, pagando deuda VMware agresivamente</td></tr>
+                    <tr><td>Ventaja Competitiva</td><td class="positive">18/20</td><td>Moat ancho: custom silicon relationships, networking dominance, VMware lock-in</td></tr>
+                    <tr><td>Gestión</td><td class="positive">18/20</td><td>Hock Tan excepcional, 16 años dividend growth, capital allocation best-in-class</td></tr>
+                    <tr><td>Valoración</td><td class="warning">12/20</td><td>P/E 34x forward es caro, pero PEG 1.04 y growth 35%+ justifica parcialmente</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 03</div>
+            <h2>Análisis del Negocio</h2>
+            <div class="metrics-grid">
+                <div class="metric-card"><div class="metric-value">$64B</div><div class="metric-label">Ingresos FY2025</div><div class="metric-change positive">+24% YoY</div></div>
+                <div class="metric-card"><div class="metric-value">$20B</div><div class="metric-label">AI Revenue FY2025</div><div class="metric-change positive">+65% YoY</div></div>
+                <div class="metric-card"><div class="metric-value">$43B</div><div class="metric-label">Adj EBITDA</div><div class="metric-change positive">67% margin</div></div>
+            </div>
+            <h3>Segmentos de Negocio</h3>
+            <table>
+                <thead><tr><th>Segmento</th><th>Revenue FY25</th><th>Crecimiento</th><th>Margen</th></tr></thead>
+                <tbody>
+                    <tr><td>Semiconductores Total</td><td>$37B</td><td class="positive">+24%</td><td>~60%</td></tr>
+                    <tr><td>- AI (ASICs + Networking)</td><td>$20B</td><td class="positive">+65%</td><td>Premium</td></tr>
+                    <tr><td>- Non-AI (Broadband, Storage)</td><td>$17B</td><td class="neutral">Flat</td><td>Estable</td></tr>
+                    <tr><td>Software (VMware)</td><td>$27B</td><td class="positive">+26%</td><td class="positive">93% gross, 78% op</td></tr>
+                </tbody>
+            </table>
+            <h3>Clientes de Custom AI Chips</h3>
+            <div class="highlight-box">
+                <p><strong>5 Hyperscalers confirmados:</strong> Google (TPU, ~$22B en FY26), Meta (MTIA), OpenAI (Titan, potencial $100B deal), Anthropic ($21B deal), Apple (Project Baltra). Cada relación dura décadas y tiene switching costs enormes.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 04</div>
+            <h2>Evolución Financiera (5 años)</h2>
+            <table>
+                <thead><tr><th>Métrica</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>Tendencia</th></tr></thead>
+                <tbody>
+                    <tr><td>Ingresos ($B)</td><td>$27.5</td><td>$33.2</td><td>$35.8</td><td>$51.6</td><td>$64.0</td><td class="positive">+133% (5Y)</td></tr>
+                    <tr><td>Adj EBITDA ($B)</td><td>$16.0</td><td>$20.4</td><td>$22.5</td><td>$31.8</td><td>$43.0</td><td class="positive">+169% (5Y)</td></tr>
+                    <tr><td>FCF ($B)</td><td>$13.3</td><td>$16.3</td><td>$17.6</td><td>$19.4</td><td>$26.9</td><td class="positive">+102% (5Y)</td></tr>
+                    <tr><td>AI Revenue ($B)</td><td>~$2</td><td>~$4</td><td>~$7</td><td>$12.2</td><td>$20.0</td><td class="positive">+900% (5Y)</td></tr>
+                    <tr><td>Dividend/Share</td><td>$1.46</td><td>$1.64</td><td>$1.84</td><td>$2.12</td><td>$2.36</td><td class="positive">+62% (5Y)</td></tr>
+                </tbody>
+            </table>
+            <h3>Q1 FY2026 Guidance</h3>
+            <div class="highlight-box">
+                <p><strong>AI duplica:</strong> Revenue $19.1B (+28% YoY). AI semiconductor revenue $8.2B (dobla YoY). Semiconductor total $12.3B (+50% YoY). EBITDA margin 67%.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 05</div>
+            <h2>Posición Competitiva</h2>
+            <table>
+                <thead><tr><th>Mercado</th><th>Broadcom Share</th><th>Competidores</th><th>Tendencia</th></tr></thead>
+                <tbody>
+                    <tr><td>Custom ASICs (AI)</td><td class="positive">75-89%</td><td>Marvell (~10%)</td><td>Consolidando</td></tr>
+                    <tr><td>Cloud Networking Switches</td><td class="positive">~90%</td><td>NVIDIA, Cisco</td><td>Dominante</td></tr>
+                    <tr><td>Enterprise Virtualization</td><td class="positive">~70%</td><td>Nutanix, Red Hat</td><td>VMware sticky</td></tr>
+                    <tr><td>High-end SerDes IP</td><td class="positive">80%+</td><td>Marvell, Alphawave</td><td>Moat técnico</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>"7 of 8":</strong> CEO Hock Tan afirma que 7 de los 8 clusters de AI más grandes del mundo usan soluciones Ethernet de Broadcom. Es la "plomería" invisible de la revolución AI.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 06</div>
+            <h2>Timeline de Eventos Críticos</h2>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-date">Diciembre 2025</div><div class="timeline-title">Q4 FY25: AI revenue $6.5B (+74%)</div><div class="timeline-desc">Revenue total $18B récord. Anuncia 5º cliente de custom AI chips. Guidance Q1 FY26 supera expectativas.</div></div>
+                <div class="timeline-item"><div class="timeline-date">2025</div><div class="timeline-title">Deals con OpenAI y Anthropic</div><div class="timeline-desc">OpenAI firma potencial $100B deal para chip Titan. Anthropic confirma $21B para Google TPUs (diseñados por Broadcom).</div></div>
+                <div class="timeline-item"><div class="timeline-date">Abril 2025</div><div class="timeline-title">$10B Buyback anunciado</div><div class="timeline-desc">Hock Tan anuncia programa de recompra agresivo tras corrección del mercado. Señal de confianza en valoración.</div></div>
+                <div class="timeline-item"><div class="timeline-date">Noviembre 2023</div><div class="timeline-title">Cierra adquisición VMware $69B</div><div class="timeline-desc">Mayor adquisición de la historia tech. Integración progresa mejor de lo esperado. Software margin sube a 78% op.</div></div>
+                <div class="timeline-item"><div class="timeline-date">2022</div><div class="timeline-title">Google TPU partnership madura</div><div class="timeline-desc">Después de casi una década de colaboración, Google TPU se convierte en generador de $10B+ anuales.</div></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 07</div>
+            <h2>Análisis del Moat</h2>
+            <div class="moat-visual">
+                <div class="moat-level inactive">Sin Moat</div>
+                <div class="moat-level inactive">Estrecho</div>
+                <div class="moat-level inactive">Moderado</div>
+                <div class="moat-level active">Ancho</div>
+            </div>
+            <div class="red-flags">
+                <div class="flag-item green"><div class="flag-icon">1</div><div class="flag-content"><h4>Custom ASIC Relationships (MUY FUERTE)</h4><p>Diseñar un chip personalizado con Broadcom toma 3-5 años y cientos de millones de inversión. Una vez que Google tiene TPUs con Broadcom, cambiar a otro proveedor significaría empezar de cero.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">2</div><div class="flag-content"><h4>Networking IP (MUY FUERTE)</h4><p>Broadcom tiene el mejor SerDes IP de la industria - la tecnología que permite transmitir datos a alta velocidad entre chips. Es prácticamente imposible de replicar. 90% market share en switches cloud.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">3</div><div class="flag-content"><h4>VMware Lock-in (FUERTE)</h4><p>VMware está embedido en la infraestructura IT de miles de enterprises. Migrar cuesta millones y años. Margen bruto 93% demuestra el poder de pricing.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">4</div><div class="flag-content"><h4>Escala y Diversificación</h4><p>La combinación de semiconductores + software es única. Si un segmento flaquea, el otro compensa. FCF de $27B permite invertir en I+D y M&A.</p></div></div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Veredicto Moat:</strong> Moat ancho y duradero. Las relaciones con hyperscalers son "sticky" por décadas. El networking IP es casi imposible de replicar. VMware tiene switching costs altísimos. Es el proveedor "invisible" pero indispensable de la infraestructura AI.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 08</div>
+            <h2>Evaluación del Management</h2>
+            <table>
+                <thead><tr><th>Ejecutivo</th><th>Cargo</th><th>Track Record</th></tr></thead>
+                <tbody>
+                    <tr><td>Hock Tan</td><td>CEO & President</td><td class="positive">Serial acquirer legendario. Avago→Broadcom→VMware. 20x value creation.</td></tr>
+                    <tr><td>Kirsten Spears</td><td>CFO</td><td>Ex-Symantec, sólida ejecución financiera</td></tr>
+                </tbody>
+            </table>
+            <h3>Capital Allocation Excellence</h3>
+            <table>
+                <thead><tr><th>FY2025</th><th>Cantidad</th><th>% FCF</th></tr></thead>
+                <tbody>
+                    <tr><td>Dividendos</td><td>$11.1B</td><td>41%</td></tr>
+                    <tr><td>Buybacks</td><td>$6.4B</td><td>24%</td></tr>
+                    <tr><td>Debt Paydown</td><td>$15.0B</td><td>Reduciendo VMware debt</td></tr>
+                    <tr><td>Nuevo Buyback</td><td>$10B program</td><td>2026</td></tr>
+                </tbody>
+            </table>
+            <p>16 años consecutivos de aumentos de dividendo. Yield ~1% pero creciendo. Filosofía Hock Tan: "50% FCF a dividendos, 50% para deals y buybacks."</p>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 09</div>
+            <h2>Checklist de Red Flags</h2>
+            <div class="red-flags">
+                <div class="flag-item yellow"><div class="flag-icon">!</div><div class="flag-content"><h4>Valoración Elevada</h4><p>P/E trailing 72x, forward 34x. A $1.6T market cap, ya está priced for excellence. Cualquier decepción en AI growth castigará el múltiplo.</p></div></div>
+                <div class="flag-item yellow"><div class="flag-icon">!</div><div class="flag-content"><h4>Concentración en Google</h4><p>Google TPU representa ~78% del revenue de ASICs. Si Google decide diseñar internamente o cambiar proveedor, impacto significativo.</p></div></div>
+                <div class="flag-item yellow"><div class="flag-icon">!</div><div class="flag-content"><h4>Deuda VMware</h4><p>Aunque pagando $15B en FY25, aún queda deuda significativa de la adquisición de $69B. Interest expense es material.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">OK</div><div class="flag-content"><h4>FCF Monster</h4><p>$27B de free cash flow en FY25. Puede pagar deuda, buybacks y dividendos simultáneamente. Fortaleza financiera indiscutible.</p></div></div>
+                <div class="flag-item green"><div class="flag-icon">OK</div><div class="flag-content"><h4>Diversificación de Clientes AI</h4><p>Ya no solo Google. Meta, OpenAI, Anthropic, Apple. Pipeline de "tens of billions" en nuevos deals reduce riesgo de concentración.</p></div></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 10</div>
+            <h2>Valoración a 5 Años</h2>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull"><div class="scenario-label">Escenario Alcista</div><div class="scenario-price">$650</div><div class="scenario-return positive">+85% vs actual</div><div class="scenario-prob">Probabilidad: 25%</div></div>
+                <div class="scenario-card base"><div class="scenario-label">Escenario Base</div><div class="scenario-price">$500</div><div class="scenario-return positive">+42% vs actual</div><div class="scenario-prob">Probabilidad: 55%</div></div>
+                <div class="scenario-card bear"><div class="scenario-label">Escenario Bajista</div><div class="scenario-price">$280</div><div class="scenario-return negative">-20% vs actual</div><div class="scenario-prob">Probabilidad: 20%</div></div>
+            </div>
+            <h3>Supuestos por Escenario</h3>
+            <table>
+                <thead><tr><th>Variable</th><th>Bull</th><th>Base</th><th>Bear</th></tr></thead>
+                <tbody>
+                    <tr><td>Revenue 2030</td><td class="positive">$130B</td><td>$100B</td><td class="negative">$75B</td></tr>
+                    <tr><td>AI Revenue 2030</td><td class="positive">$60B</td><td>$40B</td><td class="negative">$25B</td></tr>
+                    <tr><td>EBITDA Margin</td><td class="positive">70%</td><td>67%</td><td class="negative">62%</td></tr>
+                    <tr><td>EV/EBITDA Terminal</td><td>22x</td><td>18x</td><td>14x</td></tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <p><strong>Precio objetivo 5 años:</strong> $490 (ponderado)</p>
+                <p>Retorno esperado: +39% (CAGR ~7%/año + 1% dividendo = ~8% anual)</p>
+                <p><strong>Validación:</strong> A $350, el mercado implica que AI revenue llega a $35-40B en 2030. Alcanzable dados los deals anunciados.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 11</div>
+            <h2>Alertas de Seguimiento</h2>
+            <table>
+                <thead><tr><th>Alerta</th><th>Condición</th><th>Acción</th></tr></thead>
+                <tbody>
+                    <tr><td>Google TPU relationship</td><td>Cualquier cambio de proveedor</td><td>Revisar tesis inmediatamente</td></tr>
+                    <tr><td>AI revenue growth</td><td>Si cae bajo 40% YoY</td><td>Múltiplo comprimirá</td></tr>
+                    <tr><td>VMware churn</td><td>Si customers migran a alternatives</td><td>Revisar software moat</td></tr>
+                    <tr><td>OpenAI deal execution</td><td>Primeras entregas 2026</td><td>Validación de pipeline</td></tr>
+                    <tr><td>Dividend increase</td><td>Anual (nov/dic)</td><td>17º año consecutivo</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <div class="section-number">Sección 12</div>
+            <h2>Conclusión Final</h2>
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">BUENA INVERSIÓN</div>
+                <div class="conclusion-verdict" style="font-size: 24px; color: white;">Core Holding AI Infrastructure</div>
+                <p class="conclusion-summary">Broadcom es el proveedor indispensable de la infraestructura AI - custom chips para hyperscalers y networking para data centers. Moat ancho, management excepcional (Hock Tan), y FCF de $27B. La valoración es cara pero el quality premium es merecido.</p>
+                <div class="conclusion-actions">
+                    <div class="action-item"><div class="action-label">Score Final</div><div class="action-value">85/100</div></div>
+                    <div class="action-item"><div class="action-label">Precio Objetivo 5Y</div><div class="action-value">$490</div></div>
+                    <div class="action-item"><div class="action-label">Upside Potencial</div><div class="action-value">+39%</div></div>
+                    <div class="action-item"><div class="action-label">Riesgo</div><div class="action-value">MEDIO</div></div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">Recomendación de Acción</h3>
+            <div class="highlight-box">
+                <p><strong>Para inversores quality:</strong> Core holding del 3-5% del portfolio. Broadcom es NVIDIA-lite con menor riesgo de competencia y más diversificación (VMware).</p>
+                <p><strong>Precio de entrada ideal:</strong> $300-320 (corrección del 10-15%) para mayor margen de seguridad.</p>
+                <p><strong>Estrategia:</strong> Comprar y mantener. Reinvertir dividendos. Broadcom compone capital a largo plazo.</p>
+            </div>
+        </section>
+
+        <section style="background: var(--secondary); color: white; text-align: center; padding: 40px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">
+                Informe generado por Sistema FMA | Metodología Value-Growth Investing<br>
+                Este informe no constituye asesoramiento financiero. Invertir conlleva riesgos.<br>
+                Fuentes: Broadcom IR, CNBC, TipRanks, Seeking Alpha<br>
+                27 Enero 2026
+            </p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Inversión: Oracle Corporation (ORCL)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C74634;
+            --primary-light: #E8DDD4;
+            --secondary: #312D2A;
+            --accent: #00758F;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --danger: #C62828;
+            --bg-light: #FAF9F7;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* PORTADA */
+        .cover {
+            background: linear-gradient(135deg, var(--primary) 0%, #8B2E22 100%);
+            color: white;
+            padding: 80px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .report-type {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .report-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .cover-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .company-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .verdict-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        .verdict-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .verdict-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .verdict-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .verdict-score span {
+            font-size: 24px;
+            opacity: 0.7;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .analyst-info {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .price-info {
+            text-align: right;
+        }
+
+        .current-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .price-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* SECCIONES */
+        section {
+            padding: 60px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--secondary);
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 32px 0 16px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .warning { color: var(--warning); }
+        .neutral { color: var(--text-secondary); }
+
+        /* SCORING DASHBOARD */
+        .score-dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .score-card.highlight {
+            background: var(--primary);
+            color: white;
+        }
+
+        .score-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .score-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .score-max {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            margin: 16px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E5E5E5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-fill.excellent { background: var(--success); }
+        .progress-fill.good { background: #66BB6A; }
+        .progress-fill.acceptable { background: var(--warning); }
+        .progress-fill.caution { background: #FF9800; }
+        .progress-fill.avoid { background: var(--danger); }
+
+        /* GRID LAYOUTS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .metric-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .metric-change {
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E5E5E5;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* MOAT VISUAL */
+        .moat-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 32px 0;
+        }
+
+        .moat-level {
+            width: 80px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .moat-level.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .moat-level.inactive {
+            background: #E5E5E5;
+            color: #999;
+        }
+
+        /* SCENARIOS */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .scenario-card {
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+        }
+
+        .scenario-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .scenario-return {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenario-prob {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* RED FLAGS */
+        .red-flags {
+            display: grid;
+            gap: 16px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: #FFF5F5;
+            border-radius: 8px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .flag-item.yellow {
+            background: #FFFBF0;
+            border-left-color: var(--warning);
+        }
+
+        .flag-item.green {
+            background: #F0FFF4;
+            border-left-color: var(--success);
+        }
+
+        .flag-icon {
+            font-size: 24px;
+        }
+
+        .flag-content h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .flag-content p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* CONCLUSION */
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #8B2E22 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .conclusion-verdict {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .conclusion-summary {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            opacity: 0.9;
+        }
+
+        .conclusion-actions {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .action-item {
+            text-align: center;
+        }
+
+        .action-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .action-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .page { box-shadow: none; }
+            section { break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .cover { padding: 40px 24px; }
+            section { padding: 40px 24px; }
+            .company-name { font-size: 48px; }
+            .score-dashboard { grid-template-columns: repeat(3, 1fr); }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .scenarios-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- PORTADA -->
+        <section class="cover">
+            <div class="cover-header">
+                <div class="report-type">Informe de Inversión Value-Growth</div>
+                <div class="report-date">27 Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <h1 class="company-name">Oracle<br>Corporation</h1>
+                <div class="company-ticker">NYSE: ORCL | Tecnología - Cloud Enterprise</div>
+
+                <div class="verdict-box">
+                    <div class="verdict-label">Veredicto del Análisis</div>
+                    <div class="verdict-text">ACEPTABLE - Growth Play</div>
+                    <div class="verdict-score">64<span>/100</span></div>
+                </div>
+            </div>
+
+            <div class="cover-footer">
+                <div class="analyst-info">
+                    Análisis: Sistema FMA<br>
+                    Metodología: Value-Growth Investing
+                </div>
+                <div class="price-info">
+                    <div class="current-price">$191.07</div>
+                    <div class="price-label">Precio al cierre</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+        <section>
+            <div class="section-number">Sección 01</div>
+            <h2>Explicación Simple</h2>
+
+            <div class="highlight-box">
+                <p>Oracle es el gigante de las bases de datos empresariales que ahora compite en el cloud computing contra AWS y Azure. Imagina una empresa que durante 40 años dominó el "almacén de datos" de las grandes corporaciones, y ahora está transformándose para competir en la carrera de la inteligencia artificial.</p>
+            </div>
+
+            <h3>Lo que hace Oracle</h3>
+            <p>Oracle vende tres cosas principales: (1) bases de datos - el software donde las empresas guardan toda su información crítica, (2) aplicaciones empresariales - sistemas para finanzas, recursos humanos y ventas, y (3) infraestructura cloud (OCI) - servidores en la nube donde las empresas ejecutan sus programas de IA.</p>
+
+            <h3>Por qué está creciendo ahora</h3>
+            <p>La explosión de la inteligencia artificial ha creado una demanda masiva de poder de computación. Oracle, siendo el "underdog" del cloud, ha conseguido acuerdos importantes ofreciendo precios 2.3x más baratos que AWS. Su backlog (contratos firmados pendientes de ejecutar) ha explotado a $523 mil millones, un crecimiento del 438%.</p>
+
+            <h3>El pero importante</h3>
+            <p>Oracle tiene una deuda masiva de $112 mil millones netos. Para financiar su expansión cloud, ha pedido prestado agresivamente. Además, la CEO Safra Catz vendió $2.5 mil millones en acciones en 2025. Cuando los insiders venden en masa, es una señal de precaución.</p>
+
+            <div class="highlight-box">
+                <p><strong>En una frase:</strong> Oracle es una apuesta por el crecimiento del cloud/AI con fundamentos sólidos pero deuda preocupante y valoración elevada. Para inversores con tolerancia al riesgo.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: SCORING DASHBOARD -->
+        <section>
+            <div class="section-number">Sección 02</div>
+            <h2>Dashboard de Valoración</h2>
+
+            <div class="score-dashboard">
+                <div class="score-card">
+                    <div class="score-value">15</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Negocio</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">10</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Finanzas</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">14</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Moat</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-value">12</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Gestión</div>
+                </div>
+                <div class="score-card highlight">
+                    <div class="score-value">13</div>
+                    <div class="score-max">/20</div>
+                    <div class="score-label">Valoración</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Score Total</span>
+                    <span>64/100 - Aceptable</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill acceptable" style="width: 64%"></div>
+                </div>
+            </div>
+
+            <h3>Desglose del Scoring</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pilar</th>
+                        <th>Score</th>
+                        <th>Factores Clave</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calidad del Negocio</td>
+                        <td class="positive">15/20</td>
+                        <td>Ingresos recurrentes 76%, crecimiento cloud 40%+, líder en DB enterprise</td>
+                    </tr>
+                    <tr>
+                        <td>Solidez Financiera</td>
+                        <td class="negative">10/20</td>
+                        <td>Deuda/Equity 355%, net debt $112B, cash flow bajo, interés 6x cubierto</td>
+                    </tr>
+                    <tr>
+                        <td>Ventaja Competitiva</td>
+                        <td class="neutral">14/20</td>
+                        <td>Lock-in DB Oracle, pricing agresivo OCI, pero solo 3% cuota cloud</td>
+                    </tr>
+                    <tr>
+                        <td>Gestión</td>
+                        <td class="warning">12/20</td>
+                        <td>Ellison visionario, pero CEO vendiendo $2.5B, transición co-CEOs</td>
+                    </tr>
+                    <tr>
+                        <td>Valoración</td>
+                        <td class="neutral">13/20</td>
+                        <td>P/E 36x vs histórico 28x, pero growth 40%+ justifica prima</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 3: ANÁLISIS DEL NEGOCIO -->
+        <section>
+            <div class="section-number">Sección 03</div>
+            <h2>Análisis del Negocio</h2>
+
+            <h3>Modelo de Negocio</h3>
+            <p>Oracle opera en tres segmentos principales: Cloud Services (76% de ingresos), License (14%), y Hardware (10%). La estrategia actual es migrar clientes on-premise a OCI y capturar cuota en el boom de infraestructura AI.</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$57.4B</div>
+                    <div class="metric-label">Ingresos FY2025</div>
+                    <div class="metric-change positive">+8% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$16.1B</div>
+                    <div class="metric-label">Ingresos Q2 FY26</div>
+                    <div class="metric-change positive">+14% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$523B</div>
+                    <div class="metric-label">Backlog (RPO)</div>
+                    <div class="metric-change positive">+438% YoY</div>
+                </div>
+            </div>
+
+            <h3>Segmentos de Negocio</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Segmento</th>
+                        <th>Ingresos</th>
+                        <th>Crecimiento</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cloud Infrastructure (OCI)</td>
+                        <td>$8.0B Q2</td>
+                        <td class="positive">+68% YoY</td>
+                        <td>Acelerando (AI boom)</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud Applications (SaaS)</td>
+                        <td>$3.6B Q2</td>
+                        <td class="positive">+12% YoY</td>
+                        <td>Estable</td>
+                    </tr>
+                    <tr>
+                        <td>Database License</td>
+                        <td>$1.2B Q2</td>
+                        <td class="warning">-3% YoY</td>
+                        <td>Declive (migración cloud)</td>
+                    </tr>
+                    <tr>
+                        <td>Hardware</td>
+                        <td>$0.7B Q2</td>
+                        <td class="negative">-8% YoY</td>
+                        <td>Legacy en declive</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Posición en el Mercado Cloud</h3>
+            <div class="highlight-box">
+                <p>Oracle es el "cuarto hyperscaler" con solo 3% de cuota de mercado cloud (vs AWS 30%, Azure 20%, Google 13%). Sin embargo, su crecimiento OCI del 68% es el más rápido de la industria, impulsado por pricing 2.3x más barato y demanda de GPUs para AI.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: EVOLUCIÓN FINANCIERA -->
+        <section>
+            <div class="section-number">Sección 04</div>
+            <h2>Evolución Financiera (5 años)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ingresos ($B)</td>
+                        <td>$40.5</td>
+                        <td>$42.4</td>
+                        <td>$50.0</td>
+                        <td>$53.0</td>
+                        <td>$57.4</td>
+                        <td class="positive">+42% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>EBIT ($B)</td>
+                        <td>$15.2</td>
+                        <td>$14.3</td>
+                        <td>$13.9</td>
+                        <td>$15.8</td>
+                        <td>$17.7</td>
+                        <td class="positive">+16% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>EPS (GAAP)</td>
+                        <td>$3.21</td>
+                        <td>$2.41</td>
+                        <td>$2.67</td>
+                        <td>$3.65</td>
+                        <td>$4.34</td>
+                        <td class="positive">+35% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Bruto</td>
+                        <td>79.4%</td>
+                        <td>79.2%</td>
+                        <td>71.5%</td>
+                        <td>71.3%</td>
+                        <td>68.5%</td>
+                        <td class="warning">-11pts</td>
+                    </tr>
+                    <tr>
+                        <td>Deuda Total ($B)</td>
+                        <td>$72.0</td>
+                        <td>$76.0</td>
+                        <td>$90.5</td>
+                        <td>$86.9</td>
+                        <td>$96.0</td>
+                        <td class="negative">+33% (5Y)</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud Revenue ($B)</td>
+                        <td>$7.2</td>
+                        <td>$8.4</td>
+                        <td>$12.4</td>
+                        <td>$19.8</td>
+                        <td>$28.0</td>
+                        <td class="positive">+289% (5Y)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Métricas de Rentabilidad</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">68.5%</div>
+                    <div class="metric-label">Margen Bruto</div>
+                    <div class="metric-change warning">Bajando (inversión cloud)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">31.8%</div>
+                    <div class="metric-label">Margen Operativo</div>
+                    <div class="metric-change neutral">Estable</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8.8%</div>
+                    <div class="metric-label">ROIC</div>
+                    <div class="metric-change warning">Bajo (deuda alta)</div>
+                </div>
+            </div>
+
+            <h3>Situación de Deuda</h3>
+            <div class="highlight-box">
+                <p><strong>Alerta:</strong> Oracle tiene $112B de deuda neta con un ratio Deuda/Equity del 355%. Aunque el EBIT cubre 6x los intereses, la carga de deuda limita flexibilidad y ha obligado a reducir buybacks de $21B (2021) a $600M (2025).</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: COMPARATIVA COMPETITIVA -->
+        <section>
+            <div class="section-number">Sección 05</div>
+            <h2>Comparativa Competitiva</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Oracle</th>
+                        <th>Microsoft Azure</th>
+                        <th>Amazon AWS</th>
+                        <th>Google Cloud</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cuota Cloud</td>
+                        <td>3%</td>
+                        <td class="positive">20%</td>
+                        <td class="positive">30%</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>Crecimiento Cloud</td>
+                        <td class="positive">68%</td>
+                        <td>21%</td>
+                        <td>19%</td>
+                        <td>28%</td>
+                    </tr>
+                    <tr>
+                        <td>P/E Ratio</td>
+                        <td>36x</td>
+                        <td>34x</td>
+                        <td>45x</td>
+                        <td>25x</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Op.</td>
+                        <td>32%</td>
+                        <td class="positive">45%</td>
+                        <td class="positive">38%</td>
+                        <td>32%</td>
+                    </tr>
+                    <tr>
+                        <td>Deuda/EBITDA</td>
+                        <td class="negative">4.2x</td>
+                        <td class="positive">0.5x</td>
+                        <td class="positive">0.3x</td>
+                        <td class="positive">Net Cash</td>
+                    </tr>
+                    <tr>
+                        <td>Pricing VM 4vCPU</td>
+                        <td class="positive">$54/mes</td>
+                        <td>$124/mes</td>
+                        <td>$124/mes</td>
+                        <td>$113/mes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <p><strong>Ventaja Oracle:</strong> Pricing 2.3x más barato + migration path natural para clientes de bases de datos Oracle existentes. Desventaja: balance sheet más débil que competidores con net cash positions.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: TIMELINE -->
+        <section>
+            <div class="section-number">Sección 06</div>
+            <h2>Timeline de Eventos Críticos</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Diciembre 2025</div>
+                    <div class="timeline-title">Q2 FY26 supera expectativas</div>
+                    <div class="timeline-desc">EPS $2.26 vs $1.50 esperado (+51% beat). Cloud revenue +34% YoY. Backlog explota a $523B.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Septiembre 2025</div>
+                    <div class="timeline-title">Transición de liderazgo</div>
+                    <div class="timeline-desc">Safra Catz pasa a Vice Chair. Nuevos co-CEOs: Clay Magouyrk y Mike Sicilia. Ellison continúa como CTO/Chairman.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">H1 2025</div>
+                    <div class="timeline-title">Insider selling masivo</div>
+                    <div class="timeline-desc">Safra Catz vende $2.5B en acciones. Es la insider sale más grande de cualquier ejecutivo US en 2025.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Enero 2025</div>
+                    <div class="timeline-title">Proyecto Stargate</div>
+                    <div class="timeline-desc">Oracle anunciado como partner de infraestructura para Stargate ($500B iniciativa AI de OpenAI/SoftBank/Oracle).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">GPU consumption +336%</div>
+                    <div class="timeline-desc">Demanda de AI dispara consumo de GPUs en OCI. Oracle emerge como "cuarto hyperscaler".</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-title">Adquisición Cerner $28B</div>
+                    <div class="timeline-desc">Mayor adquisición en historia de Oracle. Entrada agresiva en healthcare IT. Aumenta deuda significativamente.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: MOAT ANALYSIS -->
+        <section>
+            <div class="section-number">Sección 07</div>
+            <h2>Análisis del Moat</h2>
+
+            <div class="moat-visual">
+                <div class="moat-level inactive">Sin Moat</div>
+                <div class="moat-level inactive">Estrecho</div>
+                <div class="moat-level active">Moderado</div>
+                <div class="moat-level inactive">Ancho</div>
+            </div>
+
+            <h3>Fuentes de Ventaja Competitiva</h3>
+
+            <div class="red-flags">
+                <div class="flag-item green">
+                    <div class="flag-icon">1</div>
+                    <div class="flag-content">
+                        <h4>Switching Costs (FUERTE)</h4>
+                        <p>Las bases de datos Oracle son el corazón de miles de empresas. Migrar a PostgreSQL o SQL Server requiere años y millones. Este lock-in genera ingresos recurrentes de $44B anuales.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">2</div>
+                    <div class="flag-content">
+                        <h4>Ecosistema Integrado (FUERTE)</h4>
+                        <p>Oracle DB + Oracle ERP + Oracle Cloud forman un stack integrado. Clientes que usan uno tienden a usar los demás. Migración natural a OCI.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">3</div>
+                    <div class="flag-content">
+                        <h4>Pricing Agresivo (TEMPORAL)</h4>
+                        <p>OCI es 2.3x más barato que AWS/Azure. Esto atrae clientes pero no es sostenible a largo plazo. Los competidores pueden igualar precios.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">4</div>
+                    <div class="flag-content">
+                        <h4>Cuota de Mercado Cloud (DÉBIL)</h4>
+                        <p>Solo 3% vs AWS 30% y Azure 20%. Oracle está creciendo rápido pero desde una base pequeña. Escala limitada vs hyperscalers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Veredicto Moat:</strong> Moat moderado basado en switching costs de bases de datos legacy. El cloud es una apuesta de crecimiento sin moat establecido todavía. Depende de ejecutar la transición.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 8: MANAGEMENT -->
+        <section>
+            <div class="section-number">Sección 08</div>
+            <h2>Evaluación del Management</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ejecutivo</th>
+                        <th>Cargo</th>
+                        <th>Ownership</th>
+                        <th>Track Record</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Larry Ellison</td>
+                        <td>CTO & Chairman</td>
+                        <td class="positive">~42% ($365B)</td>
+                        <td>Fundador 1977, visionario, alineado</td>
+                    </tr>
+                    <tr>
+                        <td>Safra Catz</td>
+                        <td>Exec Vice Chair</td>
+                        <td class="warning">~0.1%</td>
+                        <td>Vendió $2.5B en H1 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Clay Magouyrk</td>
+                        <td>Co-CEO (nuevo)</td>
+                        <td>N/A</td>
+                        <td>Arquitecto de OCI</td>
+                    </tr>
+                    <tr>
+                        <td>Mike Sicilia</td>
+                        <td>Co-CEO (nuevo)</td>
+                        <td>N/A</td>
+                        <td>Líder de aplicaciones cloud</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Señales de Alerta del Management</h3>
+            <div class="red-flags">
+                <div class="flag-item">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Insider Selling Masivo</h4>
+                        <p>Safra Catz vendió $2.5B en acciones durante H1 2025, siendo la mayor venta de insider de cualquier ejecutivo US. Contrasta con Ellison que nunca vende.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">?</div>
+                    <div class="flag-content">
+                        <h4>Transición de CEO en Marcha</h4>
+                        <p>Co-CEOs nuevos (Sept 2025). Estructura dual puede generar fricción. Aún por demostrar ejecución independiente de Catz.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">+</div>
+                    <div class="flag-content">
+                        <h4>Ellison Totalmente Alineado</h4>
+                        <p>Con 42% de la compañía ($365B), Larry Ellison es el tercer hombre más rico del mundo. Su fortuna está completamente atada a Oracle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Capital Allocation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Uso del Capital</th>
+                        <th>2021</th>
+                        <th>2025</th>
+                        <th>Cambio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Buybacks</td>
+                        <td>$21B</td>
+                        <td>$0.6B</td>
+                        <td class="negative">-97%</td>
+                    </tr>
+                    <tr>
+                        <td>Dividendos</td>
+                        <td>$3.1B</td>
+                        <td>$4.4B</td>
+                        <td class="positive">+42%</td>
+                    </tr>
+                    <tr>
+                        <td>CapEx (Cloud)</td>
+                        <td>$3.5B</td>
+                        <td>$9.2B</td>
+                        <td class="positive">+163%</td>
+                    </tr>
+                    <tr>
+                        <td>Deuda Neta</td>
+                        <td>$62B</td>
+                        <td>$112B</td>
+                        <td class="negative">+81%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 9: RED FLAGS -->
+        <section>
+            <div class="section-number">Sección 09</div>
+            <h2>Checklist de Red Flags</h2>
+
+            <div class="red-flags">
+                <div class="flag-item">
+                    <div class="flag-icon">X</div>
+                    <div class="flag-content">
+                        <h4>Deuda Excesiva</h4>
+                        <p>Deuda/Equity 355%. Net debt $112B. Ratio más alto que cualquier competidor cloud. Limita flexibilidad estratégica.</p>
+                    </div>
+                </div>
+                <div class="flag-item">
+                    <div class="flag-icon">X</div>
+                    <div class="flag-content">
+                        <h4>Insider Selling Record</h4>
+                        <p>CEO Safra Catz vendió $2.5B en H1 2025. Cuando la persona que más conoce la empresa vende así, es señal de precaución.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Margen Bruto Declinando</h4>
+                        <p>De 79% (2021) a 68.5% (2025). La inversión en cloud es intensiva en capital. Compresión de márgenes vs negocio legacy de licencias.</p>
+                    </div>
+                </div>
+                <div class="flag-item yellow">
+                    <div class="flag-icon">!</div>
+                    <div class="flag-content">
+                        <h4>Valoración Elevada</h4>
+                        <p>P/E 36x vs promedio histórico 28x. La acción subió 98% en 2025. Mucho del upside ya está priced in.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Cobertura de Intereses Adecuada</h4>
+                        <p>EBIT cubre 6x los intereses. Aunque la deuda es alta, el servicio de la misma es manejable con el cash flow actual.</p>
+                    </div>
+                </div>
+                <div class="flag-item green">
+                    <div class="flag-icon">OK</div>
+                    <div class="flag-content">
+                        <h4>Ingresos Recurrentes Sólidos</h4>
+                        <p>76% de ingresos son recurrentes (cloud + support). Visibilidad alta con backlog de $523B.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: VALORACIÓN 5 AÑOS -->
+        <section>
+            <div class="section-number">Sección 10</div>
+            <h2>Valoración a 5 Años</h2>
+
+            <h3>Escenarios de Precio Objetivo</h3>
+            <div class="scenarios-grid">
+                <div class="scenario-card bull">
+                    <div class="scenario-label">Escenario Alcista</div>
+                    <div class="scenario-price">$380</div>
+                    <div class="scenario-return positive">+99% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-label">Escenario Base</div>
+                    <div class="scenario-price">$270</div>
+                    <div class="scenario-return positive">+41% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 50%</div>
+                </div>
+                <div class="scenario-card bear">
+                    <div class="scenario-label">Escenario Bajista</div>
+                    <div class="scenario-price">$140</div>
+                    <div class="scenario-return negative">-27% vs actual</div>
+                    <div class="scenario-prob">Probabilidad: 25%</div>
+                </div>
+            </div>
+
+            <h3>Supuestos por Escenario</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Bull</th>
+                        <th>Base</th>
+                        <th>Bear</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Crecimiento Cloud CAGR</td>
+                        <td class="positive">35%</td>
+                        <td>25%</td>
+                        <td class="negative">15%</td>
+                    </tr>
+                    <tr>
+                        <td>Cuota Mercado Cloud 2030</td>
+                        <td class="positive">8%</td>
+                        <td>5%</td>
+                        <td class="negative">3%</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Operativo 2030</td>
+                        <td class="positive">35%</td>
+                        <td>30%</td>
+                        <td class="negative">25%</td>
+                    </tr>
+                    <tr>
+                        <td>P/E Terminal</td>
+                        <td>30x</td>
+                        <td>25x</td>
+                        <td>18x</td>
+                    </tr>
+                    <tr>
+                        <td>EPS 2030</td>
+                        <td>$12.70</td>
+                        <td>$10.80</td>
+                        <td>$7.80</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Precio Objetivo Ponderado</h3>
+            <div class="highlight-box">
+                <p><strong>Precio objetivo 5 años:</strong> $265 (ponderado por probabilidades)</p>
+                <p>Retorno esperado: +39% (CAGR ~7%/año + 1.5% dividendo = ~8.5% anual)</p>
+                <p><strong>Validación DCF inverso:</strong> Al precio actual de $191, el mercado implica un crecimiento de EPS del 12% anual durante 5 años. Alcanzable pero requiere ejecución perfecta en cloud.</p>
+            </div>
+
+            <h3>Sensibilidad a Múltiplos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EPS 2030 \ P/E</th>
+                        <th>18x</th>
+                        <th>22x</th>
+                        <th>25x</th>
+                        <th>30x</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$8.00</td>
+                        <td>$144</td>
+                        <td>$176</td>
+                        <td>$200</td>
+                        <td>$240</td>
+                    </tr>
+                    <tr>
+                        <td>$10.00</td>
+                        <td>$180</td>
+                        <td>$220</td>
+                        <td>$250</td>
+                        <td>$300</td>
+                    </tr>
+                    <tr>
+                        <td>$12.00</td>
+                        <td>$216</td>
+                        <td>$264</td>
+                        <td>$300</td>
+                        <td>$360</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 11: ALERTAS DE SEGUIMIENTO -->
+        <section>
+            <div class="section-number">Sección 11</div>
+            <h2>Alertas de Seguimiento</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Alerta</th>
+                        <th>Condición</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Resultados Q3 FY26</td>
+                        <td>Marzo 2026</td>
+                        <td>Verificar si cloud mantiene >30% growth</td>
+                    </tr>
+                    <tr>
+                        <td>Cuota mercado OCI</td>
+                        <td>Si supera 5%</td>
+                        <td>Upgrade a BUENA inversión</td>
+                    </tr>
+                    <tr>
+                        <td>Reducción deuda</td>
+                        <td>Si Net Debt < $90B</td>
+                        <td>Mejora perfil de riesgo</td>
+                    </tr>
+                    <tr>
+                        <td>Insider buying</td>
+                        <td>Si nuevos CEOs compran acciones</td>
+                        <td>Señal de confianza positiva</td>
+                    </tr>
+                    <tr>
+                        <td>Margen bruto</td>
+                        <td>Si cae bajo 65%</td>
+                        <td>Revisar tesis (guerra de precios)</td>
+                    </tr>
+                    <tr>
+                        <td>Competencia AWS/Azure</td>
+                        <td>Si igualan precios OCI</td>
+                        <td>Erosiona ventaja principal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 12: CONCLUSIÓN FINAL -->
+        <section>
+            <div class="section-number">Sección 12</div>
+            <h2>Conclusión Final</h2>
+
+            <div class="conclusion-box">
+                <div class="conclusion-verdict">ACEPTABLE</div>
+                <div class="conclusion-verdict" style="font-size: 24px;">Growth Play con Riesgo</div>
+                <p class="conclusion-summary">
+                    Oracle es una apuesta por la transformación cloud/AI de un gigante legacy. El crecimiento de OCI (68%) y el backlog ($523B) son impresionantes, pero la deuda elevada ($112B) y el insider selling masivo ($2.5B) generan precaución. Para inversores con tolerancia al riesgo que creen en la ejecución de la transición cloud.
+                </p>
+
+                <div class="conclusion-actions">
+                    <div class="action-item">
+                        <div class="action-label">Score Final</div>
+                        <div class="action-value">64/100</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Precio Objetivo 5Y</div>
+                        <div class="action-value">$265</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Upside Potencial</div>
+                        <div class="action-value">+39%</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-label">Riesgo</div>
+                        <div class="action-value">ALTO</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">Recomendación de Acción</h3>
+            <div class="highlight-box">
+                <p><strong>Para inversores agresivos:</strong> Posición pequeña (2-3% del portfolio) como apuesta de crecimiento. Comprar en correcciones bajo $170.</p>
+                <p><strong>Para inversores conservadores:</strong> Esperar reducción de deuda o confirmación de que cloud escala con márgenes. La deuda/equity de 355% es incompatible con un perfil conservador.</p>
+                <p><strong>Stop loss sugerido:</strong> Vender si margen bruto cae bajo 62% o si crecimiento cloud desacelera bajo 20%.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section style="background: var(--secondary); color: white; text-align: center; padding: 40px;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">
+                Informe generado por Sistema FMA | Metodología Value-Growth Investing<br>
+                Este informe no constituye asesoramiento financiero. Invertir conlleva riesgos.<br>
+                Fuentes: Yahoo Finance, SEC Filings, Oracle IR, Synergy Research, SemiAnalysis<br>
+                27 Enero 2026
+            </p>
+        </section>
+    </div>
+</body>
+</html>

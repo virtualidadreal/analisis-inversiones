@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copart (CPRT) - Informe de Inversión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-500: #f59e0b;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--gray-900);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.375rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+        .tiny {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: calc(100vh - 160px);
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-600);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-date {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .cover-main {
+            padding: 80px 0;
+        }
+
+        .cover-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .cover-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .cover-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cover-metric {
+            text-align: left;
+        }
+
+        .cover-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .cover-metric-value.positive {
+            color: var(--green-600);
+        }
+
+        .cover-metric-value.negative {
+            color: var(--red-600);
+        }
+
+        .cover-metric-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .cover-rating {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: var(--gray-300);
+        }
+
+        .rating-stars .filled {
+            color: var(--green-500);
+        }
+
+        .rating-verdict {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--green-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Styling */
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gray-300);
+            margin-right: 8px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-white {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-dark {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .card-danger {
+            background: var(--red-50);
+            border: 1px solid var(--red-100);
+        }
+
+        .card-success {
+            background: var(--green-50);
+            border: 1px solid var(--green-100);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Stats */
+        .stat-block {
+            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-value.danger {
+            color: var(--red-600);
+        }
+
+        .stat-value.success {
+            color: var(--green-600);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .stat-change.negative {
+            background: var(--red-100);
+            color: var(--red-700);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            margin: 32px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9375rem;
+        }
+
+        thead {
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .cell-danger {
+            color: var(--red-600);
+            font-weight: 600;
+        }
+
+        .cell-success {
+            color: var(--green-600);
+            font-weight: 600;
+        }
+
+        /* Progress Bars */
+        .progress-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-label {
+            width: 140px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .progress-bar-wrapper {
+            flex: 1;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: width 0.6s ease;
+        }
+
+        .progress-bar.primary {
+            background: var(--gray-800);
+        }
+
+        .progress-bar.danger {
+            background: var(--red-500);
+        }
+
+        .progress-bar.success {
+            background: var(--green-500);
+        }
+
+        .progress-value {
+            width: 60px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin: 32px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-danger {
+            background: var(--red-50);
+            border-color: var(--red-500);
+        }
+
+        .callout-warning {
+            background: var(--amber-50);
+            border-color: var(--amber-500);
+        }
+
+        .callout-success {
+            background: var(--green-50);
+            border-color: var(--green-500);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout-text {
+            font-size: 0.9375rem;
+            color: var(--gray-700);
+            margin: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 48px;
+            border-radius: 16px;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            color: var(--gray-700);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* Red Flag List */
+        .flag-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--green-50);
+            border-radius: 12px;
+            border: 1px solid var(--green-100);
+        }
+
+        .flag-item.warning {
+            background: var(--amber-50);
+            border-color: #fde68a;
+        }
+
+        .flag-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--green-500);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .flag-icon.warning {
+            background: var(--amber-500);
+        }
+
+        .flag-content h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--gray-900);
+        }
+
+        .flag-content p {
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 32px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--green-500), var(--green-500), var(--green-500));
+            border-radius: 2px;
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border: 3px solid var(--green-500);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-year {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--green-600);
+        }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .company-card {
+            padding: 28px;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .company-card.highlight {
+            border-color: var(--green-300);
+            background: var(--green-50);
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+
+        .company-card.highlight .company-name {
+            color: var(--green-700);
+        }
+
+        .company-stat {
+            margin: 16px 0;
+        }
+
+        .company-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .company-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .company-rating {
+            margin-top: 20px;
+            font-size: 1.25rem;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scenario-card {
+            padding: 32px;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .scenario-card.bull {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+        }
+
+        .scenario-card.base {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+        }
+
+        .scenario-card.bear {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 1px solid #fca5a5;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .scenario-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .scenario-prob {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.08);
+        }
+
+        .scenario-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .scenario-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .scenario-list {
+            list-style: none;
+        }
+
+        .scenario-list li {
+            font-size: 0.875rem;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .scenario-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gray-400);
+        }
+
+        /* Verdict Section */
+        .verdict-section {
+            text-align: center;
+            padding: 80px 60px;
+        }
+
+        .verdict-rating {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+
+        .verdict-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--green-500);
+            margin-bottom: 24px;
+        }
+
+        .verdict-text {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .page-number {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 48px 0;
+        }
+
+        /* Lists */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-500);
+            font-weight: 700;
+        }
+
+        .check-list li.warning::before {
+            content: '⚠';
+            color: var(--amber-500);
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                padding: 40px 24px;
+            }
+
+            h1, .cover-title {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .grid-2, .grid-4, .company-grid, .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flag-list {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>●</span> Buena Inversión
+                </div>
+                <div class="cover-date">Enero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: CPRT</div>
+                <h1 class="cover-title font-display">Copart, Inc.</h1>
+                <p class="cover-subtitle">El "toll booth" silencioso de la industria de seguros. Un duopolio con moat ancho, ROIC del 30% y crecimiento predecible. Análisis fundamental completo bajo el framework Value-Growth Investing.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span class="filled">★</span><span>★</span>
+                    </div>
+                    <div class="rating-verdict">84/100 - Buena</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$45.20</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">$58-75</div>
+                    <div class="cover-metric-label">Rango precio justo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">+30%</div>
+                    <div class="cover-metric-label">ROIC</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$43.6B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: En Simple + Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Copart en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">Copart es el "peaje" obligatorio que pagan las aseguradoras cada vez que un coche se declara siniestro total. Es el eBay de los coches destrozados — un negocio aburrido, sucio y extremadamente rentable.</p>
+        </div>
+
+        <div class="card card-success" style="margin-bottom: 32px;">
+            <h3 style="color: var(--green-700); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes un accidente y tu coche queda para el desguace. Tu aseguradora tiene que deshacerse de él y recuperar algo de dinero. ¿A quién llama? A Copart. Copart recoge el coche, lo almacena, le saca fotos, y lo subasta online a compradores de todo el mundo — talleres, exportadores, chatarreros. Por cada coche que pasa por sus manos, Copart cobra fees al vendedor (la aseguradora) y al comprador. No importa si el coche vale $500 o $50,000: Copart siempre gana.
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">30%</div>
+                <div class="stat-label">ROIC</div>
+                <div class="stat-change positive">Excepcional</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">45%</div>
+                <div class="stat-label">Gross Margin</div>
+                <div class="stat-change positive">Estable 10+ años</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">~$0</div>
+                <div class="stat-label">Deuda Neta</div>
+                <div class="stat-change positive">Net cash position</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">1/9</div>
+                <div class="stat-label">Red Flags</div>
+                <div class="stat-change positive">Solo 1 advertencia</div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Tesis Principal</div>
+            <p class="callout-text">Copart opera un duopolio natural con IAA en el mercado de subastas de vehículos siniestrados. Tiene un moat ancho basado en network effects (más compradores = mejores precios = más vendedores), economías de escala (200+ locations) y switching costs (contratos largos con aseguradoras). El negocio crece con el aumento de vehículos siniestrados (tendencia secular al alza) y genera cash flow predecible. Management tiene skin in the game ($1.2B en acciones del fundador).</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">Por qué es buena inversión</h3>
+                <ul class="check-list">
+                    <li>ROIC 30% — genera mucho valor</li>
+                    <li>Duopolio con IAA (80% del mercado)</li>
+                    <li>Fundador con $1.2B invertidos</li>
+                    <li>Sin deuda, posición de caja neta</li>
+                    <li>Crecimiento orgánico 9-10% anual</li>
+                    <li>Total loss frequency en máximos</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Qué vigilar</h3>
+                <ul class="check-list">
+                    <li class="warning">Valoración exigente (PER 23x)</li>
+                    <li class="warning">Aumento de conductores sin seguro</li>
+                    <li class="warning">Competencia de IAA/Ritchie Bros</li>
+                    <li class="warning">Insider selling (aunque con $1.2B)</li>
+                    <li class="warning">Revenue Q1 miss reciente</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scoring Dashboard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuación de inversión: 84/100</h2>
+
+        <p class="lead">Cada pilar se evalúa de 0 a 20 puntos basándose en criterios objetivos del framework Value-Growth Investing. Copart destaca en fortaleza financiera y calidad de negocio. La valoración es el punto más débil.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 90%;">Entendible, predecible, creciendo</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">18/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 95%;">ROIC 30%, FCF+, Net Cash</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">19/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 85%;">Duopolio + Network Effects</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">17/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Fundador con $1.2B skin in game</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">16/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoración</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 70%;">PER 23x vs media 29x</div>
+                </div>
+                <span class="progress-value">14/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuación Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--green-600);">84</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px; border: 2px solid var(--green-300);">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente ←</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Entendiendo Copart: el eBay de los coches siniestrados</h2>
+
+        <p class="lead">Copart opera una plataforma de subastas online para vehículos siniestrados. Es un negocio de marketplace que conecta vendedores (principalmente aseguradoras) con compradores (talleres, exportadores, chatarreros). El modelo es capital-light: Copart no compra los coches, solo facilita la transacción y cobra fees a ambas partes.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Modelo de negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Service Fees</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Subastas, almacenamiento, transporte</div>
+                </div>
+                <span class="progress-value">~80%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Vehicle Sales</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 20%;">Compra y reventa directa</div>
+                </div>
+                <span class="progress-value">~20%</span>
+            </div>
+
+            <p style="font-size: 0.9375rem; color: var(--gray-600); margin-top: 24px; margin-bottom: 0;">
+                <strong>Clave:</strong> El 80% de los ingresos viene de fees, no de inventario. Esto hace el negocio capital-light y predecible. Copart gana dinero sin importar el precio final del vehículo.
+            </p>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Quién vende (Supply)</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Aseguradoras</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">75-80%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Bancos/Finance</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">8-10%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Rental/Flotas</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">5-8%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Particulares</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">2-5%</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Quién compra (Demand)</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Dismantlers/Desguaces</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">40-50%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Exportadores int'l</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">25-35%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Body Shops</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">10-15%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Otros</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">5-10%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 32px;">
+            <div class="callout-title">Por qué el modelo funciona tan bien</div>
+            <p class="callout-text"><strong>Network Effects en acción:</strong> Cuantos más compradores tiene Copart, mejores precios consigue para las aseguradoras. Mejores precios atraen más aseguradoras. Más inventario atrae más compradores. Es un círculo virtuoso que se refuerza. Los compradores internacionales pagan un <strong>38% más</strong> que los domésticos — Copart tiene acceso a demanda global que ningún competidor pequeño puede replicar.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolución Financiera
+        </div>
+
+        <h2>Cinco años de crecimiento consistente</h2>
+
+        <p class="lead">Los números cuentan la historia de un negocio bien gestionado que crece de forma predecible. Revenue CAGR del 15%, Net Income CAGR del 21%, márgenes estables en el 40%+. No hay sorpresas negativas — solo ejecución constante trimestre tras trimestre.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>CAGR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$2.7B</td>
+                        <td>$3.3B</td>
+                        <td>$3.9B</td>
+                        <td>$4.2B</td>
+                        <td class="cell-success">$4.65B</td>
+                        <td class="cell-success">+15%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>$0.86B</td>
+                        <td>$1.13B</td>
+                        <td>$1.25B</td>
+                        <td>$1.40B</td>
+                        <td class="cell-success">$1.55B</td>
+                        <td class="cell-success">+16%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow</strong></td>
+                        <td>$0.53B</td>
+                        <td>$0.74B</td>
+                        <td>$0.88B</td>
+                        <td>$0.98B</td>
+                        <td class="cell-success">~$1.1B</td>
+                        <td class="cell-success">+20%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Margin</strong></td>
+                        <td>44%</td>
+                        <td>46%</td>
+                        <td>45%</td>
+                        <td>45%</td>
+                        <td>45%</td>
+                        <td>Estable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operating Margin</strong></td>
+                        <td>38%</td>
+                        <td>41%</td>
+                        <td>40%</td>
+                        <td>40%</td>
+                        <td>40%</td>
+                        <td>Estable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td>$0.89</td>
+                        <td>$1.17</td>
+                        <td>$1.28</td>
+                        <td>$1.40</td>
+                        <td class="cell-success">$1.59</td>
+                        <td class="cell-success">+16%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolución del ROIC: creación de valor sostenida</h3>
+
+        <p>El Return on Invested Capital (ROIC) mide cuánto beneficio genera la empresa por cada euro invertido en el negocio. Un ROIC del 15-20% es excelente. El ROIC de Copart del 30% es extraordinario y demuestra que el negocio tiene ventajas competitivas duraderas.</p>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-year">ROIC</div>
+                    <div class="timeline-value">+25%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-year">ROIC</div>
+                    <div class="timeline-value">+28%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2023</div>
+                    <div class="timeline-year">ROIC</div>
+                    <div class="timeline-value">+29%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2024</div>
+                    <div class="timeline-year">ROIC</div>
+                    <div class="timeline-value">+30%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2025</div>
+                    <div class="timeline-year">ROIC</div>
+                    <div class="timeline-value">+30%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Buffett y Munger buscan empresas con ROIC superior al 15% sostenido durante 10 años o más. Copart tiene ROIC del 30% y mejorando.</p>
+            <p class="quote-author">— Framework Value-Growth Investing</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Análisis Competitivo
+        </div>
+
+        <h2>Duopolio dominante: Copart vs IAA</h2>
+
+        <p class="lead">El mercado de subastas de vehículos siniestrados es un duopolio natural. Copart (~40%) e IAA (~40%) controlan el 80% del mercado. Esta estructura es extremadamente favorable para los incumbentes: no hay espacio para un tercer jugador porque los network effects benefician a los más grandes.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">COPART</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">~40%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">30%</div>
+                    <div class="company-stat-label">ROIC</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">45%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-rating">★★★★☆</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">IAA (Ritchie Bros)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~40%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~15%</div>
+                    <div class="company-stat-label">ROIC</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">42%</div>
+                    <div class="company-stat-label">Gross Margin</div>
+                </div>
+                <div class="company-rating">★★★☆☆</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">Otros</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--gray-400);">~20%</div>
+                    <div class="company-stat-label">Market Share</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--gray-400);">?</div>
+                    <div class="company-stat-label">ROIC</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--gray-400);">Menor</div>
+                    <div class="company-stat-label">Escala</div>
+                </div>
+                <div class="company-rating">★★☆☆☆</div>
+            </div>
+        </div>
+
+        <h3>Por qué Copart gana vs IAA</h3>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Copart</th>
+                        <th>IAA</th>
+                        <th>Ventaja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ROIC</strong></td>
+                        <td class="cell-success">30%</td>
+                        <td>~15%</td>
+                        <td style="color: var(--green-600);">Copart 2x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deuda</strong></td>
+                        <td class="cell-success">Net Cash</td>
+                        <td>Apalancada (fusión)</td>
+                        <td style="color: var(--green-600);">Copart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Management</strong></td>
+                        <td class="cell-success">Fundador activo</td>
+                        <td>Post-fusión shuffle</td>
+                        <td style="color: var(--green-600);">Copart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>International Buyers</strong></td>
+                        <td class="cell-success">750K+ registrados</td>
+                        <td>Menor alcance</td>
+                        <td style="color: var(--green-600);">Copart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tecnología (VB3)</strong></td>
+                        <td class="cell-success">Plataforma propia</td>
+                        <td>Catching up</td>
+                        <td style="color: var(--green-600);">Copart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Foco</strong></td>
+                        <td class="cell-success">100% salvage</td>
+                        <td>Dividido (equipo pesado)</td>
+                        <td style="color: var(--green-600);">Copart</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo: fusión IAA + Ritchie Bros</div>
+            <p class="callout-text">La fusión de IAA con Ritchie Bros en 2023 creó un competidor más grande en teoría. En la práctica, la fusión añadió complejidad y deuda a IAA. Ritchie Bros está enfocado en equipos de construcción/agrícola, no en salvage. El consenso es que la fusión ha distraído a IAA más que fortalecerlo. Vigilar si esto cambia.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline & Tailwinds -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Tendencias y Catalizadores
+        </div>
+
+        <h2>Vientos a favor: total loss frequency en máximos históricos</h2>
+
+        <p class="lead">El negocio de Copart crece cuando hay más coches siniestrados. La "total loss frequency" — el porcentaje de accidentes que resultan en siniestro total — está en máximos históricos del 22.2%. Esto no es cíclico, es estructural: los coches modernos son más costosos de reparar.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <h3 style="margin-bottom: 32px;">Total Loss Frequency: tendencia alcista de largo plazo</h3>
+
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 200px; padding: 0 20px;">
+                <div style="text-align: center;">
+                    <div style="height: 80px; width: 50px; background: var(--gray-200); border-radius: 4px 4px 0 0;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 8px;">2015</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">18%</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="height: 100px; width: 50px; background: var(--gray-300); border-radius: 4px 4px 0 0;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 8px;">2018</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">19%</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="height: 120px; width: 50px; background: var(--gray-400); border-radius: 4px 4px 0 0;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 8px;">2021</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">20%</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="height: 150px; width: 50px; background: var(--green-400); border-radius: 4px 4px 0 0;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 8px;">2024</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">21.5%</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="height: 170px; width: 50px; background: var(--green-500); border-radius: 4px 4px 0 0;"></div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 8px;">2025</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--green-600); font-weight: 600;">22.2%</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Por qué la total loss frequency sube (y seguirá subiendo)</h3>
+
+        <div class="grid-2" style="margin: 32px 0;">
+            <div class="card card-success">
+                <h4 style="color: var(--green-700); margin-bottom: 16px;">Drivers estructurales</h4>
+                <ul style="list-style: none; line-height: 2.2;">
+                    <li>✓ <strong>Coches más caros de reparar:</strong> sensores, ADAS, materiales avanzados</li>
+                    <li>✓ <strong>Mano de obra escasa:</strong> menos mecánicos, costes laborales suben</li>
+                    <li>✓ <strong>Supply chain:</strong> piezas tardan más, costes de almacenamiento</li>
+                    <li>✓ <strong>EVs:</strong> baterías dañadas = siniestro total automático</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 style="margin-bottom: 16px;">Catalizadores adicionales</h4>
+                <ul style="list-style: none; line-height: 2.2;">
+                    <li>→ <strong>Catástrofes naturales:</strong> huracanes Milton/Helene impulsaron volumen</li>
+                    <li>→ <strong>Demanda internacional:</strong> compradores globales pagan +38%</li>
+                    <li>→ <strong>Nuevas verticales:</strong> BluCar (flotas), Purple Wave (maquinaria)</li>
+                    <li>→ <strong>Motos:</strong> adquisición NPA (National Powersport Auctions)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Headwind a vigilar: conductores sin seguro</div>
+            <p class="callout-text">La empresa ha señalado un "modest increase in the uninsured population". Cuando hay más conductores sin seguro, menos coches entran al flujo de siniestros de aseguradoras → menos inventario para Copart. Este es el principal riesgo de demanda a corto plazo. Las subidas de precios de seguros están forzando a algunos consumidores a reducir cobertura.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Análisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas: moat ancho y duradero</h2>
+
+        <p class="lead">Copart tiene un moat ancho basado en múltiples fuentes de ventaja competitiva que se refuerzan mutuamente. Es extremadamente difícil para un nuevo entrante replicar la infraestructura, la base de compradores internacionales y las relaciones con aseguradoras que Copart ha construido en 40 años.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Network Effects</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Más compradores = mejores precios = más vendedores</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Economías de Escala</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">200+ locations, infraestructura imposible de replicar</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Switching Costs</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Contratos largos con aseguradoras (Allstate, Nationwide)</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Estructura de Duopolio</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Copart + IAA = 80% del mercado, barrera natural de entrada</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Demanda Internacional</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">750K+ compradores globales, pagan 38% más que domésticos</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>Test de durabilidad: ¿Cómo será Copart en 10 años?</h3>
+
+        <div class="grid-2" style="margin-top: 24px;">
+            <div class="card card-success">
+                <h4 style="margin-bottom: 16px; color: var(--green-700);">Factores que refuerzan el moat</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✓ Los coches serán AÚN más costosos de reparar</li>
+                    <li>✓ EVs con baterías = más siniestros totales</li>
+                    <li>✓ Demanda internacional seguirá creciendo</li>
+                    <li>✓ Aseguradoras no tienen incentivo para cambiar</li>
+                    <li>✓ Infraestructura física muy difícil de replicar</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 style="margin-bottom: 16px;">Posibles amenazas (baja probabilidad)</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>? Vehículos autónomos reducen accidentes (15+ años)</li>
+                    <li>? Regulación que favorezca competencia</li>
+                    <li>? Tech disruptor con modelo radicalmente diferente</li>
+                    <li>? Aseguradoras se integran verticalmente</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-box" style="margin-top: 40px;">
+            <p class="quote-text">Lo que buscamos es un negocio con un foso ancho y duradero alrededor de él, protegiendo un castillo económico, con un señor honesto a cargo.</p>
+            <p class="quote-author">— Warren Buffett, 1995 (Copart cumple los 3 criterios)</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management
+        </div>
+
+        <h2>Liderazgo: fundador con $1.2B en skin in the game</h2>
+
+        <p class="lead">Jay Adair, hijo del fundador Willis Johnson, ha estado en Copart desde 1992 y fue CEO de 2010 a 2024. Desde abril 2024 es Executive Chairman activo. Lo más notable: desde 2020 solo acepta $1 de salario y rechaza toda compensación. Su participación de 26.6 millones de acciones vale ~$1.2 billones. Está 100% alineado con accionistas.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card" style="border: 2px solid var(--green-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--green-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Jay Adair</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">Executive Chairman desde Abril 2024</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ En Copart desde 1992 (33 años)</li>
+                    <li>✓ CEO de 2010 a 2024 (14 años)</li>
+                    <li>✓ <strong>$1 de salario desde 2020</strong></li>
+                    <li>✓ 26.6M acciones = ~$1.2B</li>
+                    <li>✓ Say-on-pay: 95% aprobación</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>Clave:</strong> Un fundador que rechaza compensación y tiene billones invertidos está perfectamente alineado con los accionistas de largo plazo.
+                </p>
+            </div>
+
+            <div class="card" style="border: 2px solid var(--gray-200);">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: var(--gray-100); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+                    <h3 style="margin: 0;">Jeff Liaw</h3>
+                    <p style="color: var(--gray-500); margin: 4px 0 0; font-size: 0.875rem;">CEO desde Abril 2024</p>
+                </div>
+
+                <ul style="list-style: none; font-size: 0.9375rem; line-height: 2;">
+                    <li>✓ En Copart desde 2014</li>
+                    <li>✓ Co-CEO con Adair 2022-2024</li>
+                    <li>✓ Ex-CFO, conoce los números</li>
+                    <li>✓ Transición ordenada del fundador</li>
+                    <li>✓ Continuidad estratégica</li>
+                </ul>
+
+                <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                    <strong>Contexto:</strong> A diferencia de otras transiciones de CEO, esta fue planificada con 2 años de co-CEO. Liaw no es un outsider — conoce el negocio profundamente.
+                </p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor de Evaluación</th>
+                        <th>Estado</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Track record</td>
+                        <td class="cell-success">Excelente</td>
+                        <td>CAGR 15%+ revenue, 20%+ EPS durante 14 años</td>
+                    </tr>
+                    <tr>
+                        <td>Skin in the game</td>
+                        <td class="cell-success">Excepcional</td>
+                        <td>$1.2B de Jay Adair, $1 salario</td>
+                    </tr>
+                    <tr>
+                        <td>Capital allocation</td>
+                        <td class="cell-success">Bueno</td>
+                        <td>Expansión disciplinada, adquisiciones pequeñas</td>
+                    </tr>
+                    <tr>
+                        <td>Comunicación</td>
+                        <td class="cell-success">Buena</td>
+                        <td>Earnings calls claros, guidance conservador</td>
+                    </tr>
+                    <tr>
+                        <td>Sucesión</td>
+                        <td class="cell-success">Ordenada</td>
+                        <td>2 años de co-CEO, transición sin drama</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Nota: Insider selling</div>
+            <p class="callout-text">Jay Adair vendió $32M en acciones en noviembre 2024. Sin embargo, esto representa apenas el 2.5% de su posición total de $1.2B. En este contexto, las ventas son diversificación personal razonable, no una señal de alerta. Las ventas programadas para impuestos o liquidez son normales para fundadores con posiciones tan grandes.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags Checklist -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags Checklist
+        </div>
+
+        <h2>1 de 9 señales de alerta (solo advertencia menor)</h2>
+
+        <p class="lead">El análisis de red flags detecta problemas antes de que sea tarde. Copart pasa el checklist con excelencia: solo hay una advertencia menor (valoración elevada), que no es un red flag operativo sino una cuestión de precio.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Revenue vs Cash Flow alineados</h4>
+                    <p>No hay divergencia. El cash flow crece en línea con revenue. Beneficios de alta calidad.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Márgenes estables</h4>
+                    <p>Gross margin 44-46% sostenido 10+ años. Operating margin 38-41%. Sin deterioro.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Sin gastos "one-time" recurrentes</h4>
+                    <p>GAAP y Non-GAAP earnings muy similares. No hay ajustes agresivos.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Cuentas por cobrar normales</h4>
+                    <p>DSO (Days Sales Outstanding) estable. No hay acumulación sospechosa de receivables.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Sin cambios de auditor/CFO</h4>
+                    <p>Continuidad en el equipo financiero. Transición de CEO fue planificada y ordenada.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Sin related party transactions</h4>
+                    <p>No hay transacciones sospechosas con partes relacionadas.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">✓</div>
+                <div class="flag-content">
+                    <h4>Dilución mínima</h4>
+                    <p>Stock compensation ~1-2% anual. Shares outstanding crecen muy poco.</p>
+                </div>
+            </div>
+
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Valoración elevada</h4>
+                    <p>PER 23x es razonable pero no barato. Requiere que el crecimiento continúe para justificar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-success" style="text-align: center; padding: 48px;">
+            <div style="font-size: 4rem; margin-bottom: 16px;">✓</div>
+            <h3 style="color: var(--green-700); font-size: 1.75rem; margin-bottom: 12px;">1 de 9 Red Flags (Solo Advertencia)</h3>
+            <p style="color: var(--gray-600); margin: 0; font-size: 1.125rem;">Esta es una empresa de alta calidad sin problemas operativos ni contables visibles. La única consideración es el precio de entrada.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation 5Y -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoración a 5 Años
+        </div>
+
+        <h2>Proyección 2026-2030 con escenarios</h2>
+
+        <p class="lead">Usamos estimaciones de consenso y proyectamos 3 escenarios de múltiplo para determinar el rango de precio justo. El método combina EPS/FCF estimado con análisis de múltiplos históricos.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Año Fiscal</th>
+                        <th>EPS Estimado</th>
+                        <th>FCF Estimado</th>
+                        <th>Crecimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>FY2025 (actual)</td>
+                        <td>$1.59</td>
+                        <td>~$1.1B</td>
+                        <td>+14%</td>
+                    </tr>
+                    <tr>
+                        <td>FY2026E</td>
+                        <td>$1.68</td>
+                        <td>~$1.2B</td>
+                        <td>+6%</td>
+                    </tr>
+                    <tr>
+                        <td>FY2027E</td>
+                        <td>$1.87</td>
+                        <td>~$1.3B</td>
+                        <td>+11%</td>
+                    </tr>
+                    <tr>
+                        <td>FY2028E</td>
+                        <td>$2.05</td>
+                        <td>~$1.45B</td>
+                        <td>+10%</td>
+                    </tr>
+                    <tr>
+                        <td>FY2029E</td>
+                        <td>$2.25</td>
+                        <td>~$1.55B</td>
+                        <td>+10%</td>
+                    </tr>
+                    <tr style="background: var(--green-50);">
+                        <td><strong>FY2030E</strong></td>
+                        <td><strong>$2.48</strong></td>
+                        <td><strong>~$1.7B</strong></td>
+                        <td><strong>+10%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Análisis de múltiplos</h3>
+
+        <div class="grid-4" style="margin: 24px 0;">
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">23x</div>
+                <div class="stat-label">PER Actual</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">29x</div>
+                <div class="stat-label">PER Media 10y</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">17x</div>
+                <div class="stat-label">EV/EBITDA</div>
+            </div>
+            <div class="stat-block" style="text-align: center;">
+                <div class="stat-value">22x</div>
+                <div class="stat-label">EV/EBITDA Med</div>
+            </div>
+        </div>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #991b1b;">Bear Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #991b1b;">$52</div>
+                <div class="scenario-change" style="color: #991b1b;">+15% (3% CAGR)</div>
+                <ul class="scenario-list">
+                    <li>PER comprime a 18x</li>
+                    <li>EPS 2030: $2.30 (menor)</li>
+                    <li>Aumento conductores sin seguro</li>
+                    <li>IAA compite más agresivo</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">Base Case</span>
+                    <span class="scenario-prob">50%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">$72</div>
+                <div class="scenario-change" style="color: #92400e;">+60% (10% CAGR)</div>
+                <ul class="scenario-list">
+                    <li>PER estable en 22-24x</li>
+                    <li>EPS 2030: $2.48</li>
+                    <li>Crecimiento orgánico continúa</li>
+                    <li>Márgenes estables</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #065f46;">Bull Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: #065f46;">$95</div>
+                <div class="scenario-change" style="color: #065f46;">+110% (16% CAGR)</div>
+                <ul class="scenario-list">
+                    <li>PER expande a 28x</li>
+                    <li>EPS 2030: $2.70 (beat)</li>
+                    <li>Nuevas verticales aceleran</li>
+                    <li>EVs impulsan total loss</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 32px;">
+            <h3 style="margin-bottom: 16px;">Precio esperado ponderado</h3>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; line-height: 2;">
+                <div>Valor = <span style="color: var(--red-500);">(0.25 × $52)</span> + <span style="color: var(--amber-500);">(0.50 × $72)</span> + <span style="color: var(--green-500);">(0.25 × $95)</span></div>
+                <div style="padding-left: 60px;">= $13 + $36 + $23.75 = <strong style="color: var(--green-600);">$72.75</strong></div>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.9375rem; color: var(--gray-600);">
+                <strong>Upside potencial:</strong> +61% desde precio actual ($45) | <strong>CAGR esperado:</strong> ~10% anual
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: DCF Inverso + Precio Justo -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Validación de Valoración
+        </div>
+
+        <h2>DCF Inverso: ¿qué asume el mercado?</h2>
+
+        <p class="lead">El DCF inverso responde: "¿qué crecimiento de FCF necesita Copart para justificar el precio actual?" Si el crecimiento implícito es razonable, el precio actual es justo. Si es demasiado optimista, está cara.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <h3 style="margin-bottom: 24px;">Supuestos del mercado implícitos en $45</h3>
+
+            <div class="grid-3">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600;">7-8%</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: 8px;">Crecimiento FCF implícito</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600;">18-20x</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: 8px;">Múltiplo terminal implícito</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--green-600);">Razonable</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: 8px;">Veredicto</div>
+                </div>
+            </div>
+
+            <p style="margin-top: 24px; font-size: 0.9375rem; color: var(--gray-600);">
+                <strong>Análisis:</strong> El mercado asume crecimiento de FCF del 7-8% anual durante 10 años. Históricamente, Copart ha crecido FCF al 20%+ CAGR. El precio actual asume una desaceleración significativa, lo cual es conservador. Si el crecimiento continúa al 10-12% (más probable), el precio actual ofrece upside.
+            </p>
+        </div>
+
+        <h3>Rango de precio justo</h3>
+
+        <div class="grid-2" style="margin: 32px 0;">
+            <div class="card card-success" style="text-align: center; padding: 40px;">
+                <div style="font-size: 0.875rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">PRECIO JUSTO ESTIMADO</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--green-700);">$58 - $75</div>
+                <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: 12px;">Basado en múltiplos normalizados y crecimiento esperado</div>
+            </div>
+            <div class="card" style="text-align: center; padding: 40px;">
+                <div style="font-size: 0.875rem; color: var(--gray-500); font-weight: 600; margin-bottom: 8px;">PRECIO ACTUAL</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700;">$45.20</div>
+                <div style="font-size: 0.875rem; color: var(--green-600); margin-top: 12px;">~28-66% por debajo del rango justo</div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Consenso de analistas</div>
+            <p class="callout-text">11 analistas cubren Copart. El precio objetivo medio es <strong>$58.44</strong>, lo que implica un upside del 30%. El consenso es "Moderate Buy" — 5 Strong Buy, 6 Hold, 0 Sell. Los analistas ven valor pero esperan un catalizador.</p>
+        </div>
+
+        <h3 style="margin-top: 40px;">Nivel de entrada óptimo</h3>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Precio</th>
+                        <th>PER Implícito</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sobrevalorada</td>
+                        <td>>$75</td>
+                        <td>>28x</td>
+                        <td>Esperar / Reducir</td>
+                    </tr>
+                    <tr>
+                        <td>Precio justo alto</td>
+                        <td>$65-75</td>
+                        <td>25-28x</td>
+                        <td>Mantener</td>
+                    </tr>
+                    <tr style="background: var(--amber-50);">
+                        <td>Precio justo</td>
+                        <td>$55-65</td>
+                        <td>21-25x</td>
+                        <td>Acumular gradual</td>
+                    </tr>
+                    <tr style="background: var(--green-50);">
+                        <td><strong>Atractiva</strong></td>
+                        <td><strong>$40-55</strong></td>
+                        <td><strong>16-21x</strong></td>
+                        <td><strong>Comprar ← ACTUAL</strong></td>
+                    </tr>
+                    <tr style="background: var(--green-100);">
+                        <td>Muy atractiva</td>
+                        <td><$40</td>
+                        <td><16x</td>
+                        <td>Comprar agresivo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="page-footer">
+            <span>Copart (CPRT) · Informe de Inversión</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">★★★★☆</div>
+                <div class="verdict-title font-display">84/100 - Buena</div>
+                <p class="verdict-text">Copart es un negocio de alta calidad con moat ancho, ROIC excepcional y management alineado. El precio actual ofrece una oportunidad razonable de entrada. No es una ganga, pero la calidad del negocio justifica pagar un múltiplo premium.</p>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-4" style="margin: 48px 0; text-align: center;">
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: white;">$45.20</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio actual</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">$58-75</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Precio justo</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">+30-66%</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">Upside</div>
+                </div>
+                <div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: var(--green-400);">30%</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 4px;">ROIC</div>
+                </div>
+            </div>
+
+            <div class="divider" style="background: var(--gray-700);"></div>
+
+            <div class="grid-2" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Fortalezas clave</h3>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">Duopolio natural</strong> — 80% mercado con IAA
+                        </li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">ROIC 30%</strong> — excepcional generación de valor
+                        </li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">
+                            <strong style="color: white;">Net cash</strong> — balance fortaleza, sin deuda
+                        </li>
+                        <li style="padding: 12px 0;">
+                            <strong style="color: white;">Fundador con $1.2B</strong> — alineación perfecta
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 20px;">Qué vigilar (triggers)</h3>
+                    <ul style="list-style: none; margin-top: 20px; color: var(--gray-300);">
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">⚠️ Aumento significativo conductores sin seguro</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">⚠️ IAA/Ritchie Bros ganan share agresivamente</li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-700);">⚠️ Márgenes caen <40%</li>
+                        <li style="padding: 12px 0;">⚠️ PER sube >35x (sobrevaloración)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; padding: 32px; background: rgba(255,255,255,0.05); border-radius: 16px;">
+                <h3 style="color: white; margin-bottom: 16px;">Lo que no sé (transparencia)</h3>
+                <ul style="list-style: none; color: var(--gray-400); line-height: 2;">
+                    <li>❓ Impacto exacto de conductores sin seguro en volumen futuro</li>
+                    <li>❓ Estrategia de precios de IAA post-fusión con Ritchie Bros</li>
+                    <li>❓ Timeline de adopción masiva de EVs y su impacto en total loss</li>
+                    <li>❓ Potencial de expansión internacional (actualmente 18% revenue)</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-700); display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: var(--gray-500); font-size: 0.875rem;">
+                    <div>Análisis realizado: 28 Enero 2026</div>
+                    <div>Framework: Value-Growth Investing</div>
+                    <div style="margin-top: 12px;">Fuentes: SEC filings, Yahoo Finance, MacroTrends, Stock Analysis, earnings transcripts</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">"El precio es lo que pagas.</div>
+                    <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--gray-400); font-size: 1.125rem;">El valor es lo que obtienes."</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: 8px;">— Warren Buffett</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
