@@ -8,7 +8,7 @@
 
 | Total Análisis | Promedio Score | Última Actualización |
 |----------------|----------------|---------------------|
-| 25 | 59.4/100 | 2026-01-28 |
+| 26 | 59.7/100 | 2026-01-31 |
 
 ---
 
@@ -17,6 +17,7 @@
 | Empresa | Ticker | Sector | Fecha | Score | Rating | Veredicto | Informe |
 |---------|--------|--------|-------|-------|--------|-----------|---------|
 | Taiwan Semiconductor | TSM | Tecnología (Semiconductores) | 2026-01-27 | 87/100 | ★★★★★ | EXCELENTE | [Ver informe](./2026-01-27-tsmc-informe.html) |
+| Shopify Inc. | SHOP | Tecnología (E-Commerce) | 2026-01-31 | 68/100 | ★★★☆☆ | ACEPTABLE | [Ver informe](./2026-01-31-shopify-informe.html) |
 | Microsoft Corporation | MSFT | Tecnología (Cloud & AI) | 2026-01-27 | 85/100 | ★★★★☆ | BUENA | [Ver informe](./2026-01-27-microsoft-informe.html) |
 | Broadcom Inc. | AVGO | Tecnología (Semiconductores) | 2026-01-27 | 85/100 | ★★★★☆ | BUENA | [Ver informe](./2026-01-27-broadcom-informe.html) |
 | NVIDIA Corporation | NVDA | Tecnología (Semiconductores) | 2026-01-25 | 82/100 | ★★★★☆ | BUENA | [Ver informe](./2026-01-25-nvidia-informe.html) |
@@ -67,6 +68,7 @@
 ### Aceptables (51-70)
 | Empresa | Ticker | Score | Fecha | Informe |
 |---------|--------|-------|-------|---------|
+| Shopify Inc. | SHOP | 68/100 | 2026-01-31 | [Ver](./2026-01-31-shopify-informe.html) |
 | Oracle Corporation | ORCL | 64/100 | 2026-01-27 | [Ver](./2026-01-27-oracle-informe.html) |
 | CrowdStrike | CRWD | 64/100 | 2026-01-27 | [Ver](./2026-01-27-crowdstrike-informe.html) |
 | UnitedHealth Group | UNH | 62/100 | 2026-01-27 | [Ver](./2026-01-27-unitedhealth-informe.html) |
@@ -119,6 +121,11 @@
 | Empresa | Ticker | Score | Veredicto | Informe |
 |---------|--------|-------|-----------|---------|
 | Apple Inc. | AAPL | 79/100 | Mantener | [Ver](./2026-01-25-apple-informe.html) |
+
+### Tecnología (E-Commerce)
+| Empresa | Ticker | Score | Veredicto | Informe |
+|---------|--------|-------|-----------|---------|
+| Shopify Inc. | SHOP | 68/100 | Aceptable | [Ver](./2026-01-31-shopify-informe.html) |
 
 ### Salud (Pharma)
 | Empresa | Ticker | Score | Veredicto | Informe |
@@ -255,6 +262,9 @@
 | Copart | Márgenes | Si gross margin cae <42% | Pendiente |
 | Copart | Valoración | Si PER sube >35x (sobrevaloración) | Pendiente |
 | Copart | Resultados Q2 FY2026 | Febrero 2026 | Pendiente |
+| Shopify | Resultados Q4 2025 | 11 Febrero 2026 | Pendiente |
+| Shopify | Valoración | Si PE cae a ~60x ($75-90) | Pendiente |
+| Shopify | Gross Margin | Si sigue cayendo (<47%) | Pendiente |
 
 ---
 
@@ -349,4 +359,4 @@ EXCELENTE:  █░░░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Última actualización: 2026-01-28 (Análisis completado: 25 empresas - incluye Copart)*
+*Última actualización: 2026-01-31 (Análisis completado: 26 empresas - incluye Shopify)*

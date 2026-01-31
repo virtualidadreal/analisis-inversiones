@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis: Shopify (SHOP) | 31 Enero 2026</title>
+    <style>
+        :root {
+            --primary: #5C6AC4;
+            --secondary: #95BF47;
+            --warning: #FFC453;
+            --danger: #DE3618;
+            --dark: #212B36;
+            --light: #F4F6F8;
+            --success: #50B83C;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, var(--primary), #2c3e8c); color: white; padding: 40px 30px; border-radius: 16px; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header .ticker { font-size: 1.2em; opacity: 0.9; }
+        .header .date { font-size: 0.9em; opacity: 0.8; margin-top: 5px; }
+        .card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .card h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.4em; border-bottom: 2px solid var(--light); padding-bottom: 10px; }
+        .verdict { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 2.5em; font-weight: bold; color: white; }
+        .score-good { background: linear-gradient(135deg, var(--success), #3d8c31); }
+        .score-caution { background: linear-gradient(135deg, var(--warning), #e6a800); }
+        .verdict-text { flex: 1; }
+        .verdict-text h3 { font-size: 1.5em; margin-bottom: 5px; }
+        .verdict-text p { color: #637381; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #E1E3E5; }
+        th { background: var(--light); color: #637381; font-weight: 600; font-size: 0.85em; text-transform: uppercase; }
+        td { font-size: 0.95em; }
+        .number { font-family: 'SF Mono', Monaco, monospace; }
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .neutral { color: var(--warning); }
+        .progress-bar { background: #E1E3E5; border-radius: 10px; height: 20px; overflow: hidden; margin: 5px 0; }
+        .progress-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+        .pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
+        .pill-green { background: #E3F1DF; color: var(--success); }
+        .pill-red { background: #FBE9E7; color: var(--danger); }
+        .pill-yellow { background: #FFF8E1; color: #C77700; }
+        .pill-blue { background: #E8EAF6; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .metric-box { background: var(--light); padding: 15px; border-radius: 8px; text-align: center; }
+        .metric-box .value { font-size: 1.8em; font-weight: bold; color: var(--dark); }
+        .metric-box .label { font-size: 0.85em; color: #637381; margin-top: 5px; }
+        .timeline { border-left: 3px solid var(--primary); margin-left: 20px; padding-left: 20px; }
+        .timeline-item { margin-bottom: 20px; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -28px; top: 5px; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; }
+        .timeline-item .date { font-weight: 600; color: var(--primary); }
+        .checklist { list-style: none; }
+        .checklist li { padding: 8px 0; padding-left: 30px; position: relative; }
+        .checklist li::before { position: absolute; left: 0; font-size: 1.2em; }
+        .checklist .check::before { content: '✓'; color: var(--success); }
+        .checklist .cross::before { content: '✗'; color: var(--danger); }
+        .checklist .warn::before { content: '⚠'; color: var(--warning); }
+        .scenario { border-left: 4px solid; padding-left: 15px; margin: 15px 0; }
+        .scenario.bull { border-color: var(--success); }
+        .scenario.base { border-color: var(--primary); }
+        .scenario.bear { border-color: var(--danger); }
+        .footer { text-align: center; padding: 30px; color: #637381; font-size: 0.9em; }
+        @media (max-width: 600px) { .verdict { flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- PÁGINA 1: PORTADA + CONCLUSIÓN -->
+        <div class="header">
+            <h1>Shopify Inc.</h1>
+            <div class="ticker">NASDAQ: SHOP | E-Commerce Platform</div>
+            <div class="date">Análisis: 31 Enero 2026 | Precio: $131.23</div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 Veredicto Inmediato</h2>
+            <div class="verdict">
+                <div class="score-circle score-caution">68<span style="font-size:0.4em">/100</span></div>
+                <div class="verdict-text">
+                    <h3><span class="pill pill-yellow">ACEPTABLE - CARA</span></h3>
+                    <p><strong>Negocio excelente, valoración muy exigente.</strong> Shopify es el líder indiscutible en e-commerce para PYMES con un moat fuerte (switching costs + ecosistema). Financieros sólidos: crece 30%, FCF margin 18%, net cash $5.9B. PERO: PE de 105x y EV/EBITDA de 106x implican perfección. A precio actual, pagas por 10 años de crecimiento impecable.</p>
+                    <p style="margin-top:10px;"><strong>Acción:</strong> Watchlist. Esperar corrección a PE ~60-70x ($75-90/acción) para margen de seguridad.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 2: EXPLICACIÓN PARA TODOS -->
+        <div class="card">
+            <h2>📖 Explicación Para Todos</h2>
+            <p><strong>¿Qué hace Shopify?</strong></p>
+            <p>Imagina que quieres montar una tienda online. Antes necesitabas un programador, un diseñador, alguien que configurara los pagos, el envío... Shopify te da todo eso en un solo lugar: montas tu tienda en minutos, procesas pagos, gestionas inventario, y envías productos. Es como el "WordPress del e-commerce" pero mucho más completo.</p>
+            
+            <p style="margin-top:15px;"><strong>¿Cómo gana dinero?</strong></p>
+            <ul style="margin-left:20px; margin-top:10px;">
+                <li><strong>Suscripciones:</strong> Pagas mensual por usar la plataforma ($29-$299/mes para la mayoría)</li>
+                <li><strong>Pagos:</strong> Cada vez que vendes algo con Shopify Payments, se llevan un % (~2.9%)</li>
+                <li><strong>Servicios extra:</strong> Envíos, préstamos a comerciantes, apps del marketplace</li>
+            </ul>
+            
+            <p style="margin-top:15px;"><strong>Analogía del día:</strong></p>
+            <p>Shopify es como el dueño de un centro comercial online que cobra alquiler fijo + comisión por ventas. Mientras más tiendas entren y más vendan, más gana. Y una vez que instalas tu tienda ahí, mudarte es un dolor de cabeza enorme (eso es bueno para Shopify).</p>
+        </div>
+
+        <!-- PÁGINA 3: SCORING VISUAL -->
+        <div class="card">
+            <h2>📊 Scoring Visual</h2>
+            <table>
+                <tr>
+                    <td><strong>Negocio</strong></td>
+                    <td style="width:50%">
+                        <div class="progress-bar"><div class="progress-fill" style="width:85%; background:var(--success);"></div></div>
+                    </td>
+                    <td class="number">17/20</td>
+                </tr>
+                <tr>
+                    <td><strong>Financieros</strong></td>
+                    <td>
+                        <div class="progress-bar"><div class="progress-fill" style="width:80%; background:var(--success);"></div></div>
+                    </td>
+                    <td class="number">16/20</td>
+                </tr>
+                <tr>
+                    <td><strong>Moat</strong></td>
+                    <td>
+                        <div class="progress-bar"><div class="progress-fill" style="width:80%; background:var(--success);"></div></div>
+                    </td>
+                    <td class="number">16/20</td>
+                </tr>
+                <tr>
+                    <td><strong>Management</strong></td>
+                    <td>
+                        <div class="progress-bar"><div class="progress-fill" style="width:70%; background:var(--primary);"></div></div>
+                    </td>
+                    <td class="number">14/20</td>
+                </tr>
+                <tr>
+                    <td><strong>Valoración</strong></td>
+                    <td>
+                        <div class="progress-bar"><div class="progress-fill" style="width:25%; background:var(--danger);"></div></div>
+                    </td>
+                    <td class="number">5/20</td>
+                </tr>
+                <tr style="background:var(--light); font-weight:bold;">
+                    <td>TOTAL</td>
+                    <td>
+                        <div class="progress-bar"><div class="progress-fill" style="width:68%; background:var(--warning);"></div></div>
+                    </td>
+                    <td class="number" style="font-size:1.3em;">68/100</td>
+                </tr>
+            </table>
+            <p style="color:#637381; font-size:0.9em; margin-top:10px;">Interpretación: 51-70 = ACEPTABLE. Buen negocio pero valoración no deja margen de seguridad.</p>
+        </div>
+
+        <!-- PÁGINA 4: EL NEGOCIO -->
+        <div class="card">
+            <h2>🏢 El Negocio</h2>
+            <div class="grid">
+                <div class="metric-box">
+                    <div class="value">$10.7B</div>
+                    <div class="label">Revenue TTM</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">+30%</div>
+                    <div class="label">Crecimiento YoY</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">8,100</div>
+                    <div class="label">Empleados</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">2004</div>
+                    <div class="label">Fundada</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top:20px; margin-bottom:10px;">Segmentos de Negocio</h3>
+            <table>
+                <tr>
+                    <th>Segmento</th>
+                    <th>Qué incluye</th>
+                    <th>Modelo</th>
+                </tr>
+                <tr>
+                    <td><strong>Subscription Solutions</strong></td>
+                    <td>Plataforma SaaS, temas, apps, dominios</td>
+                    <td>Recurrente mensual</td>
+                </tr>
+                <tr>
+                    <td><strong>Merchant Solutions</strong></td>
+                    <td>Shopify Payments, Shipping, Capital, POS</td>
+                    <td>% de transacciones</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top:20px; margin-bottom:10px;">Geografía</h3>
+            <p>Canadá, Estados Unidos, Europa, MENA, Asia Pacífico, Latinoamérica. Principal mercado: USA (~70% revenue estimado).</p>
+        </div>
+
+        <!-- PÁGINA 5: ANÁLISIS FINANCIERO -->
+        <div class="card">
+            <h2>💰 Análisis Financiero</h2>
+            <h3 style="margin-bottom:10px;">Income Statement (Millones USD)</h3>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>TTM</th>
+                    <th>2024</th>
+                    <th>2023</th>
+                    <th>2022</th>
+                    <th>2021</th>
+                </tr>
+                <tr>
+                    <td>Revenue</td>
+                    <td class="number">10,696</td>
+                    <td class="number">8,880</td>
+                    <td class="number">7,060</td>
+                    <td class="number">5,600</td>
+                    <td class="number">4,612</td>
+                </tr>
+                <tr>
+                    <td>Revenue Growth</td>
+                    <td class="number positive">+30%</td>
+                    <td class="number positive">+26%</td>
+                    <td class="number positive">+26%</td>
+                    <td class="number positive">+21%</td>
+                    <td class="number positive">+57%</td>
+                </tr>
+                <tr>
+                    <td>Gross Margin</td>
+                    <td class="number">48.8%</td>
+                    <td class="number">50.4%</td>
+                    <td class="number">49.8%</td>
+                    <td class="number">49.2%</td>
+                    <td class="number">53.8%</td>
+                </tr>
+                <tr>
+                    <td>Operating Income</td>
+                    <td class="number">1,694</td>
+                    <td class="number">1,247</td>
+                    <td class="number">260</td>
+                    <td class="number negative">-476</td>
+                    <td class="number">381</td>
+                </tr>
+                <tr>
+                    <td>Op. Margin</td>
+                    <td class="number">15.8%</td>
+                    <td class="number">14.0%</td>
+                    <td class="number">3.7%</td>
+                    <td class="number negative">-8.5%</td>
+                    <td class="number">8.3%</td>
+                </tr>
+                <tr>
+                    <td>Net Income</td>
+                    <td class="number">1,781</td>
+                    <td class="number">2,019</td>
+                    <td class="number">132</td>
+                    <td class="number negative">-3,460</td>
+                    <td class="number">2,915</td>
+                </tr>
+                <tr>
+                    <td>FCF</td>
+                    <td class="number">1,903</td>
+                    <td class="number">1,597</td>
+                    <td class="number">905</td>
+                    <td class="number negative">-186</td>
+                    <td class="number">485</td>
+                </tr>
+                <tr>
+                    <td>FCF Margin</td>
+                    <td class="number positive">17.8%</td>
+                    <td class="number positive">18.0%</td>
+                    <td class="number">12.8%</td>
+                    <td class="number negative">-3.3%</td>
+                    <td class="number">10.5%</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top:20px; margin-bottom:10px;">Balance Sheet Highlights</h3>
+            <div class="grid">
+                <div class="metric-box">
+                    <div class="value positive">$6.3B</div>
+                    <div class="label">Cash + Inversiones</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value positive">$5.9B</div>
+                    <div class="label">Net Cash</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value positive">9%</div>
+                    <div class="label">Debt/Equity</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">$12.5B</div>
+                    <div class="label">Equity</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top:20px; margin-bottom:10px;">Métricas SaaS (Rule of 40)</h3>
+            <p><strong>Revenue Growth:</strong> 30% + <strong>EBITDA Margin:</strong> 16% = <strong class="positive">46% ✓</strong></p>
+            <p style="color:#637381; font-size:0.9em;">Regla de 40: suma de crecimiento + margen debe ser >40% para SaaS saludable.</p>
+        </div>
+
+        <!-- PÁGINA 6: COMPARATIVA CON COMPETIDORES -->
+        <div class="card">
+            <h2>⚔️ Comparativa con Competidores</h2>
+            <table>
+                <tr>
+                    <th>Métrica</th>
+                    <th>Shopify</th>
+                    <th>BigCommerce</th>
+                    <th>Squarespace</th>
+                    <th>Adobe Commerce</th>
+                </tr>
+                <tr>
+                    <td>Market Cap</td>
+                    <td class="number">$171B</td>
+                    <td class="number">~$500M</td>
+                    <td class="number">Privada*</td>
+                    <td class="number">Parte de Adobe</td>
+                </tr>
+                <tr>
+                    <td>Revenue Growth</td>
+                    <td class="number positive">30%</td>
+                    <td class="number">~10%</td>
+                    <td class="number">~15%</td>
+                    <td class="number">N/A</td>
+                </tr>
+                <tr>
+                    <td>Gross Margin</td>
+                    <td class="number">49%</td>
+                    <td class="number">~76%</td>
+                    <td class="number">~80%</td>
+                    <td class="number">N/A</td>
+                </tr>
+                <tr>
+                    <td>Target Market</td>
+                    <td>SMB → Enterprise</td>
+                    <td>Mid-market</td>
+                    <td>SMB/Creadores</td>
+                    <td>Enterprise</td>
+                </tr>
+                <tr>
+                    <td>P/S Ratio</td>
+                    <td class="number negative">17.6x</td>
+                    <td class="number">~1.5x</td>
+                    <td class="number">N/A</td>
+                    <td class="number">N/A</td>
+                </tr>
+            </table>
+            <p style="color:#637381; font-size:0.9em; margin-top:10px;">*Squarespace fue privatizada en 2024. También compite con WooCommerce (WordPress - open source) y Amazon (para vendors).</p>
+            
+            <h3 style="margin-top:20px;">Posición Competitiva</h3>
+            <p><strong>Shopify es el #1 indiscutible</strong> en plataformas de e-commerce para PYMES. Su principal "competencia" real es:</p>
+            <ul style="margin-left:20px; margin-top:10px;">
+                <li><strong>Amazon:</strong> Sellers que prefieren marketplace vs tienda propia</li>
+                <li><strong>WooCommerce:</strong> Open source para los que quieren control total (pero más técnico)</li>
+                <li><strong>In-house:</strong> Grandes empresas que construyen su propia solución</li>
+            </ul>
+        </div>
+
+        <!-- PÁGINA 7: TIMELINE DE EVENTOS -->
+        <div class="card">
+            <h2>📅 Timeline de Eventos Clave</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">2004</div>
+                    <p>Fundación como Jaded Pixel Technologies en Ottawa, Canadá</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2015</div>
+                    <p>IPO en NYSE y TSX a $17/acción</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2019</div>
+                    <p>Lanzamiento de Shopify Fulfillment Network</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2020-2021</div>
+                    <p>Boom pandémico: acción alcanza $169 (ajustado por split). Revenue crece 86% y 57%</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2022</div>
+                    <p>Crash post-pandemia: pérdidas operativas, despidos. Acción cae a mínimos de $28</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2023</div>
+                    <p>Venta de Shopify Logistics a Flexport. Restructuración completada</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2024</div>
+                    <p>Vuelta a rentabilidad fuerte. $2B net income. Stock split 10:1</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">Ene 2025</div>
+                    <p>Asociación AI con Google anunciada. Precio alcanza máximo 52 semanas de $182</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">11 Feb 2026</div>
+                    <p><strong>PRÓXIMO:</strong> Earnings Q4 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 8: MOAT Y VENTAJAS -->
+        <div class="card">
+            <h2>🏰 Moat y Ventajas Competitivas</h2>
+            <table>
+                <tr>
+                    <th>Tipo de Moat</th>
+                    <th>Fortaleza</th>
+                    <th>Evidencia</th>
+                </tr>
+                <tr>
+                    <td><strong>Switching Costs</strong></td>
+                    <td><span class="pill pill-green">ALTO</span></td>
+                    <td>Migrar tienda = redesarrollar todo, perder integraciones, reentrenar equipo</td>
+                </tr>
+                <tr>
+                    <td><strong>Efecto Red</strong></td>
+                    <td><span class="pill pill-yellow">MODERADO</span></td>
+                    <td>Ecosistema de 8,000+ apps y miles de desarrolladores. Más merchants = más apps</td>
+                </tr>
+                <tr>
+                    <td><strong>Escala</strong></td>
+                    <td><span class="pill pill-yellow">MODERADO</span></td>
+                    <td>Puede invertir $1.4B/año en R&D (más que cualquier competidor directo)</td>
+                </tr>
+                <tr>
+                    <td><strong>Marca</strong></td>
+                    <td><span class="pill pill-green">ALTO</span></td>
+                    <td>"Shopify" es sinónimo de e-commerce para PYMES. Reconocimiento global</td>
+                </tr>
+                <tr>
+                    <td><strong>Datos</strong></td>
+                    <td><span class="pill pill-yellow">MODERADO</span></td>
+                    <td>Insights de millones de tiendas para optimizar conversión, pricing, etc.</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top:20px;">Señales de Moat</h3>
+            <ul class="checklist">
+                <li class="check">ROIC ~18% sostenido (por encima del coste de capital)</li>
+                <li class="check">Revenue crece 25-30% anual consistente</li>
+                <li class="check">Net Revenue Retention alto (merchants gastan más cada año)</li>
+                <li class="warn">Gross margin cayendo (54% → 49% en 3 años) - señal de competencia en payments</li>
+                <li class="check">Cuota de mercado estable/creciente en e-commerce platforms</li>
+            </ul>
+        </div>
+
+        <!-- PÁGINA 9: MANAGEMENT -->
+        <div class="card">
+            <h2>👔 Management</h2>
+            <table>
+                <tr>
+                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Desde</th>
+                    <th>Background</th>
+                </tr>
+                <tr>
+                    <td>CEO</td>
+                    <td>Tobi Lütke</td>
+                    <td>2008 (Fundador)</td>
+                    <td>Programador. Creó Shopify para su tienda de snowboards</td>
+                </tr>
+                <tr>
+                    <td>President</td>
+                    <td>Harley Finkelstein</td>
+                    <td>2010</td>
+                    <td>Abogado, emprendedor serial. Cara pública de Shopify</td>
+                </tr>
+                <tr>
+                    <td>CFO</td>
+                    <td>Jeff Hoffmeister</td>
+                    <td>2022</td>
+                    <td>Ex-Morgan Stanley, Goldman Sachs</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top:20px;">Evaluación</h3>
+            <ul class="checklist">
+                <li class="check"><strong>Founder-led:</strong> Tobi Lütke sigue al mando con visión a largo plazo</li>
+                <li class="check"><strong>Skin in the game:</strong> Lütke tiene ~6% de la compañía (~$10B)</li>
+                <li class="check"><strong>Track record:</strong> Navegaron bien el post-pandemia, vendieron logistics, volvieron a profitabilidad</li>
+                <li class="warn"><strong>Dilución:</strong> SBC de ~$430M/año (4% del FCF)</li>
+                <li class="check"><strong>Capital allocation:</strong> No dividendos, reinvierten en producto. Sentido para growth company</li>
+            </ul>
+        </div>
+
+        <!-- PÁGINA 10: RED FLAGS + ESCENARIOS -->
+        <div class="card">
+            <h2>🚨 Red Flags + Escenarios</h2>
+            
+            <h3>Checklist de Red Flags</h3>
+            <ul class="checklist">
+                <li class="cross"><strong>Valoración extrema:</strong> PE 105x, EV/EBITDA 106x - priced for perfection</li>
+                <li class="warn"><strong>Gross margin decline:</strong> 54% (2021) → 49% (2025) - presión en payments</li>
+                <li class="warn"><strong>Beta 2.84:</strong> Muy volátil, caerá 3x más que el mercado en correcciones</li>
+                <li class="check"><strong>Deuda:</strong> No es problema - net cash de $5.9B</li>
+                <li class="check"><strong>Accounting:</strong> No hay señales de manipulación</li>
+                <li class="warn"><strong>Dependencia macro:</strong> Sensible a gasto de consumidores/PYMES</li>
+            </ul>
+            
+            <h3 style="margin-top:20px;">Escenarios de Valoración</h3>
+            
+            <div class="scenario bull">
+                <h4>🐂 Bull Case - $200+ (2027)</h4>
+                <p>AI/Agentic commerce despega. Shopify se convierte en el "sistema operativo" del comercio. Revenue crece 30%+ sostenido. Margins expanden a 20%+. PE comprime a 60x sobre EPS de $3.50.</p>
+            </div>
+            
+            <div class="scenario base">
+                <h4>📊 Base Case - $150-160 (2027)</h4>
+                <p>Crecimiento se modera a 20-25%. Margins estables ~16%. PE comprime a 50x sobre EPS de $3.00. Upside limitado desde precio actual.</p>
+            </div>
+            
+            <div class="scenario bear">
+                <h4>🐻 Bear Case - $70-90</h4>
+                <p>Recesión golpea PYMES. Amazon intensifica competencia. Crecimiento cae a 15%. Márgenes comprimen. PE cae a 35x sobre EPS de $2.50. Potencial -40% desde precio actual.</p>
+            </div>
+        </div>
+
+        <!-- PÁGINA 11: CONCLUSIÓN -->
+        <div class="card">
+            <h2>✅ Conclusión Final</h2>
+            
+            <div class="grid">
+                <div class="metric-box">
+                    <div class="value">68/100</div>
+                    <div class="label">Score Total</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value" style="color:var(--warning);">WATCHLIST</div>
+                    <div class="label">Recomendación</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">$75-90</div>
+                    <div class="label">Precio Objetivo Compra</div>
+                </div>
+                <div class="metric-box">
+                    <div class="value">-30/40%</div>
+                    <div class="label">Descuento Necesario</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top:20px;">Resumen</h3>
+            <p><strong>Shopify es un negocio excepcional:</strong> líder de mercado con moat fuerte, creciendo 30%, generando FCF, balance impecable, founder-led. Es exactamente el tipo de empresa que quieres tener.</p>
+            
+            <p style="margin-top:10px;"><strong>PERO el precio actual no tiene sentido:</strong> PE de 105x significa que esperas que mantenga este crecimiento perfecto durante una década sin tropezar. No hay margen de seguridad. Si algo sale mal (recesión, competencia, desaceleración), la caída será brutal (Beta 2.84).</p>
+            
+            <p style="margin-top:10px;"><strong>Estrategia:</strong></p>
+            <ul style="margin-left:20px;">
+                <li>Añadir a watchlist y monitorear</li>
+                <li>Comprar si cae a zona $75-90 (PE ~60x forward)</li>
+                <li>Considerar posición pequeña si hay corrección de mercado amplia</li>
+                <li>Earnings 11 Feb 2026 - podría generar volatilidad</li>
+            </ul>
+            
+            <h3 style="margin-top:20px;">⚠️ Lo Que Me Falta</h3>
+            <ul style="margin-left:20px; color:#637381;">
+                <li>Métricas de NRR (Net Revenue Retention) detalladas</li>
+                <li>GMV (Gross Merchandise Volume) actualizado</li>
+                <li>Breakdown revenue por geografía</li>
+                <li>Detalles de la estrategia AI/Agentic commerce</li>
+                <li>Conference calls recientes para tono del management</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>Disclaimer:</strong> Este análisis es educativo e informativo. No constituye recomendación de compra o venta. Hacer siempre due diligence propia antes de invertir.</p>
+            <p style="margin-top:10px;">Generado por FMA | 31 Enero 2026</p>
+        </div>
+    </div>
+</body>
+</html>
