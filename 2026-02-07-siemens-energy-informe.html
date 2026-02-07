@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siemens Energy AG (ENR) - Informe de Inversión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--amber-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--amber-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--red-500), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--teal-500); background: var(--blue-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--teal-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--amber-500); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Precaucion
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">XETRA: ENR</div>
+                <h1 class="cover-title font-display">Siemens Energy AG</h1>
+                <p class="cover-subtitle">El turnaround energetico del siglo. Negocio excepcional con vientos de cola seculares, pero cotizando a 97x beneficios. Calidad innegable, precio exigente.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">66/100 - Aceptable</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">&euro;149.30</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">&euro;120-214</div>
+                    <div class="cover-metric-label">Rango precio justo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">&euro;138B</div>
+                    <div class="cover-metric-label">Order Backlog</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">&euro;116B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Siemens Energy en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">Siemens Energy es la empresa que fabrica las turbinas, transformadores y redes electricas que hacen posible que la luz llegue a tu casa, a los centros de datos de la IA, y a las fabricas del mundo. Ha pasado de perder miles de millones a generar beneficios record en solo dos anos.</p>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 32px;">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes una empresa de fontaneria que lleva 150 anos instalando tuberias en todo el mundo. De repente, la demanda de agua se multiplica porque todo el mundo quiere piscinas (centros de datos), coches que usan agua (vehiculos electricos), y fabricas que consumen mucha mas agua (la transicion energetica). Tus tuberias son las unicas que aguantan la presion. Negocio redondo. Pero hay un problema: hace dos anos compraste una division de tuberias de plastico (Gamesa) que salia defectuosa y te hizo perder mucho dinero. Ahora estas arreglando esas tuberias defectuosas mientras el negocio bueno crece como nunca. La pregunta es: &iquest;vale la accion 20 veces mas que hace 2 anos?
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">&euro;39.1B</div>
+                <div class="stat-label">Revenue FY2025</div>
+                <div class="stat-change positive">+15.2% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">&euro;4.66B</div>
+                <div class="stat-label">Free Cash Flow</div>
+                <div class="stat-change positive">+151% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">&euro;138B</div>
+                <div class="stat-label">Order Backlog</div>
+                <div class="stat-change positive">Record historico</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">97x</div>
+                <div class="stat-label">Trailing P/E</div>
+                <div class="stat-change negative">Muy caro</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>Megatendencia: electrificacion + data centers</li>
+                    <li>Backlog EUR 138B = visibilidad excepcional</li>
+                    <li>FCF pre-tax EUR 4.66B (+151%)</li>
+                    <li>Net cash EUR 4.79B (de deuda neta a caja)</li>
+                    <li>Grid Technologies: 15.8% margen</li>
+                    <li>Guidance FY2028: 14-16% margen</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="warning">PER 97x trailing, 41x forward</li>
+                    <li class="warning">Gamesa pierde EUR 1.36B al ano</li>
+                    <li class="danger">Accion subio 20x desde minimos 2023</li>
+                    <li class="warning">Margen total solo 6% (vs 14-16% objetivo)</li>
+                    <li class="warning">Riesgo de ejecucion alto</li>
+                    <li class="warning">Siemens AG vendiendo su participacion</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 66/100</h2>
+
+        <p class="lead">Negocio solido en pleno turnaround con ventajas competitivas reales y vientos de cola seculares. Pero la valoracion actual descuenta practicamente toda la mejora futura, dejando muy poco margen de seguridad.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 90%;">Secular, creciendo, predecible</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">18/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 65%;">FCF fuerte, margenes aun bajos</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">13/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 75%;">Escala + tecnologia + base instalada</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">15/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 75%;">Bruch lidera turnaround exitoso</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">15/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 25%;">97x PE, 35x EV/EBITDA</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">5/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--amber-600);">66</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px; border: 2px solid var(--amber-500);">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>La columna vertebral de la electricidad mundial</h2>
+
+        <p class="lead">Siemens Energy cubre casi toda la cadena de valor energetica: genera electricidad con turbinas de gas y eolicas, la transmite con transformadores y redes de alta tension, y suministra equipos industriales para descarbonizacion. Su tecnologia sustenta aproximadamente 1 de cada 6 kilovatios generados en el mundo.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio (FY2025)</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Gas Services</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 33%;">Turbinas gas + servicios LTSA</div>
+                </div>
+                <span class="progress-value">~33%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Grid Technologies</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 28%;">HVDC, transformadores, subestaciones</div>
+                </div>
+                <span class="progress-value">~28%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Siemens Gamesa</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 26%;">Eolica onshore/offshore (perdidas)</div>
+                </div>
+                <span class="progress-value">~26%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Transformation</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 15%;">Industrial, compresores, H2</div>
+                </div>
+                <span class="progress-value">~15%</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Lo que genera beneficios</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Gas Services</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">13.0% margen</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Grid Technologies</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">15.8% margen</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Transformation</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">11.3% margen</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Lo que destruye valor</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Siemens Gamesa</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">-13.1% margen</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Perdida operativa</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">-&euro;1.36B</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Break-even objetivo</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">FY2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 32px;">
+            <div class="callout-title">Clave del modelo de negocio</div>
+            <p class="callout-text"><strong>Contratos de servicio a largo plazo (LTSA):</strong> Siemens Energy instala turbinas y transformadores con vida util de 25-40 anos. Durante toda esa vida, el cliente paga mantenimiento y repuestos. Esto genera ingresos recurrentes y de alto margen. Con un backlog de EUR 138B (3.5x el revenue anual), la visibilidad es excepcional.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolucion Financiera
+        </div>
+
+        <h2>De la crisis a los beneficios record</h2>
+
+        <p class="lead">La historia financiera de Siemens Energy es la de un turnaround dramatico. De perder EUR 4.6B en FY2023 (crisis Gamesa) a generar EUR 1.7B de beneficio neto y EUR 4.7B de FCF en FY2025. Los margenes aun estan lejos de su potencial (6% vs objetivo 14-16%), lo que implica que el recorrido operativo existe.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>&euro;28.5B</td>
+                        <td>&euro;29.0B</td>
+                        <td>&euro;31.1B</td>
+                        <td>&euro;34.5B</td>
+                        <td class="cell-success">&euro;39.1B</td>
+                        <td class="cell-success">+37% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td class="cell-danger">-&euro;0.56B</td>
+                        <td class="cell-danger">-&euro;0.71B</td>
+                        <td class="cell-danger">-&euro;4.6B</td>
+                        <td class="cell-success">&euro;1.34B</td>
+                        <td class="cell-success">&euro;1.69B</td>
+                        <td class="cell-success">Turnaround</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow</strong></td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td>&euro;0.78B</td>
+                        <td>&euro;1.86B</td>
+                        <td class="cell-success">&euro;4.66B</td>
+                        <td class="cell-success">+151% YoY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profit Margin (bef. SI)</strong></td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">-8.9%</td>
+                        <td>1.0%</td>
+                        <td class="cell-success">6.0%</td>
+                        <td class="cell-success">+500bps YoY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Orders</strong></td>
+                        <td>&euro;33.5B</td>
+                        <td>&euro;37.3B</td>
+                        <td>&euro;47.3B</td>
+                        <td>&euro;50.2B</td>
+                        <td class="cell-success">&euro;58.9B</td>
+                        <td class="cell-success">+76% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">-&euro;5.47</td>
+                        <td>&euro;1.37</td>
+                        <td class="cell-success">&euro;1.63</td>
+                        <td class="cell-success">+19% YoY</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion del margen: el camino hacia el 14-16%</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">2021</div>
+                    <div class="timeline-year">Margen</div>
+                    <div class="timeline-value" style="color: var(--red-600);">neg.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">2023</div>
+                    <div class="timeline-year">Crisis</div>
+                    <div class="timeline-value" style="color: var(--red-600);">-8.9%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2024</div>
+                    <div class="timeline-year">Inflexion</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">1.0%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2025</div>
+                    <div class="timeline-year">Mejora</div>
+                    <div class="timeline-value" style="color: var(--green-600);">6.0%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2028E</div>
+                    <div class="timeline-year">Objetivo</div>
+                    <div class="timeline-value" style="color: var(--green-600);">14-16%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Con Gamesa en break-even, solo el negocio base (Gas + Grid + TI) ya generaria margenes del 13-14%. Si Gamesa llega al 3-5% en 2028, el grupo alcanza el 14-16%.</p>
+            <p class="quote-author">&mdash; Analisis del potencial de margenes</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Analisis Competitivo
+        </div>
+
+        <h2>Un oligopolio industrial global</h2>
+
+        <p class="lead">El mercado de equipos de generacion y transmision electrica es un oligopolio natural. Solo 3-4 empresas en el mundo pueden fabricar turbinas H-class de gran escala o sistemas HVDC. Las barreras de entrada son enormes: decadas de ingenieria, certificaciones, capital, y relaciones con clientes.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">SIEMENS ENERGY</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">&euro;39.1B</div>
+                    <div class="company-stat-label">Revenue FY2025</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">6.0%</div>
+                    <div class="company-stat-label">Margen (mejorando)</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">&euro;116B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">GE VERNOVA</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$36.8B</div>
+                    <div class="company-stat-label">Revenue FY2025</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~9%</div>
+                    <div class="company-stat-label">Margen EBITDA</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$180B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">SCHNEIDER ELECTRIC</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">&euro;39.7B</div>
+                    <div class="company-stat-label">Revenue FY2024</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~19%</div>
+                    <div class="company-stat-label">Margen EBITA</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$163B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Siemens Energy</th>
+                        <th>GE Vernova</th>
+                        <th>ABB</th>
+                        <th>Vestas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td class="cell-success">&euro;39.1B</td>
+                        <td>$36.8B</td>
+                        <td>$32.8B</td>
+                        <td>&euro;18.8B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Margen operativo</strong></td>
+                        <td class="cell-amber">6.0%</td>
+                        <td>~9%</td>
+                        <td class="cell-success">18.1%</td>
+                        <td>5.7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trailing P/E</strong></td>
+                        <td class="cell-danger">~97x</td>
+                        <td class="cell-danger">~105x</td>
+                        <td>~30x</td>
+                        <td>~24x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Forward P/E</strong></td>
+                        <td class="cell-amber">~41x</td>
+                        <td class="cell-danger">~58x</td>
+                        <td>~24x</td>
+                        <td>~22x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EV/EBITDA</strong></td>
+                        <td class="cell-danger">~35x</td>
+                        <td class="cell-danger">~57x</td>
+                        <td>~19x</td>
+                        <td>~11x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROIC</strong></td>
+                        <td class="cell-amber">Mejorando</td>
+                        <td class="cell-amber">Mejorando</td>
+                        <td class="cell-success">16.2%</td>
+                        <td>~12%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Nota sobre la valoracion relativa</div>
+            <p class="callout-text">Siemens Energy y GE Vernova cotizan a multiplos de turnaround, no de empresas maduras. ABB y Schneider, con margenes del 18-19%, cotizan a 20-30x PE &mdash; que podria ser un techo razonable para Siemens Energy una vez que alcance su potencial de margenes.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Criticos
+        </div>
+
+        <h2>Del spin-off a los maximos historicos</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--gray-300), var(--red-500), var(--amber-500), var(--green-500));"></div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--gray-400); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gray-500);">SEP 2020</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Spin-off de Siemens AG</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">IPO a ~&euro;22 por accion. Siemens AG retiene 35.1%.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--gray-400); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gray-500);">ENE 2023</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Adquisicion del 100% de Siemens Gamesa</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Squeeze-out completado por &euro;4.05B. Full consolidation del problema eolico.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--red-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--red-600);">JUN 2023</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--red-600);">Crisis Gamesa: cargos de &euro;4.6B</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Problemas de calidad en turbinas 4.X y 5.X. Accion cae a &euro;6-7. Garantia gubernamental de &euro;11B.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">NOV 2024</div>
+                    <div style="font-weight: 600; margin: 4px 0;">FY2024: primer ano de beneficio</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Net income &euro;1.34B. FCF &euro;1.86B. Margen 1%. Inicio del turnaround real.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">NOV 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--green-600);">FY2025: resultados record. Suben objetivos 2028</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Revenue &euro;39.1B, FCF &euro;4.66B, backlog &euro;138B. Primer dividendo en 4 anos. Margen objetivo subido a 14-16%.</div>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">FEB 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Maximos historicos: &euro;149.45</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Market cap &euro;116B. Accion sube 20x desde minimos de 2023. Proximos resultados: 11 Feb 2026.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Proximos catalizadores</div>
+            <p class="callout-text"><strong>11 Feb 2026:</strong> Resultados Q1 FY2026. Primer trimestre con guidance de 9-11% margen. <strong>FY2026:</strong> Gamesa break-even seria un catalizador enorme. <strong>2026-2028:</strong> Ejecucion del plan de buybacks de hasta &euro;6B. Expansion de margen trimestre a trimestre.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Analisis de Moat
+        </div>
+
+        <h2>Ventajas competitivas solidas pero no invulnerables</h2>
+
+        <p class="lead">Siemens Energy tiene un moat basado en escala, tecnologia y base instalada. No es un monopolio, pero las barreras de entrada son enormes. Solo 3-4 empresas en el mundo pueden competir en turbinas de gran escala o transmision HVDC.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Base Instalada + LTSA</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">1/6 de la electricidad mundial usa su tecnologia. Contratos de servicio 25-40 anos.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Backlog de &euro;138B</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">3.5x revenue anual. Visibilidad de ingresos excepcional. 85% cubierto para FY2026.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Tecnologia Propietaria</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Turbinas H-class, HVDC, hydrogen-ready. 150 anos de I+D heredados de Siemens.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Switching Costs</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Cambiar de proveedor requiere recertificacion, formacion y riesgo operativo alto.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Escala Global</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">99,000 empleados, 90+ paises. Capacidad de ejecutar proyectos que pocos pueden.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Amenaza al moat: competidores chinos</div>
+            <p class="callout-text">En el segmento eolico, fabricantes chinos como Goldwind y Envision estan ganando cuota de mercado a nivel global con precios muy agresivos. En turbinas de gas, la amenaza china es menor debido a la complejidad tecnologica, pero esta creciendo. Es el principal riesgo a largo plazo para el moat.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Christian Bruch: el arquitecto del turnaround</h2>
+
+        <p class="lead">El CEO Christian Bruch lleva al frente desde mayo 2020 y ha ejecutado un turnaround que pocos esperaban. Desde la crisis de Gamesa en 2023 hasta los resultados record de 2025, su liderazgo ha sido decisivo. Su contrato se ha extendido hasta abril 2030, mostrando confianza del consejo.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Equipo Directivo</h3>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Christian Bruch</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CEO (desde 2020, extendido a 2030)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Ex-Linde Group. 25+ anos experiencia industrial. Lidero IPO y turnaround.</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Maria Ferraro</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CFO</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Finanzas, controlling, tesoreria, riesgo, relacion con inversores.</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Karim Amin</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Responsable Gas Services</div>
+                </div>
+                <div>
+                    <div style="font-weight: 700;">Joe Kaeser</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Presidente Consejo de Vigilancia (ex-CEO Siemens AG)</div>
+                </div>
+            </div>
+            <div>
+                <div class="card card-success" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor del management</h3>
+                    <ul class="check-list">
+                        <li>Turnaround ejecutado con exito</li>
+                        <li>Guidance FY2025 superada ampliamente</li>
+                        <li>Transparente con problemas de Gamesa</li>
+                        <li>Vuelta al dividendo + buybacks</li>
+                        <li>Objetivos 2028 subidos (ambiciosos)</li>
+                    </ul>
+                </div>
+                <div class="card card-danger">
+                    <h3 style="color: var(--red-700); margin-bottom: 16px;">Riesgos de governance</h3>
+                    <ul class="check-list">
+                        <li class="danger">Insider ownership relativamente bajo</li>
+                        <li class="warning">Siemens AG vendiendo participacion</li>
+                        <li class="warning">KfW (estado aleman) como accionista</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Capital Allocation</div>
+            <p class="callout-text"><strong>Primer dividendo en 4 anos:</strong> &euro;0.70/accion (pago 3 Mar 2026). <strong>Buybacks:</strong> &euro;170M completados (May-Jun 2025), plan de hasta &euro;6B hasta FY2028. <strong>Investment grade:</strong> Moody's Baa2 con perspectiva positiva. La empresa ha pasado de necesitar garantias gubernamentales a devolver capital a accionistas en solo 2 anos.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de senales de alerta</h2>
+
+        <p class="lead">Siemens Energy tiene un perfil de riesgo moderado. Los problemas principales son la valoracion extrema y la dependencia del turnaround de Gamesa. Los fundamentales del negocio base son solidos.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Revenue vs CFO</h4>
+                    <p>FCF &euro;4.66B confirma calidad de beneficios. Sin divergencia.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Margenes vs peers</h4>
+                    <p>6% margen vs 18-19% de ABB/Schneider. Aun lejos del potencial. Gamesa lastra.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Gastos "one-time" recurrentes</h4>
+                    <p>Gamesa ha generado cargos extraordinarios en FY2022, FY2023 y FY2024. Parecen estar disminuyendo.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Cuentas por cobrar</h4>
+                    <p>Sin senales de crecimiento anomalo vs revenue. Orden backlog creciendo en linea.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Insider selling</h4>
+                    <p>Siemens AG reduciendo del 35% al ~17% (y anuncio venta adicional del 6%). Presion vendedora.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Cambios de auditor/CFO</h4>
+                    <p>Equipo directivo estable. CEO extendido hasta 2030. Sin cambios sospechosos.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Related party transactions</h4>
+                    <p>Relacion con Siemens AG es transparente. Participacion en reduccion progresiva.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Valoracion extrema</h4>
+                    <p>97x trailing PE, 35x EV/EBITDA. Precio descuenta ejecucion perfecta del plan a 2028.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Guidance cumplida</h4>
+                    <p>FY2025 supero guidance en revenue, margen y FCF. Historial positivo reciente.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Deuda</h4>
+                    <p>Net cash &euro;4.79B. Investment grade. Mejora radical del balance en 2 anos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 24px; text-align: center;">
+            <span style="font-size: 0.875rem; color: var(--gray-500);">Red flags detectadas:</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; margin-left: 12px; color: var(--amber-600);">2 serias + 2 advertencias de 10</span>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>Proyeccion FY2030: &iquest;justifica el precio actual?</h2>
+
+        <div class="card" style="margin: 32px 0;">
+            <h3 style="margin-bottom: 16px;">Estimaciones de consenso + proyeccion propia</h3>
+            <div class="table-wrapper" style="margin: 16px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Revenue (&euro;B)</th>
+                            <th>Margen bef. SI</th>
+                            <th>FCF pre-tax (&euro;B)</th>
+                            <th>EPS (&euro;)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>FY2025 (real)</strong></td>
+                            <td>39.1</td>
+                            <td>6.0%</td>
+                            <td>4.66</td>
+                            <td>1.63</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2026E</strong></td>
+                            <td>43.7</td>
+                            <td>9-11%</td>
+                            <td>4.0-5.0</td>
+                            <td>3.55-3.69</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2027E</strong></td>
+                            <td>~50</td>
+                            <td>~12%</td>
+                            <td>~6.0</td>
+                            <td>~4.79</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2028E</strong></td>
+                            <td>~56</td>
+                            <td>14-16%</td>
+                            <td>~7.5</td>
+                            <td>~6.50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2029E</strong></td>
+                            <td>~62</td>
+                            <td>~15-17%</td>
+                            <td>~9.0</td>
+                            <td>~8.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2030E</strong></td>
+                            <td class="cell-success">~68</td>
+                            <td class="cell-success">~16-18%</td>
+                            <td class="cell-success">~10.0</td>
+                            <td class="cell-success">~9.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Analisis de multiplos</h3>
+        <div class="grid-4" style="margin: 24px 0;">
+            <div class="stat-block">
+                <div class="stat-value danger" style="font-size: 2rem;">35x</div>
+                <div class="stat-label">EV/EBITDA actual</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">19x</div>
+                <div class="stat-label">EV/EBITDA ABB (peer)</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">22x</div>
+                <div class="stat-label">EV/EBITDA Schneider</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">24x</div>
+                <div class="stat-label">EV/FCF FY2025</div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Validacion: DCF Inverso</div>
+            <p class="callout-text">El precio actual (&euro;149.30) con EV ~&euro;111B implica que el mercado espera un FCF de ~&euro;10-11B en 2030 con un multiplo de 11-12x. Esto requiere que la empresa practicamente triplique su FCF en 5 anos y el multiplo se comprima. Esto es posible si se cumplen los objetivos de margen, pero no deja margen para errores.</p>
+        </div>
+
+        <div style="background: var(--gray-900); color: var(--white); border-radius: 16px; padding: 32px; margin-top: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio justo estimado</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0; color: var(--amber-500);">&euro;120 - &euro;214</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio actual</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0;">&euro;149.30</div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-700); font-size: 0.875rem; color: var(--gray-400);">
+                Precio ponderado (base): &euro;191. CAGR esperado (5y): 5-7%. El precio actual esta en el rango medio-alto del valor justo, dejando poco margen de seguridad.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios de Inversion
+        </div>
+
+        <h2>Tres caminos posibles</h2>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--red-700);">Bear Case</div>
+                    <div class="scenario-prob">30%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">&euro;115</div>
+                <div class="scenario-change" style="color: var(--red-600);">-23% | CAGR: -5.1%</div>
+                <ul class="scenario-list">
+                    <li>Gamesa no alcanza break-even en FY2026</li>
+                    <li>Margenes llegan a 10-12% (no 14-16%)</li>
+                    <li>Revenue CAGR solo 8%</li>
+                    <li>Multiplo se comprime a 14x EV/FCF</li>
+                    <li>FY2030 FCF: &euro;6B</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: #92400e;">Base Case</div>
+                    <div class="scenario-prob">50%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">&euro;214</div>
+                <div class="scenario-change" style="color: var(--green-600);">+43% | CAGR: 7.5%</div>
+                <ul class="scenario-list">
+                    <li>Objetivos 2028 mayormente cumplidos</li>
+                    <li>Margenes 12-14% para FY2030</li>
+                    <li>Revenue crece low-teens CAGR</li>
+                    <li>Multiplo 18x EV/FCF (normalizado)</li>
+                    <li>FY2030 FCF: &euro;9B</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--green-700);">Bull Case</div>
+                    <div class="scenario-prob">20%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">&euro;344</div>
+                <div class="scenario-change" style="color: var(--green-600);">+130% | CAGR: 18.2%</div>
+                <ul class="scenario-list">
+                    <li>Todos los objetivos superados</li>
+                    <li>Gamesa rentable, margenes 16-18%</li>
+                    <li>Data centers impulsan demanda record</li>
+                    <li>Multiplo 22x EV/FCF (premium justificado)</li>
+                    <li>FY2030 FCF: &euro;12B</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 32px;">
+            <h3 style="margin-bottom: 24px;">Precio ponderado por probabilidad</h3>
+            <div class="table-wrapper" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Precio 2030</th>
+                            <th>Probabilidad</th>
+                            <th>Contribucion</th>
+                            <th>CAGR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bear</strong></td>
+                            <td class="cell-danger">&euro;115</td>
+                            <td>30%</td>
+                            <td>&euro;34.50</td>
+                            <td class="cell-danger">-5.1%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base</strong></td>
+                            <td>&euro;214</td>
+                            <td>50%</td>
+                            <td>&euro;107.00</td>
+                            <td class="cell-success">+7.5%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bull</strong></td>
+                            <td class="cell-success">&euro;344</td>
+                            <td>20%</td>
+                            <td>&euro;68.80</td>
+                            <td class="cell-success">+18.2%</td>
+                        </tr>
+                        <tr style="background: var(--gray-50); font-weight: 700;">
+                            <td><strong>Ponderado</strong></td>
+                            <td class="cell-amber">&euro;210</td>
+                            <td>100%</td>
+                            <td>&euro;210.30</td>
+                            <td class="cell-amber">+7.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo asimetrico</div>
+            <p class="callout-text">El CAGR ponderado del 7.1% es inferior al retorno historico del mercado (8-10%). Con un bear case que implica -23%, la relacion riesgo/recompensa no es favorable a estos precios. Para que la inversion sea atractiva, el precio deberia estar <strong>por debajo de &euro;120</strong>, ofreciendo un margen de seguridad razonable.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Siemens Energy (ENR) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+                <div class="verdict-title font-display">PRECAUCION</div>
+                <div class="verdict-text">Negocio excepcional en turnaround. Megatendencias reales. Pero a &euro;149, el mercado ya descuenta la perfeccion. Esperar a que el precio ofrezca margen de seguridad.</div>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 48px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--amber-500);">66/100</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Score Total</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700;">&euro;120-214</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Rango Precio Justo</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--amber-500);">7.1%</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">CAGR Esperado (5y)</div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Que vigilar (Triggers de reevaluacion)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Gamesa break-even</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si alcanza break-even en FY2026, subir score</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Margen Q1 FY2026</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Resultados 11 Feb 2026. Primer test del 9-11%</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Precio &lt;&euro;120</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">A este precio, el margen de seguridad seria atractivo</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Siemens AG sale completo</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Cuando termine de vender, se elimina el overhang</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Lo que no se (Transparencia)</h3>
+                    <div style="font-size: 0.9375rem; color: var(--gray-400); line-height: 1.8;">
+                        <p style="color: var(--gray-400);">&#10067; Desglose geografico preciso de revenue FY2025 (no disponible en earnings release)</p>
+                        <p style="color: var(--gray-400);">&#10067; Coste real total de remediacion de turbinas Gamesa defectuosas (estimado &euro;1.6B pero podria ser mayor)</p>
+                        <p style="color: var(--gray-400);">&#10067; Compensacion exacta del equipo directivo y stock ownership individual</p>
+                        <p style="color: var(--gray-400);">&#10067; Impacto concreto de los aranceles US/EU en la cadena de suministro para FY2026</p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px; font-size: 0.8125rem; color: var(--gray-500);">
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Fuentes:</strong> Siemens Energy Investor Relations, Q4 FY2025 Earnings Release, Annual Report FY2024, Yahoo Finance, MarketScreener, CompaniesMarketCap, MacroTrends, StockAnalysis.</p>
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Disclaimer:</strong> Este informe es un analisis educativo, no una recomendacion de compra o venta. Los datos pueden contener inexactitudes. Investiga por tu cuenta antes de tomar decisiones de inversion.</p>
+                    <p style="color: var(--gray-500); margin: 0;"><strong>Fecha:</strong> 7 de Febrero de 2026 | Generado por /analista (FMA)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

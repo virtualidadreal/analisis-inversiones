@@ -8,7 +8,7 @@
 
 | Total Análisis | Promedio Score | Última Actualización |
 |----------------|----------------|---------------------|
-| 26 | 59.7/100 | 2026-01-31 |
+| 27 | 59.8/100 | 2026-02-07 |
 
 ---
 
@@ -16,6 +16,7 @@
 
 | Empresa | Ticker | Sector | Fecha | Score | Rating | Veredicto | Informe |
 |---------|--------|--------|-------|-------|--------|-----------|---------|
+| Siemens Energy AG | ENR | Industrial (Energy Equipment) | 2026-02-07 | 66/100 | ★★★☆☆ | PRECAUCIÓN | [Ver informe](./2026-02-07-siemens-energy-informe.html) |
 | Taiwan Semiconductor | TSM | Tecnología (Semiconductores) | 2026-01-27 | 87/100 | ★★★★★ | EXCELENTE | [Ver informe](./2026-01-27-tsmc-informe.html) |
 | Shopify Inc. | SHOP | Tecnología (E-Commerce) | 2026-01-31 | 68/100 | ★★★☆☆ | ACEPTABLE | [Ver informe](./2026-01-31-shopify-informe.html) |
 | Microsoft Corporation | MSFT | Tecnología (Cloud & AI) | 2026-01-27 | 85/100 | ★★★★☆ | BUENA | [Ver informe](./2026-01-27-microsoft-informe.html) |
@@ -69,6 +70,7 @@
 | Empresa | Ticker | Score | Fecha | Informe |
 |---------|--------|-------|-------|---------|
 | Shopify Inc. | SHOP | 68/100 | 2026-01-31 | [Ver](./2026-01-31-shopify-informe.html) |
+| Siemens Energy AG | ENR | 66/100 | 2026-02-07 | [Ver](./2026-02-07-siemens-energy-informe.html) |
 | Oracle Corporation | ORCL | 64/100 | 2026-01-27 | [Ver](./2026-01-27-oracle-informe.html) |
 | CrowdStrike | CRWD | 64/100 | 2026-01-27 | [Ver](./2026-01-27-crowdstrike-informe.html) |
 | UnitedHealth Group | UNH | 62/100 | 2026-01-27 | [Ver](./2026-01-27-unitedhealth-informe.html) |
@@ -142,6 +144,11 @@
 | Empresa | Ticker | Score | Veredicto | Informe |
 |---------|--------|-------|-----------|---------|
 | Citigroup Inc. | C | 55/100 | Aceptable | [Ver](./2026-01-27-citigroup-informe.html) |
+
+### Industrial (Energy Equipment)
+| Empresa | Ticker | Score | Veredicto | Informe |
+|---------|--------|-------|-----------|---------|
+| Siemens Energy AG | ENR | 66/100 | Precaución | [Ver](./2026-02-07-siemens-energy-informe.html) |
 
 ### Industrial (Aeroespacial)
 | Empresa | Ticker | Score | Veredicto | Informe |
@@ -265,6 +272,11 @@
 | Shopify | Resultados Q4 2025 | 11 Febrero 2026 | Pendiente |
 | Shopify | Valoración | Si PE cae a ~60x ($75-90) | Pendiente |
 | Shopify | Gross Margin | Si sigue cayendo (<47%) | Pendiente |
+| Siemens Energy | Resultados Q1 FY2026 | 11 Febrero 2026 | Pendiente |
+| Siemens Energy | Gamesa break-even | FY2026 (Sep 2026) | Pendiente |
+| Siemens Energy | Margen 9-11% | Trimestral FY2026 | Pendiente |
+| Siemens Energy | Precio <EUR 120 | Punto de entrada atractivo | Pendiente |
+| Siemens Energy | Siemens AG venta restante | Eliminación overhang | Pendiente |
 
 ---
 
@@ -359,4 +371,4 @@ EXCELENTE:  █░░░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Última actualización: 2026-01-31 (Análisis completado: 26 empresas - incluye Shopify)*
+*Última actualización: 2026-02-07 (Análisis completado: 27 empresas - incluye Siemens Energy AG)*
