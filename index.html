@@ -881,15 +881,15 @@
 
     <div class="stats-bar">
         <div class="stat animate-fade-up" style="animation-delay: 300ms;">
-            <div class="stat-value">25</div>
+            <div class="stat-value" id="statTotal">-</div>
             <div class="stat-label">Análisis</div>
         </div>
         <div class="stat animate-fade-up" style="animation-delay: 350ms;">
-            <div class="stat-value">59.4</div>
+            <div class="stat-value" id="statAvg">-</div>
             <div class="stat-label">Score Promedio</div>
         </div>
         <div class="stat animate-fade-up" style="animation-delay: 400ms;">
-            <div class="stat-value">17</div>
+            <div class="stat-value" id="statSectors">-</div>
             <div class="stat-label">Sectores</div>
         </div>
     </div>
@@ -981,7 +981,7 @@
 
     <footer>
         <p>Generado con <a href="#">/analista</a> · FMA</p>
-        <p style="margin-top: 0.5rem; opacity: 0.7;">Última actualización: 28 Enero 2026</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Última actualización: 14 Febrero 2026</p>
     </footer>
 
     <script>
@@ -1167,6 +1167,11 @@
             activeFiltersCount.textContent = count;
             activeFiltersCount.style.display = count > 0 ? 'inline-flex' : 'none';
         }
+
+        // Dynamic stats
+        document.getElementById('statTotal').textContent = analyses.length;
+        document.getElementById('statAvg').textContent = (analyses.reduce((sum, a) => sum + a.score, 0) / analyses.length).toFixed(1);
+        document.getElementById('statSectors').textContent = new Set(analyses.map(a => a.sector)).size;
 
         // Initial render
         renderCards();
