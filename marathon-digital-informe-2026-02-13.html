@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARA Holdings (MARA) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--red-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--red-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--red-500), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--orange-500); background: var(--amber-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--orange-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--red-600); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        /* BTC sensitivity */
+        .btc-table td.highlight-cell { background: var(--amber-50); font-weight: 600; }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Precaucion
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: MARA</div>
+                <h1 class="cover-title font-display">MARA Holdings</h1>
+                <p class="cover-subtitle">La mayor minera de Bitcoin cotizada del mundo, con 52,850 BTC en balance y ambiciones en AI/HPC. Un apalancamiento puro a Bitcoin... justo cuando BTC cae un 48% desde maximos.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">38/100 - Precaucion</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">$8.24</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">$6-18</div>
+                    <div class="cover-metric-label">Rango precio justo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">52,850</div>
+                    <div class="cover-metric-label">BTC en balance</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$3.1B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>MARA Holdings en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">MARA es la empresa que mas Bitcoin mina y acumula del mundo despues de MicroStrategy. Gana o pierde dinero dependiendo casi exclusivamente de lo que haga el precio de Bitcoin. Cuando BTC sube, MARA es un cohete. Cuando BTC baja, es un agujero negro.</p>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 32px;">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes una mina de oro que produce pepitas cada dia. Pero en vez de vender el oro que extraes, decides guardarlo en una boveda enorme, y ademas pides prestamos para comprar aun mas oro en el mercado. Si el oro sube de precio, eres un genio: tienes toneladas acumuladas y tu mina sigue produciendo mas. Pero si el oro baja &mdash;como esta pasando ahora, de $126,000 a $65,000&mdash; tu boveda pierde valor, tus prestamos siguen ahi, y la mina cuesta mas en electricidad de lo que vale el oro que sacas. MARA esta exactamente en ese punto: sentada sobre $3,500M en Bitcoin que compraron a precios mas altos, con $3,600M en deuda, y un precio de BTC que ha caido un 48% desde maximos.
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">$919M</div>
+                <div class="stat-label">Revenue TTM</div>
+                <div class="stat-change positive">+40% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber">57.4</div>
+                <div class="stat-label">EH/s Hashrate</div>
+                <div class="stat-change positive">+82% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value">52,850</div>
+                <div class="stat-label">BTC Holdings</div>
+                <div class="stat-change positive">+98% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">$3.6B</div>
+                <div class="stat-label">Deuda Total</div>
+                <div class="stat-change negative">Convertible notes</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>Mayor minera de BTC cotizada: 57.4 EH/s</li>
+                    <li>52,850 BTC en balance (~$3,500M al precio actual)</li>
+                    <li>Coste energia por BTC: $33,735 (Q2 2025)</li>
+                    <li>Revenue creciendo +40% anual</li>
+                    <li>Diversificacion AI/HPC en marcha</li>
+                    <li>Fred Thiel: CEO con vision estrategica clara</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="danger">BTC ha caido 48% desde ATH ($126K a $65K)</li>
+                    <li class="danger">$3,600M en deuda (convertible notes)</li>
+                    <li class="danger">FCF negativo: -$924M en 2024</li>
+                    <li class="warning">Dilucion masiva: shares +59% YoY</li>
+                    <li class="warning">Halving 2024 reduce recompensas un 50%</li>
+                    <li class="warning">Beneficios dependen de revalorizacion de BTC, no de operaciones</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 38/100</h2>
+
+        <p class="lead">MARA es un vehiculo de apalancamiento a Bitcoin, no un negocio tradicional con ventajas competitivas duraderas. Su valor depende casi enteramente de un activo exogeno (precio de BTC). Buena escala operativa pero financieros fragiles, deuda alta, y dilucion agresiva. La valoracion actual ya refleja un descuento significativo vs BTC, pero los riesgos son sustanciales.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 45%;">Entendible pero impredecible</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">9/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 25%;">FCF negativo, deuda alta</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">5/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 40%;">Escala pero sin pricing power</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">8/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 45%;">Vision pero mucha dilucion</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">9/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 35%;">Descuento vs NAV, pero justificado</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">7/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--red-600);">38</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px; border: 2px solid var(--red-500);">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Precaucion &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Que hace MARA y como gana dinero</h2>
+
+        <p class="lead">MARA Holdings (antes Marathon Digital Holdings) es la mayor empresa de mineria de Bitcoin cotizada en bolsa. Su modelo de negocio se basa en operar centros de datos llenos de ordenadores especializados (ASICs) que resuelven problemas matematicos para validar transacciones de Bitcoin y recibir BTC como recompensa.</p>
+
+        <p>Fundada en 2010, la empresa ha crecido agresivamente desde 2020 bajo el liderazgo de Fred Thiel, pasando de ser un pequeño minero a dominar el sector con 57.4 EH/s de hashrate instalado &mdash;mas que cualquier otro minero cotizado del mundo. En agosto de 2024 cambio su nombre de Marathon Digital Holdings a MARA Holdings, reflejando su ambicion de ser mas que una minera de Bitcoin.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card card-white">
+                <h3>Mineria de Bitcoin (>90% revenue)</h3>
+                <p style="margin: 0; font-size: 1rem; color: var(--gray-600);">Opera 1.1 GW de capacidad de mineria propia, con objetivo de llegar a 1.8 GW. Produce ~26 BTC al dia con una eficiencia de 18.3 J/TH. Tras el halving de abril 2024, la recompensa por bloque se redujo de 6.25 a 3.125 BTC, forzando a todos los mineros a ser mas eficientes o morir. MARA ha respondido escalando agresivamente su hashrate para compensar con volumen.</p>
+            </div>
+            <div class="card card-white">
+                <h3>Estrategia "HODL" + Compra de BTC</h3>
+                <p style="margin: 0; font-size: 1rem; color: var(--gray-600);">Lo que hace unica a MARA es que NO vende los Bitcoin que mina. Sigue una politica "full HODL" y ademas utiliza deuda (convertible notes a 0% interes) y emision de acciones para comprar aun mas BTC en el mercado abierto. En 2024 compro 22,065 BTC adicionales a un coste medio de $87,205. Total en balance: 52,850 BTC (~$3,500M al precio actual de $65,500).</p>
+            </div>
+        </div>
+
+        <div class="card card-white" style="margin-bottom: 32px;">
+            <h3>Diversificacion: AI/HPC (Futuro)</h3>
+            <p style="margin: 0; font-size: 1rem; color: var(--gray-600);">Fred Thiel ha declarado que "los electrones son el nuevo petroleo" y esta pivotando MARA hacia infraestructura digital. La empresa esta instalando servidores AI en su site de Granbury, Texas, desarrollando datacenters de gas con MPLX, y pendiente de adquirir Exaion (filial de EDF francesa) para operaciones HPC. El objetivo es que el 50% del revenue venga de mercados internacionales en 2028 y que la infraestructura sirva tanto para minar BTC como para computacion AI. Sin embargo, a dia de hoy esto es un plan, no una realidad: mas del 90% de los ingresos siguen siendo mineria de Bitcoin pura.</p>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">&#9888; Punto critico: Esto NO es un negocio tradicional</div>
+            <p class="callout-text">A diferencia de una empresa que fabrica un producto y lo vende con margen, MARA es esencialmente un vehiculo de apalancamiento a Bitcoin. Su "producto" (BTC minado) tiene un precio que MARA no controla. Sus ingresos, beneficios y valoracion dependen de un activo exogeno. Si crees en Bitcoin a largo plazo, MARA amplifica esa apuesta. Si no, es una empresa que quema cash, se endeuda y diluye acciones para acumular un activo volatil.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Analisis Financiero
+        </div>
+
+        <h2>Los numeros: una montana rusa</h2>
+
+        <p>Los financieros de MARA son un reflejo directo de los ciclos de Bitcoin. No hay estabilidad, no hay predecibilidad, no hay la consistencia que un inversor value busca. Cada metrica sube y baja dramaticamente segun el precio de BTC.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>2021</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>TTM 2025</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue ($M)</strong></td>
+                        <td>$150</td>
+                        <td class="cell-danger">$118</td>
+                        <td class="cell-success">$388</td>
+                        <td class="cell-success">$656</td>
+                        <td class="cell-success">$919</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income ($M)</strong></td>
+                        <td class="cell-danger">-$37</td>
+                        <td class="cell-danger">-$687</td>
+                        <td class="cell-danger">-$109</td>
+                        <td class="cell-success">$541</td>
+                        <td class="cell-success">$927</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow ($M)</strong></td>
+                        <td class="cell-danger">-$253</td>
+                        <td class="cell-danger">-$381</td>
+                        <td class="cell-danger">-$335</td>
+                        <td class="cell-danger">-$924</td>
+                        <td class="cell-danger">-$1,770</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>8,133</td>
+                        <td>12,232</td>
+                        <td>15,741</td>
+                        <td>44,893</td>
+                        <td>52,850</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hashrate (EH/s)</strong></td>
+                        <td>3.5</td>
+                        <td>7.0</td>
+                        <td>24.7</td>
+                        <td>53.2</td>
+                        <td>57.4</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shares Out. (M)</strong></td>
+                        <td>105</td>
+                        <td>163</td>
+                        <td>230</td>
+                        <td>315</td>
+                        <td>~470</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">&#9888; Alerta critica: FCF siempre negativo</div>
+            <p class="callout-text">MARA NUNCA ha generado Free Cash Flow positivo. Ni en un solo ano. Los "beneficios netos" de 2024 ($541M) y TTM ($927M) vienen principalmente de ganancias no realizadas en sus holdings de Bitcoin tras la adopcion de contabilidad a valor razonable (ASU 2023-08). No es cash entrando en caja. Es una revalorizacion contable. Mientras tanto, el FCF fue -$924M en 2024 y -$1,770M en TTM, porque la empresa compra agresivamente BTC con deuda y emisiones de acciones. Esto es capital allocation, no generacion de valor operativo.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-white">
+                <h3>Dilucion: El elefante en la habitacion</h3>
+                <p style="margin: 0; font-size: 1rem;">Las acciones en circulacion han pasado de 105M en 2021 a ~470M diluted en 2025. Eso es una dilucion del 350% en 4 anos. Cada vez que el precio de BTC sube, MARA emite mas acciones para comprar mas BTC. El BTC per share solo funciona si el precio de BTC sube mas rapido que la dilucion. Con BTC cayendo un 48%, el BTC yield per share se convierte en una metrica irrelevante.</p>
+            </div>
+            <div class="card card-white">
+                <h3>Deuda: Convertible notes a 0%</h3>
+                <p style="margin: 0; font-size: 1rem;">MARA tiene ~$3,600M en deuda total, casi toda en convertible notes. En julio 2025 emitio $850M adicionales a cupon 0% vencimiento 2032. La "ventaja" es que no paga intereses. El riesgo es que si BTC no se recupera, estas notas se convierten en acciones (mas dilucion) o hay que repagar a vencimiento. Es una apuesta apalancada: si BTC sube, genial. Si no, el balance se deteriora rapido.</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitors -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Comparativa con Competidores
+        </div>
+
+        <h2>MARA vs otros mineros de Bitcoin</h2>
+
+        <p>El sector de mineria de Bitcoin esta dominado por un punado de empresas cotizadas que compiten por hashrate, eficiencia energetica y escala. MARA lidera en hashrate y holdings de BTC, pero no necesariamente en eficiencia o valoracion.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th style="color: var(--amber-500);">MARA</th>
+                        <th>Riot (RIOT)</th>
+                        <th>CleanSpark (CLSK)</th>
+                        <th>TeraWulf (WULF)</th>
+                        <th>Bitfarms (BITF)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hashrate (EH/s)</strong></td>
+                        <td class="cell-success"><strong>57.4</strong></td>
+                        <td>38.5</td>
+                        <td>50.0</td>
+                        <td>12.8</td>
+                        <td>14.8</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td class="cell-success"><strong>52,850</strong></td>
+                        <td>~18,000</td>
+                        <td>~13,100</td>
+                        <td>~600</td>
+                        <td>~1,200</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revenue TTM ($M)</strong></td>
+                        <td><strong>$919</strong></td>
+                        <td>~$580</td>
+                        <td>$766</td>
+                        <td>~$180</td>
+                        <td>~$260</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Cap ($B)</strong></td>
+                        <td>$3.1</td>
+                        <td>$4.8</td>
+                        <td>~$3.5</td>
+                        <td>~$2.0</td>
+                        <td>~$1.5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Eficiencia (J/TH)</strong></td>
+                        <td>18.3</td>
+                        <td>21.2</td>
+                        <td>~18</td>
+                        <td>~20</td>
+                        <td>19.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deuda ($B)</strong></td>
+                        <td class="cell-danger">$3.6</td>
+                        <td>~$0.8</td>
+                        <td>~$1.2</td>
+                        <td class="cell-danger">~$1.5</td>
+                        <td>~$0.6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pivot AI/HPC</strong></td>
+                        <td class="cell-amber">En desarrollo</td>
+                        <td class="cell-amber">Incipiente</td>
+                        <td class="cell-amber">Colocation</td>
+                        <td class="cell-success">Avanzado</td>
+                        <td class="cell-amber">En desarrollo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>MARA lidera en escala bruta (hashrate y BTC holdings), pero tiene la mayor carga de deuda del sector. Su market cap de $3.1B esta curiosamente por debajo de Riot ($4.8B) a pesar de tener mas hashrate y mas Bitcoin. Esto refleja la preocupacion del mercado por la deuda y la dilucion.</p>
+
+        <div class="company-grid" style="margin-top: 40px;">
+            <div class="company-card highlight">
+                <div class="company-name">MARA</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">57.4 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">$3.6B</div>
+                    <div class="company-stat-label">Deuda Total</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+            <div class="company-card">
+                <div class="company-name">Riot Platforms</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">38.5 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--amber-600);">$0.8B</div>
+                    <div class="company-stat-label">Deuda Total</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+            <div class="company-card">
+                <div class="company-name">CleanSpark</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">50 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--amber-600);">$1.2B</div>
+                    <div class="company-stat-label">Deuda Total</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">&#9888; Posicion competitiva</div>
+            <p class="callout-text">MARA tiene la mayor escala pero tambien la mayor deuda. TeraWulf es la mas avanzada en AI/HPC con 90% energia zero-carbon. CleanSpark destaca por operaciones 100% propias y la mayor eficiencia. Riot tiene el balance mas conservador. En un entorno de BTC bajista prolongado, los mineros con menos deuda y mas diversificacion sobreviviran mejor. MARA ha apostado todo a que BTC se recupere.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos
+        </div>
+
+        <h2>La historia de MARA: de minero a titan del Bitcoin</h2>
+
+        <div class="timeline" style="margin: 48px 0;">
+            <div class="timeline::before"></div>
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">21</div>
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-value" style="font-size: 1rem;">Expansion agresiva</div>
+                    <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 4px;">Compra masiva de ASICs. BTC llega a $69K. MARA crece pero pierde dinero.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">22</div>
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-value" style="font-size: 1rem;">Crypto winter</div>
+                    <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 4px;">BTC cae a $16K. Revenue baja -26%. Perdida neta de $687M. Supervivencia.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">23</div>
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-value" style="font-size: 1rem;">Recuperacion</div>
+                    <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 4px;">Revenue +229%. BTC recupera. Hashrate crece a 24.7 EH/s. Inicia politica HODL.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">24</div>
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-value" style="font-size: 1rem;">Record y halving</div>
+                    <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 4px;">Revenue $656M. Halving abril. Compra 22K BTC con debt. Cambio nombre a MARA.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">25</div>
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-value" style="font-size: 1rem;">BTC crash</div>
+                    <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 4px;">BTC cae de $126K a $65K. Pivot AI/HPC. Revenue $919M TTM pero stock -70%.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 48px;">Proximos catalizadores</h3>
+
+        <div class="grid-2" style="margin-top: 16px;">
+            <div class="card card-white">
+                <h3 style="color: var(--green-600);">&#8593; Positivos</h3>
+                <ul class="check-list">
+                    <li>Q4 2025 earnings (marzo 2026): validar trayectoria</li>
+                    <li>Cierre adquisicion Exaion (AI/HPC Francia)</li>
+                    <li>Hashrate target 75 EH/s a fin 2025</li>
+                    <li>Cualquier recuperacion de BTC por encima de $80K</li>
+                    <li>Primeros ingresos significativos de AI/HPC</li>
+                </ul>
+            </div>
+            <div class="card card-white">
+                <h3 style="color: var(--red-600);">&#8595; Negativos</h3>
+                <ul class="check-list">
+                    <li class="danger">BTC cayendo por debajo de $50K (breakeven danger)</li>
+                    <li class="danger">Vencimiento convertible notes 2026 ($250M+)</li>
+                    <li class="warning">Mas dilucion si necesita capital en bear market</li>
+                    <li class="warning">Regulacion cripto adversa en EE.UU.</li>
+                    <li class="warning">Dificultad de red Bitcoin sigue subiendo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Moat y Ventajas Competitivas
+        </div>
+
+        <h2>Ventajas competitivas: escala sin poder de fijacion de precios</h2>
+
+        <p class="lead">MARA tiene ventajas de escala reales en un sector donde el tamaño importa. Pero la mineria de Bitcoin es fundamentalmente un negocio de commodity donde nadie tiene pricing power. Tu "producto" (BTC) vale lo mismo que el de tu competidor. La unica diferencia es a que coste lo produces.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 28px;">
+                <span class="progress-label">Escala operativa</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Mayor hashrate cotizado</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">16/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 28px;">
+                <span class="progress-label">Coste de energia</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 55%;">$33.7K/BTC en Q2 2025</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">11/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 28px;">
+                <span class="progress-label">Reserva BTC</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 75%;">52,850 BTC - 2do mayor corporate holder</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">15/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 28px;">
+                <span class="progress-label">Switching costs</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 10%;">Cero - BTC es fungible</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">2/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Pricing power</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 5%;">No existe - precio lo fija mercado</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">1/20</span>
+            </div>
+        </div>
+
+        <p>El "moat" de MARA es de tipo <strong>cost advantage through scale</strong>. Cuanto mas grande eres, mas eficiente puedes ser en la compra de equipos, negociacion de contratos electricos, y amortizacion de infraestructura. MARA tiene el mayor hashrate del sector y una de las mejores eficiencias energeticas (18.3 J/TH). Pero esto es una ventaja relativa, no absoluta. Si BTC cae por debajo de tu all-in cost (~$54K/BTC en Q1 2025), no importa lo grande que seas: pierdes dinero minando cada bloque.</p>
+
+        <p>La reserva de 52,850 BTC funciona como un "war chest" que da opcionalidad: pueden prestarlos para generar rendimiento (31% ya esta activado como colateral o prestamos), usarlos como garantia para nuevas emisiones de deuda, o venderlos si necesitan liquidez. Pero esta reserva se deteriora con la caida de BTC: a $65K vale $3,460M; a $50K valdria $2,640M, insuficiente para cubrir la deuda de $3,600M.</p>
+
+        <div class="callout callout-danger" style="margin-top: 24px;">
+            <div class="callout-title">&#9888; Amenaza principal al moat</div>
+            <p class="callout-text">El halving de abril 2024 redujo la recompensa de 6.25 a 3.125 BTC por bloque. Esto duplica efectivamente el coste de produccion. Sin una subida equivalente en el precio de BTC, todos los mineros se comprimen. Los que tienen mayor deuda y mayor estructura de costes sufren mas. MARA ha compensado parcialmente con escala (mas hashrate = mas bloques), pero el juego es cada vez mas ajustado. El proximo halving en 2028 volvera a apretar.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Fred Thiel: vision clara, ejecucion arriesgada</h2>
+
+        <div class="grid-2" style="margin: 32px 0;">
+            <div class="card card-white">
+                <h3>Fred Thiel - CEO desde 2021</h3>
+                <p style="font-size: 1rem; color: var(--gray-600); margin-bottom: 16px;">Ex-CEO de US Datalink Corporation y veterano del sector tecnologico. Ha transformado MARA de un pequeño minero a la mayor empresa de mineria de Bitcoin cotizada. Frase emblematica: <em>"Los electrones son el nuevo petroleo"</em>.</p>
+                <p style="font-size: 1rem; color: var(--gray-600); margin: 0;"><strong>Track record:</strong> Ha escalado hashrate de 3.5 a 57.4 EH/s, construido la segunda mayor tesoreria corporativa de BTC, y articulado una vision de transicion hacia infraestructura digital que incluye AI/HPC.</p>
+            </div>
+            <div class="card card-white">
+                <h3>Evaluacion del equipo</h3>
+                <div class="progress-row" style="margin-top: 16px; margin-bottom: 16px;">
+                    <span class="progress-label" style="width: 140px;">Vision</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 80%;"></div>
+                    </div>
+                    <span class="progress-value" style="color: var(--green-600);">Alta</span>
+                </div>
+                <div class="progress-row" style="margin-bottom: 16px;">
+                    <span class="progress-label" style="width: 140px;">Ejecucion</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar amber" style="width: 55%;"></div>
+                    </div>
+                    <span class="progress-value" style="color: var(--amber-600);">Media</span>
+                </div>
+                <div class="progress-row" style="margin-bottom: 16px;">
+                    <span class="progress-label" style="width: 140px;">Capital alloc.</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar danger" style="width: 30%;"></div>
+                    </div>
+                    <span class="progress-value" style="color: var(--red-600);">Baja</span>
+                </div>
+                <div class="progress-row">
+                    <span class="progress-label" style="width: 140px;">Alineacion</span>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar amber" style="width: 50%;"></div>
+                    </div>
+                    <span class="progress-value" style="color: var(--amber-600);">Media</span>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>Lo positivo:</strong> Fred Thiel ha demostrado capacidad de escalar operaciones rapidamente y tiene una vision articulada del futuro de la empresa. La decision de ir "full HODL" y acumular Bitcoin era brillante cuando BTC subia. La adquisicion de Exaion y el pivot hacia AI/HPC muestran pensamiento estrategico a largo plazo.</p>
+
+        <p><strong>Lo preocupante:</strong> La capital allocation ha sido cuestionable. Comprar 22,000 BTC a un precio medio de $87,205 cuando el precio actual es $65,500 implica una perdida no realizada de ~$480M solo en esas compras. Emitir $850M en convertible notes a 0% suena bien, pero diluye a los accionistas cuando se convierten. La dilucion del 350% en 4 anos destruye valor per share incluso cuando el negocio crece. Hay una tension constante entre "crecer la empresa" y "proteger al accionista existente".</p>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">&#9888; Skin in the game</div>
+            <p class="callout-text">Thiel tiene participacion significativa en MARA y ha expresado publicamente su conviccion en Bitcoin a largo plazo. Sin embargo, la compensacion ejecutiva incluye grandes paquetes de stock options, lo que alinea parcialmente pero tambien incentiva la dilucion (mas acciones emitidas = mas stock disponible para el management). La transparencia en las earnings calls es aceptable pero tiende hacia el optimismo excesivo.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de alertas</h2>
+
+        <p>MARA presenta varias banderas rojas tipicas de empresas con alto apalancamiento operativo y financiero en un sector ciclico y volatil.</p>
+
+        <div class="flag-list" style="margin-top: 32px;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>FCF siempre negativo</h4>
+                    <p>Nunca ha generado Free Cash Flow positivo en su historia. Los "beneficios" son revalorizaciones contables de BTC, no cash real. Dependencia total de mercados de capital (deuda y equity) para financiar operaciones.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Dilucion extrema (350% en 4 anos)</h4>
+                    <p>Shares outstanding de 105M en 2021 a 470M en 2025. Cada subida de BTC se usa para emitir mas acciones. El accionista pierde participacion constantemente.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Deuda superior a BTC holdings (a precios actuales)</h4>
+                    <p>$3,600M en deuda vs $3,460M en BTC holdings a $65K. Net Asset Value se acerca a cero. Si BTC baja mas, la deuda supera los activos de Bitcoin.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Concentracion en un solo activo</h4>
+                    <p>Mas del 90% del negocio depende del precio de Bitcoin. Cero diversificacion real (AI/HPC es plan futuro). Correlacion casi 1:1 con BTC pero con apalancamiento.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>BTC comprado a $87K, ahora a $65K</h4>
+                    <p>Los 22,065 BTC comprados en 2024 a precio medio de $87,205 estan ahora ~25% por debajo de su coste. Perdida latente de ~$480M en esas compras.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Contabilidad a valor razonable infla beneficios</h4>
+                    <p>Desde ASU 2023-08, los BTC se contabilizan a market value. Cuando BTC sube, aparecen "beneficios" enormes que no son cash. Cuando baja, aparecen perdidas masivas. Confunde al inversor poco sofisticado.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Revenue vs CFO: coherente (ambos negativos en cash real)</h4>
+                    <p>No hay divergencia sospechosa entre revenue y cash from operations. El problema no es fraude contable sino modelo de negocio que quema cash estructuralmente.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Auditor y CFO estables</h4>
+                    <p>No ha habido cambios de auditor ni de CFO recientes sospechosos. La empresa publica resultados y hosting de earnings calls regularmente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>La valoracion de MARA es un juego de Bitcoin</h2>
+
+        <p class="lead">Valorar MARA con metodos tradicionales (DCF, multiplos de FCF) es practicamente imposible porque nunca ha generado FCF positivo. La forma mas honesta de valorarla es como un <strong>proxy apalancado de Bitcoin</strong>: su valor = valor de los BTC en balance + valor del negocio de mineria &minus; deuda.</p>
+
+        <div class="card" style="margin: 32px 0; padding: 32px;">
+            <h3 style="margin-bottom: 20px;">Metodo NAV (Net Asset Value) - Sensibilidad a precio de BTC</h3>
+            <div class="table-wrapper" style="margin: 16px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Precio BTC</th>
+                            <th>Valor BTC Holdings</th>
+                            <th>Mining Biz Value</th>
+                            <th>Menos Deuda</th>
+                            <th>NAV</th>
+                            <th>NAV/Share</th>
+                            <th>vs Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>$40,000</td>
+                            <td>$2,114M</td>
+                            <td>$500M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-danger">-$986M</td>
+                            <td class="cell-danger">-$2.10</td>
+                            <td class="cell-danger">Quiebra</td>
+                        </tr>
+                        <tr>
+                            <td>$50,000</td>
+                            <td>$2,643M</td>
+                            <td>$700M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-danger">-$257M</td>
+                            <td class="cell-danger">-$0.55</td>
+                            <td class="cell-danger">Insolvente</td>
+                        </tr>
+                        <tr style="background: var(--amber-50);">
+                            <td><strong>$65,500 (hoy)</strong></td>
+                            <td><strong>$3,462M</strong></td>
+                            <td><strong>$1,000M</strong></td>
+                            <td><strong>-$3,600M</strong></td>
+                            <td><strong>$862M</strong></td>
+                            <td><strong>$1.83</strong></td>
+                            <td class="cell-danger"><strong>-78%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>$80,000</td>
+                            <td>$4,228M</td>
+                            <td>$1,500M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-success">$2,128M</td>
+                            <td class="cell-success">$4.53</td>
+                            <td class="cell-danger">-45%</td>
+                        </tr>
+                        <tr>
+                            <td>$100,000</td>
+                            <td>$5,285M</td>
+                            <td>$2,000M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-success">$3,685M</td>
+                            <td class="cell-success">$7.84</td>
+                            <td class="cell-amber">-5%</td>
+                        </tr>
+                        <tr>
+                            <td>$130,000</td>
+                            <td>$6,871M</td>
+                            <td>$3,000M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-success">$6,271M</td>
+                            <td class="cell-success">$13.34</td>
+                            <td class="cell-success">+62%</td>
+                        </tr>
+                        <tr>
+                            <td>$180,000</td>
+                            <td>$9,513M</td>
+                            <td>$4,000M</td>
+                            <td>-$3,600M</td>
+                            <td class="cell-success">$9,913M</td>
+                            <td class="cell-success">$21.09</td>
+                            <td class="cell-success">+156%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin: 0;">* Shares outstanding: ~470M (diluted). Mining biz value estimado como multiplo de revenue operativo excluyendo BTC revaluation. Asume BTC holdings constantes a 52,850 BTC.</p>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">&#9888; DCF inverso: lo que el precio actual implica</div>
+            <p class="callout-text">Al precio actual de $8.24, el market cap de MARA es $3,100M. Restando la deuda neta (~$3,600M deuda - $826M cash = $2,774M deuda neta), el Enterprise Value es ~$5,874M. Esto implica que el mercado valora los 52,850 BTC a ~$65,500 (precio actual) MAS asigna ~$2,400M de valor al negocio de mineria. Parece justo. El problema: si BTC cae otro 20% a $52K, el NAV se acerca a cero y la accion deberia cotizar mucho mas abajo. MARA cotiza a $8.24 porque el mercado asigna una "prima de opcionalidad" al rebote de BTC y al pivot AI. Si BTC no rebota, esa prima desaparece.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios de Inversion a 5 Anos
+        </div>
+
+        <h2>Tres futuros posibles para MARA</h2>
+
+        <p>Los escenarios de MARA estan 100% vinculados al precio de Bitcoin en 2030. Asumimos que MARA mantiene/crece su hashrate y holdings, y que la diversificacion AI/HPC contribuye marginalmente.</p>
+
+        <div class="scenario-grid" style="margin: 40px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name">Bear Case</span>
+                    <span class="scenario-prob">35%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">$2.50</div>
+                <div class="scenario-change" style="color: var(--red-600);">-70% desde hoy</div>
+                <ul class="scenario-list">
+                    <li>BTC se mantiene entre $40K-$60K hasta 2030</li>
+                    <li>Regulacion cripto adversa en EE.UU.</li>
+                    <li>Necesidad de vender BTC para pagar deuda</li>
+                    <li>Dilucion adicional masiva para sobrevivir</li>
+                    <li>AI/HPC no genera ingresos significativos</li>
+                    <li>NAV negativo, posible reestructuracion</li>
+                </ul>
+            </div>
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name">Base Case</span>
+                    <span class="scenario-prob">40%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">$12.00</div>
+                <div class="scenario-change" style="color: var(--amber-600);">+46% desde hoy</div>
+                <ul class="scenario-list">
+                    <li>BTC recupera a $100K-$120K en 2028-2030</li>
+                    <li>MARA crece hashrate a 80-100 EH/s</li>
+                    <li>AI/HPC contribuye 10-15% de revenue</li>
+                    <li>Dilucion moderada pero continuada</li>
+                    <li>NAV positivo, cotiza a descuento del 20-30%</li>
+                    <li>CAGR: ~7.8% anual</li>
+                </ul>
+            </div>
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name">Bull Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">$35.00</div>
+                <div class="scenario-change" style="color: var(--green-600);">+325% desde hoy</div>
+                <ul class="scenario-list">
+                    <li>BTC supera $180K-$250K (nuevo ciclo alcista)</li>
+                    <li>MARA con 100+ EH/s y 70,000+ BTC</li>
+                    <li>AI/HPC se convierte en negocio real (20%+ revenue)</li>
+                    <li>Reserve estrategica de BTC (gobierno EE.UU.)</li>
+                    <li>Recompra de acciones o reduccion de deuda</li>
+                    <li>CAGR: ~33.5% anual</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 32px; margin-top: 24px;">
+            <h3>Precio ponderado por probabilidad</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <div>
+                    <p style="font-size: 1rem; color: var(--gray-600); margin: 0;">($2.50 &times; 35%) + ($12.00 &times; 40%) + ($35.00 &times; 25%)</p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--amber-600);">$14.43</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Precio justo ponderado</div>
+                </div>
+            </div>
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                <p style="font-size: 1rem; color: var(--gray-600); margin: 0;"><strong>Rango de precio justo: $6 - $18.</strong> A $8.24 la accion cotiza dentro del rango pero mas cerca del extremo bajo. El upside existe pero esta condicionado EXCLUSIVAMENTE a la recuperacion de BTC. Si eres un inversor que cree firmemente en BTC por encima de $100K a largo plazo, MARA ofrece apalancamiento. Si no, hay mejores formas de invertir tu dinero.</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MARA Holdings (MARA) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Final Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="section-label" style="color: var(--gray-500);">
+                <span class="section-number" style="color: var(--gray-600);">12</span> Conclusion Final
+            </div>
+
+            <div class="verdict-section" style="padding: 60px 0;">
+                <div class="verdict-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+                <div class="verdict-title" style="color: var(--amber-500);">PRECAUCION</div>
+                <p class="verdict-text" style="color: var(--gray-400); max-width: 700px;">
+                    MARA es una apuesta apalancada a Bitcoin, no una empresa con fundamentos solidos por si misma. Si crees en Bitcoin por encima de $100K a largo plazo y quieres maximizar exposicion con riesgo, MARA amplifica esa apuesta. Pero los riesgos son enormes: deuda que supera el valor de los BTC, dilucion cronica, FCF siempre negativo, y dependencia total de un activo volatil.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin: 40px 0;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Rating</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--amber-500);">38/100</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Precio actual</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--white);">$8.24</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Rango justo</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--amber-500);">$6-$18</div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;">
+                    <div>
+                        <h3 style="color: var(--green-500); margin-bottom: 16px; font-family: 'Playfair Display', serif;">Fortalezas clave</h3>
+                        <ul style="list-style: none; color: var(--gray-300); font-size: 1rem; line-height: 2;">
+                            <li>&#8226; Mayor minera de BTC cotizada del mundo (57.4 EH/s)</li>
+                            <li>&#8226; 52,850 BTC en balance (~$3,460M)</li>
+                            <li>&#8226; Coste energia competitivo ($33.7K/BTC)</li>
+                            <li>&#8226; Eficiencia de flota lider (18.3 J/TH)</li>
+                            <li>&#8226; Opcionalidad AI/HPC con Exaion</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--red-500); margin-bottom: 16px; font-family: 'Playfair Display', serif;">Debilidades clave</h3>
+                        <ul style="list-style: none; color: var(--gray-300); font-size: 1rem; line-height: 2;">
+                            <li>&#8226; FCF siempre negativo &mdash; no genera cash real</li>
+                            <li>&#8226; $3,600M deuda vs $3,460M BTC &mdash; margen nulo</li>
+                            <li>&#8226; Dilucion extrema: 350% en 4 anos</li>
+                            <li>&#8226; Dependencia total del precio de Bitcoin</li>
+                            <li>&#8226; BTC comprado a $87K, ahora a $65K</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                <h3 style="color: var(--amber-500); margin-bottom: 16px; font-family: 'Playfair Display', serif;">Que vigilar (triggers de reevaluacion)</h3>
+                <ul style="list-style: none; color: var(--gray-300); font-size: 1rem; line-height: 2;">
+                    <li>&#9888; Reevaluar si BTC supera $100K de forma sostenida &rarr; mejora NAV significativamente</li>
+                    <li>&#9888; Alerta si BTC cae a $50K &rarr; NAV negativo, riesgo de solvencia</li>
+                    <li>&#9888; Vigilar Q4 2025 earnings (marzo 2026) para ver impacto del crash de BTC</li>
+                    <li>&#9888; Seguir progreso de AI/HPC &rarr; primer trimestre con revenue HPC significativo</li>
+                    <li>&#9888; Monitorizar vencimiento convertible notes 2026 ($250M+)</li>
+                    <li>&#9888; Si shares outstanding superan 600M &rarr; dilucion insostenible</li>
+                </ul>
+            </div>
+
+            <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                <h3 style="color: var(--gray-400); margin-bottom: 16px; font-family: 'Playfair Display', serif;">Lo que no se (transparencia)</h3>
+                <ul style="list-style: none; color: var(--gray-500); font-size: 1rem; line-height: 2;">
+                    <li>&#10067; All-in cost por BTC exacto en Q3-Q4 2025 (post-crash BTC)</li>
+                    <li>&#10067; Terminos completos de las convertible notes y triggers de conversion</li>
+                    <li>&#10067; Timeline real de ingresos AI/HPC vs plan declarado</li>
+                    <li>&#10067; Cuantos BTC estan prestados/como colateral vs libres</li>
+                    <li>&#10067; Impacto real del halving 2024 en costes operativos a escala actual</li>
+                    <li>&#10067; Si Thiel tiene lockup en sus acciones o puede vender</li>
+                </ul>
+            </div>
+
+            <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                <h3 style="color: var(--gray-400); margin-bottom: 16px; font-family: 'Playfair Display', serif;">Para quien es esta inversion</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;">
+                    <div style="padding: 24px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border: 1px solid rgba(34, 197, 94, 0.2);">
+                        <p style="font-size: 1rem; color: var(--green-500); font-weight: 600; margin-bottom: 8px;">Podria interesarte si...</p>
+                        <p style="font-size: 0.9375rem; color: var(--gray-400); margin: 0;">Eres un inversor con alta tolerancia al riesgo, conviccion firme en Bitcoin por encima de $100K+ a largo plazo, y buscas exposicion apalancada a BTC a traves de equity. No te importa la dilucion si el "BTC yield per share" crece.</p>
+                    </div>
+                    <div style="padding: 24px; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                        <p style="font-size: 1rem; color: var(--red-500); font-weight: 600; margin-bottom: 8px;">NO es para ti si...</p>
+                        <p style="font-size: 0.9375rem; color: var(--gray-400); margin: 0;">Buscas empresas con fundamentales solidos, cash flow predecible, moat duradero, y proteccion de capital. MARA puede ir a $0 tan facilmente como puede multiplicar por 5x. Si quieres exposicion a BTC, es mas seguro comprar BTC directamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--gray-700);">
+                <p style="font-size: 0.75rem; color: var(--gray-600); line-height: 1.8;">
+                    <strong>Fuentes utilizadas:</strong> MARA Holdings 10-K FY2024 (febrero 2025), MARA Q3 2025 Earnings Release (noviembre 2025), MARA Q2 2025 Earnings Call, ir.mara.com press releases, MacroTrends historicals, Yahoo Finance, CoinDesk, Bitcoin Treasuries, Investing.com earnings transcripts. Datos de competidores: Riot Platforms Q3 2025, CleanSpark FY2025, TeraWulf Q3 2025, Bitfarms Q3 2025. Precio de BTC al 12 de febrero 2026: ~$65,500.<br><br>
+                    <strong>Disclaimer:</strong> Este analisis es educativo e informativo. No constituye recomendacion de compra o venta de valores. Hacer siempre due diligence propia antes de invertir. Los datos presentados pueden contener errores y las estimaciones futuras son especulativas por naturaleza. Invertir en empresas de mineria de Bitcoin conlleva riesgos extremos incluyendo perdida total del capital.<br><br>
+                    <strong>Fecha del analisis:</strong> 13 de febrero de 2026 &middot; Analista: FMA
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

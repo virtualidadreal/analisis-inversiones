@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeraWulf Inc. (WULF) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--green-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--green-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--red-500), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--teal-500); background: var(--blue-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--teal-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--green-600); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Interesante
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: WULF</div>
+                <h1 class="cover-title font-display">TeraWulf Inc.</h1>
+                <p class="cover-subtitle">De minero de Bitcoin a plataforma de infraestructura AI. Pivote estrategico con contratos de $17B, respaldado por Google, pero con dilucion agresiva, sin beneficios y dependencia de ejecucion.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">72/100 - Buena</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$15.98</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">$23-37</div>
+                    <div class="cover-metric-label">Rango analistas</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">2.8 GW</div>
+                    <div class="cover-metric-label">Portfolio energetico</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$6.7B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>TeraWulf en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">TeraWulf es una empresa que mina Bitcoin con energia limpia y esta pivotando a albergar centros de datos de inteligencia artificial, con contratos multimillonarios respaldados por Google. Tiene la infraestructura energetica que la IA necesita desesperadamente.</p>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 32px;">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes un terreno enorme con acceso a un rio de agua dulce y electricidad barata. Hasta ahora lo usabas para cultivar patatas (minar Bitcoin). Pero de repente, Google llama a tu puerta y dice: &laquo;Necesito tu terreno y tu electricidad para construir un centro de datos de IA. Te pago durante 25 anos.&raquo; Tu tienes lo que todos quieren &mdash; energia limpia, espacio, y permisos ya listos. La pregunta es: &iquest;puedes construir los edificios a tiempo y sin arruinarte en el proceso?
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">$206M</div>
+                <div class="stat-label">Revenue 2025E</div>
+                <div class="stat-change positive">+47% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber">$17B+</div>
+                <div class="stat-label">Contratos HPC</div>
+                <div class="stat-change positive">Google-backed</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">510 MW</div>
+                <div class="stat-label">HPC contratado</div>
+                <div class="stat-change positive">+250-500 MW/ano obj.</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">neg.</div>
+                <div class="stat-label">EPS 2025E</div>
+                <div class="stat-change negative">-$0.34</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>Pivote a AI/HPC con contratos $17B+ firmados</li>
+                    <li>Google backstop de $3.2B en deuda del proyecto</li>
+                    <li>2.8 GW de infraestructura energetica (5 sites)</li>
+                    <li>Energia 100% nuclear/limpia (ventaja ESG)</li>
+                    <li>Revenue 2026E: $422M (+104% YoY)</li>
+                    <li>Morgan Stanley inicia cobertura: Overweight, $37</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="warning">Sin beneficios: EPS 2025E -$0.34, 2026E -$0.13</li>
+                    <li class="danger">Dilucion masiva: acciones +67% en 2024</li>
+                    <li class="warning">$500M en notas convertibles + financiaciones</li>
+                    <li class="warning">Riesgo de ejecucion: multiples build-outs simultaneos</li>
+                    <li class="danger">Related-party transactions con entidades del CEO</li>
+                    <li class="warning">Bitcoin mining declining post-halving</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 72/100</h2>
+
+        <p class="lead">Negocio en plena transformacion con un pivote estrategico brillante hacia la infraestructura AI. Los contratos firmados y el respaldo de Google validan la tesis. Sin embargo, la ejecucion del build-out es compleja, la dilucion es significativa y el negocio aun no genera beneficios. El potencial es enorme si ejecutan correctamente.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Pivote AI validado, energia limpia</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">16/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 50%;">Sin beneficios, revenue creciendo</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">10/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 75%;">Energia limpia + sites + contratos</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">15/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 60%;">Vision buena, conflictos interes</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">12/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 95%;">Upside significativo vs analistas</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">19/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--green-600);">72</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px; border: 2px solid var(--green-500);">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente &larr;</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Mineria Bitcoin que se transforma en infraestructura AI</h2>
+
+        <p class="lead">TeraWulf empezo como un minero de Bitcoin diferenciado por usar energia 100% limpia (nuclear e hidroelectrica). En 2025, dio un giro estrategico historico: convertir su ventaja en acceso a energia barata y limpia en una plataforma de infraestructura para computacion de alta potencia (HPC) e inteligencia artificial, firmando contratos multimillonarios con Google a traves de Fluidstack.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio (evolucion)</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Bitcoin Mining</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 60%;">12.8 EH/s, energia limpia, post-halving</div>
+                </div>
+                <span class="progress-value">~75% rev.</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">HPC / AI Hosting</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 30%;">510+ MW contratados, ramp-up 2026</div>
+                </div>
+                <span class="progress-value">~14% rev.</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Infraestructura</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 15%;">2.8 GW portfolio, 5 sites</div>
+                </div>
+                <span class="progress-value">Futuro</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Sites operativos</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Lake Mariner (NY)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">245 MW BTC + 22.5 MW HPC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Nautilus (PA)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">Nuclear-powered BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Abernathy (TX)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">168 MW HPC (en desarrollo)</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Nuevas adquisiciones (Feb 2026)</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Hawesville (KY)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--blue-600);">480 MW inmediatos</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Morgantown (MD)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--blue-600);">210 MW &rarr; 1 GW expansion</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Total portfolio</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">2.8 GW (5 sites)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 32px;">
+            <div class="callout-title">Clave del modelo de negocio</div>
+            <p class="callout-text"><strong>La tesis central es simple:</strong> La IA necesita cantidades masivas de electricidad. TeraWulf tiene acceso a energia limpia y barata, con terrenos preparados y permisos ya obtenidos. En lugar de solo minar Bitcoin (commodity), ahora alquila su infraestructura energetica a hiperescaladores como Google con contratos a 10-25 anos. Eso transforma un negocio volatil (Bitcoin mining) en ingresos predecibles y de alta calidad.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolucion Financiera
+        </div>
+
+        <h2>Crecimiento explosivo, beneficios pendientes</h2>
+
+        <p class="lead">TeraWulf ha multiplicado sus ingresos por 3x en dos anos gracias al crecimiento del hashrate y la subida de Bitcoin. Pero el verdadero catalizador financiero sera el ramp-up de los contratos HPC en 2026-2027, que podrian llevar los ingresos por encima de $800M y finalmente generar beneficios positivos. Actualmente la empresa sigue en perdidas netas debido a la amortizacion acelerada, las inversiones de capital y la dilucion.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025E</th>
+                        <th>FY2026E</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$21M</td>
+                        <td>$69M</td>
+                        <td>$140M</td>
+                        <td class="cell-success">$206M</td>
+                        <td class="cell-success">$422M</td>
+                        <td class="cell-success">20x en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Adj. EBITDA</strong></td>
+                        <td class="cell-danger">neg.</td>
+                        <td>$31.9M</td>
+                        <td>$60.4M</td>
+                        <td class="cell-amber">~$70M</td>
+                        <td class="cell-success">~$180M</td>
+                        <td class="cell-success">Mejorando</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">-$73M</td>
+                        <td class="cell-danger">-$72M</td>
+                        <td class="cell-danger">~-$140M</td>
+                        <td class="cell-danger">~-$55M</td>
+                        <td class="cell-amber">Mejorando lento</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td class="cell-danger">neg.</td>
+                        <td class="cell-danger">-$0.35</td>
+                        <td class="cell-danger">-$0.21</td>
+                        <td class="cell-danger">-$0.34</td>
+                        <td class="cell-danger">-$0.13</td>
+                        <td class="cell-amber">Positivo en 2027E</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hashrate</strong></td>
+                        <td>~2 EH/s</td>
+                        <td>5.0 EH/s</td>
+                        <td>9.7 EH/s</td>
+                        <td class="cell-success">12.8 EH/s</td>
+                        <td>~13 EH/s</td>
+                        <td class="cell-success">+155% en 2 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cash + BTC</strong></td>
+                        <td>~$30M</td>
+                        <td>~$70M</td>
+                        <td>$274M</td>
+                        <td class="cell-success">$713M</td>
+                        <td>~$500M</td>
+                        <td class="cell-success">Fuerte liquidez</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Timeline de revenue: de BTC mining a AI/HPC</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">2022</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value" style="color: var(--red-600);">$21M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2023</div>
+                    <div class="timeline-year">Crecimiento</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$69M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2024</div>
+                    <div class="timeline-year">Duplicando</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$140M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2025E</div>
+                    <div class="timeline-year">+ HPC</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$206M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2026E</div>
+                    <div class="timeline-year">HPC ramp</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$422M</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">La transicion de TeraWulf es parecida a la de un propietario de terrenos que pasa de cultivar maiz a arrendar el terreno a Amazon para construir un almacen. Mismo activo, valor radicalmente diferente.</p>
+            <p class="quote-author">&mdash; Analogia del pivote estrategico</p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Analisis Competitivo
+        </div>
+
+        <h2>Los mineros de Bitcoin compiten por el AI</h2>
+
+        <p class="lead">Todos los grandes mineros de Bitcoin estan pivotando hacia HPC/AI hosting, pero con estrategias muy diferentes. TeraWulf destaca por haber asegurado los contratos mas grandes con respaldo de Google, aunque es la empresa mas pequena por revenue y hashrate del grupo. Su ventaja esta en la velocidad del pivote y la calidad de sus contratos, no en la escala actual.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">TERAWULF (WULF)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">$206M</div>
+                    <div class="company-stat-label">Revenue 2025E</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">12.8 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$6.7B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">MARA HOLDINGS</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$850M</div>
+                    <div class="company-stat-label">Revenue 2025E</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">57.4 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$6.8B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">CLEANSPARK (CLSK)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$766M</div>
+                    <div class="company-stat-label">Revenue FY2025</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">50+ EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$4.2B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>TeraWulf</th>
+                        <th>MARA</th>
+                        <th>RIOT</th>
+                        <th>CleanSpark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hashrate</strong></td>
+                        <td>12.8 EH/s</td>
+                        <td class="cell-success">57.4 EH/s</td>
+                        <td>36+ EH/s</td>
+                        <td>50+ EH/s</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Energia limpia</strong></td>
+                        <td class="cell-success">~100%</td>
+                        <td>~50%</td>
+                        <td>~75%</td>
+                        <td>~95%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI/HPC contratos</strong></td>
+                        <td class="cell-success">$17B+ (Google)</td>
+                        <td>En desarrollo</td>
+                        <td>En desarrollo</td>
+                        <td>Minimo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS 2025</strong></td>
+                        <td class="cell-danger">-$0.34</td>
+                        <td class="cell-amber">~$0.20</td>
+                        <td class="cell-success">~$0.80</td>
+                        <td class="cell-success">$1.25</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>~100 BTC</td>
+                        <td class="cell-success">48,237 BTC</td>
+                        <td>17,722 BTC</td>
+                        <td>13,000+ BTC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Cap</strong></td>
+                        <td>$6.7B</td>
+                        <td>$6.8B</td>
+                        <td>$7.4B</td>
+                        <td>$4.2B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estrategia AI</strong></td>
+                        <td class="cell-success">All-in HPC</td>
+                        <td class="cell-amber">Hibrido</td>
+                        <td class="cell-amber">Hibrido</td>
+                        <td>Focused BTC</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Paradoja competitiva</div>
+            <p class="callout-text">TeraWulf tiene market cap similar a MARA ($6.7B vs $6.8B) pero genera 4x menos revenue. La diferencia la justifican los contratos HPC futuros por $17B+. Si estos contratos se ejecutan, TeraWulf esta barata. Si hay retrasos o cancelaciones, la prima actual no tiene justificacion.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Criticos
+        </div>
+
+        <h2>La transformacion en tiempo real</h2>
+
+        <p class="lead">TeraWulf ha experimentado una metamorfosis completa en menos de 3 anos, pasando de ser un minero de Bitcoin mas a convertirse en una de las plataformas de infraestructura AI mas ambiciosas del sector. Cada hito ha ampliado exponencialmente el valor potencial de la empresa.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="display: flex; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--gray-400);">Mar 2023</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Nautilus: primera mina nuclear de Bitcoin en EEUU</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Activan casi 8,000 rigs en la instalacion Nautilus, alimentada por energia nuclear. TeraWulf se diferencia como el minero 100% clean energy.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--amber-600);">Abr 2024</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Bitcoin Halving: los costes de minado se duplican</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">El halving reduce la recompensa por bloque de 6.25 a 3.125 BTC. Los mineros menos eficientes sufren, pero TeraWulf con su coste energetico bajo sobrevive mejor que la mayoria.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--green-600);">Oct 2024</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Emision de $500M en notas convertibles</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Colocan convertible notes al 2.75% para financiar la expansion HPC. Elimina la deuda legacy del term loan anterior. La accion tiene cap a $12.80.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--green-600);">Jul 2025</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Primeros contratos HPC con Fluidstack: 200+ MW</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Firma acuerdos de 10 anos para mas de 200 MW de HPC en Lake Mariner. Google respalda la capacidad financiera de Fluidstack. El pivote AI se hace real.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--green-600);">Oct 2025</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Mega-deal Texas: $9.5B JV con Fluidstack/Google</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Joint venture para 168 MW en Abernathy, TX. Contrato a 25 anos, $9.5B en revenue contratado. Google backstop de $3.2B. TeraWulf mantiene 51%. La accion sube 22%.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 32px;">
+                <div style="min-width: 100px;">
+                    <span class="font-mono" style="font-size: 0.875rem; color: var(--blue-600);">Feb 2026</span>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Adquisicion Kentucky + Maryland: 1.5 GW adicionales</h4>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">Compra sites brownfield en Hawesville (480 MW) y Morgantown (210 MW, expandible a 1 GW). El portfolio total sube a 2.8 GW. La accion sube 11%.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Moat y Ventajas Competitivas
+        </div>
+
+        <h2>Energia limpia como foso competitivo</h2>
+
+        <p class="lead">El moat de TeraWulf no reside en la tecnologia de minado (commodity) sino en tres ventajas interdependientes: acceso a energia limpia y barata, infraestructura ya construida con permisos, y contratos firmados a largo plazo con hiperescaladores. Es un moat que se fortalece con el tiempo a medida que la demanda de electricidad para AI explota y los permisos para nuevas instalaciones se vuelven mas escasos.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700);">1. Acceso a energia limpia</h3>
+                <p style="font-size: 0.9375rem; margin: 16px 0 0;">TeraWulf opera con energia 100% libre de carbono &mdash; nuclear (Nautilus) e hidroelectrica (Lake Mariner). En un mundo donde los hiperescaladores tienen compromisos de carbono cero, esta ventaja es critica. Google, Microsoft y Amazon priorizan proveedores de energia limpia para sus centros de datos. TeraWulf no solo tiene la energia, sino que la tiene en sites con infraestructura ya conectada a la red.</p>
+            </div>
+            <div class="card card-success">
+                <h3 style="color: var(--green-700);">2. Sites con permisos (speed-to-market)</h3>
+                <p style="font-size: 0.9375rem; margin: 16px 0 0;">Conseguir permisos para construir un centro de datos de 200+ MW puede tardar 3-5 anos. TeraWulf ya tiene 5 sites con permisos, subestaciones, lineas de transmision y terrenos preparados. El site de Hawesville tiene 250 acres con acceso inmediato a 480 MW. Esto significa que pueden entregar capacidad HPC mucho mas rapido que un competidor que empieza de cero.</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>3. Contratos a largo plazo (lock-in)</h3>
+                <p style="font-size: 0.9375rem; margin: 16px 0 0;">Mas de $17B en contratos HPC firmados a 10-25 anos con Fluidstack (respaldado por Google). Esto convierte un negocio de commodity (mining) en un negocio de ingresos recurrentes predecibles. Una vez que un hiperescalador instala sus servidores en tu centro de datos, el coste de cambio es altisimo. El switching cost actua como un moat natural.</p>
+            </div>
+            <div class="card">
+                <h3>4. Relacion con Google</h3>
+                <p style="font-size: 0.9375rem; margin: 16px 0 0;">Google no solo es cliente indirecto (via Fluidstack), sino que ha comprometido $3.2B en backstop financiero y tiene ~14% de equity pro forma en TeraWulf. Cuando un hiperescalador de esta magnitud invierte dinero y reputacion en tu empresa, valida tu modelo de negocio y hace extremadamente improbable que cancelen los contratos. Ademas, abre la puerta a futuras expansiones.</p>
+            </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Limitaciones del moat</div>
+            <p class="callout-text">El moat NO es invulnerable. Otros mineros (RIOT, MARA, HUT 8) tambien tienen sites con energia y estan persiguiendo contratos HPC. La construccion de nuevas plantas nucleares (SMRs) podria democratizar el acceso a energia limpia a medio plazo. Y la dependencia de un solo cliente (Fluidstack/Google) es un riesgo de concentracion significativo.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Vision clara, conflictos de interes reales</h2>
+
+        <p class="lead">Paul Prager, co-fundador, Chairman y CEO (66 anos), ha liderado el pivote estrategico de TeraWulf con vision y agresividad. El resultado habla por si solo: de un minero mas a una plataforma con $17B+ en contratos con Google. Sin embargo, la estructura de gobierno presenta conflictos de interes significativos que cualquier inversor debe evaluar cuidadosamente.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor del management</h3>
+                <ul class="check-list">
+                    <li>Vision estrategica: pivote a AI/HPC en el momento exacto</li>
+                    <li>Execution: contratos $17B+ firmados en 12 meses</li>
+                    <li>Insider buying: CEO compro 150,000 acciones (sin ventas)</li>
+                    <li>Skin in the game: Prager posee >40M acciones via entidades</li>
+                    <li>Elimino deuda legacy ($139M term loan) en 2024</li>
+                    <li>Aseguro backstop de $3.2B de Google</li>
+                </ul>
+            </div>
+            <div class="card card-danger">
+                <h3 style="color: var(--red-700); margin-bottom: 16px;">Conflictos de interes</h3>
+                <ul class="check-list">
+                    <li class="danger">Related-party transactions con Beowulf E&D, Riesling Power</li>
+                    <li class="danger">CEO controla entidades que alquilan assets a TeraWulf</li>
+                    <li class="warning">20M acciones emitidas a entidades del CEO como compensacion</li>
+                    <li class="warning">Estructura corporativa compleja con multiples LLCs</li>
+                    <li class="warning">CEO de 66 anos sin plan de sucesion publico</li>
+                    <li class="warning">Dilucion agresiva: acciones +67% en 2024</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 32px 0; padding: 32px;">
+            <h3 style="margin-bottom: 24px;">Estructura de propiedad</h3>
+            <div class="progress-row">
+                <span class="progress-label">Paul Prager (directo + indirecto)</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 25%;">~40M+ acciones via LLCs</div>
+                </div>
+                <span class="progress-value">~10%</span>
+            </div>
+            <div class="progress-row">
+                <span class="progress-label">Google (warrants pro forma)</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 14%;">~41M warrants</div>
+                </div>
+                <span class="progress-value">~14%</span>
+            </div>
+            <div class="progress-row">
+                <span class="progress-label">Institucionales</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 45%;">Fondos + ETFs</div>
+                </div>
+                <span class="progress-value">~45%</span>
+            </div>
+            <div class="progress-row">
+                <span class="progress-label">Retail + Otros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: 31%; background: var(--gray-400);">Free float</div>
+                </div>
+                <span class="progress-value">~31%</span>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Paul Prager ha demostrado ser un operador con vision excepcional. Pero las related-party transactions son un patron que requiere vigilancia constante. El mejor CEO puede tener incentivos mal alineados si la estructura corporativa lo permite.</p>
+            <p class="quote-author">&mdash; Evaluacion del governance</p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de riesgos</h2>
+
+        <p class="lead">TeraWulf presenta un perfil de riesgo propio de una empresa en plena transformacion: alta recompensa potencial pero con riesgos significativos de ejecucion, dilucion y gobierno corporativo. Ninguna red flag es fatal por si sola, pero la combinacion merece atencion.</p>
+
+        <div class="flag-list" style="margin: 48px 0;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">!</div>
+                <div class="flag-content">
+                    <h4>Dilucion masiva de accionistas</h4>
+                    <p>Las acciones en circulacion aumentaron 67% en 2024 y siguen creciendo. Notas convertibles por $500M, warrants a Google (~41M acciones), conversion de preferentes. El share count podria superar 500M diluido, erosionando el valor por accion incluso si el negocio crece.</p>
+                </div>
+            </div>
+
+            <div class="flag-item danger">
+                <div class="flag-icon danger">!</div>
+                <div class="flag-content">
+                    <h4>Related-party transactions</h4>
+                    <p>El CEO controla entidades (Beowulf E&D, Riesling Power, Heorot Power) que tienen transacciones con TeraWulf. Esto incluye alquiler de activos, compensacion en acciones, y acuerdos de servicios. Investigadores independientes han cuestionado este patron.</p>
+                </div>
+            </div>
+
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Riesgo de ejecucion del build-out</h4>
+                    <p>TeraWulf debe entregar CB-3, CB-4 y CB-5 en Lake Mariner, mas el campus de Texas, mas los nuevos sites de Kentucky y Maryland. Multiples build-outs simultaneos a escala masiva con plazos ajustados. Cualquier retraso afecta directamente al revenue contratado.</p>
+                </div>
+            </div>
+
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Concentracion de cliente</h4>
+                    <p>Practicamente todo el negocio HPC depende de un unico cliente (Fluidstack/Google). Si Google reduce su compromiso, cancela contratos, o Fluidstack tiene problemas financieros, el impacto seria devastador. No hay diversificacion significativa de clientes.</p>
+                </div>
+            </div>
+
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Sin beneficios netos</h4>
+                    <p>TeraWulf no ha generado beneficios netos positivos en ningun ano de su historia. El consenso no espera EPS positivo hasta 2027. La empresa quema capital y depende de financiacion externa para construir su infraestructura HPC.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Exposicion a Bitcoin</h4>
+                    <p>Aunque el pivote a HPC reduce la dependencia de Bitcoin, el mining sigue siendo ~75% del revenue actual. Una caida prolongada de Bitcoin afectaria el cash flow operativo mientras los contratos HPC maduran. Risk manageable pero real.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Deuda convertible: cap a $12.80</h4>
+                    <p>Las notas convertibles de Oct 2024 tienen un cap price de $12.80. Con la accion a $16, los capped calls ya no protegen contra la dilucion adicional. Esto puede crear presion vendedora si los holders ejercen la conversion.</p>
+                </div>
+            </div>
+
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Liquidez fuerte</h4>
+                    <p>$713M en cash + BTC a cierre Q3 2025, mas acceso a project financing respaldado por Google. La empresa tiene recursos suficientes para ejecutar el build-out a corto-medio plazo sin necesitar nuevas emisiones inmediatas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>El mercado descuenta crecimiento, pero queda upside</h2>
+
+        <p class="lead">Valorar TeraWulf es complejo porque la mayor parte del valor esta en los contratos HPC futuros, no en el negocio actual de mining. La empresa cotiza a multiplos elevados sobre metricas actuales (EV/Revenue 31x TTM, P/E negativo) pero con descuento significativo sobre los target prices de los analistas ($23 mediana, $37 Morgan Stanley). La clave es si los $17B+ en contratos se materializan en cash flow real.</p>
+
+        <div class="grid-2" style="margin: 48px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 24px;">Multiplos actuales</h3>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>EV/Revenue (TTM)</span>
+                    <span class="font-mono cell-danger">31.6x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>EV/Revenue (2026E)</span>
+                    <span class="font-mono cell-amber">~14x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>EV/EBITDA (2027E)</span>
+                    <span class="font-mono cell-amber">~13x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+                    <span>Price/Sales (2026E)</span>
+                    <span class="font-mono cell-amber">~16x</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 24px;">Proyecciones consenso</h3>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>Revenue 2026E</span>
+                    <span class="font-mono cell-success">$422M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>Revenue 2027E</span>
+                    <span class="font-mono cell-success">$820M+</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                    <span>EBITDA 2027E</span>
+                    <span class="font-mono cell-success">$448M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+                    <span>EPS 2027E</span>
+                    <span class="font-mono cell-success">+$0.33</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 32px 0; padding: 32px;">
+            <h3 style="margin-bottom: 24px;">DCF inverso: &iquest;que esta descontando el mercado?</h3>
+            <p style="font-size: 0.9375rem; color: var(--gray-600); margin-bottom: 20px;">
+                Al precio actual de $15.98, con ~420M acciones diluidas y ~$500M en deuda neta ajustada, el Enterprise Value es de aproximadamente $7.2B. Para justificar este EV con un WACC del 12% y un terminal multiple de 12x EBITDA, el mercado esta descontando:
+            </p>
+            <div class="grid-3">
+                <div class="stat-block">
+                    <div class="stat-value amber" style="font-size: 1.5rem;">$500M+</div>
+                    <div class="stat-label">EBITDA necesario en 2030</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-value amber" style="font-size: 1.5rem;">~55%</div>
+                    <div class="stat-label">Margen EBITDA implicito</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-value success" style="font-size: 1.5rem;">Alcanzable</div>
+                    <div class="stat-label">Si contratos se ejecutan</div>
+                </div>
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--gray-600); margin-top: 20px;">
+                Con $17B+ en contratos a 10-25 anos, el revenue anualizado potencial del negocio HPC supera los $800M. Si los margenes EBITDA del negocio de hosting alcanzan el 50-60% (tipico del sector de data centers), los $500M de EBITDA son razonables. <strong>Conclusion: el mercado no esta sobrevalorando la empresa, esta valorandola correctamente para el escenario base.</strong> El upside viene si la ejecucion es mejor de lo esperado o si firman mas contratos.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios a 5 Anos
+        </div>
+
+        <h2>Tres caminos posibles</h2>
+
+        <p class="lead">El rango de resultados para TeraWulf es excepcionalmente amplio. En el escenario alcista, la empresa se convierte en un pilar de la infraestructura AI americana. En el bajista, los retrasos en construccion y la dilucion destruyen valor. El escenario base asume ejecucion razonable de los contratos existentes sin nuevos mega-deals.</p>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name">Bear Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">$8</div>
+                <div class="scenario-change" style="color: var(--red-600);">-50% desde actual</div>
+                <ul class="scenario-list">
+                    <li>Retrasos significativos en build-out HPC</li>
+                    <li>Bitcoin cae por debajo de $50,000</li>
+                    <li>Dilucion adicional masiva para financiar obras</li>
+                    <li>Google reduce compromiso o Fluidstack tiene problemas</li>
+                    <li>Revenue 2030: ~$400M, EBITDA $150M</li>
+                    <li>Multiple EV/EBITDA: 8x &rarr; EV $1.2B</li>
+                    <li>CAGR 5 anos: -13%</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name">Base Case</span>
+                    <span class="scenario-prob">50%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">$32</div>
+                <div class="scenario-change" style="color: var(--amber-600);">+100% desde actual</div>
+                <ul class="scenario-list">
+                    <li>HPC ramp-up con 6-12 meses de retraso parcial</li>
+                    <li>Bitcoin se mantiene $80,000-$120,000</li>
+                    <li>510+ MW operativos en HPC para 2028</li>
+                    <li>Revenue 2030: ~$900M, EBITDA $450M</li>
+                    <li>Dilucion contenida (shares ~500M)</li>
+                    <li>Multiple EV/EBITDA: 14x &rarr; EV $6.3B</li>
+                    <li>CAGR 5 anos: +15%</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name">Bull Case</span>
+                    <span class="scenario-prob">25%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">$55</div>
+                <div class="scenario-change" style="color: var(--green-600);">+244% desde actual</div>
+                <ul class="scenario-list">
+                    <li>Build-out on-time, contratos adicionales +500 MW/ano</li>
+                    <li>Bitcoin supera $150,000 (reserva estrategica EEUU)</li>
+                    <li>1+ GW operativo en HPC para 2029</li>
+                    <li>Revenue 2030: $1.5B+, EBITDA $800M</li>
+                    <li>Google aumenta participacion</li>
+                    <li>Multiple EV/EBITDA: 18x &rarr; EV $14.4B</li>
+                    <li>CAGR 5 anos: +28%</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin: 32px 0; padding: 32px;">
+            <h3 style="margin-bottom: 16px;">Precio objetivo ponderado por probabilidad</h3>
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <div style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                        <span>Bear ($8) x 25%</span>
+                        <span class="font-mono">$2.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                        <span>Base ($32) x 50%</span>
+                        <span class="font-mono">$16.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+                        <span>Bull ($55) x 25%</span>
+                        <span class="font-mono">$13.75</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; font-weight: 700;">
+                        <span>Precio objetivo ponderado</span>
+                        <span class="font-mono" style="color: var(--green-600); font-size: 1.5rem;">$31.75</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--gray-600); margin-top: 16px;">
+                El precio objetivo ponderado de $31.75 implica un upside del ~99% desde el precio actual de $15.98. Esto esta alineado con la mediana de los analistas ($23) ajustada por el potencial de los nuevos sites de Kentucky y Maryland que aun no estan completamente incorporados en las estimaciones de consenso.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>TeraWulf (WULF) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Final Verdict -->
+    <div class="page page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                <h2 class="verdict-title font-display" style="color: var(--green-500);">72/100 &mdash; Buena</h2>
+                <p class="verdict-text">
+                    TeraWulf es una apuesta asimetrica sobre la infraestructura AI con respaldo de Google. El pivote estrategico es brillante, los contratos estan firmados, y la energia limpia es la ventaja competitiva correcta en el momento correcto. Pero la dilucion, los conflictos de interes y la dependencia de una ejecucion impecable exigen posicion medida, no all-in.
+                </p>
+            </div>
+
+            <div style="max-width: 700px; margin: 0 auto;">
+                <div class="divider" style="border-color: var(--gray-700); background: var(--gray-700);"></div>
+
+                <h3 style="color: var(--white); text-align: center; margin-bottom: 32px;">Veredicto</h3>
+
+                <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 32px; margin-bottom: 32px;">
+                    <p style="color: var(--gray-300); font-size: 1.125rem; text-align: center; margin: 0;">
+                        <strong style="color: var(--green-500);">INTERESANTE para una posicion especulativa medida.</strong><br><br>
+                        TeraWulf tiene los ingredientes para multiplicar su valor: contratos reales con Google, infraestructura energetica escasa, y un mercado AI que necesita MW desesperadamente. Pero la falta de beneficios actuales, la dilucion constante, y la concentracion en un unico cliente significan que la posicion no debe ser grande. Ideal para un 2-4% del portfolio como apuesta asimetrica de alto crecimiento. Monitorizar trimestralmente la ejecucion del build-out HPC y la evolucion del share count.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 48px 0;">
+                    <div style="background: rgba(34, 197, 94, 0.1); border-radius: 12px; padding: 24px;">
+                        <h4 style="color: var(--green-500); margin-bottom: 12px; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Catalistas positivos</h4>
+                        <ul style="list-style: none; font-size: 0.875rem; color: var(--gray-300);">
+                            <li style="padding: 6px 0;">&#8594; Entrega on-time de CB-3/CB-4 en H1 2026</li>
+                            <li style="padding: 6px 0;">&#8594; Nuevos contratos HPC con otros clientes</li>
+                            <li style="padding: 6px 0;">&#8594; Bitcoin supera $120K</li>
+                            <li style="padding: 6px 0;">&#8594; Primer trimestre con EBITDA positivo fuerte</li>
+                            <li style="padding: 6px 0;">&#8594; Google aumenta participacion o backstop</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.1); border-radius: 12px; padding: 24px;">
+                        <h4 style="color: var(--red-500); margin-bottom: 12px; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Triggers de salida</h4>
+                        <ul style="list-style: none; font-size: 0.875rem; color: var(--gray-300);">
+                            <li style="padding: 6px 0;">&#8594; Retrasos >6 meses en build-out HPC</li>
+                            <li style="padding: 6px 0;">&#8594; Google reduce backstop o compromiso</li>
+                            <li style="padding: 6px 0;">&#8594; Nueva emision de acciones >15% del share count</li>
+                            <li style="padding: 6px 0;">&#8594; Insider selling por parte del CEO</li>
+                            <li style="padding: 6px 0;">&#8594; Cambio adverso en regulacion energetica</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--white); text-align: center; margin: 48px 0 32px;">Que me falta por investigar</h3>
+
+                <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 32px;">
+                    <ul style="list-style: none; font-size: 0.9375rem; color: var(--gray-300);">
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">&#9679; &nbsp;Detalle contractual exacto del deal con Fluidstack/Google (estructura de pagos, penalizaciones por retraso, clausulas de salida)</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">&#9679; &nbsp;Coste real de construccion por MW de los data centers HPC vs presupuesto estimado</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">&#9679; &nbsp;Detalles de las related-party transactions: cuanto paga TeraWulf a las entidades del CEO y a que precios de mercado</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">&#9679; &nbsp;Analisis detallado de la dilucion total potencial (convertibles + warrants + opciones + preferentes convertidas)</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">&#9679; &nbsp;Estado de permisos y timeline real de los nuevos sites de Kentucky y Maryland</li>
+                        <li style="padding: 8px 0;">&#9679; &nbsp;Comparativa de unit economics: coste por MW de TeraWulf vs competidores en HPC hosting</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 60px; color: var(--gray-500); font-size: 0.75rem;">
+                    <p style="color: var(--gray-500);">Informe generado el 13 de febrero de 2026 &middot; FMA Analisis de Inversion</p>
+                    <p style="color: var(--gray-600); margin-top: 8px;">Este informe no constituye asesoramiento financiero. Haz tu propia investigacion.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

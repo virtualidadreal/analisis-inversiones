@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare, Inc. (NET) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--amber-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--amber-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--gray-300), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--teal-500); background: var(--blue-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--teal-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--amber-500); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Precaucion
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NYSE: NET</div>
+                <h1 class="cover-title font-display">Cloudflare, Inc.</h1>
+                <p class="cover-subtitle">La autopista del internet moderno. Crecimiento excepcional del 30%, posicionamiento unico en la era de la IA agente, pero cotizando a 30x ventas y aun sin beneficios GAAP. Calidad premium, precio premium.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">62/100 - Aceptable</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$185.07</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">$120-$210</div>
+                    <div class="cover-metric-label">Rango precio justo</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value positive">$2.17B</div>
+                    <div class="cover-metric-label">Revenue FY2025</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$66.4B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Cloudflare en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">Cloudflare es la empresa que hace que internet sea mas rapido, mas seguro y mas fiable. Su red global procesa el 20% del trafico web mundial y se esta convirtiendo en la infraestructura sobre la que los agentes de IA interactuan con internet.</p>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 32px;">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes una empresa que ha construido una red de autopistas privadas por las que circula el 20% del trafico de internet mundial. Cada web, cada app, cada API que pasa por tus autopistas paga peaje. Ahora imagina que aparecen millones de coches autonomos (agentes de IA) que necesitan tus autopistas aun mas que los humanos. Tu negocio se multiplica. Pero hay un problema: aunque tus autopistas generan mucho dinero, sigues regalando parte del peaje a tus empleados en forma de acciones (stock-based compensation), asi que oficialmente "pierdes dinero". Y encima, el mercado ya paga 30 veces tus ingresos anuales por comprar acciones de tu empresa. &iquest;Vale la pena a este precio?
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">$2.17B</div>
+                <div class="stat-label">Revenue FY2025</div>
+                <div class="stat-change positive">+29.8% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">$260.6M</div>
+                <div class="stat-label">Free Cash Flow</div>
+                <div class="stat-change positive">+56% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">120%</div>
+                <div class="stat-label">Net Revenue Retention</div>
+                <div class="stat-change positive">+9pp YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">30x</div>
+                <div class="stat-label">EV / Revenue</div>
+                <div class="stat-change negative">Muy caro</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>Crecimiento revenue acelerando: 34% en Q4 2025</li>
+                    <li>NRR 120%: clientes existentes gastan mas cada ano</li>
+                    <li>4,298 clientes >$100K (+23% YoY)</li>
+                    <li>269 clientes >$1M (+55% YoY)</li>
+                    <li>FCF margin 12% y mejorando</li>
+                    <li>Posicionamiento unico en "Internet Agente" (IA)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="danger">EV/Revenue 30x: valoracion extrema</li>
+                    <li class="danger">GAAP net loss: -$102.3M en FY2025</li>
+                    <li class="warning">SBC ~$980M (45% del revenue)</li>
+                    <li class="warning">Gross margin cayendo: 74.5% vs 77.3% en FY2024</li>
+                    <li class="warning">Deuda convertible: $3.5B ($2B emitidos en 2025)</li>
+                    <li class="warning">Dilucion continua de accionistas</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 62/100</h2>
+
+        <p class="lead">Negocio excepcional con crecimiento acelerado y posicionamiento estrategico en la era de la IA. Los fundamentales mejoran trimestre a trimestre, pero la valoracion descuenta un futuro practicamente perfecto. El gap entre GAAP y non-GAAP por la SBC es la mayor preocupacion real.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 90%;">Secular, creciendo, expandiendose</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">18/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 55%;">FCF+, pero GAAP loss y SBC alta</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">11/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 80%;">Red global + switching costs + escala</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">16/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 70%;">Fundador-CEO, vision, ejecucion</div>
+                </div>
+                <span class="progress-value" style="color: var(--green-600);">14/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 15%;">30x revenue, P/E negativo GAAP</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">3/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--amber-600);">62</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px; border: 2px solid var(--amber-500);">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>La autopista del internet moderno</h2>
+
+        <p class="lead">Cloudflare opera una de las redes mas grandes del mundo, con presencia en mas de 330 ciudades en 120+ paises. Su mision: ayudar a construir un internet mejor. En la practica, hace que las webs sean mas rapidas (CDN), mas seguras (WAF, DDoS protection, Zero Trust) y permite a los desarrolladores ejecutar codigo en el edge (Workers). Ahora, se posiciona como la infraestructura clave del "internet agente", donde los bots de IA generan mas trafico que los humanos.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Areas de negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Security</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 45%;">WAF, DDoS, Bot Mgmt, Zero Trust, SASE</div>
+                </div>
+                <span class="progress-value">~45%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Performance</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 30%;">CDN, DNS, Load Balancing, Argo</div>
+                </div>
+                <span class="progress-value">~30%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Developer Platform</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 15%;">Workers, R2, D1, Pages, KV</div>
+                </div>
+                <span class="progress-value">~15%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">AI &amp; Emerging</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 10%;">AI Gateway, Workers AI, Pay-per-Crawl</div>
+                </div>
+                <span class="progress-value">~10%</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Metricas SaaS clave (FY2025)</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Net Revenue Retention</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">120%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Gross Margin (GAAP)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">74.5%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Non-GAAP Op. Margin</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">14.0%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Rule of 40</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">~44 (30% + 14%)</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Expansion de clientes grandes</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Clientes >$100K/ano</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">4,298 (+23%)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Clientes >$1M/ano</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">269 (+55%)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Revenue de grandes clientes</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">73% del total</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Revenue grandes creciendo</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">+42% YoY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 32px;">
+            <div class="callout-title">Clave del modelo de negocio</div>
+            <p class="callout-text"><strong>Freemium + Land &amp; Expand:</strong> Cloudflare ofrece un plan gratuito que usa el 20% del internet. Los clientes entran gratis y van subiendo de plan a medida que necesitan mas (Pro, Business, Enterprise). Con un NRR del 120%, los clientes existentes gastan un 20% mas cada ano sin necesidad de adquirir nuevos. Los clientes >$1M crecieron un 55% YoY, demostrando que las grandes empresas estan consolidando gasto en Cloudflare.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolucion Financiera
+        </div>
+
+        <h2>Crecimiento acelerado con rentabilidad emergente</h2>
+
+        <p class="lead">Cloudflare ha multiplicado su revenue 5x en 5 anos (de $431M en 2020 a $2,168M en 2025), manteniendo tasas de crecimiento cercanas al 30%. El negocio genera cash flow positivo y es rentable en non-GAAP, pero la pesada carga de stock-based compensation (~$980M, el 45% del revenue) mantiene las cifras GAAP en rojo. La compania esta en una transicion critica: de crecimiento puro a crecimiento + rentabilidad.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$656M</td>
+                        <td>$975M</td>
+                        <td>$1,297M</td>
+                        <td>$1,670M</td>
+                        <td class="cell-success">$2,168M</td>
+                        <td class="cell-success">+230% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>YoY Growth</strong></td>
+                        <td>52%</td>
+                        <td>49%</td>
+                        <td>33%</td>
+                        <td>29%</td>
+                        <td class="cell-success">30%</td>
+                        <td class="cell-success">Reacelerando</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Margin</strong></td>
+                        <td>77.1%</td>
+                        <td>75.3%</td>
+                        <td>76.3%</td>
+                        <td>77.3%</td>
+                        <td class="cell-amber">74.5%</td>
+                        <td class="cell-amber">Presion AI infra</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GAAP Net Income</strong></td>
+                        <td class="cell-danger">-$260M</td>
+                        <td class="cell-danger">-$193M</td>
+                        <td class="cell-danger">-$184M</td>
+                        <td class="cell-danger">-$79M</td>
+                        <td class="cell-danger">-$102M</td>
+                        <td class="cell-amber">SBC lastra</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Non-GAAP Net Income</strong></td>
+                        <td>$14M</td>
+                        <td>$76M</td>
+                        <td>$135M</td>
+                        <td>$269M</td>
+                        <td class="cell-success">$343M</td>
+                        <td class="cell-success">+27% YoY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Free Cash Flow</strong></td>
+                        <td>$16M</td>
+                        <td>$57M</td>
+                        <td>$119M</td>
+                        <td>$167M</td>
+                        <td class="cell-success">$261M</td>
+                        <td class="cell-success">12% margin</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion del revenue: crecimiento sostenido a escala</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value">$656M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value">$975M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2023</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$1.3B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2024</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$1.67B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2025</div>
+                    <div class="timeline-year">Revenue</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$2.17B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">El gran dilema de Cloudflare: en non-GAAP es una maquina bien engrasada (14% op. margin, 12% FCF margin). Pero en GAAP pierde dinero porque regala ~$980M/ano en acciones a empleados. Eso es casi el 45% del revenue. Hasta que la SBC no baje como % del revenue, los beneficios GAAP no llegaran.</p>
+            <p class="quote-author">&mdash; Analisis del gap GAAP vs non-GAAP</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Analisis Competitivo
+        </div>
+
+        <h2>Un mercado fragmentado con posicionamiento unico</h2>
+
+        <p class="lead">Cloudflare compite en multiples mercados simultaneamente: CDN (vs Akamai, Fastly), ciberseguridad/Zero Trust (vs Zscaler, CrowdStrike), y developer platform (vs AWS CloudFront, Vercel). Su ventaja diferencial es la arquitectura: una unica red global que integra todas las funciones en un solo control plane, frente a competidores que operan con stacks fragmentados por adquisiciones.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">CLOUDFLARE</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">$2.17B</div>
+                    <div class="company-stat-label">Revenue FY2025</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">+30%</div>
+                    <div class="company-stat-label">Crecimiento YoY</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$66.4B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">ZSCALER</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$2.76B</div>
+                    <div class="company-stat-label">Revenue TTM (est.)</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">+26%</div>
+                    <div class="company-stat-label">Crecimiento YoY</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$27B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">AKAMAI</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$4.13B</div>
+                    <div class="company-stat-label">Revenue TTM</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">+4%</div>
+                    <div class="company-stat-label">Crecimiento YoY</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$13.6B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Cloudflare</th>
+                        <th>Zscaler</th>
+                        <th>CrowdStrike</th>
+                        <th>Akamai</th>
+                        <th>Fastly</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td class="cell-success">$2.17B</td>
+                        <td>$2.76B</td>
+                        <td>$4.24B</td>
+                        <td>$4.13B</td>
+                        <td>$0.56B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Growth YoY</strong></td>
+                        <td class="cell-success">30%</td>
+                        <td>26%</td>
+                        <td>22%</td>
+                        <td>4%</td>
+                        <td>8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Margin</strong></td>
+                        <td>74.5%</td>
+                        <td class="cell-success">~80%</td>
+                        <td class="cell-success">~76%</td>
+                        <td>~60%</td>
+                        <td>~55%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EV/Revenue</strong></td>
+                        <td class="cell-danger">~30x</td>
+                        <td>~10x</td>
+                        <td class="cell-danger">~25x</td>
+                        <td>~3.3x</td>
+                        <td>~2.5x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Cap</strong></td>
+                        <td>$66.4B</td>
+                        <td>$27B</td>
+                        <td>$106B</td>
+                        <td>$13.6B</td>
+                        <td>$1.4B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NRR</strong></td>
+                        <td class="cell-success">120%</td>
+                        <td class="cell-success">~120%</td>
+                        <td class="cell-success">~115%</td>
+                        <td>n/d</td>
+                        <td>~105%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Nota sobre la valoracion relativa</div>
+            <p class="callout-text">Cloudflare cotiza a 30x revenue, la valoracion mas alta del grupo. CrowdStrike (25x) tiene margenes significativamente mejores. Zscaler (10x) crece casi al mismo ritmo con margenes superiores. La prima de Cloudflare refleja su TAM mas amplio (CDN + seguridad + developer platform + AI), pero tambien incluye altas expectativas de ejecucion.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Criticos
+        </div>
+
+        <h2>De CDN a la Connectivity Cloud</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--gray-300), var(--amber-500), var(--green-500));"></div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--gray-400); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gray-500);">SEP 2019</div>
+                    <div style="font-weight: 600; margin: 4px 0;">IPO en NYSE a $15/accion</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Valoracion inicial de ~$4.4B. Revenue de $287M. Conocido principalmente como CDN y proteccion DDoS.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">2020-2021</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Expansion: Workers, R2, Cloudflare One</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Lanza developer platform (Workers, KV, R2) y suite Zero Trust (Cloudflare One). Empieza la transicion de "CDN" a "Connectivity Cloud".</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">SEP 2023</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Workers AI y AI Gateway</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Lanza inferencia de IA en el edge. GPUs en 100+ ciudades. Posicionamiento como infraestructura de IA distribuida.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">OCT 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Infire Engine: inference sin cold starts</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Breakthrough que permite correr LLMs en edge GPUs sin cold starts. Reduce latencia para apps de IA en tiempo real.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">ENE 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--green-600);">AI agents duplican trafico en un mes</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">CEO Matthew Prince reporta que las solicitudes semanales generadas por agentes de IA se duplicaron en enero 2026. Lanza modelo "Pay-per-Crawl".</div>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">FEB 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Q4 2025: revenue acelera a +34%. Guidance 2026: $2.79B</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Revenue Q4 $614.5M, tercer trimestre consecutivo de aceleracion. Market cap $66.4B. Stock sube 16% post-earnings.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Proximos catalizadores</div>
+            <p class="callout-text"><strong>Q1 2026 (mayo):</strong> Primer trimestre con guidance de $665-667M. <strong>2026:</strong> Expansion de Pay-per-Crawl como nueva linea de revenue. Crecimiento de Zero Trust enterprise. <strong>2027-2028:</strong> Si la tendencia AI-agent se materializa como esperan, Cloudflare podria ser la pieza central del internet post-humano.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Analisis de Moat
+        </div>
+
+        <h2>Red global + efecto de red + switching costs</h2>
+
+        <p class="lead">El moat de Cloudflare es multidimensional. Su red global de 330+ ciudades crea una ventaja de escala que es practicamente imposible de replicar. Cada nuevo cliente hace la red mas inteligente (efecto de red en datos de seguridad). Y una vez que una empresa integra Cloudflare en su stack (DNS, WAF, CDN, Zero Trust, Workers), el coste de cambiar es enorme.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Red Global (330+ ciudades, 120+ paises)</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Procesa ~20% del trafico web mundial. Latencia sub-50ms para el 95% de usuarios de internet.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Efecto de Red en Seguridad</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Cada ataque detectado en un cliente protege a todos. Millones de sitios = inteligencia de amenazas inigualable.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Switching Costs (multi-producto)</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">DNS + WAF + CDN + Zero Trust + Workers = reemplazar Cloudflare requiere migrar 5-6 proveedores distintos.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Freemium Funnel</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Millones de sitios en plan gratuito que se convierten en clientes de pago. Coste de adquisicion bajo.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Developer Mindshare</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Workers es la plataforma serverless preferida por desarrolladores. Pero AWS Lambda y Vercel son competidores fuertes.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Amenaza principal: los hyperscalers</div>
+            <p class="callout-text">AWS, Google Cloud y Azure tienen sus propios CDN, WAF y servicios de seguridad. En enterprise deals grandes, pueden ofrecer descuentos agresivos como parte de contratos mas amplios de cloud. Sin embargo, Cloudflare compite bien porque es cloud-agnostico: funciona delante de AWS, Azure y GCP simultaneamente, algo que los hyperscalers no ofrecen.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Matthew Prince: fundador-CEO con vision a largo plazo</h2>
+
+        <p class="lead">Cloudflare es una empresa liderada por su cofundador y CEO desde 2009. Matthew Prince tiene una participacion significativa del 7.5% (~$4.7B) y una compensacion total relativamente baja ($2.08M) para una empresa de este tamano, lo que sugiere alineacion con accionistas a largo plazo. Su vision de transformar Cloudflare de CDN a "Connectivity Cloud" y ahora a infraestructura del "internet agente" ha sido ambiciosa y hasta ahora exitosa.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Equipo Directivo</h3>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Matthew Prince</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Co-Founder &amp; CEO (desde 2009)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">7.5% ownership (~$4.7B). Vision, producto, cultura. Ex-abogado y emprendedor serial.</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Michelle Zatlyn</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Co-Founder, President &amp; COO</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Operaciones, go-to-market, cultura. Participacion significativa.</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Thomas Seifert</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CFO</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Ex-CFO de Symantec y Lam Research. Experiencia en escalar finanzas de tech companies.</div>
+                </div>
+                <div>
+                    <div style="font-weight: 700;">John Graham-Cumming</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CTO</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Visionario tecnico. Arquitecto de la red global y la plataforma de desarrollo.</div>
+                </div>
+            </div>
+            <div>
+                <div class="card card-success" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor del management</h3>
+                    <ul class="check-list">
+                        <li>Fundadores activos con skin-in-the-game real</li>
+                        <li>Vision ambiciosa y consistente desde IPO</li>
+                        <li>Revenue ha crecido 7x desde IPO (2019)</li>
+                        <li>Ejecucion product: 20+ productos lanzados</li>
+                        <li>Governance: clawback, no hedging</li>
+                    </ul>
+                </div>
+                <div class="card card-danger">
+                    <h3 style="color: var(--red-700); margin-bottom: 16px;">Riesgos de governance</h3>
+                    <ul class="check-list">
+                        <li class="danger">SBC excesiva (~$980M, 45% revenue)</li>
+                        <li class="warning">Dual-class shares: Prince/Zatlyn controlan votos</li>
+                        <li class="warning">GAAP persistentemente negativo</li>
+                        <li class="warning">Deuda convertible de $3.5B emitida agresivamente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Capital Allocation</div>
+            <p class="callout-text"><strong>Caja:</strong> $4.1B en cash y valores. <strong>Deuda:</strong> $3.5B en convertibles (0% coupon, vence 2028-2030). <strong>Sin dividendo ni buybacks:</strong> Todo el capital se reinvierte en crecimiento. <strong>Adquisiciones:</strong> Estrategia de "build vs buy" &mdash; prefieren construir internamente. Pocas adquisiciones y cuando las hacen son pequenas (acqui-hires). Esto es consistente con la filosofia de una sola plataforma integrada.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de senales de alerta</h2>
+
+        <p class="lead">Cloudflare no tiene red flags clasicas de fraude o manipulacion contable, pero tiene riesgos significativos relacionados con la valoracion, la compensacion en acciones y la ausencia de beneficios GAAP. El mayor riesgo es pagar un precio premium por una empresa que aun no ha demostrado que puede generar beneficios reales para sus accionistas.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Revenue vs Cash Flow</h4>
+                    <p>FCF $261M confirma calidad del revenue. Cash flow from operations $603M. Sin divergencia sospechosa.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Valoracion extrema</h4>
+                    <p>30x EV/Revenue, ~187x P/E trailing. Es una de las acciones SaaS mas caras del mercado. Cualquier desaceleracion sera castigada.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>SBC como % del revenue</h4>
+                    <p>~$980M en SBC = 45% del revenue. Dilucion real para accionistas. La empresa es rentable solo si ignoras esta compensacion.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>GAAP persistentemente negativo</h4>
+                    <p>GAAP net loss de -$102.3M en FY2025, empeorando vs -$78.8M en FY2024. No hay path claro a beneficio GAAP a corto plazo.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Gross margin cayendo</h4>
+                    <p>74.5% en FY2025 vs 77.3% en FY2024. La expansion en AI infra y GPU edge esta presionando los margenes brutos.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Guidance cumplida</h4>
+                    <p>Q4 2025 supero guidance en revenue ($614.5M vs $591M esperado). Historial consistente de beat-and-raise.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Deuda convertible agresiva</h4>
+                    <p>$3.5B en convertibles (0% coupon). $2B emitidos en 2025. Si el stock baja, la conversion diluye; si sube, la empresa paga mas.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Founder ownership</h4>
+                    <p>Matthew Prince posee 7.5% (~$4.7B). Skin in the game real. Compensacion total baja ($2.08M).</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Cuentas por cobrar</h4>
+                    <p>Crecimiento de A/R en linea con revenue. NRR de 120% confirma expansiones reales, no channel stuffing.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Equipo directivo estable</h4>
+                    <p>Cofundadores activos desde 2009. CFO Thomas Seifert con experiencia. Sin rotacion sospechosa.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 24px; text-align: center;">
+            <span style="font-size: 0.875rem; color: var(--gray-500);">Red flags detectadas:</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; margin-left: 12px; color: var(--amber-600);">2 serias + 3 advertencias de 10</span>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>Proyeccion FY2030: &iquest;justifica el precio actual?</h2>
+
+        <div class="card" style="margin: 32px 0;">
+            <h3 style="margin-bottom: 16px;">Estimaciones de consenso + proyeccion propia</h3>
+            <div class="table-wrapper" style="margin: 16px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Revenue ($B)</th>
+                            <th>Growth YoY</th>
+                            <th>Non-GAAP Op. Margin</th>
+                            <th>FCF ($M)</th>
+                            <th>Non-GAAP EPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>FY2025 (real)</strong></td>
+                            <td>2.17</td>
+                            <td>30%</td>
+                            <td>14.0%</td>
+                            <td>261</td>
+                            <td>$0.93</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2026E</strong></td>
+                            <td>2.79</td>
+                            <td>29%</td>
+                            <td>14-15%</td>
+                            <td>350-400</td>
+                            <td>$1.11-1.12</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2027E</strong></td>
+                            <td>~3.6</td>
+                            <td>~28%</td>
+                            <td>~16%</td>
+                            <td>~550</td>
+                            <td>~$1.55</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2028E</strong></td>
+                            <td>~4.5</td>
+                            <td>~25%</td>
+                            <td>~18%</td>
+                            <td>~800</td>
+                            <td>~$2.20</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2029E</strong></td>
+                            <td>~5.5</td>
+                            <td>~22%</td>
+                            <td>~20%</td>
+                            <td>~1,100</td>
+                            <td>~$3.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FY2030E</strong></td>
+                            <td class="cell-success">~6.6</td>
+                            <td class="cell-success">~20%</td>
+                            <td class="cell-success">~22%</td>
+                            <td class="cell-success">~1,400</td>
+                            <td class="cell-success">~$3.80</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Analisis de multiplos</h3>
+        <div class="grid-4" style="margin: 24px 0;">
+            <div class="stat-block">
+                <div class="stat-value danger" style="font-size: 2rem;">30x</div>
+                <div class="stat-label">EV/Revenue actual</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">25x</div>
+                <div class="stat-label">EV/Rev CrowdStrike</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">10x</div>
+                <div class="stat-label">EV/Rev Zscaler</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">~47x</div>
+                <div class="stat-label">EV/FCF FY2026E</div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Validacion: DCF Inverso</div>
+            <p class="callout-text">El precio actual ($185) con EV ~$65.8B implica que el mercado espera un FCF de ~$3.3B en 2030 con un multiplo de 20x, o bien un revenue de ~$6.6B con un multiplo de 10x EV/Revenue. La primera opcion requiere que Cloudflare genere un FCF margin del 50% (improbable). La segunda requiere que la compresion de multiplos sea moderada. El escenario mas realista necesita una combinacion: revenue ~$6.5B con FCF ~$1.4B y multiplo ~15x EV/FCF, lo que da un EV de ~$21B &mdash; muy por debajo del actual. Para justificar $185, se necesita crecimiento del 25%+ sostenido durante 5 anos Y expansion de margenes significativa Y mantenimiento del multiplo premium.</p>
+        </div>
+
+        <div style="background: var(--gray-900); color: var(--white); border-radius: 16px; padding: 32px; margin-top: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio justo estimado</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0; color: var(--amber-500);">$120 - $210</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio actual</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0;">$185.07</div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-700); font-size: 0.875rem; color: var(--gray-400);">
+                Precio ponderado (base): $171. CAGR esperado (5y): 2-8%. El precio actual esta en la parte alta del rango justo, con muy poco margen de seguridad.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios de Inversion
+        </div>
+
+        <h2>Tres caminos posibles</h2>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--red-700);">Bear Case</div>
+                    <div class="scenario-prob">25%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">$95</div>
+                <div class="scenario-change" style="color: var(--red-600);">-49% | CAGR: -12.4%</div>
+                <ul class="scenario-list">
+                    <li>Growth desacelera a 18-20% para FY2028</li>
+                    <li>Gross margin baja a 72% por AI infra costs</li>
+                    <li>NRR cae a 110% (competencia de hyperscalers)</li>
+                    <li>Multiplo se comprime a 8x EV/Revenue</li>
+                    <li>SBC no baja como % revenue</li>
+                    <li>FY2030 Revenue: ~$5.5B</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: #92400e;">Base Case</div>
+                    <div class="scenario-prob">50%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">$210</div>
+                <div class="scenario-change" style="color: var(--green-600);">+13% | CAGR: 2.6%</div>
+                <ul class="scenario-list">
+                    <li>Growth se mantiene 22-25% CAGR</li>
+                    <li>Non-GAAP op margin llega a 22%</li>
+                    <li>NRR se estabiliza en 115-120%</li>
+                    <li>AI agent revenue se materializa</li>
+                    <li>Multiplo 12x EV/Revenue (normalizado)</li>
+                    <li>FY2030 Revenue: ~$6.6B</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--green-700);">Bull Case</div>
+                    <div class="scenario-prob">25%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">$380</div>
+                <div class="scenario-change" style="color: var(--green-600);">+105% | CAGR: 15.5%</div>
+                <ul class="scenario-list">
+                    <li>AI agents disparan el trafico 10x</li>
+                    <li>Pay-per-Crawl se convierte en $1B+ linea</li>
+                    <li>Growth se mantiene 28%+ CAGR</li>
+                    <li>GAAP profitable en FY2028</li>
+                    <li>Multiplo 15x EV/Revenue (justified premium)</li>
+                    <li>FY2030 Revenue: ~$8.5B</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 32px;">
+            <h3 style="margin-bottom: 24px;">Precio ponderado por probabilidad</h3>
+            <div class="table-wrapper" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Precio 2030</th>
+                            <th>Probabilidad</th>
+                            <th>Contribucion</th>
+                            <th>CAGR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bear</strong></td>
+                            <td class="cell-danger">$95</td>
+                            <td>25%</td>
+                            <td>$23.75</td>
+                            <td class="cell-danger">-12.4%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base</strong></td>
+                            <td>$210</td>
+                            <td>50%</td>
+                            <td>$105.00</td>
+                            <td class="cell-success">+2.6%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bull</strong></td>
+                            <td class="cell-success">$380</td>
+                            <td>25%</td>
+                            <td>$95.00</td>
+                            <td class="cell-success">+15.5%</td>
+                        </tr>
+                        <tr style="background: var(--gray-50); font-weight: 700;">
+                            <td><strong>Ponderado</strong></td>
+                            <td class="cell-amber">$224</td>
+                            <td>100%</td>
+                            <td>$223.75</td>
+                            <td class="cell-amber">+3.9%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo asimetrico</div>
+            <p class="callout-text">El CAGR ponderado del 3.9% esta significativamente por debajo del retorno historico del mercado (8-10%). El bear case implica una caida del 49%, mientras que el base case solo ofrece +13% en 5 anos. Para que la inversion sea claramente atractiva, el precio deberia estar <strong>por debajo de $120</strong>, donde el margen de seguridad y el risk/reward mejoran sustancialmente. A $185, estas pagando por la perfeccion.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Cloudflare (NET) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+                <div class="verdict-title font-display">PRECAUCION</div>
+                <div class="verdict-text">Negocio excepcional, crecimiento acelerado, posicionamiento unico en la era de la IA. Pero a $185, el mercado ya descuenta un futuro casi perfecto. CAGR ponderado de solo 3.9%. Esperar correccion o comprar solo si crees en el bull case.</div>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 48px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--amber-500);">62/100</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Score Total</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700;">$120-$210</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Rango Precio Justo</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--amber-500);">3.9%</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">CAGR Esperado (5y)</div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Que vigilar (Triggers de reevaluacion)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">GAAP breakeven</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si la SBC baja a <30% del revenue y llegan a GAAP profit, subir score</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">AI agent revenue</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si Pay-per-Crawl y AI Gateway se materializan como lineas significativas</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Precio &lt;$120</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">A este precio, el margen de seguridad seria atractivo incluso con el bear case</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Gross margin recupera 77%+</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Confirmaria que la expansion en AI no erosiona la calidad del negocio base</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Lo que no se (Transparencia)</h3>
+                    <div style="font-size: 0.9375rem; color: var(--gray-400); line-height: 1.8;">
+                        <p style="color: var(--gray-400);">&#10067; Desglose exacto de revenue por producto (Security vs Performance vs Developer Platform vs AI). Cloudflare no reporta segmentos.</p>
+                        <p style="color: var(--gray-400);">&#10067; Cuanto revenue genera realmente Pay-per-Crawl y AI Gateway. Es una narrativa potente pero aun sin cifras concretas.</p>
+                        <p style="color: var(--gray-400);">&#10067; El impacto real de la caida de gross margin: &iquest;es temporal (expansion de GPU fleet) o estructural (AI inference tiene margenes mas bajos)?</p>
+                        <p style="color: var(--gray-400);">&#10067; La tasa de conversion de los $2B en convertibles al 0%: &iquest;cuando y a que precio se convierten? Dilucion potencial no clara.</p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px; font-size: 0.8125rem; color: var(--gray-500);">
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Fuentes:</strong> Cloudflare Investor Relations, Q4 FY2025 Earnings Release (10 Feb 2026), BusinessWire, Yahoo Finance, MacroTrends, StockAnalysis, CompaniesMarketCap, Investing.com, CNBC, The Motley Fool, Benzinga.</p>
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Disclaimer:</strong> Este informe es un analisis educativo, no una recomendacion de compra o venta. Los datos pueden contener inexactitudes. Investiga por tu cuenta antes de tomar decisiones de inversion.</p>
+                    <p style="color: var(--gray-500); margin: 0;"><strong>Fecha:</strong> 13 de Febrero de 2026 | Generado por /analista (FMA)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

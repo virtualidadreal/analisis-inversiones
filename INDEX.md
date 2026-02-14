@@ -8,7 +8,7 @@
 
 | Total Análisis | Promedio Score | Última Actualización |
 |----------------|----------------|---------------------|
-| 27 | 59.8/100 | 2026-02-07 |
+| 33 | 56.5/100 | 2026-02-13 |
 
 ---
 
@@ -16,6 +16,12 @@
 
 | Empresa | Ticker | Sector | Fecha | Score | Rating | Veredicto | Informe |
 |---------|--------|--------|-------|-------|--------|-----------|---------|
+| TeraWulf Inc. | WULF | Crypto (Bitcoin Mining / AI Infra) | 2026-02-13 | 72/100 | ★★★★☆ | BUENA | [Ver informe](./terawulf-informe-2026-02-13.html) |
+| Cloudflare Inc. | NET | Tecnología (Internet Infrastructure) | 2026-02-13 | 62/100 | ★★★☆☆ | ACEPTABLE | [Ver informe](./cloudflare-informe-2026-02-13.html) |
+| Strategy (MicroStrategy) | MSTR | Crypto (Bitcoin Treasury) | 2026-02-13 | 38/100 | ★★☆☆☆ | PRECAUCIÓN | [Ver informe](./strategy-mstr-informe-2026-02-13.html) |
+| American Bitcoin Corp. | ABTC | Crypto (Bitcoin Mining) | 2026-02-13 | 38/100 | ★★☆☆☆ | PRECAUCIÓN | [Ver informe](./american-bitcoin-informe-2026-02-13.html) |
+| MARA Holdings | MARA | Crypto (Bitcoin Mining) | 2026-02-13 | 38/100 | ★★☆☆☆ | PRECAUCIÓN | [Ver informe](./marathon-digital-informe-2026-02-13.html) |
+| Strive Inc. | ASST | Financiero (Asset Mgmt / BTC Treasury) | 2026-02-13 | 28/100 | ★☆☆☆☆ | EVITAR | [Ver informe](./strive-informe-2026-02-13.html) |
 | Siemens Energy AG | ENR | Industrial (Energy Equipment) | 2026-02-07 | 66/100 | ★★★☆☆ | PRECAUCIÓN | [Ver informe](./2026-02-07-siemens-energy-informe.html) |
 | Taiwan Semiconductor | TSM | Tecnología (Semiconductores) | 2026-01-27 | 87/100 | ★★★★★ | EXCELENTE | [Ver informe](./2026-01-27-tsmc-informe.html) |
 | Shopify Inc. | SHOP | Tecnología (E-Commerce) | 2026-01-31 | 68/100 | ★★★☆☆ | ACEPTABLE | [Ver informe](./2026-01-31-shopify-informe.html) |
@@ -87,6 +93,7 @@
 | ImmunityBio Inc. | IBRX | 45/100 | 2026-01-27 | [Ver](./2026-01-27-immunitybio-informe.html) |
 | Opendoor Technologies | OPEN | 42/100 | 2026-01-27 | [Ver](./2026-01-27-opendoor-informe.html) |
 | Lithium Americas Corp. | LAC | 40/100 | 2026-01-27 | [Ver](./2026-01-27-lithium-americas-informe.html) |
+| MARA Holdings | MARA | 38/100 | 2026-02-13 | [Ver](./marathon-digital-informe-2026-02-13.html) |
 
 ### Evitar (0-30)
 | Empresa | Ticker | Score | Fecha | Informe |
@@ -205,6 +212,11 @@
 |---------|--------|-------|-----------|---------|
 | AST SpaceMobile | ASTS | 28/100 | Evitar | [Ver](./2026-01-27-ast-spacemobile-informe.html) |
 
+### Crypto (Bitcoin Mining)
+| Empresa | Ticker | Score | Veredicto | Informe |
+|---------|--------|-------|-----------|---------|
+| MARA Holdings | MARA | 38/100 | Precaución | [Ver](./marathon-digital-informe-2026-02-13.html) |
+
 ### Servicios (Vehicle Auction)
 | Empresa | Ticker | Score | Veredicto | Informe |
 |---------|--------|-------|-----------|---------|
@@ -277,6 +289,11 @@
 | Siemens Energy | Margen 9-11% | Trimestral FY2026 | Pendiente |
 | Siemens Energy | Precio <EUR 120 | Punto de entrada atractivo | Pendiente |
 | Siemens Energy | Siemens AG venta restante | Eliminación overhang | Pendiente |
+| MARA Holdings | Precio BTC | Si BTC supera $100K sostenido | Pendiente |
+| MARA Holdings | Solvencia | Si BTC cae a $50K (NAV negativo) | Pendiente |
+| MARA Holdings | Q4 2025 earnings | Impacto crash BTC - Marzo 2026 | Pendiente |
+| MARA Holdings | AI/HPC revenue | Primer trimestre significativo | Pendiente |
+| MARA Holdings | Convertible notes 2026 | Vencimiento ~$250M | Pendiente |
 
 ---
 
@@ -371,4 +388,4 @@ EXCELENTE:  █░░░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Última actualización: 2026-02-07 (Análisis completado: 27 empresas - incluye Siemens Energy AG)*
+*Última actualización: 2026-02-13 (Análisis completado: 28 empresas - incluye MARA Holdings)*

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Bitcoin Corp (ABTC) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--red-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--red-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--gray-300), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--orange-500); background: var(--amber-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--orange-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--red-600); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Precaucion
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: ABTC</div>
+                <h1 class="cover-title font-display">American Bitcoin Corp</h1>
+                <p class="cover-subtitle">Mineria de Bitcoin respaldada por los Trump con ambiciones de ser el mayor acumulador de BTC. Crecimiento explosivo, pero valoracion fragil, dependencia total de Bitcoin y riesgos estructurales severos.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">38/100 - Precaucion</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$1.20</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">$0.50-2.80</div>
+                    <div class="cover-metric-label">Rango escenarios</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">~$1.1B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">5,843 BTC</div>
+                    <div class="cover-metric-label">Treasury Bitcoin</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>American Bitcoin en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">American Bitcoin es una empresa de mineria de Bitcoin respaldada por Eric Trump, Donald Trump Jr. y Hut 8. Salio a bolsa en septiembre 2025 a traves de una fusion con Gryphon Digital Mining, alcanzo una valoracion de $8.5B en su pico y hoy cotiza un 92% por debajo, a ~$1.1B. Es una apuesta apalancada al precio de Bitcoin con riesgos estructurales importantes.</p>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 32px;">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Montas una fabrica de oro que solo es rentable cuando el oro esta caro. Ademas, guardas todo el oro que produces en lugar de venderlo, con la esperanza de que suba mas. Tus inversores te financian porque confian en que el precio del oro subira. Pero si el precio baja, tu fabrica pierde dinero, tu stock de oro vale menos, y tus inversores huyen. Eso es American Bitcoin: una apuesta apalancada donde el activo subyacente (Bitcoin) determina absolutamente todo, y encima la empresa cotiza a un premium enorme sobre lo que realmente tiene.
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value success">$64.2M</div>
+                <div class="stat-label">Revenue Q3 2025</div>
+                <div class="stat-change positive">+453% YoY</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value success">25 EH/s</div>
+                <div class="stat-label">Hashrate</div>
+                <div class="stat-change positive">+150% YTD</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber">5,843</div>
+                <div class="stat-label">BTC en Treasury</div>
+                <div class="stat-change neutral">Top 20 global</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">-92%</div>
+                <div class="stat-label">Desde maximo</div>
+                <div class="stat-change negative">$14.65 &rarr; $1.20</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>Crecimiento de hashrate explosivo: 10 &rarr; 25 EH/s</li>
+                    <li>Revenue Q3 +453% YoY a $64.2M</li>
+                    <li>Margen bruto ~56% (eficiencia minera)</li>
+                    <li>5,843 BTC en treasury (~$384M a precios actuales)</li>
+                    <li>Respaldo de Hut 8 (infraestructura + operaciones)</li>
+                    <li>Eficiencia de flota: 16.3 J/TH</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="danger">Caida del 92% desde maximos ($14.65 &rarr; $1.20)</li>
+                    <li class="danger">Current ratio 0.1x &mdash; liquidez critica</li>
+                    <li class="danger">Working capital deficit de -$137M</li>
+                    <li class="warning">2,385 BTC pignorados como garantia de compras</li>
+                    <li class="warning">Solo 2 empleados directos + dependencia total de Hut 8</li>
+                    <li class="warning">Riesgo politico: vinculacion Trump</li>
+                    <li class="danger">Lock-up expiry causo sell-off del 60%+</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 38/100</h2>
+
+        <p class="lead">Empresa muy joven (fundada marzo 2025) con un modelo de negocio que es esencialmente una apuesta apalancada al precio de Bitcoin. Crecimiento impresionante en metricas operativas, pero con riesgos financieros severos, gobernanza cuestionable y una valoracion que aun cotiza con premium sobre sus activos reales.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 45%;">Simple pero ciclico y commodity</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">9/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 25%;">Liquidez critica, deuda elevada</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">5/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 20%;">Sin ventaja competitiva durable</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">4/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 50%;">Equipo competente, gobernanza mixta</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">10/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 50%;">Premium sobre NAV, pero corregida</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">10/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--red-600);">38</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px; border: 2px solid var(--red-500);">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Precaucion &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Una apuesta apalancada al precio de Bitcoin</h2>
+
+        <p class="lead">American Bitcoin Corp es una empresa de mineria de Bitcoin con un modelo dual: produce BTC a traves de mineria a gran escala y acumula BTC en su balance como estrategia de tesoreria. Fundada en marzo 2025 como joint venture entre Hut 8 (80%), Eric Trump y Donald Trump Jr. (20%), salio a bolsa en septiembre 2025 via fusion con Gryphon Digital Mining.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Estructura del negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Bitcoin Mining</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 70%;">Produccion de BTC con ASICs (S21+)</div>
+                </div>
+                <span class="progress-value">~70%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">BTC Treasury</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 30%;">Acumulacion + compras estrategicas</div>
+                </div>
+                <span class="progress-value">~30%</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Como gana dinero</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Revenue Q3 2025</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">$64.2M</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Margen bruto</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">~56%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">BTC producidos (sept. 2025)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">187.66 BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Coste mineria vs revenue</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">~50%</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Dependencias criticas</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Hut 8 ownership</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">~80%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Empleados directos</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">Solo 2</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Hosting exclusivo</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">100% Hut 8</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">BTC pignorados</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">2,385 BTC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo fundamental del modelo</div>
+            <p class="callout-text"><strong>Dependencia total de Hut 8:</strong> ABTC tiene solo 2 empleados. Todas las operaciones de mineria, hosting, colocacion y servicios se proporcionan exclusivamente por Hut 8 bajo un acuerdo de exclusividad. La empresa es esencialmente una entidad financiera que depende operativamente al 100% de su controladora. Si Hut 8 decide cambiar terminos o prioridades, ABTC no tiene alternativa.</p>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Bitcoin pignorados</div>
+            <p class="callout-text">De los 3,418 BTC que tenia a Sept. 2025, <strong>2,385 BTC estaban pignorados</strong> como garantia para compras de equipos de mineria (Bitmain). Solo ~1,033 BTC eran libres. Esto significa que el 70% de la treasury no es liquida &mdash; un detalle crucial que muchos inversores ignoran.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolucion Financiera
+        </div>
+
+        <h2>Crecimiento impresionante, cimientos fragiles</h2>
+
+        <p class="lead">American Bitcoin solo tiene un trimestre de resultados como empresa publica (Q3 2025). La empresa fue fundada en marzo 2025 y debuto en Nasdaq en septiembre 2025. Los resultados FY2025 se publicaran el 26 de febrero de 2026. Los datos historicos pre-fusiones corresponden a Gryphon Digital Mining y no son comparables.</p>
+
+        <div class="callout callout-warning" style="margin-bottom: 32px;">
+            <div class="callout-title">Limitacion importante de datos</div>
+            <p class="callout-text">Esta empresa tiene menos de 1 ano de historia como entidad publica. Solo disponemos de Q3 2025 como dato reportado post-merger. Los datos pre-2025 corresponden a Gryphon Digital Mining, una empresa mucho mas pequena que fue absorbida. Los datos FY2025 completos se publicaran el 26/02/2026.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Pre-merger (Gryphon)</th>
+                        <th>Q3 2025 (ABTC)</th>
+                        <th>FY2025E</th>
+                        <th>FY2026E</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue</strong></td>
+                        <td>$11.6M (Q3 2024)</td>
+                        <td class="cell-success">$64.2M</td>
+                        <td>~$76.9M</td>
+                        <td>~$79.6M</td>
+                        <td class="cell-success">+453% YoY en Q3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td class="cell-danger">-$0.6M (Q3 2024)</td>
+                        <td class="cell-success">$3.5M</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td>Primer trimestre rentable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Margen bruto</strong></td>
+                        <td>~49%</td>
+                        <td class="cell-success">~56%</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td class="cell-success">+7pp YoY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBIT Margin</strong></td>
+                        <td class="cell-danger">negativo</td>
+                        <td class="cell-danger">-8.2%</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td class="cell-danger">Aun negativo operativamente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hashrate</strong></td>
+                        <td>~10 EH/s</td>
+                        <td class="cell-success">~25 EH/s</td>
+                        <td>25-30 EH/s</td>
+                        <td>40-50 EH/s?</td>
+                        <td class="cell-success">+150% en 2025</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>n/d</td>
+                        <td>3,418 BTC</td>
+                        <td>~5,843 BTC</td>
+                        <td>n/d</td>
+                        <td>Top 20 Treasury</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Assets</strong></td>
+                        <td>n/d</td>
+                        <td>$1.16B</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Liabilities</strong></td>
+                        <td>n/d</td>
+                        <td class="cell-danger">$587.4M</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td class="cell-danger">~51% de activos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Equity</strong></td>
+                        <td>n/d</td>
+                        <td>$575.5M</td>
+                        <td>n/d</td>
+                        <td>n/d</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion: De Gryphon a American Bitcoin</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2024</div>
+                    <div class="timeline-year">Gryphon</div>
+                    <div class="timeline-value" style="color: var(--gray-500);">~$12M rev</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">Mar 25</div>
+                    <div class="timeline-year">Fundacion</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">ABTC nace</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">Sep 25</div>
+                    <div class="timeline-year">Nasdaq</div>
+                    <div class="timeline-value" style="color: var(--green-600);">IPO $5B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">Sep 25</div>
+                    <div class="timeline-year">Pico</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$8.5B</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">Feb 26</div>
+                    <div class="timeline-year">Hoy</div>
+                    <div class="timeline-value" style="color: var(--red-600);">$1.1B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-danger">
+                <h3 style="color: var(--red-700);">Senales de alarma financiera</h3>
+                <ul class="check-list">
+                    <li class="danger">Current ratio: 0.1x (liquidez critica)</li>
+                    <li class="danger">Working capital: -$137M</li>
+                    <li class="danger">Cash flow operativo: -$39M</li>
+                    <li class="danger">Leverage ratio: 2.0x</li>
+                    <li class="warning">$286M en obligaciones de compra de miners</li>
+                    <li class="warning">Pre-tax profit margin: -115%</li>
+                </ul>
+            </div>
+            <div class="card card-success">
+                <h3 style="color: var(--green-700);">Senales positivas</h3>
+                <ul class="check-list">
+                    <li>Revenue Q3 +453% YoY</li>
+                    <li>Primer trimestre con net income positivo</li>
+                    <li>Margen bruto mejorando (49% &rarr; 56%)</li>
+                    <li>Eficiencia de flota: 16.3 J/TH</li>
+                    <li>Expansion de hashrate: 2.5x QoQ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitors -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Comparativa con Competidores
+        </div>
+
+        <h2>ABTC vs los gigantes del mining</h2>
+
+        <p class="lead">El sector de mineria de Bitcoin esta dominado por empresas mucho mas establecidas que ABTC. Marathon Digital tiene ~50,000 BTC y 57 EH/s, Riot tiene diversificacion en AI/HPC, y CleanSpark lidera en eficiencia energetica. ABTC es la mas joven y con mayor riesgo estructural.</p>
+
+        <div class="company-grid" style="margin: 40px 0;">
+            <div class="company-card">
+                <div class="company-name">Marathon (MARA)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">$3.6B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">57.4 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">49,951</div>
+                    <div class="company-stat-label">BTC Holdings</div>
+                </div>
+                <div class="company-rating">Lider del sector</div>
+            </div>
+
+            <div class="company-card highlight">
+                <div class="company-name">ABTC</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--red-600);">$1.1B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">25 EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">5,843</div>
+                    <div class="company-stat-label">BTC Holdings</div>
+                </div>
+                <div class="company-rating">Mas joven, mas riesgo</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">Riot (RIOT)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--green-600);">$5.5B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">31+ EH/s</div>
+                    <div class="company-stat-label">Hashrate</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">Diversificado</div>
+                    <div class="company-stat-label">Mining + AI/HPC</div>
+                </div>
+                <div class="company-rating">Pivot AI/HPC</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>ABTC</th>
+                        <th>MARA</th>
+                        <th>RIOT</th>
+                        <th>CLSK</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Market Cap</strong></td>
+                        <td>~$1.1B</td>
+                        <td>~$3.6B</td>
+                        <td>~$5.5B</td>
+                        <td>~$4B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hashrate</strong></td>
+                        <td>25 EH/s</td>
+                        <td class="cell-success">57.4 EH/s</td>
+                        <td>31+ EH/s</td>
+                        <td class="cell-success">50 EH/s</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>5,843</td>
+                        <td class="cell-success">~50,000</td>
+                        <td>~18,000</td>
+                        <td>~9,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coste por BTC</strong></td>
+                        <td>~50% rev</td>
+                        <td class="cell-success">$33,735</td>
+                        <td>~$40,000</td>
+                        <td>~$36,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diversificacion AI/HPC</strong></td>
+                        <td class="cell-danger">No</td>
+                        <td>Limitada</td>
+                        <td class="cell-success">Si</td>
+                        <td class="cell-success">Si</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Empleados directos</strong></td>
+                        <td class="cell-danger">2</td>
+                        <td>~200+</td>
+                        <td>~400+</td>
+                        <td>~200+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Historial publico</strong></td>
+                        <td class="cell-danger">6 meses</td>
+                        <td>5+ anos</td>
+                        <td>5+ anos</td>
+                        <td>3+ anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>YTD Performance</strong></td>
+                        <td>+12%</td>
+                        <td class="cell-danger">-28%</td>
+                        <td class="cell-success">+48%</td>
+                        <td class="cell-success">+53%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">La diferencia clave: diversificacion</div>
+            <p class="callout-text">Mientras Riot, CleanSpark y TeraWulf estan pivotando hacia AI/HPC (centros de datos para inteligencia artificial), ABTC es <strong>pure-play mining + treasury</strong>. No tiene plan de diversificacion hacia AI. Esto la hace la mas vulnerable del sector si Bitcoin sufre un bear market prolongado. Los peers con negocio de data center AI tienen un "suelo" de ingresos que ABTC no tiene.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Cronologia
+        </div>
+
+        <h2>La breve pero intensa historia de ABTC</h2>
+
+        <div class="card" style="margin: 32px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--gray-400); min-width: 100px;">Late 2024</span>
+                <div>
+                    <strong>Genesis:</strong> Asher Genoot (CEO Hut 8), Michael Ho (CSO) y Eric Trump se reunen para conceptualizar American Bitcoin como spin-off de mineria de Hut 8.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start; background: var(--green-50);">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--green-600); min-width: 100px;">Mar 2025</span>
+                <div>
+                    <strong>Fundacion:</strong> ABTC se funda como joint venture. Hut 8 aporta la mayoria de sus ASICs de mineria a cambio del 80% del equity. Trump family + American Data Centers reciben el 20%.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--gray-400); min-width: 100px;">Abr 2025</span>
+                <div>
+                    <strong>Private equity round:</strong> $220M liderados por Solari Capital (AJ Scaramucci). Valoracion implica alto interes institucional.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--gray-400); min-width: 100px;">May 2025</span>
+                <div>
+                    <strong>Merger anunciada:</strong> Acuerdo de fusion all-stock con Gryphon Digital Mining (GRYP) para acceso rapido a Nasdaq. Reverse stock split 5:1 para cumplir requisitos de listing.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start; background: var(--green-50);">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--green-600); min-width: 100px;">Sep 3, 2025</span>
+                <div>
+                    <strong>Debut Nasdaq:</strong> ABTC comienza a cotizar. Valoracion de ~$5B el primer dia. Alcanza $8.5B pico el 9 de septiembre ($14.65/accion).
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--gray-400); min-width: 100px;">Q3 2025</span>
+                <div>
+                    <strong>Expansion masiva:</strong> Hashrate de 10 &rarr; 25 EH/s. Revenue de $64.2M. Net income de $3.5M. Se acumulan 3,000+ BTC.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 24px; align-items: flex-start; background: var(--red-50);">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--red-600); min-width: 100px;">Dic 2025</span>
+                <div>
+                    <strong>Lock-up expiry:</strong> Expira el periodo de bloqueo para accionistas pre-merger. Venta masiva: la accion cae 60%+ en semanas. Coincide con caida de Bitcoin desde $126K hacia $65K.
+                </div>
+            </div>
+            <div style="padding: 24px 32px; display: flex; gap: 24px; align-items: flex-start; background: var(--red-50);">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; color: var(--red-600); min-width: 100px;">Feb 2026</span>
+                <div>
+                    <strong>Situacion actual:</strong> ABTC cotiza a $1.20 (-92% desde maximos). Bitcoin en ~$66K. Market cap ~$1.1B. FY2025 earnings el 26 de febrero.
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Contexto macro: Bitcoin en bear market</div>
+            <p class="callout-text">Bitcoin ha caido desde su ATH de $126K en octubre 2025 hasta ~$66K en febrero 2026 (-48%). Esta caida amplifica los problemas de ABTC: (1) sus BTC en treasury valen menos, (2) la mineria es menos rentable, (3) la narrativa de acumulacion pierde fuerza. ABTC tiene un beta estimado de 3.87x respecto a Bitcoin, lo que explica la magnitud de su caida.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Moat y Ventajas Competitivas
+        </div>
+
+        <h2>Moat: Practicamente inexistente</h2>
+
+        <p class="lead">La mineria de Bitcoin es un negocio commodity por naturaleza. Todos los miners producen el mismo producto (BTC), compiten por el mismo recurso (poder computacional en la red) y enfrentan los mismos costes (electricidad, hardware). No hay diferenciacion real de producto, marca, patentes ni switching costs.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10005;</div>
+                <div class="flag-content">
+                    <h4>Sin diferenciacion de producto</h4>
+                    <p>Todos los miners producen BTC identico. No hay propiedad intelectual, patentes ni producto diferenciado. Es puro commodity.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10005;</div>
+                <div class="flag-content">
+                    <h4>Sin switching costs</h4>
+                    <p>Los inversores que quieren exposicion a BTC pueden comprar directamente, via ETFs, o cualquier otro miner. No hay lealtad al "productor".</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10005;</div>
+                <div class="flag-content">
+                    <h4>Sin escala real propia</h4>
+                    <p>ABTC no posee infraestructura. Toda la operacion depende de Hut 8. La escala es alquilada, no propia.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Network effects: nulos</h4>
+                    <p>La mineria de Bitcoin no tiene efectos de red. Mas miners en la red = mayor dificultad = menor rentabilidad individual.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">!</div>
+                <div class="flag-content">
+                    <h4>Eficiencia de flota: temporal</h4>
+                    <p>16.3 J/TH es bueno hoy, pero los nuevos ASICs deprecian esta ventaja rapidamente. Es una ventaja perecedera que requiere CAPEX constante.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Brand: nombre Trump</h4>
+                    <p>La asociacion con la familia Trump atrae capital especulativo y atencion mediatica. Es un arma de doble filo: atrae pero tambien genera controversia y riesgo politico.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-dark" style="margin-top: 32px;">
+            <h3 style="color: var(--white); margin-bottom: 16px;">Veredicto sobre el moat</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-300); margin: 0;">
+                <strong>Score: 4/20.</strong> La mineria de Bitcoin es un negocio sin moat estructural. ABTC no posee su propia infraestructura (depende de Hut 8), no tiene tecnologia propietaria, no genera efectos de red, y cualquier eficiencia operativa es temporal. La unica "ventaja" es el acceso a capital via la marca Trump, que es una espada de doble filo. Comparado con miners que estan pivotando a AI/HPC (donde SI pueden construir moats via contratos a largo plazo con hyperscalers), ABTC queda especialmente expuesta.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Equipo Directivo
+        </div>
+
+        <h2>Management competente, gobernanza cuestionable</h2>
+
+        <p class="lead">El equipo ejecutivo combina experiencia operativa real (via Hut 8) con la influencia politica y mediatica de la familia Trump. El riesgo no esta en la competencia tecnica sino en la estructura de gobernanza, los conflictos de interes con Hut 8, y la concentracion de poder.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Equipo clave</h3>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Asher Genoot</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Executive Chairman</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 8px;">CEO de Hut 8 simultaneamente. Emprendedor serial (Ivy Crest, Curio en Shanghai). USC Business Administration. Arquitecto de la estrategia ABTC.</div>
+                </div>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Michael Ho</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CEO & Director</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 8px;">Chief Strategy Officer de Hut 8. Lidero la conceptualizacion de ABTC junto con Genoot y Eric Trump.</div>
+                </div>
+                <div>
+                    <div style="font-weight: 700;">Matthew Prusak</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">President & Interim CFO</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 8px;">Rol dual como presidente y director financiero interino. La ausencia de un CFO permanente es una senal de alarma.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Aspectos de gobernanza</h3>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--red-500); font-weight: 700;">&#10005;</span>
+                        <span style="font-weight: 600;">Dual role CEO/Chairman</span>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 4px;">Genoot es CEO de Hut 8 Y Chairman de ABTC. Conflicto de interes inherente.</div>
+                </div>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--red-500); font-weight: 700;">&#10005;</span>
+                        <span style="font-weight: 600;">Sin CFO permanente</span>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 4px;">El CFO es interino y comparte el rol de presidente. Para una empresa de $1B+, esto es inaceptable.</div>
+                </div>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--amber-500); font-weight: 700;">!</span>
+                        <span style="font-weight: 600;">Compensacion vinculada a BTC</span>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 4px;">Bonuses ligados al crecimiento de treasury BTC y rendimiento de la accion. Incentiva acumulacion agresiva.</div>
+                </div>
+                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--red-500); font-weight: 700;">&#10005;</span>
+                        <span style="font-weight: 600;">Hut 8 controla todo</span>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 4px;">Con 80% del equity, Hut 8 tiene control total. Los minoritarios tienen poder de voto irrelevante.</div>
+                </div>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--amber-500); font-weight: 700;">!</span>
+                        <span style="font-weight: 600;">Riesgo politico Trump</span>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 4px;">La vinculacion Trump atrae y repele. Cambios politicos pueden afectar sentimiento y regulacion.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">Conflicto de interes estructural</div>
+            <p class="callout-text">Los tres ejecutivos clave de ABTC (Genoot, Ho, Prusak) trabajan simultaneamente para Hut 8. ABTC paga a Hut 8 por <strong>todos</strong> sus servicios operativos bajo un acuerdo de exclusividad. Cuando el CEO de tu proveedor ES tu chairman, los precios de transferencia estan abiertos a abuso. No hay garantia de que los terminos sean favorables para los accionistas minoritarios de ABTC.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags + Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags y Escenarios
+        </div>
+
+        <h2>Riesgos: Muchos y severos</h2>
+
+        <div class="flag-list" style="margin: 32px 0;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">1</div>
+                <div class="flag-content">
+                    <h4>Liquidez critica</h4>
+                    <p>Current ratio de 0.1x y working capital de -$137M. Si Bitcoin cae otro 30%, la empresa puede necesitar capital urgente o vender BTC a precios de derribo.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">2</div>
+                <div class="flag-content">
+                    <h4>BTC pignorados (70%)</h4>
+                    <p>2,385 de 3,418 BTC pignorados para compras Bitmain. La "treasury" real es mucho menor que la reportada. Si BTC cae, podrian tener que aportar mas garantias.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">3</div>
+                <div class="flag-content">
+                    <h4>Dependencia total de Hut 8</h4>
+                    <p>Solo 2 empleados. Toda la operacion es de Hut 8. Si Hut 8 tiene problemas o decide cambiar prioridades, ABTC queda indefensa.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">4</div>
+                <div class="flag-content">
+                    <h4>Lock-up venta masiva</h4>
+                    <p>La expiracion del lock-up en diciembre 2025 causo un sell-off del 60%+. Puede haber mas presion vendedora de insiders pendiente.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">5</div>
+                <div class="flag-content">
+                    <h4>Sin diversificacion AI/HPC</h4>
+                    <p>Mientras los peers pivotan a AI, ABTC es pure-play mining. Sin "suelo" de ingresos si Bitcoin sufre bear market prolongado.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">6</div>
+                <div class="flag-content">
+                    <h4>Riesgo politico elevado</h4>
+                    <p>La marca Trump polariza. Cambios en regulacion cripto, investigaciones, o cambios de gobierno pueden impactar directamente.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">7</div>
+                <div class="flag-content">
+                    <h4>Dilucion futura</h4>
+                    <p>~908M acciones outstanding con ejecutivos controlando 7.6%. Expansion a 50 EH/s requerira capital adicional = mas dilucion probable.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">8</div>
+                <div class="flag-content">
+                    <h4>Halving impact</h4>
+                    <p>El proximo halving de Bitcoin (abril 2028) reducira a la mitad los rewards de mineria. ABTC necesitara el doble de eficiencia o que BTC duplique su precio.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 48px;">Escenarios de valoracion</h3>
+        <p style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 24px;">Basados en el precio de Bitcoin, expansion de hashrate y NAV premium. Market cap actual: ~$1.1B. Precio actual: $1.20.</p>
+
+        <div class="scenario-grid">
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: var(--green-700);">Bull Case</span>
+                    <span class="scenario-prob">20%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--green-700);">$2.80</div>
+                <div class="scenario-change" style="color: var(--green-600);">+133% vs actual</div>
+                <ul class="scenario-list">
+                    <li>BTC recupera $100K+ en 2026</li>
+                    <li>Expansion a 50 EH/s exitosa</li>
+                    <li>Treasury crece a 10,000+ BTC</li>
+                    <li>FY2025 earnings superan expectativas</li>
+                    <li>NAV premium de 2-3x justificado</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: #92400e;">Base Case</span>
+                    <span class="scenario-prob">45%</span>
+                </div>
+                <div class="scenario-price" style="color: #92400e;">$1.00</div>
+                <div class="scenario-change" style="color: var(--amber-600);">-17% vs actual</div>
+                <ul class="scenario-list">
+                    <li>BTC se estabiliza $60-80K</li>
+                    <li>Hashrate crece gradualmente a 35 EH/s</li>
+                    <li>Treasury se mantiene en ~6,000 BTC</li>
+                    <li>Revenue FY2026 ~$80M</li>
+                    <li>NAV premium comprime a 1.5x</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <span class="scenario-name" style="color: var(--red-700);">Bear Case</span>
+                    <span class="scenario-prob">35%</span>
+                </div>
+                <div class="scenario-price" style="color: var(--red-700);">$0.30</div>
+                <div class="scenario-change" style="color: var(--red-600);">-75% vs actual</div>
+                <ul class="scenario-list">
+                    <li>BTC cae a $40-50K (bear market)</li>
+                    <li>Obligados a vender BTC pignorados</li>
+                    <li>Mineria opera a perdida</li>
+                    <li>Necesidad de capital urgente (dilucion)</li>
+                    <li>Riesgo de Hut 8 renegociando terminos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Asimetria desfavorable</div>
+            <p class="callout-text">El bull case ofrece +133% pero requiere que Bitcoin suba 50%+ Y que ABTC ejecute perfectamente su expansion. El bear case (-75%) solo necesita que Bitcoin siga cayendo como lo ha hecho los ultimos 4 meses. La probabilidad ponderada es negativa: (20% x $2.80) + (45% x $1.00) + (35% x $0.30) = <strong>$1.06</strong>, ligeramente por debajo del precio actual de $1.20.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation Deep Dive -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion
+        </div>
+
+        <h2>Cuanto vale realmente ABTC?</h2>
+
+        <p class="lead">Valorar una empresa de mineria de Bitcoin que acumula BTC en su balance es un ejercicio atipico. No se puede aplicar un DCF clasico porque el "producto" (BTC) fluctua dramaticamente. El enfoque correcto es un analisis de NAV (Net Asset Value) combinado con un analisis de coste de produccion.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">NAV Breakdown (Feb 2026)</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>5,843 BTC &times; $66,000</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">$385.6M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>Mining equipment (est.)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">~$400M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>Otros activos</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">~$374M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span style="color: var(--red-600);">(-) Liabilities</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--red-600);">-$587M</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-top: 8px;">
+                    <span style="font-weight: 700; font-size: 1.125rem;">NAV estimado</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.25rem;">~$573M</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Multiplos actuales</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>Market Cap / NAV</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--amber-600);">~1.9x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>Market Cap / BTC Value</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--amber-600);">~2.9x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>P/S (TTM ~$77M est.)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--amber-600);">~14x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <span>Historico NAV premium (pico)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--red-600);">3.9x</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Shares Outstanding</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">~908M</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-amber">
+            <h3 style="color: var(--amber-600); margin-bottom: 16px;">La pregunta clave de valoracion</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Si quieres exposicion a Bitcoin, &iquest;por que pagar 2.9x el valor de los BTC que tiene ABTC cuando puedes comprar un ETF de Bitcoin a ~1x? El "premium" se justifica solo si crees que: (1) ABTC minara BTC a un coste muy inferior al mercado de forma sostenida, (2) la treasury crecera exponencialmente, y (3) el equipo asignara capital de forma excepcional. Con los problemas de liquidez, gobernanza y dependencia de Hut 8, ese premium es dificil de defender.
+            </p>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">Comparacion con alternativas directas</div>
+            <p class="callout-text">Un inversor que quiera exposicion apalancada a Bitcoin tiene mejores opciones: <strong>MARA</strong> tiene 50,000 BTC con una estructura mas solida; <strong>Strategy (MSTR)</strong> tiene 470,000+ BTC con el track record mas largo; los <strong>ETFs de Bitcoin</strong> ofrecen 1x puro sin riesgo operacional. ABTC ofrece beta alta (3.87x) pero con riesgos desproporcionados.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Bitcoin Context -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Contexto: El mercado de Bitcoin
+        </div>
+
+        <h2>El driver que lo determina todo</h2>
+
+        <p class="lead">ABTC no es una empresa de tecnologia, industriales o servicios. Es fundamentalmente un vehiculo de exposicion apalancada a Bitcoin. Para evaluar ABTC, hay que entender primero donde esta Bitcoin.</p>
+
+        <div class="grid-4" style="margin: 40px 0;">
+            <div class="stat-block">
+                <div class="stat-value">$66K</div>
+                <div class="stat-label">BTC precio actual</div>
+                <div class="stat-change negative">-48% desde ATH</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">$126K</div>
+                <div class="stat-label">ATH (Oct 2025)</div>
+                <div class="stat-change negative">Hace 4 meses</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber">Apr 2028</div>
+                <div class="stat-label">Proximo Halving</div>
+                <div class="stat-change neutral">-50% reward</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value">3.87x</div>
+                <div class="stat-label">Beta ABTC vs BTC</div>
+                <div class="stat-change negative">Altamente apalancado</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin: 32px 0;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">Factores alcistas para BTC</h3>
+                <ul class="check-list">
+                    <li>ETFs institucionales (BlackRock, Fidelity)</li>
+                    <li>Adopcion corporativa creciente</li>
+                    <li>Halving 2028 reduce oferta</li>
+                    <li>Posible reserva estrategica EE.UU.</li>
+                    <li>Inflacion global como catalizador</li>
+                </ul>
+            </div>
+            <div class="card card-danger">
+                <h3 style="color: var(--red-700); margin-bottom: 16px;">Factores bajistas para BTC</h3>
+                <ul class="check-list">
+                    <li class="danger">Caida del 48% en 4 meses</li>
+                    <li class="danger">Outflows de ETFs institucionales</li>
+                    <li class="warning">Tech sell-off global arrastra cripto</li>
+                    <li class="warning">Regulacion creciente (EU MiCA, etc.)</li>
+                    <li class="warning">Dificultad de red en maximos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-dark">
+            <h3 style="color: var(--white); margin-bottom: 16px;">Sensibilidad ABTC al precio de Bitcoin</h3>
+            <p style="color: var(--gray-300); margin-bottom: 24px;">Con un beta de 3.87x, cada movimiento del 10% en Bitcoin genera un movimiento de ~15-20% en ABTC. Esto funciona en ambas direcciones.</p>
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; text-align: center;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-bottom: 4px;">BTC $40K</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; color: var(--red-500);">$0.30</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-bottom: 4px;">BTC $55K</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; color: var(--red-500);">$0.70</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 8px;">
+                    <div style="font-size: 0.75rem; color: var(--amber-500); margin-bottom: 4px;">BTC $66K (hoy)</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; color: var(--amber-500);">$1.20</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-bottom: 4px;">BTC $85K</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; color: var(--green-500);">$1.80</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-bottom: 4px;">BTC $100K</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; color: var(--green-500);">$2.80</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>American Bitcoin (ABTC) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">
+                    <span class="filled" style="color: var(--amber-500);">&#9733;</span><span class="filled" style="color: var(--amber-500);">&#9733;</span><span style="color: var(--gray-600);">&#9733;</span><span style="color: var(--gray-600);">&#9733;</span><span style="color: var(--gray-600);">&#9733;</span>
+                </div>
+                <h2 class="verdict-title font-display" style="color: var(--red-500);">38/100 &mdash; Precaucion</h2>
+                <p class="verdict-text" style="max-width: 700px;">
+                    American Bitcoin es una apuesta altamente especulativa al precio de Bitcoin con riesgos estructurales que la hacen inferior a alternativas mas directas y seguras. La dependencia total de Hut 8, la liquidez critica, los BTC pignorados, la gobernanza cuestionable y la ausencia de diversificacion la convierten en una inversion de muy alto riesgo con asimetria desfavorable.
+                </p>
+
+                <div style="margin: 60px auto; max-width: 700px; text-align: left;">
+                    <h3 style="color: var(--white); margin-bottom: 24px;">Veredicto final</h3>
+
+                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px; border-left: 4px solid var(--red-500);">
+                        <p style="color: var(--gray-300); margin: 0; font-size: 1rem;">
+                            <strong style="color: var(--white);">NO recomendada como inversion.</strong> Si quieres exposicion a Bitcoin, compra un ETF de Bitcoin (iShares IBIT, Fidelity FBTC). Si quieres beta apalancada a BTC, Marathon (MARA) o Strategy (MSTR) ofrecen mejor estructura, mas historial y menos riesgos idiosincraticos. ABTC solo tiene sentido como apuesta especulativa de muy corto plazo si crees en un rebote fuerte de Bitcoin, y aun asi el riesgo-reward no compensa.
+                        </p>
+                    </div>
+
+                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px;">
+                        <p style="color: var(--gray-300); margin: 0; font-size: 1rem;">
+                            <strong style="color: var(--white);">Catalogo de riesgos:</strong> Liquidez critica (current ratio 0.1x), 70% de BTC pignorados, dependencia total de Hut 8, solo 2 empleados, gobernanza con conflictos de interes, sin diversificacion AI/HPC, riesgo politico Trump, beta extrema (3.87x).
+                        </p>
+                    </div>
+
+                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                        <p style="color: var(--gray-300); margin: 0; font-size: 1rem;">
+                            <strong style="color: var(--white);">Lo que me falta:</strong> FY2025 completos (se publican 26/02/2026), detalle de terminos Hut 8 exclusivity agreement, coste exacto por BTC minado en dolares, planes concretos de expansion post-25 EH/s, potencial de diversificacion hacia AI/HPC, y la posicion real de insider selling post lock-up.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--gray-700);">
+                    <p style="font-size: 0.75rem; color: var(--gray-500); max-width: 600px; margin: 0 auto;">
+                        Disclaimer: Este analisis es educativo e informativo. No constituye recomendacion de compra o venta. Los datos se basan en informacion publica disponible a febrero 2026. American Bitcoin publicara sus resultados FY2025 el 26 de febrero de 2026, lo que podria alterar significativamente este analisis. Hacer siempre due diligence propia.
+                    </p>
+                    <p style="font-size: 0.75rem; color: var(--gray-600); margin-top: 16px;">
+                        FMA &middot; Analista Financiero &middot; Febrero 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

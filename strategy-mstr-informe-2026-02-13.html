@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Inc (MSTR) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--red-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--red-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--gray-400), var(--amber-500), var(--orange-500), var(--red-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--orange-500); background: var(--amber-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--orange-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--red-500); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Alto Riesgo
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: MSTR</div>
+                <h1 class="cover-title font-display">Strategy Inc</h1>
+                <p class="cover-subtitle">El mayor holder corporativo de Bitcoin del mundo. Ya no es una empresa de software: es un vehiculo apalancado de exposicion a Bitcoin con $54B invertidos, 714,644 BTC y una dependencia total del precio de la criptomoneda.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">38/100 - Especulativo</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$136.70</div>
+                    <div class="cover-metric-label">Precio actual</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">714,644</div>
+                    <div class="cover-metric-label">BTC en tesoreria</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">~1.05x</div>
+                    <div class="cover-metric-label">mNAV (vs BTC NAV)</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value">~$36B</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Strategy en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">Strategy (antes MicroStrategy) es una empresa que paso de vender software de Business Intelligence a convertirse en el mayor holder corporativo de Bitcoin del mundo, con 714,644 BTC adquiridos por $54.4 mil millones. Bajo el liderazgo de Michael Saylor, emite deuda y acciones sin parar para comprar mas Bitcoin. Tu inversion en MSTR es, en esencia, una apuesta apalancada al precio de Bitcoin.</p>
+        </div>
+
+        <div class="card card-danger" style="margin-bottom: 32px;">
+            <h3 style="color: var(--red-600); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Tienes un restaurante que funciona razonablemente bien. Un dia decides que lo importante no es la comida, sino acumular todo el oro que puedas. Dejas de invertir en el restaurante, pides prestamos gigantes, y cada centimo lo usas para comprar lingotes de oro. El restaurante sigue abierto por inercia, pero tu futuro depende al 100% del precio del oro. Si sube, eres un genio. Si baja, estas atrapado con deudas y un restaurante abandonado. Eso es Strategy: una empresa que ha transformado su balance en un almacen de Bitcoin financiado con deuda y dilucion.
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value" style="font-size: 2rem;">$477M</div>
+                <div class="stat-label">Revenue FY2025</div>
+                <div class="stat-change neutral">Software (irrelevante)</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger" style="font-size: 2rem;">-$4.2B</div>
+                <div class="stat-label">Net Loss FY2025</div>
+                <div class="stat-change negative">Fair value BTC</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber" style="font-size: 2rem;">$54.4B</div>
+                <div class="stat-label">Coste total BTC</div>
+                <div class="stat-change negative">Avg $76,056/BTC</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger" style="font-size: 2rem;">$8.2B</div>
+                <div class="stat-label">Deuda Convertible</div>
+                <div class="stat-change negative">+$7.5B preferred</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>714,644 BTC = 3.4% de todo el BTC que existira</li>
+                    <li>First mover en Bitcoin corporate treasury</li>
+                    <li>BTC Yield del 35.8% en 2025</li>
+                    <li>Deuda convertible a 0% interes mayoritariamente</li>
+                    <li>Inclusion en indices (Nasdaq-100)</li>
+                    <li>Michael Saylor: visionario con skin in the game</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="danger">Dependencia total del precio de BTC</li>
+                    <li class="danger">Dilucion masiva: de 76M a 310M+ acciones</li>
+                    <li class="danger">$779M anuales en intereses y dividendos preferred</li>
+                    <li class="danger">Holdings BTC underwater a precios actuales</li>
+                    <li class="warning">Software en declive, irrelevante para la tesis</li>
+                    <li class="warning">Riesgo regulatorio: clasificacion como investment company</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 38/100</h2>
+
+        <p class="lead">Strategy no es una empresa en el sentido tradicional. Es un vehiculo apalancado de exposicion a Bitcoin. Evaluarla requiere analizar tanto su capacidad de acumular BTC como los riesgos estructurales de su modelo de financiacion. La puntuacion refleja un riesgo extremadamente alto con recompensa potencial, pero no para inversores con aversion al riesgo.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 20%;">Software irrelevante, BTC treasury</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">4/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 25%;">Perdidas netas, deuda masiva</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">5/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 55%;">First mover BTC treasury, marca</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">11/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 50%;">Saylor: visionario pero riesgo de persona clave</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">10/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 40%;">mNAV ~1.05x, depende 100% de BTC</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">8/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--red-600);">38</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px; border: 2px solid var(--red-500);">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar / Especulativo &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Dos negocios, una apuesta</h2>
+
+        <p class="lead">Strategy tiene dos caras: un negocio de software de Business Intelligence en declive lento que genera ~$477M al ano, y un "negocio" de tesoreria Bitcoin que domina completamente la valoracion. El software es el chasis; Bitcoin es el motor. Sin Bitcoin, MSTR vale una fraccion de su precio actual.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Composicion del valor (Feb 2026)</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">Bitcoin Treasury</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 95%;">714,644 BTC (~$47B a precio actual)</div>
+                </div>
+                <span class="progress-value">~95%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Software (BI)</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar primary" style="width: 5%;">$477M revenue, decreciendo</div>
+                </div>
+                <span class="progress-value">~5%</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">Bitcoin Treasury</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">BTC en tesoreria</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">714,644 BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Coste total</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">$54.4B</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Precio medio compra</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">$76,056/BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Valor actual (~$66K)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">~$47.2B</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">P&L no realizado</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">-$7.2B</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">Software BI (legacy)</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Revenue FY2025</span>
+                        <span style="font-family: 'JetBrains Mono', monospace;">$477M</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Subscription Q4</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">$51.8M (+62%)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Crecimiento total</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">+2.7% YoY</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Relevancia para tesis</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--gray-400);">Minima</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Clave del modelo de negocio</div>
+            <p class="callout-text"><strong>El "flywheel" de Saylor:</strong> Emitir acciones/deuda &rarr; comprar Bitcoin &rarr; subida de BTC sube market cap &rarr; capacidad de emitir mas &rarr; comprar mas Bitcoin. Funciona mientras BTC sube. Si BTC baja, el ciclo se invierte: market cap cae &rarr; capacidad de emision se reduce &rarr; deuda pesa mas &rarr; mas presion vendedora. Es un ciclo reflexivo que amplifica tanto las subidas como las bajadas.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Evolution -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Evolucion Financiera
+        </div>
+
+        <h2>De empresa de software a vehiculo Bitcoin</h2>
+
+        <p class="lead">Los financieros de Strategy son peculiares: los ingresos del software son casi irrelevantes. Lo que importa es la acumulacion de Bitcoin, la estructura de capital, y la capacidad de seguir financiandose. Desde 2020, la empresa ha multiplicado sus acciones por 4x y su deuda por 10x para comprar Bitcoin.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>FY2021</th>
+                        <th>FY2022</th>
+                        <th>FY2023</th>
+                        <th>FY2024</th>
+                        <th>FY2025</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenue (software)</strong></td>
+                        <td>$511M</td>
+                        <td>$499M</td>
+                        <td>$496M</td>
+                        <td>$467M</td>
+                        <td>$477M</td>
+                        <td class="cell-danger">Estancado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>~124,391</td>
+                        <td>~132,500</td>
+                        <td>~189,150</td>
+                        <td>~446,400</td>
+                        <td class="cell-success">714,644</td>
+                        <td class="cell-success">+475% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coste acumulado BTC</strong></td>
+                        <td>$3.8B</td>
+                        <td>$4.0B</td>
+                        <td>$5.9B</td>
+                        <td>$27.9B</td>
+                        <td class="cell-danger">$54.4B</td>
+                        <td class="cell-danger">Acelerando</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acciones (diluted)</strong></td>
+                        <td>~115M</td>
+                        <td>~115M</td>
+                        <td>~167M</td>
+                        <td>~244M</td>
+                        <td class="cell-danger">~310M+</td>
+                        <td class="cell-danger">+170% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deuda convertible</strong></td>
+                        <td>$2.2B</td>
+                        <td>$2.4B</td>
+                        <td>$2.2B</td>
+                        <td>$7.3B</td>
+                        <td class="cell-danger">$8.2B</td>
+                        <td class="cell-danger">+273% en 4 anos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Preferred stock</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="cell-danger">$7.5B+</td>
+                        <td class="cell-danger">STRK, STRF, STRC, STRE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion del precio de BTC vs coste medio de adquisicion</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2020</div>
+                    <div class="timeline-year">Inicio</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$11.6K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2021</div>
+                    <div class="timeline-year">ATH</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$69K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">2022</div>
+                    <div class="timeline-year">Crash</div>
+                    <div class="timeline-value" style="color: var(--red-600);">$16K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2024</div>
+                    <div class="timeline-year">Nuevo ATH</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$108K</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot negative">2026</div>
+                    <div class="timeline-year">Hoy</div>
+                    <div class="timeline-value" style="color: var(--red-600);">$66K</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">Con un coste medio de $76,056/BTC y un precio actual de ~$66,000, Strategy esta oficialmente underwater en sus holdings. La posicion tiene una perdida no realizada de ~$7.2 mil millones. Si BTC no se recupera, la estructura de capital se vuelve insostenible.</p>
+            <p class="quote-author">&mdash; Analisis de la posicion actual</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Analisis Competitivo
+        </div>
+
+        <h2>El ecosistema de Bitcoin Treasury Companies</h2>
+
+        <p class="lead">Strategy creo la categoria de "Bitcoin Treasury Company", pero ya no esta sola. Mineras como Marathon y Riot acumulan BTC, y los ETFs de Bitcoin ofrecen exposicion directa sin el riesgo de dilucion. La pregunta clave es: &iquest;por que pagar un premium por MSTR cuando puedes comprar BTC directamente?</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">STRATEGY (MSTR)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--orange-600);">714,644</div>
+                    <div class="company-stat-label">BTC Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--orange-600);">~1.05x</div>
+                    <div class="company-stat-label">mNAV</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$36B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">MARATHON (MARA)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~53,250</div>
+                    <div class="company-stat-label">BTC Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">Hybrid</div>
+                    <div class="company-stat-label">Mining + Treasury</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$4.5B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">RIOT PLATFORMS</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~18,692</div>
+                    <div class="company-stat-label">BTC Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">Mining</div>
+                    <div class="company-stat-label">Mining-first</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$3B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Strategy</th>
+                        <th>Marathon</th>
+                        <th>Bitcoin ETF (IBIT)</th>
+                        <th>BTC Directo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Exposicion a BTC</strong></td>
+                        <td class="cell-success">Apalancada</td>
+                        <td>Mining + Hold</td>
+                        <td>1:1</td>
+                        <td>1:1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Riesgo de dilucion</strong></td>
+                        <td class="cell-danger">Extremo</td>
+                        <td class="cell-amber">Alto</td>
+                        <td class="cell-success">Ninguno</td>
+                        <td class="cell-success">Ninguno</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Riesgo de contraparte</strong></td>
+                        <td class="cell-danger">Alto (deuda)</td>
+                        <td class="cell-amber">Medio</td>
+                        <td class="cell-amber">Custodio</td>
+                        <td class="cell-success">Ninguno</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Premium sobre BTC</strong></td>
+                        <td class="cell-amber">~5% (mNAV 1.05x)</td>
+                        <td class="cell-amber">Variable</td>
+                        <td>~0.25% fee</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apalancamiento</strong></td>
+                        <td class="cell-danger">~1.4x</td>
+                        <td>Moderado</td>
+                        <td>1x</td>
+                        <td>1x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">La amenaza existencial: ETFs de Bitcoin</div>
+            <p class="callout-text">Antes de los ETFs, MSTR era la unica forma de tener exposicion a Bitcoin en una cuenta de brokerage. Ahora los ETFs como IBIT (BlackRock) ofrecen lo mismo sin dilucion, sin deuda, y con fees de 0.25%. El premium historico de MSTR (que llego a 3x NAV) se ha comprimido a ~1.05x. Sin premium, MSTR pierde su razon de ser como vehiculo de inversion.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Criticos
+        </div>
+
+        <h2>De software a Bitcoin: la transformacion de Saylor</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--gray-300), var(--amber-500), var(--green-500), var(--red-500));"></div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--gray-400); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gray-500);">AGO 2020</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Primera compra de Bitcoin: 21,454 BTC por $250M</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Saylor anuncia que BTC sera la reserva de tesoreria. Precio medio: ~$11,650/BTC.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">DIC 2020 - JUN 2021</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Primeras convertible notes: $2.2B emitidos</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Emision agresiva de deuda convertible para acelerar compras. BTC llega a $64K.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--red-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--red-600);">NOV 2022</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--red-600);">Crypto winter: BTC cae a $16K</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">MSTR cae 85% desde maximos. Saylor dimite como CEO, pasa a Executive Chairman. Colapso FTX.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">ENE 2024</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--green-600);">Aprobacion ETFs de Bitcoin spot</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">BTC sube a $73K. MSTR se beneficia pero tambien pierde monopolio como vehiculo BTC.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">OCT 2024</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Plan 21/21: $42B para comprar mas Bitcoin</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">$21B equity + $21B deuda. En mayo 2025 se amplia a 42/42 ($84B). MSTR ATH de $457.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">AGO 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Rebranding: MicroStrategy &rarr; Strategy Inc</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">La empresa se rebautiza. Lanza preferred stocks: STRK (8%), STRF (10%), STRC, STRE. Total emitido: $7.5B+.</div>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--red-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--red-600);">FEB 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--red-600);">BTC cae a $60K. MSTR -75% desde maximos</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Holdings underwater. Precio medio de compra $76K vs BTC a $66K. Market cap $36B. mNAV comprimido a ~1.05x.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Proximo catalizador</div>
+            <p class="callout-text"><strong>Precio de Bitcoin:</strong> Todo depende de esto. Si BTC recupera $100K+, MSTR se recupera con apalancamiento. Si BTC sigue cayendo por debajo de $50K, la capacidad de emision se agota y la espiral negativa se acelera. No hay catalizadores fundamentales del negocio de software que muevan la aguja.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Analisis de Moat
+        </div>
+
+        <h2>Un moat poco convencional</h2>
+
+        <p class="lead">Strategy no tiene un moat tradicional (no tiene pricing power, no tiene switching costs, no tiene red effects). Su "moat" es ser first mover en la categoria de Bitcoin Treasury Company y la marca personal de Saylor. Pero con los ETFs, este moat se ha erosionado significativamente.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">First Mover en BTC Treasury</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">714,644 BTC = 3.4% de todo el BTC. Nadie mas tiene esta escala. Ventaja de acumulacion temprana.</p>
+                    </div>
+                    <span style="background: var(--green-100); color: var(--green-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">FUERTE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Marca Saylor / Narrativa</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Saylor es sinonimo de "Bitcoin corporate". Su marca arrastra capital retail y atencion mediatica.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Acceso a mercados de capital</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Ha demostrado capacidad de levantar $25B+ en un ano. Pero depende del precio de BTC y del premium.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">EROSIONANDOSE</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Negocio de Software</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">BI legacy en declive lento. No genera crecimiento. Solo aporta algo de cash flow operativo.</p>
+                    </div>
+                    <span style="background: var(--red-100); color: var(--red-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">DEBIL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Inclusion en Indices</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">En Nasdaq-100. Genera flujo pasivo de compra. Pero riesgo de exclusion si market cap cae mas.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">EN RIESGO</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Amenaza al moat: Bitcoin ETFs han cambiado todo</div>
+            <p class="callout-text">Antes de enero 2024, si querias BTC en tu brokerage, MSTR era la mejor opcion. Ahora IBIT de BlackRock tiene $50B+ en AUM y ofrece exposicion directa sin dilucion, sin deuda, sin riesgo de contraparte, y con fees de 0.25%. El premium de MSTR sobre NAV se ha desplomado de 3x a 1.05x. Sin premium, el modelo de "comprar BTC con acciones sobrevaloradas" deja de funcionar.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Michael Saylor: el hombre que es la empresa</h2>
+
+        <p class="lead">Strategy es, en esencia, la vision de un solo hombre. Michael Saylor controla el 43.58% del voto a traves de acciones Class B con supervoto 10:1. Su conviccion inquebrantable en Bitcoin es tanto la mayor fortaleza como el mayor riesgo de la empresa. No hay plan B.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Equipo Directivo</h3>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Michael J. Saylor</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Executive Chairman (co-fundador, 1989)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">43.58% voting power via Class B. El cerebro detras de la estrategia BTC. Patrimonio ~$4B (fluctua con MSTR).</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Phong Le</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CEO (desde 2022)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Gestiona operaciones dia a dia. Anterior CFO. Rol mas operativo que estrategico.</div>
+                </div>
+                <div>
+                    <div style="font-weight: 700;">Andrew Kang</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CFO</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Ejecuta las emisiones de deuda y equity. Arquitecto financiero del plan 42/42.</div>
+                </div>
+            </div>
+            <div>
+                <div class="card card-success" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor del management</h3>
+                    <ul class="check-list">
+                        <li>Skin in the game: Saylor tiene ~$4B en MSTR</li>
+                        <li>Vision clara y consistente desde 2020</li>
+                        <li>Capacidad demostrada de levantar capital</li>
+                        <li>BTC Yield del 35.8% en 2025</li>
+                        <li>No ha vendido un solo BTC nunca</li>
+                    </ul>
+                </div>
+                <div class="card card-danger">
+                    <h3 style="color: var(--red-700); margin-bottom: 16px;">Riesgos de governance</h3>
+                    <ul class="check-list">
+                        <li class="danger">Key-man risk extremo: todo depende de Saylor</li>
+                        <li class="danger">Dual-class: 43% voto con ~10% economico</li>
+                        <li class="danger">No hay plan de sucesion publico</li>
+                        <li class="warning">Historial: fraude contable SEC 2000 ($11M multa)</li>
+                        <li class="warning">Conviccion puede ser rigidez: nunca vendera BTC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Capital Allocation: una sola estrategia</div>
+            <p class="callout-text"><strong>Todo a Bitcoin:</strong> No hay dividendos, no hay buybacks, no hay inversion en el negocio de software. Cada dolar disponible va a comprar mas Bitcoin. Plan 42/42 busca levantar $84B en total. Ya ha levantado $25.3B en 2025 solo. La estrategia es clara pero binaria: si Bitcoin funciona, funciona todo. Si no, no hay colchon.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de senales de alerta</h2>
+
+        <p class="lead">Strategy tiene un perfil de riesgo extremo. La dependencia total del precio de Bitcoin, la dilucion masiva, la deuda creciente, y la concentracion de poder en una persona hacen que las red flags sean multiples y serias.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Dependencia de un solo activo</h4>
+                    <p>95%+ del valor depende del precio de BTC. Si BTC cae a $30K, MSTR colapsa.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Dilucion masiva y continua</h4>
+                    <p>De 76M a 310M+ acciones en 4 anos. Acciones diluidas un 307%. Y continua con plan 42/42.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Holdings BTC underwater</h4>
+                    <p>Coste medio $76,056/BTC vs precio actual ~$66K. Perdida no realizada de ~$7.2B.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Carga financiera creciente</h4>
+                    <p>$8.2B deuda convertible + $7.5B preferred stock. $779M/ano en intereses y dividendos.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Key-man risk (Saylor)</h4>
+                    <p>43% voting power. Sin plan de sucesion. Historial previo de problemas con SEC (fraude 2000).</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Riesgo regulatorio</h4>
+                    <p>Posible clasificacion como "investment company" bajo la ley de 1940. SEC podria forzar cambios.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Riesgo de exclusion de indices</h4>
+                    <p>JPMorgan estima ~$2.8B outflows si sale de MSCI. Hasta $8.8B si sigue en otros indices.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Software en declive</h4>
+                    <p>Revenue estancado en ~$477M. No hay inversion. El negocio base se deteriora lentamente.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>No hay margin calls</h4>
+                    <p>La deuda convertible no tiene margin calls. La empresa no puede ser forzada a vender BTC por deuda.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Skin in the game</h4>
+                    <p>Saylor tiene ~$4B en MSTR. Alineacion de intereses con accionistas (si crees en BTC).</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 24px; text-align: center;">
+            <span style="font-size: 0.875rem; color: var(--gray-500);">Red flags detectadas:</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; margin-left: 12px; color: var(--red-600);">5 criticas + 3 advertencias de 10</span>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>Proyeccion 2031: todo depende de Bitcoin</h2>
+
+        <p class="lead">Valorar Strategy es valorar Bitcoin con apalancamiento. No hay DCF significativo del software. El ejercicio clave es: &iquest;que precio de BTC necesitas para que MSTR justifique su valoracion actual? Y la respuesta es: necesitas que BTC vuelva a subir significativamente.</p>
+
+        <div class="card" style="margin: 32px 0;">
+            <h3 style="margin-bottom: 16px;">Analisis de sensibilidad: Precio BTC vs Valor MSTR</h3>
+            <div class="table-wrapper" style="margin: 16px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Precio BTC</th>
+                            <th>NAV (714K BTC)</th>
+                            <th>- Deuda neta</th>
+                            <th>NAV/accion</th>
+                            <th>MSTR estimado (1.2x)</th>
+                            <th>vs Actual ($137)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="cell-danger"><strong>$30,000</strong></td>
+                            <td>$21.4B</td>
+                            <td>-$15.7B</td>
+                            <td>$18</td>
+                            <td class="cell-danger">$22</td>
+                            <td class="cell-danger">-84%</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-danger"><strong>$50,000</strong></td>
+                            <td>$35.7B</td>
+                            <td>-$15.7B</td>
+                            <td>$65</td>
+                            <td class="cell-danger">$78</td>
+                            <td class="cell-danger">-43%</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-amber"><strong>$66,000 (hoy)</strong></td>
+                            <td>$47.2B</td>
+                            <td>-$15.7B</td>
+                            <td>$102</td>
+                            <td class="cell-amber">$122</td>
+                            <td class="cell-amber">-11%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>$100,000</strong></td>
+                            <td>$71.5B</td>
+                            <td>-$15.7B</td>
+                            <td>$180</td>
+                            <td class="cell-success">$216</td>
+                            <td class="cell-success">+58%</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-success"><strong>$150,000</strong></td>
+                            <td>$107.2B</td>
+                            <td>-$15.7B</td>
+                            <td>$295</td>
+                            <td class="cell-success">$354</td>
+                            <td class="cell-success">+159%</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-success"><strong>$250,000</strong></td>
+                            <td>$178.7B</td>
+                            <td>-$15.7B</td>
+                            <td>$526</td>
+                            <td class="cell-success">$631</td>
+                            <td class="cell-success">+361%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--gray-500); margin: 8px 0 0;">*Deuda neta = $8.2B convertible + $7.5B preferred = $15.7B. Acciones asumidas: 310M. mNAV de 1.2x como premium residual. No incluye dilucion futura.</p>
+        </div>
+
+        <h3>Validacion: DCF Inverso</h3>
+        <div class="callout callout-warning">
+            <div class="callout-title">El mercado te esta diciendo...</div>
+            <p class="callout-text">Al precio actual de $136.70, con ~310M acciones y $15.7B de deuda, el mercado implica un valor de los BTC de ~$58.1B, o ~$81,300/BTC. Es decir, el mercado asume que BTC va a subir un ~23% desde los niveles actuales solo para justificar el precio actual. Si ademas el premium (mNAV) vuelve a subir, necesitas aun mas. <strong>No hay margen de seguridad.</strong></p>
+        </div>
+
+        <div style="background: var(--gray-900); color: var(--white); border-radius: 16px; padding: 32px; margin-top: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Break-even BTC price</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0; color: var(--red-500);">~$81,300</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio actual BTC</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0;">~$66,000</div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-700); font-size: 0.875rem; color: var(--gray-400);">
+                MSTR necesita que Bitcoin suba un 23% solo para justificar su precio actual. Para generar retorno atractivo (15%+ anual), BTC necesita llegar a $150K+ en 5 anos.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios de Inversion
+        </div>
+
+        <h2>Tres caminos posibles (a 5 anos)</h2>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--red-700);">Bear Case</div>
+                    <div class="scenario-prob">35%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">$25</div>
+                <div class="scenario-change" style="color: var(--red-600);">-82% | BTC &lt;$40K</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin cae a $30-40K y se estanca</li>
+                    <li>Dilucion masiva continua erosiona NAV/share</li>
+                    <li>Posible exclusion de indices ($8.8B outflows)</li>
+                    <li>Regulacion fuerza venta parcial de BTC</li>
+                    <li>mNAV cae a 0.5-0.8x (descuento)</li>
+                    <li>Software sigue declinando</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: #92400e;">Base Case</div>
+                    <div class="scenario-prob">40%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">$180</div>
+                <div class="scenario-change" style="color: var(--green-600);">+32% | BTC $80-120K</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin se recupera a $80-120K en 2-3 anos</li>
+                    <li>mNAV se mantiene en 1.0-1.3x</li>
+                    <li>Dilucion moderada (plan se ralentiza)</li>
+                    <li>Inclusion en indices estable</li>
+                    <li>Holdings crecen a ~800K BTC</li>
+                    <li>Software estable o transicion a cloud</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--green-700);">Bull Case</div>
+                    <div class="scenario-prob">25%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">$550</div>
+                <div class="scenario-change" style="color: var(--green-600);">+302% | BTC $200K+</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin alcanza $200K+ (adopcion soberana)</li>
+                    <li>mNAV vuelve a 1.5-2.0x</li>
+                    <li>MSTR se convierte en "BTC bank"</li>
+                    <li>Plan 42/42 ejecutado con exito</li>
+                    <li>Holdings superan 1M BTC</li>
+                    <li>Posible BTC-backed financial products</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 32px;">
+            <h3 style="margin-bottom: 24px;">Precio ponderado por probabilidad (5Y)</h3>
+            <div class="table-wrapper" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Precio MSTR 2031</th>
+                            <th>BTC Price</th>
+                            <th>Probabilidad</th>
+                            <th>Contribucion</th>
+                            <th>CAGR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bear</strong></td>
+                            <td class="cell-danger">$25</td>
+                            <td class="cell-danger">$30-40K</td>
+                            <td>35%</td>
+                            <td>$8.75</td>
+                            <td class="cell-danger">-29%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base</strong></td>
+                            <td>$180</td>
+                            <td>$80-120K</td>
+                            <td>40%</td>
+                            <td>$72.00</td>
+                            <td class="cell-success">+5.6%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bull</strong></td>
+                            <td class="cell-success">$550</td>
+                            <td class="cell-success">$200K+</td>
+                            <td>25%</td>
+                            <td>$137.50</td>
+                            <td class="cell-success">+32%</td>
+                        </tr>
+                        <tr style="background: var(--gray-50); font-weight: 700;">
+                            <td><strong>Ponderado</strong></td>
+                            <td class="cell-amber">$218</td>
+                            <td>-</td>
+                            <td>100%</td>
+                            <td>$218.25</td>
+                            <td class="cell-amber">+9.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Asimetria peligrosa</div>
+            <p class="callout-text">Aunque el CAGR ponderado del 9.8% parece decente, la distribucion es extrema. El bear case (-82%) tiene un 35% de probabilidad, lo que significa que hay mas de 1 de cada 3 posibilidades de perder la mayoria de tu inversion. Para inversores value, esto es inaceptable. MSTR solo tiene sentido como apuesta especulativa de alto riesgo en Bitcoin con apalancamiento. <strong>Si crees en Bitcoin, compra BTC directamente o un ETF. El riesgo adicional de MSTR no se compensa adecuadamente.</strong></p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strategy (MSTR) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+                <div class="verdict-title font-display">ESPECULATIVO</div>
+                <div class="verdict-text">Strategy no es una inversion. Es una apuesta apalancada en Bitcoin con riesgo de dilucion, deuda masiva, y dependencia total de un activo volatil. Si quieres Bitcoin, compra Bitcoin. Si quieres apalancamiento en BTC, entiende que puedes perder el 80%+.</div>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 48px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--red-500);">38/100</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Score Total</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700;">$25-$550</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Rango 5Y (BTC dependiente)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--amber-500);">9.8%</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">CAGR Ponderado (5y)</div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Que vigilar (Triggers de reevaluacion)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Bitcoin &gt;$100K sostenido</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si BTC vuelve a $100K+, mNAV podria expandirse y el modelo se reinicia</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Bitcoin &lt;$50K prolongado</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si BTC cae debajo de $50K, la estructura se vuelve insostenible. Salir inmediatamente.</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Regulacion SEC</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Clasificacion como investment company seria un game-changer negativo</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Exclusion de indices</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si MSCI o Nasdaq-100 lo excluyen, $2.8-8.8B en ventas forzadas de pasivos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Lo que no se (Transparencia)</h3>
+                    <div style="font-size: 0.9375rem; color: var(--gray-400); line-height: 1.8;">
+                        <p style="color: var(--gray-400);">&#10067; Cuanto de la deuda convertible se convertira vs pagara en cash (depende del precio de MSTR en cada vencimiento)</p>
+                        <p style="color: var(--gray-400);">&#10067; Si la SEC cambiara su postura y clasificara a Strategy como investment company</p>
+                        <p style="color: var(--gray-400);">&#10067; El impacto real de futuras emisiones de preferred stock en la estructura de capital</p>
+                        <p style="color: var(--gray-400);">&#10067; Si Saylor venderia BTC en caso extremo (dice que no, pero la presion podria ser enorme)</p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px; font-size: 0.8125rem; color: var(--gray-500);">
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Fuentes:</strong> Strategy Inc Investor Relations, Q4 2025 Earnings Release, SEC filings, Yahoo Finance, The Block, CoinDesk, Seeking Alpha, VanEck Research, BitBo, StockAnalysis, MarketBeat, TipRanks.</p>
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Disclaimer:</strong> Este informe es un analisis educativo, no una recomendacion de compra o venta. Los datos pueden contener inexactitudes. MSTR es un activo extremadamente volatil. Investiga por tu cuenta antes de tomar decisiones de inversion.</p>
+                    <p style="color: var(--gray-500); margin: 0;"><strong>Fecha:</strong> 13 de Febrero de 2026 | Generado por /analista (FMA)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

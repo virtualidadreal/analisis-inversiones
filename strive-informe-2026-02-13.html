@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strive, Inc. (ASST) - Informe de Inversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --blue-50: #eff6ff;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --teal-500: #14b8a6;
+            --teal-600: #0d9488;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            min-height: 100vh;
+            page-break-after: always;
+            position: relative;
+        }
+        .page-dark {
+            background: var(--gray-900);
+            color: var(--white);
+            max-width: 100%;
+            padding: 120px 0;
+        }
+        .page-dark .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--gray-900); }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); }
+        p { font-size: 1.125rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .lead { font-size: 1.375rem; line-height: 1.6; color: var(--gray-700); }
+        .small { font-size: 0.875rem; }
+        .tiny { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Cover */
+        .cover { display: flex; flex-direction: column; justify-content: space-between; min-height: calc(100vh - 160px); }
+        .cover-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .cover-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--red-600); color: white;
+            padding: 10px 20px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cover-date { color: var(--gray-400); font-size: 0.875rem; }
+        .cover-main { padding: 80px 0; }
+        .cover-ticker { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--gray-400); margin-bottom: 1rem; letter-spacing: 0.2em; }
+        .cover-title {
+            font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .cover-subtitle { font-size: 1.5rem; color: var(--gray-500); font-weight: 400; max-width: 600px; }
+        .cover-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 60px; border-top: 1px solid var(--gray-200); }
+        .cover-metric { text-align: left; }
+        .cover-metric-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gray-900); }
+        .cover-metric-value.positive { color: var(--green-600); }
+        .cover-metric-value.negative { color: var(--red-600); }
+        .cover-metric-value.amber { color: var(--amber-600); }
+        .cover-metric-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .cover-rating { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+        .rating-stars { font-size: 2rem; letter-spacing: 4px; color: var(--gray-300); }
+        .rating-stars .filled { color: var(--amber-500); }
+        .rating-verdict { font-size: 1.25rem; font-weight: 700; color: var(--red-600); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--gray-400); font-weight: 600; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+        .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--gray-300); margin-right: 8px; }
+
+        /* Cards */
+        .card { background: var(--gray-50); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .card-white { background: var(--white); border: 1px solid var(--gray-200); }
+        .card-dark { background: var(--gray-900); color: var(--white); }
+        .card-danger { background: var(--red-50); border: 1px solid var(--red-100); }
+        .card-success { background: var(--green-50); border: 1px solid var(--green-100); }
+        .card-amber { background: var(--amber-50); border: 1px solid var(--amber-100); }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Stats */
+        .stat-block { padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 600; line-height: 1; margin-bottom: 8px; }
+        .stat-value.danger { color: var(--red-600); }
+        .stat-value.success { color: var(--green-600); }
+        .stat-value.amber { color: var(--amber-600); }
+        .stat-label { font-size: 0.875rem; color: var(--gray-500); }
+        .stat-change { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .stat-change.positive { background: var(--green-100); color: var(--green-700); }
+        .stat-change.negative { background: var(--red-100); color: var(--red-700); }
+        .stat-change.neutral { background: var(--amber-100); color: var(--amber-600); }
+
+        /* Tables */
+        .table-wrapper { overflow: hidden; border-radius: 12px; border: 1px solid var(--gray-200); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+        thead { background: var(--gray-900); color: var(--white); }
+        th { padding: 16px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--gray-50); }
+        .cell-danger { color: var(--red-600); font-weight: 600; }
+        .cell-success { color: var(--green-600); font-weight: 600; }
+        .cell-amber { color: var(--amber-600); font-weight: 600; }
+
+        /* Progress Bars */
+        .progress-row { display: flex; align-items: center; margin-bottom: 16px; }
+        .progress-label { width: 160px; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+        .progress-bar-wrapper { flex: 1; height: 24px; background: var(--gray-100); border-radius: 6px; overflow: hidden; margin: 0 16px; }
+        .progress-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.75rem; font-weight: 600; color: white; transition: width 0.6s ease;
+        }
+        .progress-bar.primary { background: var(--gray-800); }
+        .progress-bar.danger { background: var(--red-500); }
+        .progress-bar.success { background: var(--green-500); }
+        .progress-bar.amber { background: var(--amber-500); }
+        .progress-value { width: 60px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 500; }
+
+        /* Callouts */
+        .callout { padding: 24px 28px; border-radius: 12px; margin: 32px 0; border-left: 4px solid; }
+        .callout-danger { background: var(--red-50); border-color: var(--red-500); }
+        .callout-warning { background: var(--amber-50); border-color: var(--amber-500); }
+        .callout-success { background: var(--green-50); border-color: var(--green-500); }
+        .callout-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .callout-text { font-size: 0.9375rem; color: var(--gray-700); margin: 0; }
+
+        /* Quote */
+        .quote-box {
+            background: var(--gray-900); color: var(--white); padding: 48px;
+            border-radius: 16px; margin: 48px 0; position: relative;
+        }
+        .quote-box::before {
+            content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem;
+            position: absolute; top: -20px; left: 32px; color: var(--gray-700); line-height: 1;
+        }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.75rem; line-height: 1.4; margin-bottom: 16px; position: relative; z-index: 1; }
+        .quote-author { font-size: 0.875rem; color: var(--gray-400); }
+
+        /* Red Flags */
+        .flag-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .flag-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--green-50); border-radius: 12px; border: 1px solid var(--green-100); }
+        .flag-item.warning { background: var(--amber-50); border-color: #fde68a; }
+        .flag-item.danger { background: var(--red-50); border-color: var(--red-100); }
+        .flag-icon { width: 32px; height: 32px; background: var(--green-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .flag-icon.warning { background: var(--amber-500); }
+        .flag-icon.danger { background: var(--red-500); }
+        .flag-content h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--gray-900); }
+        .flag-content p { font-size: 0.8125rem; color: var(--gray-600); margin: 0; line-height: 1.5; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 32px 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 60px; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--gray-300), var(--amber-500), var(--green-500)); border-radius: 2px;
+        }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { text-align: center; flex: 1; }
+        .timeline-dot {
+            width: 48px; height: 48px; background: var(--white);
+            border: 3px solid var(--gray-300); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+            position: relative; z-index: 1;
+        }
+        .timeline-dot.positive { border-color: var(--green-500); }
+        .timeline-dot.negative { border-color: var(--red-500); }
+        .timeline-dot.amber { border-color: var(--amber-500); }
+        .timeline-year { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 4px; }
+        .timeline-value { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 600; }
+
+        /* Company Cards */
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .company-card { padding: 28px; border-radius: 16px; border: 2px solid var(--gray-200); background: var(--white); text-align: center; transition: all 0.3s ease; }
+        .company-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .company-card.highlight { border-color: var(--teal-500); background: var(--blue-50); }
+        .company-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+        .company-card.highlight .company-name { color: var(--teal-600); }
+        .company-stat { margin: 16px 0; }
+        .company-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+        .company-stat-label { font-size: 0.75rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .company-rating { margin-top: 20px; font-size: 1.25rem; }
+
+        /* Scenarios */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .scenario-card { padding: 32px; border-radius: 16px; height: 100%; }
+        .scenario-card.bull { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+        .scenario-card.base { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; }
+        .scenario-card.bear { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; }
+        .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .scenario-name { font-size: 1.125rem; font-weight: 700; }
+        .scenario-prob { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(0,0,0,0.08); }
+        .scenario-price { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 16px 0; }
+        .scenario-change { font-size: 0.875rem; font-weight: 600; margin-bottom: 20px; }
+        .scenario-list { list-style: none; }
+        .scenario-list li { font-size: 0.875rem; padding: 8px 0; padding-left: 20px; position: relative; color: var(--gray-700); }
+        .scenario-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--gray-400); }
+
+        /* Verdict */
+        .verdict-section { text-align: center; padding: 80px 60px; }
+        .verdict-rating { font-size: 5rem; margin-bottom: 24px; }
+        .verdict-title { font-size: 4rem; font-weight: 700; color: var(--red-500); margin-bottom: 24px; }
+        .verdict-text { font-size: 1.25rem; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto; padding-top: 40px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--gray-400);
+        }
+        .page-number { font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: var(--gray-200); margin: 48px 0; }
+        .check-list { list-style: none; }
+        .check-list li { padding: 12px 0; padding-left: 32px; position: relative; font-size: 1rem; border-bottom: 1px solid var(--gray-100); }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-500); font-weight: 700; }
+        .check-list li.warning::before { content: '\26A0'; color: var(--amber-500); }
+        .check-list li.danger::before { content: '\2717'; color: var(--red-500); }
+
+        @media print {
+            .page { page-break-after: always; page-break-inside: avoid; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        @media (max-width: 900px) {
+            .page { padding: 40px 24px; }
+            h1, .cover-title { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-2, .grid-4, .company-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .flag-list { grid-template-columns: 1fr; }
+            .cover-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: Cover + Verdict -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <div class="cover-badge">
+                    <span>&#9679;</span> Alto Riesgo
+                </div>
+                <div class="cover-date">Febrero 2026</div>
+            </div>
+
+            <div class="cover-main">
+                <div class="cover-ticker">NASDAQ: ASST</div>
+                <h1 class="cover-title font-display">Strive, Inc.</h1>
+                <p class="cover-subtitle">Bitcoin Treasury Corporation con brazo de gestion de activos anti-ESG. Ambicion de replicar el modelo de Strategy (MSTR) pero con escala 50x menor, historial publico de 5 meses y dilucion agresiva. Especulacion pura.</p>
+
+                <div class="cover-rating">
+                    <div class="rating-stars">
+                        <span class="filled">&#9733;</span><span class="filled">&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <div class="rating-verdict">28/100 - Evitar</div>
+                </div>
+            </div>
+
+            <div class="cover-metrics">
+                <div class="cover-metric">
+                    <div class="cover-metric-value">$8.19</div>
+                    <div class="cover-metric-label">Precio actual (post-split)</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">~13,132</div>
+                    <div class="cover-metric-label">Bitcoin en balance</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value amber">~$511M</div>
+                    <div class="cover-metric-label">Market Cap</div>
+                </div>
+                <div class="cover-metric">
+                    <div class="cover-metric-value negative">-$192M</div>
+                    <div class="cover-metric-label">Net Loss Q3 2025</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">01</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Executive Summary -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">01</span> Resumen Ejecutivo
+        </div>
+
+        <h2>Strive en una frase</h2>
+
+        <div class="quote-box" style="margin: 24px 0 40px;">
+            <p class="quote-text" style="font-size: 1.5rem;">Strive es una empresa que combina gestion de activos anti-ESG (ETFs) con una tesoreria agresiva en Bitcoin al estilo de MicroStrategy. Fundada por Vivek Ramaswamy, salio a bolsa en septiembre 2025 mediante fusion inversa con Asset Entities. En 5 meses ha acumulado ~13,132 BTC pero no genera beneficios operativos.</p>
+        </div>
+
+        <div class="card card-danger" style="margin-bottom: 32px;">
+            <h3 style="color: var(--red-700); margin-bottom: 16px;">Imagina que...</h3>
+            <p style="font-size: 1.125rem; color: var(--gray-700); margin: 0;">
+                Un inversor inmobiliario con buena reputacion decide abrir un casino. En lugar de construirlo el mismo, compra un local abandonado (Asset Entities), lo renombra, y empieza a pedir prestamos masivos para comprar oro. Su argumento: &quot;el oro va a subir y mi casino va a valer mas que el oro que tengo&quot;. Mientras tanto, tambien tiene un pequeno negocio de fondos de inversion que genera algunos ingresos, pero el 99% de la apuesta es que el oro siga subiendo. Si baja, te quedas con un casino vacio y mucha deuda.
+            </p>
+        </div>
+
+        <div class="grid-4" style="margin: 48px 0;">
+            <div class="stat-block">
+                <div class="stat-value danger">$1.5M</div>
+                <div class="stat-label">Revenue Q3 2025</div>
+                <div class="stat-change negative">19 dias operativos</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">-$192M</div>
+                <div class="stat-label">Net Loss Q3 2025</div>
+                <div class="stat-change negative">93% no-cash/one-time</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value amber">13,132</div>
+                <div class="stat-label">Bitcoin Holdings</div>
+                <div class="stat-change neutral">#11 publico global</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-value danger">1:20</div>
+                <div class="stat-label">Reverse Split (Feb 2026)</div>
+                <div class="stat-change negative">Senal de debilidad</div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card card-success">
+                <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor</h3>
+                <ul class="check-list">
+                    <li>ETFs anti-ESG con $2B+ AUM (nicho real)</li>
+                    <li>13,132 BTC (~$867M a precio actual)</li>
+                    <li>Deuda-free tras liquidar notas Semler</li>
+                    <li>Seccion 351: ventaja fiscal BTC-to-equity</li>
+                    <li>Management con experiencia (CalPERS)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">En contra</h3>
+                <ul class="check-list">
+                    <li class="danger">Cero rentabilidad operativa</li>
+                    <li class="danger">Reverse split 1:20 en febrero 2026</li>
+                    <li class="danger">Accion -96% desde IPO ($268 &rarr; $8)</li>
+                    <li class="danger">Dilucion masiva ($500M ATM + PIPEs)</li>
+                    <li class="warning">100% dependiente del precio de Bitcoin</li>
+                    <li class="warning">Vivek ya no esta day-to-day</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">02</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Scorecard -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">02</span> Scorecard
+        </div>
+
+        <h2>Puntuacion de inversion: 28/100</h2>
+
+        <p class="lead">Strive es una apuesta apalancada en Bitcoin disfrazada de empresa cotizada. El negocio de gestion de activos tiene merito, pero la empresa publicamente cotizada es fundamentalmente un vehiculo de tesoreria BTC sin historial financiero, con dilucion agresiva y una caida del 96% desde IPO.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Negocio</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 35%;">Hibrido confuso: ETFs + BTC treasury</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">7/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Financieros</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar danger" style="width: 10%;">Sin revenue, sin FCF, solo perdidas</div>
+                </div>
+                <span class="progress-value" style="color: var(--red-600);">2/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Moat</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 25%;">Marca anti-ESG, sin moat real en BTC</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">5/20</span>
+            </div>
+
+            <div class="progress-row" style="margin-bottom: 24px;">
+                <span class="progress-label">Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 40%;">Experiencia, pero alineacion dudosa</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">8/20</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">Valoracion</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 30%;">Descuento a NAV pero no valorable</div>
+                </div>
+                <span class="progress-value" style="color: var(--amber-600);">6/20</span>
+            </div>
+
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-size: 0.875rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em;">Puntuacion Total</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; color: var(--red-600);">28</span>
+                    <span style="font-size: 1.5rem; color: var(--gray-400);">/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div style="text-align: center; padding: 24px; background: var(--red-50); border-radius: 12px; border: 2px solid var(--red-500);">
+                <div style="font-size: 0.75rem; color: var(--red-600); font-weight: 600; margin-bottom: 8px;">0-50</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--red-700);">Evitar &larr;</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--amber-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: #92400e; font-weight: 600; margin-bottom: 8px;">51-70</div>
+                <div style="font-size: 1rem; font-weight: 600; color: #92400e;">Aceptable</div>
+            </div>
+            <div style="text-align: center; padding: 24px; background: var(--green-50); border-radius: 12px;">
+                <div style="font-size: 0.75rem; color: var(--green-600); font-weight: 600; margin-bottom: 8px;">71-100</div>
+                <div style="font-size: 1rem; font-weight: 600; color: var(--green-700);">Buena / Excelente</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">03</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: The Business -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">03</span> El Negocio
+        </div>
+
+        <h2>Dos negocios, dos identidades</h2>
+
+        <p class="lead">Strive opera dos negocios muy distintos bajo un mismo paraguas: (1) una gestora de ETFs anti-ESG que ha crecido de 0 a $2B AUM en 2 anos &mdash; un logro impresionante, y (2) una tesoreria corporativa de Bitcoin que absorbe el 99% de la atencion y el capital. El resultado es una empresa dificil de valorar y dificil de predecir.</p>
+
+        <div class="card" style="margin: 40px 0;">
+            <h3 style="margin-bottom: 24px;">Segmentos de negocio</h3>
+
+            <div class="progress-row">
+                <span class="progress-label">ETF Management</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar success" style="width: 15%;">11 ETFs, $2B+ AUM, anti-ESG</div>
+                </div>
+                <span class="progress-value">~15%</span>
+            </div>
+
+            <div class="progress-row">
+                <span class="progress-label">BTC Treasury</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar amber" style="width: 85%;">13,132 BTC, acumulacion agresiva</div>
+                </div>
+                <span class="progress-value">~85%</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-bottom: 16px;">ETFs: el negocio real</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">DRLL (Energy)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">ETF flagship</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">STRV (S&amp;P 500)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">0.05% expense ratio</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">STXE (EM ex-China)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">Nicho geopolitico</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">+8 ETFs mas</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--gray-500);">Small/Mid/Value/Growth/Bonds</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 16px;">BTC Treasury: la apuesta</h3>
+                <div class="card-white card" style="padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">BTC totales</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">13,132 BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Valor BTC (hoy)</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber-600);">~$867M</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-weight: 600;">Modelo</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--red-600);">Emitir equity &rarr; comprar BTC</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Seccion 351</span>
+                        <span style="font-family: 'JetBrains Mono', monospace; color: var(--green-600);">Ventaja fiscal unica</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 32px;">
+            <div class="callout-title">El problema del modelo</div>
+            <p class="callout-text"><strong>Strategy (MSTR) tiene 640,000+ BTC y genera revenue operativo de $400M+ al ano con su negocio de software.</strong> Strive tiene 13,132 BTC (~2% de MSTR) y genera ~$6-8M anuales en comisiones de ETFs. El modelo &quot;comprar BTC con equity diluida&quot; solo funciona si Bitcoin sube. Si baja, los accionistas pierden por partida doble: caida de BTC + dilucion. Es una apuesta apalancada, no una inversion.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">04</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: Financial Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">04</span> Analisis Financiero
+        </div>
+
+        <h2>Datos insuficientes para un analisis real</h2>
+
+        <p class="lead">Strive cotiza desde el 12 de septiembre de 2025 &mdash; solo 5 meses. Su unico reporte financiero como empresa publica cubre 19 dias (12-30 Sep 2025). No existe historial financiero significativo. Esto es un red flag fundamental para cualquier value investor.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Q3 2025 (19 dias)</th>
+                        <th>Anualizado (est.)</th>
+                        <th>Interpretacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Net Revenue</strong></td>
+                        <td>$1.54M</td>
+                        <td class="cell-amber">~$29M</td>
+                        <td>Principalmente fees de ETFs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Expenses</strong></td>
+                        <td class="cell-danger">$24.86M</td>
+                        <td class="cell-danger">~$477M</td>
+                        <td>Incluye merger costs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GAAP Net Loss</strong></td>
+                        <td class="cell-danger">-$192.3M</td>
+                        <td>&mdash;</td>
+                        <td>93% non-cash/one-time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Adj. Net Loss</strong></td>
+                        <td class="cell-danger">-$13.0M</td>
+                        <td class="cell-danger">~-$250M</td>
+                        <td>Aun negativo ajustado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td>5,886 BTC</td>
+                        <td class="cell-amber">13,132 BTC (actual)</td>
+                        <td>Costo total ~$683M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PIPE Raised</strong></td>
+                        <td class="cell-success">$762.6M</td>
+                        <td>&mdash;</td>
+                        <td>Financiacion para BTC</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">Evolucion del AUM en ETFs (el negocio real)</h3>
+
+        <div class="timeline">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2022</div>
+                    <div class="timeline-year">Lanzamiento</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$500M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2023</div>
+                    <div class="timeline-year">10 meses</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$750M</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">2024</div>
+                    <div class="timeline-year">2 anos</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$1B+</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot positive">Ene 25</div>
+                    <div class="timeline-year">Hito</div>
+                    <div class="timeline-value" style="color: var(--green-600);">$2B+</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot amber">2026?</div>
+                    <div class="timeline-year">Objetivo</div>
+                    <div class="timeline-value" style="color: var(--amber-600);">$3-5B?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">Limitacion critica del analisis</div>
+            <p class="callout-text">Con solo 19 dias de datos financieros publicos, es imposible evaluar ROIC, FCF recurrente, margenes normalizados o tendencias. El proximo reporte (Q4 2025, 25 Feb 2026) sera el primer trimestre completo. Hasta entonces, cualquier valoracion es especulativa. Los ETFs generan ~$6-8M anuales en fees (est. $2B AUM x 0.05% avg expense ratio). Esto no cubre ni los gastos operativos.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">05</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Competitive Analysis -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">05</span> Analisis Competitivo
+        </div>
+
+        <h2>Dos frentes: ETFs anti-ESG y Bitcoin Treasuries</h2>
+
+        <p class="lead">Strive compite en dos mercados muy diferentes. En ETFs, compite contra gigantes como BlackRock y Vanguard con una propuesta anti-ESG de nicho. En Bitcoin treasury, compite directamente contra Strategy (MSTR) y otras empresas que acumulan BTC en balance.</p>
+
+        <div class="company-grid" style="margin: 48px 0;">
+            <div class="company-card highlight">
+                <div class="company-name">STRIVE (ASST)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">13,132</div>
+                    <div class="company-stat-label">Bitcoin Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value" style="color: var(--teal-600);">$2B+</div>
+                    <div class="company-stat-label">AUM ETFs</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$511M</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">STRATEGY (MSTR)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">640,000+</div>
+                    <div class="company-stat-label">Bitcoin Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">$400M+</div>
+                    <div class="company-stat-label">Revenue anual (SW)</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$70B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+
+            <div class="company-card">
+                <div class="company-name">MARATHON (MARA)</div>
+                <div class="company-stat">
+                    <div class="company-stat-value">44,893</div>
+                    <div class="company-stat-label">Bitcoin Holdings</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$600M</div>
+                    <div class="company-stat-label">Revenue anual</div>
+                </div>
+                <div class="company-stat">
+                    <div class="company-stat-value">~$5B</div>
+                    <div class="company-stat-label">Market Cap</div>
+                </div>
+                <div class="company-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrica</th>
+                        <th>Strive (ASST)</th>
+                        <th>Strategy (MSTR)</th>
+                        <th>Marathon (MARA)</th>
+                        <th>Semler (pre-merger)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>BTC Holdings</strong></td>
+                        <td class="cell-amber">13,132</td>
+                        <td class="cell-success">640,000+</td>
+                        <td>44,893</td>
+                        <td>5,048</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revenue operativo</strong></td>
+                        <td class="cell-danger">~$6-8M/yr (est.)</td>
+                        <td>$400M+</td>
+                        <td>~$600M</td>
+                        <td>~$50M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modelo BTC</strong></td>
+                        <td>Equity + Preferred</td>
+                        <td>Convertibles + Equity</td>
+                        <td>Mining + Compra</td>
+                        <td>Cash + Debt</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ventaja unica</strong></td>
+                        <td class="cell-amber">Seccion 351 tax</td>
+                        <td class="cell-success">First mover, escala</td>
+                        <td>Mining + Infrastructure</td>
+                        <td>Absorbida por Strive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rentable</strong></td>
+                        <td class="cell-danger">No</td>
+                        <td class="cell-amber">Via BTC gains</td>
+                        <td class="cell-amber">Trimestres alternos</td>
+                        <td>Si (medical devices)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">La desventaja de escala</div>
+            <p class="callout-text">Strive tiene 13,132 BTC vs 640,000+ de Strategy. Eso es un 2%. Para alcanzar una posicion relevante necesitaria emitir cantidades enormes de equity, diluyendo aun mas a los accionistas existentes. Strategy ya tiene brand recognition como &quot;el proxy de Bitcoin&quot;. Strive compite por ser el #2 o #3 en una carrera donde el ganador se lo lleva casi todo.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">06</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Timeline -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">06</span> Timeline de Eventos Criticos
+        </div>
+
+        <h2>5 meses de historia publica</h2>
+
+        <div class="card" style="margin: 40px 0; padding: 40px;">
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--gray-300), var(--amber-500), var(--red-500));"></div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--gray-400); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gray-500);">AGO 2022</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Strive Asset Management lanza primer ETF (DRLL)</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Vivek Ramaswamy funda la gestora anti-ESG. DRLL atrae $250M en semanas.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--green-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green-600);">ENE 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--green-600);">ETFs alcanzan $2B AUM</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">11 ETFs operativos. Crecimiento organico impresionante en nicho anti-ESG.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">SEP 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Fusion inversa con Asset Entities. IPO via SPAC.</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Levantan $762.6M via PIPE. Comienzan acumulacion agresiva de BTC. Ticker ASST.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--red-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--red-600);">NOV 2025</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--red-600);">Q3 2025: Net loss de $192.3M en 19 dias</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Primer reporte. GAAP loss masivo. 93% no-cash. Anuncian adquisicion de Semler Scientific.</div>
+                </div>
+
+                <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--amber-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber-600);">ENE 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0;">Completa adquisicion Semler. 12,798 BTC. Limpia deuda.</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Retira $110M de deuda Semler. $225M preferred offering (SATA). Compra 333 BTC mas.</div>
+                </div>
+
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -32px; width: 12px; height: 12px; background: var(--red-500); border-radius: 50%; top: 6px;"></div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--red-600);">FEB 2026</div>
+                    <div style="font-weight: 600; margin: 4px 0; color: var(--red-600);">Reverse split 1:20. Accion en $8.19. ATM $500M SATA.</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600);">Reverse split para mantener compliance Nasdaq. Lanza ATM de $500M en preferred stock. Proximos earnings 25 Feb.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Proximos catalizadores</div>
+            <p class="callout-text"><strong>25 Feb 2026:</strong> Earnings Q4 2025 &mdash; primer trimestre completo como empresa publica. <strong>Precio BTC:</strong> Principal driver del precio de ASST (correlacion 4-5x). <strong>Warrants:</strong> $736.6M adicionales pendientes que diluirian aun mas si se ejercen.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">07</span>
+        </div>
+    </div>
+
+    <!-- PAGE 8: Moat -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">07</span> Analisis de Moat
+        </div>
+
+        <h2>Moat debil en ambos negocios</h2>
+
+        <p class="lead">El negocio de ETFs tiene una ventaja de marca en el nicho anti-ESG, pero los ETFs son productos commodity facilmente replicables. El negocio de Bitcoin treasury no tiene moat alguno &mdash; cualquiera puede comprar BTC. La Seccion 351 es una ventaja regulatoria interesante pero no defensible a largo plazo.</p>
+
+        <div class="card" style="margin: 40px 0; padding: 0;">
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Marca Anti-ESG</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Primera gestora en posicionarse anti-ESG de forma agresiva. Reconocimiento en el nicho.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Seccion 351 (Tax Advantage)</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Permite aportar BTC a cambio de equity sin trigger fiscal. Unica empresa usandolo asi.</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Escala en BTC Treasury</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">13,132 BTC es el 2% de Strategy. Sin ventaja de escala relevante.</p>
+                    </div>
+                    <span style="background: var(--red-100); color: var(--red-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">DEBIL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">ETFs como Commodity</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">0.05% expense ratio. BlackRock/Vanguard pueden lanzar productos identicos a 0.03%.</p>
+                    </div>
+                    <span style="background: var(--red-100); color: var(--red-700); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">DEBIL</span>
+                </div>
+            </div>
+            <div style="padding: 24px 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.125rem;">Red de Vivek Ramaswamy</h4>
+                        <p style="margin: 4px 0 0; color: var(--gray-500); font-size: 0.875rem;">Conexiones politicas y mediaticas. Pero ya no esta involucrado day-to-day (candidato a gobernador).</p>
+                    </div>
+                    <span style="background: var(--amber-100); color: #92400e; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">MODERADA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">Conclusion sobre el moat</div>
+            <p class="callout-text">No existe un moat defendible. El negocio de ETFs anti-ESG tiene traccion pero es replicable. El negocio de BTC treasury no tiene ninguna barrera de entrada. La Seccion 351 es interesante pero es una ventaja regulatoria, no estructural &mdash; si mas empresas la usan, deja de ser diferenciadora. El moat mas real es la marca &quot;Strive&quot; en la comunidad conservadora/anti-ESG, pero eso es fragil.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">08</span>
+        </div>
+    </div>
+
+    <!-- PAGE 9: Management -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">08</span> Management y Gobierno
+        </div>
+
+        <h2>Equipo competente, alineacion cuestionable</h2>
+
+        <p class="lead">El CEO Matt Cole tiene experiencia seria (CalPERS, $70B AUM), y Vivek Ramaswamy aporta vision y conexiones. Pero la salida de Vivek del dia a dia para aspirar a gobernador de Ohio, combinada con la estructura de compensacion centrada en equity y la dilucion agresiva, plantean dudas sobre la alineacion con accionistas comunes.</p>
+
+        <div class="grid-2" style="margin: 40px 0;">
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Equipo Directivo</h3>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Matt Cole</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">CEO (desde 2024)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Ex-CalPERS ($70B AUM). Experiencia en fixed income y derivados. Compra acciones con su dinero.</div>
+                </div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200);">
+                    <div style="font-weight: 700;">Vivek Ramaswamy</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Co-fundador, Chairman (no ejecutivo)</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Biotech billionaire, ex-candidato presidencial, candidato a gobernador Ohio 2026. Vision estrategica pero no day-to-day.</div>
+                </div>
+                <div>
+                    <div style="font-weight: 700;">Board of Directors</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-500);">Ampliado recientemente</div>
+                    <div style="font-size: 0.8125rem; color: var(--gray-600); margin-top: 4px;">Incorporaron veteranos de la industria Bitcoin tras la adquisicion de Semler.</div>
+                </div>
+            </div>
+            <div>
+                <div class="card card-success" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--green-700); margin-bottom: 16px;">A favor del management</h3>
+                    <ul class="check-list">
+                        <li>Matt Cole compra acciones con su dinero</li>
+                        <li>Experiencia institucional real ($70B)</li>
+                        <li>Ejecucion rapida: merger + Semler en 4 meses</li>
+                        <li>Transparente con la estrategia BTC</li>
+                    </ul>
+                </div>
+                <div class="card card-danger">
+                    <h3 style="color: var(--red-700); margin-bottom: 16px;">Riesgos de governance</h3>
+                    <ul class="check-list">
+                        <li class="danger">Vivek fuera del dia a dia (campana politica)</li>
+                        <li class="danger">Dilucion masiva: $500M ATM + $736M warrants</li>
+                        <li class="danger">Empresa con 51 empleados y market cap $500M+</li>
+                        <li class="warning">Fusion con Asset Entities (shell company)</li>
+                        <li class="warning">Preferreds (SATA) priorizan sobre common</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">Capital Allocation</div>
+            <p class="callout-text"><strong>Prioridad: comprar Bitcoin.</strong> Todo el capital se dirige a acumular BTC. No hay dividendos, no hay buybacks. Se emiten preferreds (SATA) con ~14% yield, se diluye a accionistas comunes, y se usa todo para comprar mas Bitcoin. Es una estrategia &quot;all-in&quot; que funciona si BTC sube y destruye valor si BTC baja. No hay diversificacion ni plan B.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">09</span>
+        </div>
+    </div>
+
+    <!-- PAGE 10: Red Flags -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">09</span> Red Flags
+        </div>
+
+        <h2>Checklist de senales de alerta</h2>
+
+        <p class="lead">Strive presenta un numero alarmante de red flags. La falta de historial financiero, la dilucion extrema, el reverse split y la dependencia total de un solo activo (Bitcoin) hacen que esta empresa sea territorio de especulacion, no de inversion.</p>
+
+        <div class="flag-list" style="margin: 40px 0;">
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Sin revenue operativo relevante</h4>
+                    <p>$1.5M en 19 dias. Fees de ETFs ~$6-8M/yr. No cubre ni los gastos operativos.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Reverse stock split 1:20</h4>
+                    <p>Ejecutado 6 Feb 2026 para mantener compliance Nasdaq. Senal clasica de distress.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Caida del 96% desde IPO</h4>
+                    <p>De $268 (post-split) en Sep 2025 a $8.19 hoy. Destruccion masiva de valor para primeros inversores.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Dilucion extrema</h4>
+                    <p>$762M PIPE + $225M SATA preferred + $500M ATM + $736M warrants pendientes. Total potencial: $2.2B+ en dilucion.</p>
+                </div>
+            </div>
+            <div class="flag-item danger">
+                <div class="flag-icon danger">&#10007;</div>
+                <div class="flag-content">
+                    <h4>Fusion con shell company</h4>
+                    <p>Asset Entities era una micro-cap sin negocio relevante. Reverse merger para cotizar evitando IPO tradicional.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Dependencia 100% de Bitcoin</h4>
+                    <p>Si BTC cae 30%, el market cap de ASST puede caer 60-80% (correlacion apalancada 4-5x).</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Fundador fuera del dia a dia</h4>
+                    <p>Vivek Ramaswamy candidato a gobernador de Ohio. Key man risk sin el key man.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Demandas legales pendientes</h4>
+                    <p>Litigios reportados que presionan el precio. Accionistas de Semler descontentos con el ratio de canje.</p>
+                </div>
+            </div>
+            <div class="flag-item warning">
+                <div class="flag-icon warning">&#9888;</div>
+                <div class="flag-content">
+                    <h4>Solo 19 dias de datos financieros</h4>
+                    <p>Imposible evaluar tendencias, calidad de earnings, FCF recurrente. Primer trimestre completo: 25 Feb 2026.</p>
+                </div>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon">&#10003;</div>
+                <div class="flag-content">
+                    <h4>Deuda eliminada</h4>
+                    <p>Tras adquisicion Semler, limpiaron $110M deuda + $20M Coinbase. BTC unencumbered.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 24px; text-align: center;">
+            <span style="font-size: 0.875rem; color: var(--gray-500);">Red flags detectadas:</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; margin-left: 12px; color: var(--red-600);">5 criticas + 4 advertencias de 10</span>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">10</span>
+        </div>
+    </div>
+
+    <!-- PAGE 11: Valuation -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">10</span> Valoracion a 5 Anos
+        </div>
+
+        <h2>Valoracion: un ejercicio especulativo</h2>
+
+        <p class="lead">Valorar Strive de forma tradicional (DCF, multiplos) es imposible con datos de 19 dias. El unico metodo aproximado es un NAV (Net Asset Value) basado en BTC holdings + valor del negocio de ETFs, descontando la dilucion futura. El resultado depende casi exclusivamente del precio de Bitcoin.</p>
+
+        <div class="card" style="margin: 32px 0;">
+            <h3 style="margin-bottom: 16px;">NAV aproximado (febrero 2026)</h3>
+            <div class="table-wrapper" style="margin: 16px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Valor estimado</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bitcoin (13,132 BTC)</strong></td>
+                            <td class="cell-amber">~$867M</td>
+                            <td>A $66,000/BTC (precio actual)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Negocio ETFs (11 fondos)</strong></td>
+                            <td>~$50-100M</td>
+                            <td>$2B AUM x 2.5-5% del AUM (rango sector)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash y otros</strong></td>
+                            <td>~$50M (est.)</td>
+                            <td>Post-Semler debt repayment</td>
+                        </tr>
+                        <tr style="background: var(--green-50);">
+                            <td><strong>NAV Total Bruto</strong></td>
+                            <td class="cell-success">~$967-1,017M</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>(-) Dilucion pendiente</strong></td>
+                            <td class="cell-danger">-$500-1,200M</td>
+                            <td>ATM $500M + warrants $736M si se ejercen</td>
+                        </tr>
+                        <tr style="background: var(--amber-50); font-weight: 700;">
+                            <td><strong>Market Cap actual</strong></td>
+                            <td class="cell-amber">~$511M</td>
+                            <td>Descuento ~47-50% a NAV bruto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Analisis de sensibilidad al precio de Bitcoin</h3>
+        <div class="table-wrapper" style="margin: 24px 0;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Precio BTC</th>
+                        <th>Valor BTC Holdings</th>
+                        <th>NAV/share (est.)</th>
+                        <th>Precio actual $8.19</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$40,000</td>
+                        <td>$525M</td>
+                        <td class="cell-danger">~$5</td>
+                        <td class="cell-danger">-39% downside</td>
+                    </tr>
+                    <tr>
+                        <td>$66,000 (actual)</td>
+                        <td>$867M</td>
+                        <td class="cell-amber">~$8-9</td>
+                        <td>Fair value range</td>
+                    </tr>
+                    <tr>
+                        <td>$100,000</td>
+                        <td>$1,313M</td>
+                        <td class="cell-success">~$13</td>
+                        <td class="cell-success">+59% upside</td>
+                    </tr>
+                    <tr>
+                        <td>$150,000</td>
+                        <td>$1,970M</td>
+                        <td class="cell-success">~$19</td>
+                        <td class="cell-success">+132% upside</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">La trampa de la dilucion</div>
+            <p class="callout-text">Incluso si Bitcoin sube, la dilucion continua puede neutralizar las ganancias para accionistas existentes. Si Strive emite $500M mas en equity para comprar BTC, tienen mas BTC pero cada accion vale proporcionalmente menos. El metrico &quot;BTC per share&quot; es lo que importa, y hasta ahora ha ido disminuyendo con cada emision. Para que funcione, BTC tiene que subir MAS rapido que la dilucion.</p>
+        </div>
+
+        <div style="background: var(--gray-900); color: var(--white); border-radius: 16px; padding: 32px; margin-top: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">No valorable</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0; color: var(--red-500);">N/A</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">Precio actual</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin: 8px 0;">$8.19</div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-700); font-size: 0.875rem; color: var(--gray-400);">
+                No es posible establecer un precio justo con datos de 19 dias y un modelo de negocio 100% dependiente de un activo volatil. Esto es especulacion, no inversion value-growth.
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">11</span>
+        </div>
+    </div>
+
+    <!-- PAGE 12: Scenarios -->
+    <div class="page">
+        <div class="section-label">
+            <span class="section-number">11</span> Escenarios de Inversion
+        </div>
+
+        <h2>Tres caminos posibles (a 2 anos)</h2>
+
+        <p style="color: var(--gray-600); margin-bottom: 32px;">Nota: dada la falta de historial, los escenarios se proyectan a 2 anos en lugar de 5, y se basan principalmente en el precio de Bitcoin y la gestion de la dilucion.</p>
+
+        <div class="scenario-grid" style="margin: 48px 0;">
+            <div class="scenario-card bear">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--red-700);">Bear Case</div>
+                    <div class="scenario-prob">40%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--red-600);">$2-4</div>
+                <div class="scenario-change" style="color: var(--red-600);">-50 a -75%</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin cae a $40-50K</li>
+                    <li>Dilucion masiva continua</li>
+                    <li>Negocio ETFs no compensa perdidas</li>
+                    <li>Posible delisting Nasdaq</li>
+                    <li>Vivek desconectado por campana politica</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card base">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: #92400e;">Base Case</div>
+                    <div class="scenario-prob">35%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--amber-600);">$8-15</div>
+                <div class="scenario-change" style="color: var(--amber-600);">-2% a +83%</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin se mantiene $60-80K</li>
+                    <li>ETFs crecen a $3-4B AUM</li>
+                    <li>Dilucion controlada</li>
+                    <li>BTC per share estable o sube lentamente</li>
+                    <li>Primer trimestre con revenue real</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card bull">
+                <div class="scenario-header">
+                    <div class="scenario-name" style="color: var(--green-700);">Bull Case</div>
+                    <div class="scenario-prob">25%</div>
+                </div>
+                <div class="scenario-price" style="color: var(--green-600);">$20-40</div>
+                <div class="scenario-change" style="color: var(--green-600);">+144% a +388%</div>
+                <ul class="scenario-list">
+                    <li>Bitcoin supera $120-150K</li>
+                    <li>Seccion 351 atrae BTC whales</li>
+                    <li>ETFs escalan a $5B+ AUM</li>
+                    <li>BTC per share aumenta significativamente</li>
+                    <li>Se establece como &quot;mini-Strategy&quot;</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 32px;">
+            <h3 style="margin-bottom: 24px;">Precio ponderado por probabilidad (2028)</h3>
+            <div class="table-wrapper" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Precio 2028</th>
+                            <th>Probabilidad</th>
+                            <th>Contribucion</th>
+                            <th>Retorno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bear</strong></td>
+                            <td class="cell-danger">$3</td>
+                            <td>40%</td>
+                            <td>$1.20</td>
+                            <td class="cell-danger">-63%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base</strong></td>
+                            <td>$12</td>
+                            <td>35%</td>
+                            <td>$4.20</td>
+                            <td class="cell-success">+46%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bull</strong></td>
+                            <td class="cell-success">$30</td>
+                            <td>25%</td>
+                            <td>$7.50</td>
+                            <td class="cell-success">+266%</td>
+                        </tr>
+                        <tr style="background: var(--gray-50); font-weight: 700;">
+                            <td><strong>Ponderado</strong></td>
+                            <td class="cell-amber">$12.90</td>
+                            <td>100%</td>
+                            <td>$12.90</td>
+                            <td class="cell-amber">+57%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 32px;">
+            <div class="callout-title">Riesgo asimetrico desfavorable</div>
+            <p class="callout-text">Aunque el precio ponderado sugiere un +57%, esto es enganoso. Hay un 40% de probabilidad de perder el 63% de tu inversion. El upside potencial es real pero requiere que Bitcoin suba significativamente Y que la dilucion no neutralice las ganancias. Si simplemente quieres exposicion a Bitcoin, compra BTC directamente &mdash; obtienes la misma exposicion sin el riesgo de dilucion, governance, y desgobierno corporativo.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Strive, Inc. (ASST) &middot; Informe de Inversion</span>
+            <span class="page-number">12</span>
+        </div>
+    </div>
+
+    <!-- PAGE 13: Conclusion -->
+    <div class="page-dark">
+        <div class="container">
+            <div class="verdict-section">
+                <div class="verdict-rating">&#9733;&#9733;&#9734;&#9734;&#9734;</div>
+                <div class="verdict-title font-display">EVITAR</div>
+                <div class="verdict-text">Strive es una apuesta apalancada en Bitcoin con un pequeno negocio de ETFs legItimo adjunto. 5 meses de historial publico, dilucion extrema, reverse split, y cero rentabilidad operativa. Si quieres Bitcoin, compra Bitcoin directamente.</div>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 48px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--red-500);">28/100</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Score Total</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700;">N/A</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Precio Justo</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--red-500);">-96%</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">Desde IPO</div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Que vigilar (Triggers de reevaluacion)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Earnings Q4 2025 (25 Feb)</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Primer trimestre completo. Ver revenue real, gastos, BTC per share.</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Precio de Bitcoin</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si BTC &gt;$100K, revisar. Si BTC &lt;$50K, la empresa esta en peligro serio.</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Metricas de dilucion</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si BTC/share deja de caer y empieza a subir, la estrategia funciona.</div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: var(--amber-500); font-weight: 600;">Crecimiento AUM ETFs</div>
+                            <div style="font-size: 0.8125rem; color: var(--gray-400);">Si ETFs llegan a $5B+ AUM, el negocio real tiene sustancia.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px;">
+                    <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 24px;">Lo que no se (Transparencia)</h3>
+                    <div style="font-size: 0.9375rem; color: var(--gray-400); line-height: 1.8;">
+                        <p style="color: var(--gray-400);">&#10067; Revenue y gastos de un trimestre completo (primer reporte sera Q4 2025, 25 Feb)</p>
+                        <p style="color: var(--gray-400);">&#10067; BTC per share actual exacto tras todas las emisiones y Semler merger</p>
+                        <p style="color: var(--gray-400);">&#10067; Plan concreto de uso de los $500M ATM de SATA &mdash; cuanto y cuando emitiran</p>
+                        <p style="color: var(--gray-400);">&#10067; Impacto real de la Seccion 351 &mdash; cuantos holders de BTC estan usando esta via</p>
+                        <p style="color: var(--gray-400);">&#10067; Coste medio de adquisicion de los 13,132 BTC (parcialmente divulgado)</p>
+                        <p style="color: var(--gray-400);">&#10067; Plan de Vivek Ramaswamy si gana la gobernacion &mdash; se desvincula completamente?</p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 40px; margin-top: 40px; font-size: 0.8125rem; color: var(--gray-500);">
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Fuentes:</strong> Strive Investor Relations, Q3 2025 10-Q, Yahoo Finance, StockAnalysis, CoinDesk, The Block, Bitcoin Magazine, Seeking Alpha, StockTitan, Nasdaq, GlobeNewsWire, MarketBeat.</p>
+                    <p style="color: var(--gray-500); margin-bottom: 8px;"><strong>Disclaimer:</strong> Este informe es un analisis educativo, no una recomendacion de compra o venta. Los datos pueden contener inexactitudes. Investiga por tu cuenta antes de tomar decisiones de inversion.</p>
+                    <p style="color: var(--gray-500); margin: 0;"><strong>Fecha:</strong> 13 de Febrero de 2026 | Generado por /analista (FMA)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
